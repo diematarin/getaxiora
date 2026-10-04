@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>R21 — Vehicle Dealership Management System</title>
+<meta name="description" content="Sistema de gestión para concesionarias. Vendé más, ordená tu agencia, automatizá tu WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A227;
+    --gold-light: #E5C158;
+    --green: #1B5E3F;
+    --green-light: #2E7D32;
+    --black: #0D0D0D;
+    --gray: #1A1A1A;
+    --gray-light: #F5F5F5;
+    --white: #FFFFFF;
+    --text-muted: #6B7280;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--white);
+    color: var(--black);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { text-decoration: none; color: inherit; }
+
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid #E5E5E5;
+    padding: 14px 24px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo { font-weight: 900; font-size: 22px; letter-spacing: 2px; color: var(--gold); }
+  .nav-logo span { color: var(--green); }
+  .lang-switch { display: flex; gap: 8px; }
+  .lang-switch button {
+    background: transparent; border: 2px solid transparent; border-radius: 8px;
+    padding: 4px; cursor: pointer; font-family: inherit;
+    font-size: 24px; line-height: 1;
+    transition: all .15s; opacity: 0.5;
+    display: flex; align-items: center; justify-content: center;
+    width: 44px; height: 36px;
+  }
+  .lang-switch button:hover { opacity: 1; transform: scale(1.1); }
+  .lang-switch button.active {
+    opacity: 1; border-color: var(--green);
+    background: #E8F5E9;
+  }
+
+  .hero {
+    padding: 70px 24px 60px;
+    text-align: center;
+    background: linear-gradient(180deg, #FAFAFA 0%, #FFFFFF 100%);
+  }
+  .hero-logo {
+    width: 380px; height: 380px; margin: 0 auto 20px;
+    display: block; object-fit: contain;
+  }
+  .hero h1 {
+    font-size: clamp(38px, 7vw, 64px);
+    font-weight: 900; letter-spacing: 4px;
+    color: var(--gold); margin-bottom: 8px;
+  }
+  .hero h1 span { color: var(--green); }
+  .hero .tagline {
+    font-size: 13px; letter-spacing: 4px; font-weight: 600;
+    color: var(--green); text-transform: uppercase; margin-bottom: 28px;
+  }
+  .hero p.sub {
+    font-size: clamp(18px, 2.5vw, 22px);
+    color: var(--gray); max-width: 620px; margin: 0 auto 36px;
+    font-weight: 500;
+  }
+  .cta-group { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 14px 28px; border-radius: 12px;
+    font-weight: 700; font-size: 16px;
+    cursor: pointer; border: none; font-family: inherit;
+    transition: transform .15s, box-shadow .15s;
+  }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,.15); }
+  .btn-primary { background: var(--green); color: var(--white); }
+  .btn-secondary { background: var(--white); color: var(--black); border: 2px solid var(--black); }
+
+  section { padding: 80px 24px; max-width: 1100px; margin: 0 auto; }
+  section.wide { max-width: 1300px; }
+  h2 {
+    font-size: clamp(28px, 4vw, 40px); font-weight: 900;
+    text-align: center; margin-bottom: 12px; letter-spacing: -0.5px;
+  }
+  .section-sub {
+    text-align: center; color: var(--text-muted);
+    max-width: 600px; margin: 0 auto 48px; font-size: 17px;
+  }
+
+  .modules { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+  .module-card {
+    background: var(--gray-light); border-radius: 16px;
+    padding: 28px; transition: transform .15s, box-shadow .15s;
+    border: 1px solid #EEE;
+  }
+  .module-card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,.08); }
+  .module-icon { font-size: 36px; margin-bottom: 14px; }
+  .module-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+  .module-card p { color: var(--text-muted); font-size: 15px; }
+
+  .feature-category { margin-bottom: 72px; }
+  .feature-category:last-child { margin-bottom: 0; }
+  .category-header {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 28px; padding-bottom: 14px;
+    border-bottom: 2px solid var(--gray-light);
+  }
+  .category-icon { font-size: 32px; }
+  .category-header h3 { font-size: 24px; font-weight: 800; margin: 0; }
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+  }
+  .feature-card {
+    background: var(--white);
+    border: 1px solid #EEE;
+    border-radius: 16px;
+    overflow: hidden;
+    transition: transform .15s, box-shadow .15s;
+    display: flex; flex-direction: column;
+  }
+  .feature-card:hover { transform: translateY(-6px); box-shadow: 0 16px 32px rgba(0,0,0,.10); }
+  .feature-img-wrap {
+    background: #F0F0F0;
+    padding: 18px 18px 0;
+    display: flex; justify-content: center;
+    min-height: 280px;
+    overflow: hidden;
+  }
+  .feature-img {
+    width: 100%;
+    max-width: 220px;
+    height: 260px;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 12px 12px 0 0;
+    box-shadow: 0 8px 24px rgba(0,0,0,.12);
+    transition: transform .3s;
+  }
+  .feature-card:hover .feature-img { transform: translateY(-8px); }
+  .feature-info {
+    padding: 20px 22px 22px;
+    flex-grow: 1;
+    display: flex; flex-direction: column;
+  }
+  .feature-info h4 { font-size: 17px; font-weight: 800; margin-bottom: 8px; }
+  .feature-info p { font-size: 14px; color: var(--text-muted); line-height: 1.55; }
+
+  .payments-section { background: var(--gray-light); max-width: 100%; padding: 80px 24px; }
+  .payments-inner { max-width: 1100px; margin: 0 auto; }
+  .payment-cards {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px; margin-bottom: 36px;
+  }
+  .payment-card {
+    background: var(--white); border-radius: 16px;
+    padding: 26px 22px; text-align: center;
+    border: 2px solid #EEE; transition: transform .15s, border-color .15s;
+  }
+  .payment-card:hover { transform: translateY(-4px); border-color: var(--gold); }
+  .payment-icon { font-size: 42px; margin-bottom: 12px; }
+  .payment-card h4 { font-size: 17px; font-weight: 800; margin-bottom: 8px; }
+  .payment-card p { font-size: 14px; color: var(--text-muted); }
+  .payment-highlight {
+    background: var(--black); color: var(--white);
+    border-radius: 18px; padding: 36px 28px; text-align: center;
+    margin-bottom: 24px;
+  }
+  .payment-highlight h3 {
+    color: var(--gold); font-size: 26px; font-weight: 900;
+    margin-bottom: 10px;
+  }
+  .payment-highlight p { font-size: 16px; color: #DDD; max-width: 600px; margin: 0 auto; }
+  .payment-note {
+    text-align: center; font-size: 14px; color: var(--text-muted);
+    max-width: 700px; margin: 0 auto;
+  }
+
+  .period-switch {
+    display: flex; justify-content: center; gap: 8px;
+    margin-bottom: 36px; flex-wrap: wrap;
+  }
+  .period-btn {
+    background: var(--white); border: 2px solid #E5E5E5;
+    border-radius: 12px; padding: 10px 20px;
+    cursor: pointer; font-family: inherit;
+    font-weight: 700; font-size: 15px; color: var(--black);
+    display: inline-flex; align-items: center; gap: 8px;
+    transition: all .15s;
+  }
+  .period-btn:hover { border-color: var(--green); }
+  .period-btn.active {
+    background: var(--green); color: var(--white);
+    border-color: var(--green);
+  }
+  .period-badge {
+    background: var(--gold); color: var(--black);
+    font-size: 11px; font-weight: 900; letter-spacing: 0.5px;
+    padding: 2px 8px; border-radius: 20px;
+  }
+
+  .pricing {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px; align-items: stretch;
+  }
+  .price-card {
+    background: var(--white); border: 2px solid #EEE;
+    border-radius: 18px; padding: 28px 22px; text-align: center;
+    position: relative; transition: transform .15s;
+    display: flex; flex-direction: column;
+  }
+  .price-card:hover { transform: translateY(-4px); }
+  .price-card.featured { border-color: var(--gold); background: linear-gradient(180deg, #FFFDF5 0%, #FFFFFF 100%); }
+  .price-card.featured::before {
+    content: 'POPULAR'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+    background: var(--gold); color: var(--black); font-size: 11px; font-weight: 900;
+    letter-spacing: 2px; padding: 4px 14px; border-radius: 20px;
+  }
+  .price-badge {
+    display: inline-block; font-size: 11px; font-weight: 800;
+    letter-spacing: 1.5px; padding: 3px 10px; border-radius: 20px;
+    margin-bottom: 14px; text-transform: uppercase;
+  }
+  .badge-basic { background: #E8F5E9; color: var(--green); }
+  .badge-full { background: #FFF8E1; color: #8B6F00; }
+  .price-card h3 { font-size: 17px; font-weight: 800; margin-bottom: 6px; }
+  .price-users { font-size: 13px; color: var(--text-muted); font-weight: 600; margin-bottom: 16px; }
+
+  .price-per-user { margin-bottom: 6px; }
+  .per-user-label {
+    display: block; font-size: 11px; color: var(--text-muted);
+    text-transform: uppercase; letter-spacing: 1px;
+    font-weight: 700; margin-bottom: 4px;
+  }
+  .per-user-amount {
+    display: block; font-size: 34px; font-weight: 900;
+    color: var(--green); line-height: 1;
+  }
+  .per-user-ars {
+    display: block; font-size: 13px; color: var(--text-muted);
+    font-weight: 500; margin-top: 4px; min-height: 16px;
+  }
+  .price-total {
+    background: var(--gray-light); border-radius: 10px;
+    padding: 8px 12px; font-size: 13px; font-weight: 600;
+    color: var(--text-muted); margin: 14px 0 20px;
+    display: flex; justify-content: center; gap: 6px; flex-wrap: wrap;
+  }
+  .total-amount { color: var(--black); font-weight: 800; }
+  .total-ars {
+    display: block; width: 100%; text-align: center;
+    font-size: 11px; color: var(--text-muted); font-weight: 500;
+    margin-top: 2px;
+  }
+
+  .price-features { list-style: none; text-align: left; margin-bottom: 22px; flex-grow: 1; }
+  .price-features li { padding: 5px 0; font-size: 14px; color: var(--gray); }
+  .price-features li::before { content: '✓ '; color: var(--green); font-weight: 900; margin-right: 6px; }
+  .price-card .btn { width: 100%; justify-content: center; padding: 12px 18px; font-size: 15px; }
+
+  .discounts-section { background: var(--gray-light); max-width: 100%; padding: 80px 24px; }
+  .discounts-inner { max-width: 1100px; margin: 0 auto; }
+  .discount-cards {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px; margin-bottom: 48px;
+  }
+  .discount-card {
+    background: var(--white); border-radius: 14px;
+    padding: 24px 20px; text-align: center; border: 2px solid #EEE;
+  }
+  .discount-card.highlight { border-color: var(--gold); }
+  .discount-pct { font-size: 42px; font-weight: 900; color: var(--green); line-height: 1; margin-bottom: 6px; }
+  .discount-months { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+  .discount-desc { font-size: 13px; color: var(--text-muted); }
+
+  .table-wrapper {
+    overflow-x: auto; border-radius: 14px;
+    border: 1px solid #E5E5E5; background: var(--white);
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 720px; }
+  thead { background: var(--black); color: var(--white); }
+  th { padding: 14px 12px; text-align: center; font-weight: 700; font-size: 13px; letter-spacing: 0.5px; }
+  th:first-child, td:first-child { text-align: left; padding-left: 20px; }
+  td { padding: 14px 12px; text-align: center; border-bottom: 1px solid #F0F0F0; }
+  tbody tr:hover { background: #FAFAFA; }
+  tbody tr:last-child td { border-bottom: none; }
+  .table-plan-name { font-weight: 800; color: var(--black); }
+  .table-plan-badge {
+    display: inline-block; font-size: 10px; font-weight: 800;
+    padding: 2px 8px; border-radius: 10px; margin-left: 6px;
+    text-transform: uppercase; vertical-align: middle;
+  }
+  .table-price { font-weight: 700; color: var(--green); }
+  .table-note { font-size: 12px; color: var(--text-muted); text-align: center; margin-top: 16px; }
+
+  .founder-box {
+    background: var(--black); color: var(--white);
+    border-radius: 16px; padding: 28px 24px; text-align: center;
+    margin-top: 32px;
+  }
+  .founder-box strong { color: var(--gold); font-size: 22px; display: block; margin-bottom: 8px; }
+  .founder-box p { font-size: 16px; }
+
+  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
+  .step { text-align: center; }
+  .step-num {
+    width: 56px; height: 56px; border-radius: 50%;
+    background: var(--green); color: var(--white);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px; font-weight: 900; margin: 0 auto 16px;
+  }
+  .step h3 { font-size: 18px; margin-bottom: 8px; }
+  .step p { color: var(--text-muted); font-size: 15px; }
+
+  .contact { background: var(--black); color: var(--white); text-align: center; max-width: 100%; }
+  .contact h2 { color: var(--white); }
+  .contact .section-sub { color: #AAA; }
+  .contact-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn-whatsapp { background: #25D366; color: var(--white); }
+  .btn-email { background: var(--white); color: var(--black); }
+
+  footer {
+    background: #050505; color: #888;
+    text-align: center; padding: 32px 24px; font-size: 14px;
+  }
+  footer a { color: var(--gold); }
+
+  @media (max-width: 640px) {
+    nav { padding: 12px 16px; }
+    .nav-logo { font-size: 18px; }
+    .lang-switch button { font-size: 20px; width: 38px; height: 32px; }
+    .hero { padding: 40px 20px 40px; }
+    .hero-logo { width: 260px; height: 260px; }
+    section { padding: 60px 20px; }
+    .btn { padding: 12px 22px; font-size: 15px; }
+    .cta-group { flex-direction: column; align-items: center; }
+    .cta-group .btn { width: 100%; max-width: 320px; justify-content: center; }
+    .pricing { grid-template-columns: 1fr; }
+    .discount-pct { font-size: 34px; }
+    .feature-grid { grid-template-columns: 1fr; }
+    .feature-img { max-width: 180px; height: 220px; }
+    .feature-img-wrap { min-height: 240px; }
+    .period-btn { padding: 8px 14px; font-size: 14px; }
+    .period-switch { gap: 6px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">R<span>21</span></div>
+  <div class="lang-switch">
+    <button id="btn-es" class="active" onclick="setLang('es')" title="Español">🇦🇷</button>
+    <button id="btn-en" onclick="setLang('en')" title="English">🇺🇸</button>
+    <button id="btn-pt" onclick="setLang('pt')" title="Português">🇧🇷</button>
+  </div>
+</nav>
+
+<div class="hero">
+  <img src="logo.png" alt="R21" class="hero-logo" onerror="this.style.display='none'">
+  <h1>R<span>21</span></h1>
+  <div class="tagline">Vehicle Dealership Management System</div>
+  <p class="sub" data-es="Vendé más, ordená tu agencia, automatizá tu WhatsApp." data-en="Sell more, organize your dealership, automate your WhatsApp." data-pt="Venda mais, organize sua loja, automatize seu WhatsApp.">Vendé más, ordená tu agencia, automatizá tu WhatsApp.</p>
+  <div class="cta-group">
+    <a href="https://wa.me/5493415040667?text=Hola%2C%20quiero%20probar%20R21%2014%20d%C3%ADas%20gratis" target="_blank" class="btn btn-primary" data-es="🚀 Probar 14 días gratis" data-en="🚀 Try 14 days free" data-pt="🚀 Teste 14 dias grátis">🚀 Probar 14 días gratis</a>
+    <a href="#funciones" class="btn btn-secondary" data-es="Ver funciones" data-en="See features" data-pt="Ver recursos">Ver funciones</a>
+  </div>
+</div>
+
+<section id="modules">
+  <h2 data-es="Todo lo que tu agencia necesita" data-en="Everything your dealership needs" data-pt="Tudo o que sua loja precisa">Todo lo que tu agencia necesita</h2>
+  <p class="section-sub" data-es="Un sistema completo, pensado para concesionarias reales." data-en="A complete system, built for real dealerships." data-pt="Um sistema completo, feito para lojas reais.">Un sistema completo, pensado para concesionarias reales.</p>
+
+  <div class="modules">
+    <div class="module-card">
+      <div class="module-icon">📊</div>
+      <h3 data-es="Contable" data-en="Accounting" data-pt="Contábil">Contable</h3>
+      <p data-es="P&amp;L, cuentas corrientes, flujo de caja, cierre de mes." data-en="P&amp;L, current accounts, cash flow, month close." data-pt="DRE, contas correntes, fluxo de caixa, fechamento mensal.">P&amp;L, cuentas corrientes, flujo de caja, cierre de mes.</p>
+    </div>
+    <div class="module-card">
+      <div class="module-icon">💳</div>
+      <h3 data-es="Membresías" data-en="Memberships" data-pt="Assinaturas">Membresías</h3>
+      <p data-es="Gestión de usuarios, vencimientos, renovaciones y planes." data-en="User management, expirations, renewals and plans." data-pt="Gestão de usuários, vencimentos, renovações e planos.">Gestión de usuarios, vencimientos, renovaciones y planes.</p>
+    </div>
+    <div class="module-card">
+      <div class="module-icon">🤖</div>
+      <h3 data-es="Bot de WhatsApp con IA" data-en="AI WhatsApp Bot" data-pt="Bot de WhatsApp com IA">Bot de WhatsApp con IA</h3>
+      <p data-es="Atiende solo, busca stock, toma datos del cliente y te avisa." data-en="Answers alone, searches stock, takes client data and notifies you." data-pt="Atende sozinho, busca estoque, coleta dados do cliente e te avisa.">Atiende solo, busca stock, toma datos del cliente y te avisa.</p>
+    </div>
+    <div class="module-card">
+      <div class="module-icon">📄</div>
+      <h3 data-es="Documentación" data-en="Documentation" data-pt="Documentação">Documentación</h3>
+      <p data-es="11 documentos por vehículo, con archivos y fotos en la nube." data-en="11 documents per vehicle, with files and photos in the cloud." data-pt="11 documentos por veículo, com arquivos e fotos na nuvem.">11 documentos por vehículo, con archivos y fotos en la nube.</p>
+    </div>
+    <div class="module-card">
+      <div class="module-icon">💾</div>
+      <h3 data-es="Backup / Restore" data-en="Backup / Restore" data-pt="Backup / Restauração">Backup / Restore</h3>
+      <p data-es="Respaldo completo y restauración segura con confirmaciones." data-en="Full backup and secure restore with confirmations." data-pt="Backup completo e restauração segura com confirmações.">Respaldo completo y restauración segura con confirmaciones.</p>
+    </div>
+    <div class="module-card">
+      <div class="module-icon">⚙️</div>
+      <h3 data-es="Panel Admin" data-en="Admin Panel" data-pt="Painel Admin">Panel Admin</h3>
+      <p data-es="Listar cuentas, registrar pagos, editar y ver en Maps." data-en="List accounts, register payments, edit and view on Maps." data-pt="Listar contas, registrar pagamentos, editar e ver no Maps.">Listar cuentas, registrar pagos, editar y ver en Maps.</p>
+    </div>
+  </div>
+</section>
+
+<section id="funciones" class="wide">
+  <h2 data-es="Mirá el sistema por dentro" data-en="See the system inside" data-pt="Veja o sistema por dentro">Mirá el sistema por dentro</h2>
+  <p class="section-sub" data-es="Capturas reales de la app. Sin renders, sin maquetas." data-en="Real app screenshots. No renders, no mockups." data-pt="Capturas reais do app. Sem renders, sem maquetes.">Capturas reales de la app. Sin renders, sin maquetas.</p>
+
+  <div class="feature-category">
+    <div class="category-header">
+      <span class="category-icon">🚗</span>
+      <h3 data-es="Gestión de Stock" data-en="Stock Management" data-pt="Gestão de Estoque">Gestión de Stock</h3>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-img-wrap"><img src="screenshots/ss-todos-vehiculos.png" alt="Vehículos" class="feature-img" onerror="this.style.opacity=0.2"></div>
+        <div class="feature-info">
+          <h4 data-es="Lista de vehículos con filtros" data-en="Vehicle list with filters" data-pt="Lista de veículos com filtros">Lista de vehículos con filtros</h4>
+          <p data-es="Buscá por marca, modelo, año, combustible y transmisión. Todo en tiempo real." data-en="Search by brand, model, year, fuel and transmission. All in real time." data-pt="Busque por marca, modelo, ano, combustível e transmissão. Tudo em tempo real.">Buscá por marca, modelo, año, combustible y transmisión. Todo en tiempo real.</p>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-img-wrap"><img src="screenshots/ss-vehiculos-marcas.png" alt="Marcas" class="feature-img" onerror="this.style.opacity=0.2"></div>
+        <div class="feature-info">
+          <h4 data-es="16 marcas cargadas" data-en="16 brands loaded" data-pt="16 marcas carregadas">16 marcas cargadas</h4>
+          <p data-es="Accedé a cada marca con sus logos oficiales y contador de vehículos." data-en="Access each brand with official logos and vehicle counter." data-pt="Acesse cada marca com seus logos oficiais e contador de veículos.">Accedé a cada marca con sus logos oficiales y contador de vehículos.</p>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-img-wrap"><img src="screenshots/ss-vehiculo-ficha.png" alt="Ficha" class="feature-img" onerror="this.style.opacity=0.2"></div>
+        <div class="feature-info">
+          <h4 data-es="Ficha completa del vehículo" data-en="Complete vehicle file" data-pt="Ficha completa do veículo">Ficha completa del vehículo</h4>
+          <p data-es="Precio contado, permuta, kilómetros, combustible, transmisión y más." data-en="Cash price, trade-in, mileage, fuel, transmission and more." data-pt="Preço à vista, troca, quilometragem, combustível, transmissão e mais.">Precio contado, permuta, kilómetros, combustible, transmisión y más.</p>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-img-wrap"><img src="screenshots/ss-marca-fiat.png" alt="Marca" class="feature-img" onerror="this.style.opacity=0.2"></div>
+        <div class="feature-info">
+          <h4 data-es="Vista por marca" data-en="Brand view" data-pt="Visão por marca">Vista por marca</h4>
+          <p data-es="Filtrá por modelo, año, combustible y transmisión dentro de cada marca." data-en="Filter by model, year, fuel and transmission inside each brand." data-pt="Filtre por modelo, ano, combustível e transmissão dentro de cada marca.">Filtrá por modelo, año, combustible y transmisión dentro de cada marca.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="feature-category">
+    <div class="category-header">
+      <span class="category-icon">👥</span>
+      <h3 data-es="Clientes y Proveedores" data-en="Clients and Suppliers" data-pt="Clientes e Fornecedores">Clientes y Proveedores</h3>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-img-wrap"><img src="screenshots/ss-clientes.png" alt="Clientes" class="feature-img" onerror="this.style.opacity=0.2"></div>
+        <div class="feature-info">
+          <h4 data-es="Clientes buscando" data-en="Clients searching" data-pt="Clientes procurando">Clientes buscando</h4>
+          <p data-es="Guardá qué busca cada cliente: marca, modelo, año, presupuesto." data-en="Save what each client looks for: brand, model, year, budget." data-pt="Guarde o que cada cliente procura: marca, modelo, ano, orçamento.">Guardá qué busca cada cliente: marca, modelo, año, presupuesto.</p>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-img-wrap"><img src="screenshots/ss-cliente-match.png" alt="Match" class="feature-img" onerror="this.style.opacity=0.2"></div>
+        <div class="feature-info">
+          <h4 data-es="Match automático por %" data-en="Automatic match by %" data-pt="Match automático por %">Match automático por %</h4>
+          <p data-es="El sistema te sugiere qué autos coinciden con lo que busca el cliente." data-en="The system suggests which cars match what the client is looking for." data-pt="O sistema sugere quais carros combinam com o que o cliente procura.">El sistema te sugiere qué autos coinciden con lo que busca el cliente.</p>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-img-wrap"><img src="screenshots/ss-proveedores.png" alt="Proveedores" class="feature-img" onerror="this.style.opacity=0.2"></div>
+        <div class="feature-info">
+          <h4 data-es="Proveedores con rating" data-en="Suppliers with rating" data-pt="Fornecedores com avaliação">Proveedores con rating</h4>
+          <p data-es="Chaperos, pintores, tapiceros. Guardá contacto, dirección y puntuación." data-en="Bodyworkers, painters, upholsterers. Save contact, address and rating." data-pt="Funileiros, pintores, tapeceiros. Guarde contato, endereço e avaliação.">Chaperos, pintores, tapiceros. Guardá contacto, dirección y puntuación.</p>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-img-wrap"><img src="screenshots/ss-reportes.png" alt="Reportes" class="feature-img" onerror="this.style.opacity=0.2"></div>
+        <div class="feature-info">
+          <h4 data-es="Reportes de proveedores" data-en="Supplier reports" data-pt="Relatórios de fornecedores">Reportes de proveedores</h4>
+          <p data-es="Mirá cuánto facturaste con cada proveedor, cuántos trabajos y el promedio." data-en="See how much you billed with each supplier, how many jobs and the average." data-pt="Veja quanto faturou com cada fornecedor, quantos trabalhos e a média.">Mirá cuánto facturaste con cada proveedor, cuántos trabajos y el promedio.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="feature-category">
+    <div class="category-header">
+      <span class="category-icon">💰</span>
+      <h3 data-es="Contable y Estadísticas" data-en="Accounting and Statistics" data-pt="Contábil e Estatísticas">Contable y Estadísticas</h3>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-img-wrap"><img src="screenshots/ss-caja.png" alt="Caja" class="feature-img" onerror="this.style.opacity=0.2"></div>
+        <div class="feature-info">
+          <h4 data-es="Caja diaria" data-en="Daily cash" data-pt="Caixa diário">Caja diaria</h4>
+          <p data-es="Ingresos, egresos, balance. Filtrá por hoy, semana, mes, año." data-en="Income, expenses, balance. Filter by today, week, month, year." data-pt="Entradas, saídas, saldo. Filtre por hoje, semana, mês, ano.">Ingresos, egresos, balance. Filtrá por hoy, semana, mes, año.</p>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-img-wrap"><img src="screenshots/ss-inicio.png" alt="Inicio" class="feature-img" onerror="this.style.opacity=0.2"></div>
+        <div class="feature-info">
+          <h4 data-es="Resumen del mes" data-en="Month summary" data-pt="Resumo do mês">Resumen del mes</h4>
+          <p data-es="Stock, vendidos, ganancia y clientes buscando. Todo de un vistazo." data-en="Stock, sold, profit and clients searching. All at a glance." data-pt="Estoque, vendidos, lucro e clientes procurando. Tudo em um relance.">Stock, vendidos, ganancia y clientes buscando. Todo de un vistazo.</p>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-img-wrap"><img src="screenshots/ss-estadisticas-1.png" alt="Estadísticas" class="feature-img" onerror="this.style.opacity=0.2"></div>
+        <div class="feature-info">
+          <h4 data-es="Estadísticas por marca" data-en="Statistics by brand" data-pt="Estatísticas por marca">Estadísticas por marca</h4>
+          <p data-es="Cuántos autos tenés por marca, valor del stock, promedio de precios." data-en="How many cars per brand, stock value, average prices." data-pt="Quantos carros você tem por marca, valor do estoque, preço médio.">Cuántos autos tenés por marca, valor del stock, promedio de precios.</p>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-img-wrap"><img src="screenshots/ss-estadisticas-2.png" alt="Datos extra" class="feature-img" onerror="this.style.opacity=0.2"></div>
+        <div class="feature-info">
+          <h4 data-es="Datos extra y rankings" data-en="Extra data and rankings" data-pt="Dados extras e rankings">Datos extra y rankings</h4>
+          <p data-es="Marca más buscada, cliente con más envíos, autos con más días en stock." data-en="Most searched brand, client with most sends, cars with most days in stock." data-pt="Marca mais buscada, cliente com mais envios, carros com mais dias em estoque.">Marca más buscada, cliente con más envíos, autos con más días en stock.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="feature-category">
+    <div class="category-header">
+      <span class="category-icon">📄</span>
+      <h3 data-es="Documentación y Reparaciones" data-en="Documentation and Repairs" data-pt="Documentação e Reparos">Documentación y Reparaciones</h3>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-img-wrap"><img src="screenshots/ss-documentacion-1.png" alt="Docs" class="feature-img" onerror="this.style.opacity=0.2"></div>
+        <div class="feature-info">
+          <h4 data-es="11 documentos por vehículo" data-en="11 documents per vehicle" data-pt="11 documentos por veículo">11 documentos por vehículo</h4>
+          <p data-es="Título, cédulas, verificaciones. Alertas de documentos críticos." data-en="Title, registration, verifications. Critical document alerts." data-pt="Título, documentos, verificações. Alertas de documentos críticos.">Título, cédulas, verificaciones. Alertas de documentos críticos.</p>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-img-wrap"><img src="screenshots/ss-documentacion-2.png" alt="Docs" class="feature-img" onerror="this.style.opacity=0.2"></div>
+        <div class="feature-info">
+          <h4 data-es="Subida de archivos" data-en="File uploads" data-pt="Upload de arquivos">Subida de archivos</h4>
+          <p data-es="Subí fotos o PDF de cada documento. Se guardan en la nube." data-en="Upload photos or PDF of each document. Saved to the cloud." data-pt="Envie fotos ou PDF de cada documento. Salvos na nuvem.">Subí fotos o PDF de cada documento. Se guardan en la nube.</p>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-img-wrap"><img src="screenshots/ss-reparaciones.png" alt="Reparaciones" class="feature-img" onerror="this.style.opacity=0.2"></div>
+        <div class="feature-info">
+          <h4 data-es="Reparaciones con total" data-en="Repairs with total" data-pt="Reparos com total">Reparaciones con total</h4>
+          <p data-es="Cargá cada reparación, su costo, proveedor y total acumulado." data-en="Log each repair, its cost, supplier and accumulated total." data-pt="Registre cada reparo, seu custo, fornecedor e total acumulado.">Cargá cada reparación, su costo, proveedor y total acumulado.</p>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-img-wrap"><img src="screenshots/ss-consignacion.png" alt="Consignación" class="feature-img" onerror="this.style.opacity=0.2"></div>
+        <div class="feature-info">
+          <h4 data-es="Consignación con ganancia" data-en="Consignment with profit" data-pt="Consignação com lucro">Consignación con ganancia</h4>
+          <p data-es="Pactá con el dueño, definí precio de venta y mirá tu ganancia estimada." data-en="Agree with the owner, set sale price and see your estimated profit." data-pt="Combine com o dono, defina preço de venda e veja seu lucro estimado.">Pactá con el dueño, definí precio de venta y mirá tu ganancia estimada.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="feature-category">
+    <div class="category-header">
+      <span class="category-icon">📤</span>
+      <h3 data-es="Compartir y PDF" data-en="Sharing and PDF" data-pt="Compartilhar e PDF">Compartir y PDF</h3>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-img-wrap"><img src="screenshots/ss-compartir.png" alt="Compartir" class="feature-img" onerror="this.style.opacity=0.2"></div>
+        <div class="feature-info">
+          <h4 data-es="Compartir en WhatsApp / Instagram" data-en="Share on WhatsApp / Instagram" data-pt="Compartilhar no WhatsApp / Instagram">Compartir en WhatsApp / Instagram</h4>
+          <p data-es="Elegí hasta 10 autos y compartilos con un toque." data-en="Pick up to 10 cars and share them in one tap." data-pt="Escolha até 10 carros e compartilhe com um toque.">Elegí hasta 10 autos y compartilos con un toque.</p>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-img-wrap"><img src="screenshots/ss-inicio-2.png" alt="Accesos" class="feature-img" onerror="this.style.opacity=0.2"></div>
+        <div class="feature-info">
+          <h4 data-es="Recordatorio diario" data-en="Daily reminder" data-pt="Lembrete diário">Recordatorio diario</h4>
+          <p data-es="La app te recuerda compartir 5 autos por día para mantener el stock activo." data-en="The app reminds you to share 5 cars daily to keep your stock active." data-pt="O app lembra você de compartilhar 5 carros por dia para manter o estoque ativo.">La app te recuerda compartir 5 autos por día para mantener el stock activo.</p>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-img-wrap"><img src="screenshots/ss-pdf-catalogo.png" alt="PDF" class="feature-img" onerror="this.style.opacity=0.2"></div>
+        <div class="feature-info">
+          <h4 data-es="PDF catálogo completo" data-en="Full PDF catalog" data-pt="PDF catálogo completo">PDF catálogo completo</h4>
+          <p data-es="Generá un catálogo PDF con todos los autos disponibles, listo para imprimir." data-en="Generate a PDF catalog with all available cars, ready to print." data-pt="Gere um catálogo PDF com todos os carros disponíveis, pronto para imprimir.">Generá un catálogo PDF con todos los autos disponibles, listo para imprimir.</p>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-img-wrap"><img src="screenshots/ss-pdf-marca.png" alt="PDF Marca" class="feature-img" onerror="this.style.opacity=0.2"></div>
+        <div class="feature-info">
+          <h4 data-es="PDF por marca" data-en="PDF by brand" data-pt="PDF por marca">PDF por marca</h4>
+          <p data-es="Generá un PDF solo con los autos de una marca específica." data-en="Generate a PDF only with cars from a specific brand." data-pt="Gere um PDF apenas com os carros de uma marca específica.">Generá un PDF solo con los autos de una marca específica.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="feature-category">
+    <div class="category-header">
+      <span class="category-icon">⚙️</span>
+      <h3 data-es="Configuración y Seguridad" data-en="Settings and Security" data-pt="Configurações e Segurança">Configuración y Seguridad</h3>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-img-wrap"><img src="screenshots/ss-config-1.png" alt="Temas" class="feature-img" onerror="this.style.opacity=0.2"></div>
+        <div class="feature-info">
+          <h4 data-es="3 temas visuales" data-en="3 visual themes" data-pt="3 temas visuais">3 temas visuales</h4>
+          <p data-es="Claro, Oscuro y Corporativo R21. Elegí el que más te guste." data-en="Light, Dark and Corporate R21. Choose your favorite." data-pt="Claro, Escuro e Corporativo R21. Escolha o seu favorito.">Claro, Oscuro y Corporativo R21. Elegí el que más te guste.</p>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-img-wrap"><img src="screenshots/ss-config-2.png" alt="Config" class="feature-img" onerror="this.style.opacity=0.2"></div>
+        <div class="feature-info">
+          <h4 data-es="Backup y notificaciones" data-en="Backup and notifications" data-pt="Backup e notificações">Backup y notificaciones</h4>
+          <p data-es="Descargá backup completo, restaurá datos y configurá recordatorios." data-en="Download full backup, restore data and configure reminders." data-pt="Baixe backup completo, restaure dados e configure lembretes.">Descargá backup completo, restaurá datos y configurá recordatorios.</p>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-img-wrap"><img src="screenshots/ss-login.png" alt="Login" class="feature-img" onerror="this.style.opacity=0.2"></div>
+        <div class="feature-info">
+          <h4 data-es="Login con PIN" data-en="PIN login" data-pt="Login com PIN">Login con PIN</h4>
+          <p data-es="Acceso seguro por usuario y PIN. Recordá tu sesión si querés." data-en="Secure access by user and PIN. Remember your session if you want." data-pt="Acesso seguro por usuário e PIN. Lembre sua sessão se quiser.">Acceso seguro por usuario y PIN. Recordá tu sesión si querés.</p>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-img-wrap"><img src="screenshots/ss-inicio.png" alt="Admin" class="feature-img" onerror="this.style.opacity=0.2"></div>
+        <div class="feature-info">
+          <h4 data-es="Gestión de usuarios" data-en="User management" data-pt="Gestão de usuários">Gestión de usuarios</h4>
+          <p data-es="Creá usuarios, asignales roles y controlá quién accede al sistema." data-en="Create users, assign roles and control who accesses the system." data-pt="Crie usuários, atribua papéis e controle quem acessa o sistema.">Creá usuarios, asignales roles y controlá quién accede al sistema.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<section id="planes">
+  <h2 data-es="Planes simples" data-en="Simple plans" data-pt="Planos simples">Planes simples</h2>
+  <p class="section-sub" data-es="Sin sorpresas. Cancelás cuando quieras. Prueba 14 días gratis." data-en="No surprises. Cancel anytime. 14-day free trial." data-pt="Sem surpresas. Cancele quando quiser. Teste 14 dias grátis.">Sin sorpresas. Cancelás cuando quieras. Prueba 14 días gratis.</p>
+
+  <div class="period-switch">
+    <button class="period-btn" data-period="monthly" onclick="setPeriod('monthly')">
+      <span data-es="Mensual" data-en="Monthly" data-pt="Mensal">Mensual</span>
+    </button>
+    <button class="period-btn" data-period="q" onclick="setPeriod('q')">
+      <span data-es="3 meses" data-en="3 months" data-pt="3 meses">3 meses</span>
+      <span class="period-badge">-10%</span>
+    </button>
+    <button class="period-btn" data-period="s" onclick="setPeriod('s')">
+      <span data-es="6 meses" data-en="6 months" data-pt="6 meses">6 meses</span>
+      <span class="period-badge">-15%</span>
+    </button>
+    <button class="period-btn active" data-period="y" onclick="setPeriod('y')">
+      <span data-es="Anual" data-en="Annual" data-pt="Anual">Anual</span>
+      <span class="period-badge">-20%</span>
+    </button>
+  </div>
+
+  <div class="pricing">
+    <div class="price-card">
+      <span class="price-badge badge-basic" data-es="Básico" data-en="Basic" data-pt="Básico">Básico</span>
+      <h3 data-es="Solo Celular" data-en="Mobile Only" data-pt="Só Celular">Solo Celular</h3>
+      <div class="price-users" data-es="1 usuario" data-en="1 user" data-pt="1 usuário">1 usuario</div>
+      <div class="price-per-user">
+        <span class="per-user-label" data-es="por usuario/mes" data-en="per user/month" data-pt="por usuário/mês">por usuario/mes</span>
+        <span class="per-user-amount" data-usd-base="29" data-users="1">USD 29</span>
+        <span class="per-user-ars"></span>
+      </div>
+      <div class="price-total">
+        <span data-es="Total:" data-en="Total:" data-pt="Total:">Total:</span>
+        <span class="total-amount" data-usd-base="29">USD 29/mes</span>
+        <span class="total-ars"></span>
+      </div>
+      <ul class="price-features">
+        <li data-es="App Android" data-en="Android app" data-pt="App Android">App Android</li>
+        <li data-es="Todos los módulos" data-en="All modules" data-pt="Todos os módulos">Todos los módulos</li>
+        <li data-es="Soporte por WhatsApp" data-en="WhatsApp support" data-pt="Suporte por WhatsApp">Soporte por WhatsApp</li>
+      </ul>
+      <a href="https://wa.me/5493415040667?text=Hola%2C%20quiero%20el%20Plan%20B%C3%A1sico%201%20usuario" target="_blank" class="btn btn-secondary" data-es="Empezar" data-en="Start" data-pt="Começar">Empezar</a>
+    </div>
+
+    <div class="price-card">
+      <span class="price-badge badge-basic" data-es="Básico" data-en="Basic" data-pt="Básico">Básico</span>
+      <h3 data-es="Solo Celular" data-en="Mobile Only" data-pt="Só Celular">Solo Celular</h3>
+      <div class="price-users" data-es="3 usuarios" data-en="3 users" data-pt="3 usuários">3 usuarios</div>
+      <div class="price-per-user">
+        <span class="per-user-label" data-es="por usuario/mes" data-en="per user/month" data-pt="por usuário/mês">por usuario/mes</span>
+        <span class="per-user-amount" data-usd-base="59" data-users="3">USD 20</span>
+        <span class="per-user-ars"></span>
+      </div>
+      <div class="price-total">
+        <span data-es="Total:" data-en="Total:" data-pt="Total:">Total:</span>
+        <span class="total-amount" data-usd-base="59">USD 59/mes</span>
+        <span class="total-ars"></span>
+      </div>
+      <ul class="price-features">
+        <li data-es="App Android" data-en="Android app" data-pt="App Android">App Android</li>
+        <li data-es="Todos los módulos" data-en="All modules" data-pt="Todos os módulos">Todos los módulos</li>
+        <li data-es="Soporte por WhatsApp" data-en="WhatsApp support" data-pt="Suporte por WhatsApp">Soporte por WhatsApp</li>
+      </ul>
+      <a href="https://wa.me/5493415040667?text=Hola%2C%20quiero%20el%20Plan%20B%C3%A1sico%203%20usuarios" target="_blank" class="btn btn-secondary" data-es="Empezar" data-en="Start" data-pt="Começar">Empezar</a>
+    </div>
+
+    <div class="price-card featured">
+      <span class="price-badge badge-full" data-es="Full" data-en="Full" data-pt="Full">Full</span>
+      <h3 data-es="Celu + PC" data-en="Mobile + PC" data-pt="Celular + PC">Celu + PC</h3>
+      <div class="price-users" data-es="3 usuarios" data-en="3 users" data-pt="3 usuários">3 usuarios</div>
+      <div class="price-per-user">
+        <span class="per-user-label" data-es="por usuario/mes" data-en="per user/month" data-pt="por usuário/mês">por usuario/mes</span>
+        <span class="per-user-amount" data-usd-base="69" data-users="3">USD 23</span>
+        <span class="per-user-ars"></span>
+      </div>
+      <div class="price-total">
+        <span data-es="Total:" data-en="Total:" data-pt="Total:">Total:</span>
+        <span class="total-amount" data-usd-base="69">USD 69/mes</span>
+        <span class="total-ars"></span>
+      </div>
+      <ul class="price-features">
+        <li data-es="App Android + Windows" data-en="Android + Windows app" data-pt="App Android + Windows">App Android + Windows</li>
+        <li data-es="Todos los módulos" data-en="All modules" data-pt="Todos os módulos">Todos los módulos</li>
+        <li data-es="Bot de WhatsApp incluido" data-en="WhatsApp Bot included" data-pt="Bot de WhatsApp incluído">Bot de WhatsApp incluido</li>
+        <li data-es="Soporte prioritario" data-en="Priority support" data-pt="Suporte prioritário">Soporte prioritario</li>
+      </ul>
+      <a href="https://wa.me/5493415040667?text=Hola%2C%20quiero%20el%20Plan%20Full%203%20usuarios" target="_blank" class="btn btn-primary" data-es="Empezar" data-en="Start" data-pt="Começar">Empezar</a>
+    </div>
+
+    <div class="price-card">
+      <span class="price-badge badge-full" data-es="Full" data-en="Full" data-pt="Full">Full</span>
+      <h3 data-es="Celu + PC" data-en="Mobile + PC" data-pt="Celular + PC">Celu + PC</h3>
+      <div class="price-users" data-es="7 usuarios" data-en="7 users" data-pt="7 usuários">7 usuarios</div>
+      <div class="price-per-user">
+        <span class="per-user-label" data-es="por usuario/mes" data-en="per user/month" data-pt="por usuário/mês">por usuario/mes</span>
+        <span class="per-user-amount" data-usd-base="119" data-users="7">USD 17</span>
+        <span class="per-user-ars"></span>
+      </div>
+      <div class="price-total">
+        <span data-es="Total:" data-en="Total:" data-pt="Total:">Total:</span>
+        <span class="total-amount" data-usd-base="119">USD 119/mes</span>
+        <span class="total-ars"></span>
+      </div>
+      <ul class="price-features">
+        <li data-es="App Android + Windows" data-en="Android + Windows app" data-pt="App Android + Windows">App Android + Windows</li>
+        <li data-es="Todos los módulos" data-en="All modules" data-pt="Todos os módulos">Todos los módulos</li>
+        <li data-es="Bot de WhatsApp incluido" data-en="WhatsApp Bot included" data-pt="Bot de WhatsApp incluído">Bot de WhatsApp incluido</li>
+        <li data-es="Soporte prioritario" data-en="Priority support" data-pt="Suporte prioritário">Soporte prioritario</li>
+      </ul>
+      <a href="https://wa.me/5493415040667?text=Hola%2C%20quiero%20el%20Plan%20Full%207%20usuarios" target="_blank" class="btn btn-secondary" data-es="Empezar" data-en="Start" data-pt="Começar">Empezar</a>
+    </div>
+
+    <div class="price-card">
+      <span class="price-badge badge-full" data-es="Full" data-en="Full" data-pt="Full">Full</span>
+      <h3 data-es="Celu + PC" data-en="Mobile + PC" data-pt="Celular + PC">Celu + PC</h3>
+      <div class="price-users" data-es="15 usuarios" data-en="15 users" data-pt="15 usuários">15 usuarios</div>
+      <div class="price-per-user">
+        <span class="per-user-label" data-es="por usuario/mes" data-en="per user/month" data-pt="por usuário/mês">por usuario/mes</span>
+        <span class="per-user-amount" data-usd-base="199" data-users="15">USD 14</span>
+        <span class="per-user-ars"></span>
+      </div>
+      <div class="price-total">
+        <span data-es="Total:" data-en="Total:" data-pt="Total:">Total:</span>
+        <span class="total-amount" data-usd-base="199">USD 199/mes</span>
+        <span class="total-ars"></span>
+      </div>
+      <ul class="price-features">
+        <li data-es="App Android + Windows" data-en="Android + Windows app" data-pt="App Android + Windows">App Android + Windows</li>
+        <li data-es="Todos los módulos" data-en="All modules" data-pt="Todos os módulos">Todos los módulos</li>
+        <li data-es="Bot de WhatsApp incluido" data-en="WhatsApp Bot included" data-pt="Bot de WhatsApp incluído">Bot de WhatsApp incluido</li>
+        <li data-es="Soporte prioritario" data-en="Priority support" data-pt="Suporte prioritário">Soporte prioritario</li>
+      </ul>
+      <a href="https://wa.me/5493415040667?text=Hola%2C%20quiero%20el%20Plan%20Full%2015%20usuarios" target="_blank" class="btn btn-secondary" data-es="Empezar" data-en="Start" data-pt="Começar">Empezar</a>
+    </div>
+  </div>
+
+  <div class="founder-box">
+    <strong data-es="🎁 Probá gratis 14 días" data-en="🎁 Try 14 days free" data-pt="🎁 Teste grátis 14 dias">🎁 Probá gratis 14 días</strong>
+    <p data-es="Sin tarjeta. Sin contrato. Cancelás cuando quieras. Soporte directo por WhatsApp con el creador." data-en="No card. No contract. Cancel anytime. Direct WhatsApp support with the creator." data-pt="Sem cartão. Sem contrato. Cancele quando quiser. Suporte direto por WhatsApp com o criador.">Sin tarjeta. Sin contrato. Cancelás cuando quieras. Soporte directo por WhatsApp con el creador.</p>
+  </div>
+</section>
+
+<section class="discounts-section">
+  <div class="discounts-inner">
+    <h2 data-es="Ahorrá pagando adelantado" data-en="Save by paying upfront" data-pt="Economize pagando adiantado">Ahorrá pagando adelantado</h2>
+    <p class="section-sub" data-es="Cuanto más pagás por adelantado, más ahorrás." data-en="The more you pay upfront, the more you save." data-pt="Quanto mais você paga adiantado, mais economiza.">Cuanto más pagás por adelantado, más ahorrás.</p>
+
+    <div class="discount-cards">
+      <div class="discount-card">
+        <div class="discount-pct">-10%</div>
+        <div class="discount-months" data-es="3 meses" data-en="3 months" data-pt="3 meses">3 meses</div>
+        <div class="discount-desc" data-es="Pago trimestral" data-en="Quarterly payment" data-pt="Pagamento trimestral">Pago trimestral</div>
+      </div>
+      <div class="discount-card highlight">
+        <div class="discount-pct">-15%</div>
+        <div class="discount-months" data-es="6 meses" data-en="6 months" data-pt="6 meses">6 meses</div>
+        <div class="discount-desc" data-es="Pago semestral" data-en="Half-yearly payment" data-pt="Pagamento semestral">Pago semestral</div>
+      </div>
+      <div class="discount-card">
+        <div class="discount-pct">-20%</div>
+        <div class="discount-months" data-es="1 año" data-en="1 year" data-pt="1 ano">1 año</div>
+        <div class="discount-desc" data-es="Pago anual" data-en="Annual payment" data-pt="Pagamento anual">Pago anual</div>
+      </div>
+    </div>
+
+    <h3 style="font-size: 22px; font-weight: 800; text-align: center; margin-bottom: 24px;" data-es="Precio por usuario / mes" data-en="Price per user / month" data-pt="Preço por usuário / mês">Precio por usuario / mes</h3>
+
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th data-es="Plan" data-en="Plan" data-pt="Plano">Plan</th>
+            <th data-es="Usuarios" data-en="Users" data-pt="Usuários">Usuarios</th>
+            <th data-es="Mensual" data-en="Monthly" data-pt="Mensal">Mensual</th>
+            <th data-es="3 meses (-10%)" data-en="3 months (-10%)" data-pt="3 meses (-10%)">3 meses (-10%)</th>
+            <th data-es="6 meses (-15%)" data-en="6 months (-15%)" data-pt="6 meses (-15%)">6 meses (-15%)</th>
+            <th data-es="Anual (-20%)" data-en="Annual (-20%)" data-pt="Anual (-20%)">Anual (-20%)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="table-plan-name">Básico</span><span class="table-plan-badge badge-basic">1u</span></td>
+            <td>1</td>
+            <td class="table-price">USD 29</td>
+            <td class="table-price">USD 27</td>
+            <td class="table-price">USD 25</td>
+            <td class="table-price">USD 24</td>
+          </tr>
+          <tr>
+            <td><span class="table-plan-name">Básico</span><span class="table-plan-badge badge-basic">3u</span></td>
+            <td>3</td>
+            <td class="table-price">USD 20</td>
+            <td class="table-price">USD 18</td>
+            <td class="table-price">USD 17</td>
+            <td class="table-price">USD 16</td>
+          </tr>
+          <tr>
+            <td><span class="table-plan-name">Full</span><span class="table-plan-badge badge-full">3u</span></td>
+            <td>3</td>
+            <td class="table-price">USD 23</td>
+            <td class="table-price">USD 21</td>
+            <td class="table-price">USD 20</td>
+            <td class="table-price">USD 19</td>
+          </tr>
+          <tr>
+            <td><span class="table-plan-name">Full</span><span class="table-plan-badge badge-full">7u</span></td>
+            <td>7</td>
+            <td class="table-price">USD 17</td>
+            <td class="table-price">USD 16</td>
+            <td class="table-price">USD 15</td>
+            <td class="table-price">USD 14</td>
+          </tr>
+          <tr>
+            <td><span class="table-plan-name">Full</span><span class="table-plan-badge badge-full">15u</span></td>
+            <td>15</td>
+            <td class="table-price">USD 14</td>
+            <td class="table-price">USD 13</td>
+            <td class="table-price">USD 12</td>
+            <td class="table-price">USD 12</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="table-note" data-es="Precios por usuario, por mes, ya con el descuento aplicado." data-en="Prices per user, per month, discount already applied." data-pt="Preços por usuário, por mês, já com o desconto aplicado.">Precios por usuario, por mes, ya con el descuento aplicado.</p>
+  </div>
+</section>
+
+<section class="payments-section">
+  <div class="payments-inner">
+    <h2 data-es="Métodos de pago" data-en="Payment methods" data-pt="Métodos de pagamento">Métodos de pago</h2>
+    <p class="section-sub" data-es="Elegí el que más te convenga. Todos son seguros." data-en="Choose the one that suits you best. All are secure." data-pt="Escolha o que mais lhe convier. Todos são seguros.">Elegí el que más te convenga. Todos son seguros.</p>
+
+    <div class="payment-highlight">
+      <h3 data-es="💳 No pedimos tarjeta" data-en="💳 We don't ask for a card" data-pt="💳 Não pedimos cartão">💳 No pedimos tarjeta</h3>
+      <p data-es="No necesitás cargar tarjeta de crédito para probar ni para pagar. Elegís cómo pagar cuando quieras y listo." data-en="You don't need to load a credit card to try or pay. You choose how to pay whenever you want." data-pt="Você não precisa cadastrar cartão de crédito para testar nem para pagar. Escolhe como pagar quando quiser.">No necesitás cargar tarjeta de crédito para probar ni para pagar. Elegís cómo pagar cuando quieras y listo.</p>
+    </div>
+
+    <div class="payment-cards">
+      <div class="payment-card">
+        <div class="payment-icon">💙</div>
+        <h4>MercadoPago</h4>
+        <p data-es="Transferí desde cualquier billetera o app bancaria al alias." data-en="Transfer from any wallet or bank app to the alias." data-pt="Transfira de qualquer carteira ou app bancário para o alias.">Transferí desde cualquier billetera o app bancaria al alias.</p>
+      </div>
+      <div class="payment-card">
+        <div class="payment-icon">🏦</div>
+        <h4 data-es="Transferencia bancaria" data-en="Bank transfer" data-pt="Transferência bancária">Transferencia bancaria</h4>
+        <p data-es="CBU y alias. Desde cualquier home banking." data-en="CBU and alias. From any home banking." data-pt="CBU e alias. De qualquer internet banking.">CBU y alias. Desde cualquier home banking.</p>
+      </div>
+      <div class="payment-card">
+        <div class="payment-icon">🌎</div>
+        <h4>PayPal</h4>
+        <p data-es="Para clientes del exterior. Pagá con tu cuenta PayPal." data-en="For international clients. Pay with your PayPal account." data-pt="Para clientes do exterior. Pague com sua conta PayPal.">Para clientes del exterior. Pagá con tu cuenta PayPal.</p>
+      </div>
+      <div class="payment-card">
+        <div class="payment-icon">₿</div>
+        <h4>USDT (TRC20)</h4>
+        <p data-es="Cripto en red TRC20. Rápido y con comisiones bajas." data-en="Crypto on TRC20 network. Fast and low fees." data-pt="Cripto na rede TRC20. Rápido e com taxas baixas.">Cripto en red TRC20. Rápido y con comisiones bajas.</p>
+      </div>
+    </div>
+
+    <p class="payment-note" data-es="🔒 Tus datos bancarios nunca pasan por nosotros. Cada pago se hace directamente a la cuenta del proveedor del servicio." data-en="🔒 Your bank details never pass through us. Each payment goes directly to the service provider's account." data-pt="🔒 Seus dados bancários nunca passam por nós. Cada pagamento vai direto para a conta do provedor do serviço.">🔒 Tus datos bancarios nunca pasan por nosotros. Cada pago se hace directamente a la cuenta del proveedor del servicio.</p>
+  </div>
+</section>
+
+<section>
+  <h2 data-es="Empezar es fácil" data-en="Getting started is easy" data-pt="Começar é fácil">Empezar es fácil</h2>
+  <p class="section-sub" data-es="En 3 pasos tenés tu agencia funcionando." data-en="In 3 steps your dealership is running." data-pt="Em 3 passos sua loja está funcionando.">En 3 pasos tenés tu agencia funcionando.</p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h3 data-es="Probás gratis" data-en="Try for free" data-pt="Teste grátis">Probás gratis</h3>
+      <p data-es="14 días sin pagar nada. Sin tarjeta." data-en="14 days free. No card." data-pt="14 dias sem pagar nada. Sem cartão.">14 días sin pagar nada. Sin tarjeta.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h3 data-es="Cargás tus datos" data-en="Load your data" data-pt="Carregue seus dados">Cargás tus datos</h3>
+      <p data-es="Autos, clientes, movimientos. O restauramos tu backup." data-en="Cars, clients, movements. Or we restore your backup." data-pt="Carros, clientes, movimentações. Ou restauramos seu backup.">Autos, clientes, movimientos. O restauramos tu backup.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h3 data-es="El bot atiende solo" data-en="The bot answers alone" data-pt="O bot atende sozinho">El bot atiende solo</h3>
+      <p data-es="Vos dedicás a vender. El bot contesta 24/7." data-en="You focus on selling. The bot answers 24/7." data-pt="Você foca em vender. O bot responde 24/7.">Vos dedicás a vender. El bot contesta 24/7.</p>
+    </div>
+  </div>
+</section>
+
+<section class="contact">
+  <div style="max-width: 700px; margin: 0 auto;">
+    <h2 data-es="¿Hablamos?" data-en="Let's talk?" data-pt="Vamos conversar?">¿Hablamos?</h2>
+    <p class="section-sub" data-es="Te respondo yo personalmente. Sin bots, sin vueltas." data-en="I answer personally. No bots, no nonsense." data-pt="Eu respondo pessoalmente. Sem bots, sem enrolação.">Te respondo yo personalmente. Sin bots, sin vueltas.</p>
+    <div class="contact-buttons">
+      <a href="https://wa.me/5493415040667?text=Hola%2C%20quiero%20info%20sobre%20R21" target="_blank" class="btn btn-whatsapp" data-es="💬 WhatsApp" data-en="💬 WhatsApp" data-pt="💬 WhatsApp">💬 WhatsApp</a>
+      <a href="mailto:sistema.ruta21@gmail.com" class="btn btn-email" data-es="✉️ Email" data-en="✉️ Email" data-pt="✉️ Email">✉️ Email</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 R21 — <a href="https://getaxiora.com">getaxiora.com</a></p>
+</footer>
+
+<script>
+  function setLang(lang) {
+    document.querySelectorAll('[data-es]').forEach(el => {
+      const val = el.getAttribute('data-' + lang);
+      if (val) el.textContent = val;
+    });
+    document.getElementById('btn-es').classList.toggle('active', lang === 'es');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    document.getElementById('btn-pt').classList.toggle('active', lang === 'pt');
+    document.documentElement.lang = lang;
+    localStorage.setItem('r21-lang', lang);
+  }
+
+  let cotizacionUSD = 0;
+
+  async function cargarCotizacion() {
+    try {
+      const res = await fetch('https://dolarapi.com/v1/dolares/tarjeta');
+      const data = await res.json();
+      cotizacionUSD = data.venta || data.compra || 0;
+    } catch (e) {
+      console.log('No se pudo cargar la cotización:', e);
+      cotizacionUSD = 0;
+    }
+  }
+
+  const descuentos = { monthly: 0, q: 0.10, s: 0.15, y: 0.20 };
+
+  function setPeriod(period) {
+    document.querySelectorAll('.period-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.period === period);
+    });
+
+    const desc = descuentos[period] || 0;
+
+    document.querySelectorAll('.per-user-amount').forEach(el => {
+      const base = parseFloat(el.dataset.usdBase);
+      const users = parseFloat(el.dataset.users || 1);
+      const perUser = Math.ceil((base * (1 - desc)) / users);
+      el.textContent = `USD ${perUser}`;
+
+      const arsEl = el.parentElement.querySelector('.per-user-ars');
+      if (arsEl && cotizacionUSD > 0) {
+        const ars = Math.round(perUser * cotizacionUSD);
+        arsEl.textContent = `≈ $${ars.toLocaleString('es-AR')} ARS`;
+      }
+    });
+
+    document.querySelectorAll('.total-amount').forEach(el => {
+      const base = parseFloat(el.dataset.usdBase);
+      const total = Math.ceil(base * (1 - desc));
+      const sufijo = period === 'monthly' ? '/mes' : '';
+      el.textContent = `USD ${total}${sufijo}`;
+
+      const arsEl = el.parentElement.querySelector('.total-ars');
+      if (arsEl && cotizacionUSD > 0) {
+        const ars = Math.round(total * cotizacionUSD);
+        arsEl.textContent = `≈ $${ars.toLocaleString('es-AR')} ARS`;
+      }
+    });
+
+    localStorage.setItem('r21-period', period);
+  }
+
+  // ─── INIT ───
+  const navLang = (navigator.language || 'es').toLowerCase();
+  const autoLang = navLang.startsWith('pt') ? 'pt' : (navLang.startsWith('en') ? 'en' : 'es');
+  const savedLang = localStorage.getItem('r21-lang') || autoLang;
+  setLang(savedLang);
+
+  cargarCotizacion().then(() => {
+    const savedPeriod = localStorage.getItem('r21-period') || 'y';
+    setPeriod(savedPeriod);
+  });
+</script>
+
+</body>
+</html>
