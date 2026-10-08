@@ -5,9 +5,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>R21 — Vehicle Dealership Management System</title>
 <meta name="description" content="Sistema de gestión para concesionarias. Vendé más, ordená tu agencia, automatizá tu WhatsApp.">
+<link rel="canonical" href="https://getaxiora.com/">
+<link rel="icon" type="image/png" href="logo.png">
+<meta name="theme-color" content="#1B5E3F">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://getaxiora.com/">
+<meta property="og:site_name" content="R21">
+<meta property="og:title" content="R21 — Sistema de gestión para concesionarias">
+<meta property="og:description" content="Vendé más, ordená tu agencia, automatizá tu WhatsApp. Stock, clientes, tasaciones, contable y bot con IA en un solo sistema.">
+<meta property="og:image" content="https://getaxiora.com/screenshots/ss-inicio.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="R21 — Sistema de gestión para concesionarias">
+<meta name="twitter:description" content="Vendé más, ordená tu agencia, automatizá tu WhatsApp.">
+<meta name="twitter:image" content="https://getaxiora.com/screenshots/ss-inicio.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="logo.png" fetchpriority="high">
 <style>
   :root {
     --gold: #C9A227;
@@ -412,7 +426,12 @@
     <div class="module-card">
       <div class="module-icon">🤖</div>
       <h3 data-es="Bot de WhatsApp con IA" data-en="AI WhatsApp Bot" data-pt="Bot de WhatsApp com IA">Bot de WhatsApp con IA</h3>
-      <p data-es="Atiende solo, busca stock, toma datos del cliente y te avisa." data-en="Answers alone, searches stock, takes client data and notifies you." data-pt="Atende sozinho, busca estoque, coleta dados do cliente e te avisa.">Atiende solo, busca stock, toma datos del cliente y te avisa.</p>
+      <p data-es="Atiende solo: busca stock, toma tasaciones con fotos y responde consultas. Todo se guarda solo y te llega la notificación." data-en="Answers alone: searches stock, takes trade-in appraisals with photos and answers questions. Everything saves itself and you get notified." data-pt="Atende sozinho: busca estoque, recebe avaliações com fotos e responde dúvidas. Tudo se salva só e você recebe a notificação.">Atiende solo: busca stock, toma tasaciones con fotos y responde consultas. Todo se guarda solo y te llega la notificación.</p>
+    </div>
+    <div class="module-card">
+      <div class="module-icon">🚘</div>
+      <h3 data-es="Tasaciones" data-en="Trade-in appraisals" data-pt="Avaliações">Tasaciones</h3>
+      <p data-es="El cliente te ofrece su auto por WhatsApp, el bot junta los datos y las fotos, y vos lo revisás desde la app." data-en="The client offers their car via WhatsApp, the bot collects the info and photos, and you review it from the app." data-pt="O cliente oferece o carro pelo WhatsApp, o bot coleta os dados e fotos, e você revisa pelo app.">El cliente te ofrece su auto por WhatsApp, el bot junta los datos y las fotos, y vos lo revisás desde la app.</p>
     </div>
     <div class="module-card">
       <div class="module-icon">📄</div>
@@ -443,28 +462,28 @@
     </div>
     <div class="feature-grid">
       <div class="feature-card">
-        <div class="feature-img-wrap"><img src="screenshots/ss-todos-vehiculos.png" alt="Vehículos" class="feature-img" onerror="this.style.opacity=0.2"></div>
+        <div class="feature-img-wrap"><img src="screenshots/ss-todos-vehiculos.png" alt="Vehículos" class="feature-img" loading="lazy" decoding="async" onerror="this.style.opacity=0.2"></div>
         <div class="feature-info">
           <h4 data-es="Lista de vehículos con filtros" data-en="Vehicle list with filters" data-pt="Lista de veículos com filtros">Lista de vehículos con filtros</h4>
           <p data-es="Buscá por marca, modelo, año, combustible y transmisión. Todo en tiempo real." data-en="Search by brand, model, year, fuel and transmission. All in real time." data-pt="Busque por marca, modelo, ano, combustível e transmissão. Tudo em tempo real.">Buscá por marca, modelo, año, combustible y transmisión. Todo en tiempo real.</p>
         </div>
       </div>
       <div class="feature-card">
-        <div class="feature-img-wrap"><img src="screenshots/ss-vehiculos-marcas.png" alt="Marcas" class="feature-img" onerror="this.style.opacity=0.2"></div>
+        <div class="feature-img-wrap"><img src="screenshots/ss-vehiculos-marcas.png" alt="Marcas" class="feature-img" loading="lazy" decoding="async" onerror="this.style.opacity=0.2"></div>
         <div class="feature-info">
           <h4 data-es="16 marcas cargadas" data-en="16 brands loaded" data-pt="16 marcas carregadas">16 marcas cargadas</h4>
           <p data-es="Accedé a cada marca con sus logos oficiales y contador de vehículos." data-en="Access each brand with official logos and vehicle counter." data-pt="Acesse cada marca com seus logos oficiais e contador de veículos.">Accedé a cada marca con sus logos oficiales y contador de vehículos.</p>
         </div>
       </div>
       <div class="feature-card">
-        <div class="feature-img-wrap"><img src="screenshots/ss-vehiculo-ficha.png" alt="Ficha" class="feature-img" onerror="this.style.opacity=0.2"></div>
+        <div class="feature-img-wrap"><img src="screenshots/ss-vehiculo-ficha.png" alt="Ficha" class="feature-img" loading="lazy" decoding="async" onerror="this.style.opacity=0.2"></div>
         <div class="feature-info">
           <h4 data-es="Ficha completa del vehículo" data-en="Complete vehicle file" data-pt="Ficha completa do veículo">Ficha completa del vehículo</h4>
           <p data-es="Precio contado, permuta, kilómetros, combustible, transmisión y más." data-en="Cash price, trade-in, mileage, fuel, transmission and more." data-pt="Preço à vista, troca, quilometragem, combustível, transmissão e mais.">Precio contado, permuta, kilómetros, combustible, transmisión y más.</p>
         </div>
       </div>
       <div class="feature-card">
-        <div class="feature-img-wrap"><img src="screenshots/ss-marca-fiat.png" alt="Marca" class="feature-img" onerror="this.style.opacity=0.2"></div>
+        <div class="feature-img-wrap"><img src="screenshots/ss-marca-fiat.png" alt="Marca" class="feature-img" loading="lazy" decoding="async" onerror="this.style.opacity=0.2"></div>
         <div class="feature-info">
           <h4 data-es="Vista por marca" data-en="Brand view" data-pt="Visão por marca">Vista por marca</h4>
           <p data-es="Filtrá por modelo, año, combustible y transmisión dentro de cada marca." data-en="Filter by model, year, fuel and transmission inside each brand." data-pt="Filtre por modelo, ano, combustível e transmissão dentro de cada marca.">Filtrá por modelo, año, combustible y transmisión dentro de cada marca.</p>
@@ -480,31 +499,31 @@
     </div>
     <div class="feature-grid">
       <div class="feature-card">
-        <div class="feature-img-wrap"><img src="screenshots/ss-clientes.png" alt="Clientes" class="feature-img" onerror="this.style.opacity=0.2"></div>
+        <div class="feature-img-wrap"><img src="screenshots/ss-clientes.png" alt="Clientes" class="feature-img" loading="lazy" decoding="async" onerror="this.style.opacity=0.2"></div>
         <div class="feature-info">
-          <h4 data-es="Clientes buscando" data-en="Clients searching" data-pt="Clientes procurando">Clientes buscando</h4>
-          <p data-es="Guardá qué busca cada cliente: marca, modelo, año, presupuesto." data-en="Save what each client looks for: brand, model, year, budget." data-pt="Guarde o que cada cliente procura: marca, modelo, ano, orçamento.">Guardá qué busca cada cliente: marca, modelo, año, presupuesto.</p>
+          <h4 data-es="Prospectos, clientes y tasaciones" data-en="Prospects, clients and appraisals" data-pt="Prospectos, clientes e avaliações">Prospectos, clientes y tasaciones</h4>
+          <p data-es="3 pestañas: quién busca auto, quiénes ya te compraron (con historial) y quién te ofreció el suyo." data-en="3 tabs: who's searching for a car, who already bought from you (with history) and who offered you theirs." data-pt="3 abas: quem procura carro, quem já comprou de você (com histórico) e quem ofereceu o carro dele.">3 pestañas: quién busca auto, quiénes ya te compraron (con historial) y quién te ofreció el suyo.</p>
         </div>
       </div>
       <div class="feature-card">
-        <div class="feature-img-wrap"><img src="screenshots/ss-cliente-match.png" alt="Match" class="feature-img" onerror="this.style.opacity=0.2"></div>
+        <div class="feature-img-wrap"><img src="screenshots/ss-cliente-match.png" alt="Match" class="feature-img" loading="lazy" decoding="async" onerror="this.style.opacity=0.2"></div>
         <div class="feature-info">
           <h4 data-es="Match automático por %" data-en="Automatic match by %" data-pt="Match automático por %">Match automático por %</h4>
           <p data-es="El sistema te sugiere qué autos coinciden con lo que busca el cliente." data-en="The system suggests which cars match what the client is looking for." data-pt="O sistema sugere quais carros combinam com o que o cliente procura.">El sistema te sugiere qué autos coinciden con lo que busca el cliente.</p>
         </div>
       </div>
       <div class="feature-card">
-        <div class="feature-img-wrap"><img src="screenshots/ss-proveedores.png" alt="Proveedores" class="feature-img" onerror="this.style.opacity=0.2"></div>
+        <div class="feature-img-wrap"><img src="screenshots/ss-proveedores.png" alt="Proveedores" class="feature-img" loading="lazy" decoding="async" onerror="this.style.opacity=0.2"></div>
         <div class="feature-info">
           <h4 data-es="Proveedores con rating" data-en="Suppliers with rating" data-pt="Fornecedores com avaliação">Proveedores con rating</h4>
           <p data-es="Chaperos, pintores, tapiceros. Guardá contacto, dirección y puntuación." data-en="Bodyworkers, painters, upholsterers. Save contact, address and rating." data-pt="Funileiros, pintores, tapeceiros. Guarde contato, endereço e avaliação.">Chaperos, pintores, tapiceros. Guardá contacto, dirección y puntuación.</p>
         </div>
       </div>
       <div class="feature-card">
-        <div class="feature-img-wrap"><img src="screenshots/ss-reportes.png" alt="Reportes" class="feature-img" onerror="this.style.opacity=0.2"></div>
+        <div class="feature-img-wrap"><img src="screenshots/ss-reportes.png" alt="Reportes" class="feature-img" loading="lazy" decoding="async" onerror="this.style.opacity=0.2"></div>
         <div class="feature-info">
-          <h4 data-es="Reportes de proveedores" data-en="Supplier reports" data-pt="Relatórios de fornecedores">Reportes de proveedores</h4>
-          <p data-es="Mirá cuánto facturaste con cada proveedor, cuántos trabajos y el promedio." data-en="See how much you billed with each supplier, how many jobs and the average." data-pt="Veja quanto faturou com cada fornecedor, quantos trabalhos e a média.">Mirá cuánto facturaste con cada proveedor, cuántos trabajos y el promedio.</p>
+          <h4 data-es="Reportes con gráficos" data-en="Reports with charts" data-pt="Relatórios com gráficos">Reportes con gráficos</h4>
+          <p data-es="Ganancia por vehículo, gasto por proveedor e ingresos/egresos por categoría, con gráficos de barras y torta." data-en="Profit per vehicle, spend per supplier and income/expenses by category, with bar and pie charts." data-pt="Lucro por veículo, gasto por fornecedor e receitas/despesas por categoria, com gráficos de barras e pizza.">Ganancia por vehículo, gasto por proveedor e ingresos/egresos por categoría, con gráficos de barras y torta.</p>
         </div>
       </div>
     </div>
@@ -517,28 +536,28 @@
     </div>
     <div class="feature-grid">
       <div class="feature-card">
-        <div class="feature-img-wrap"><img src="screenshots/ss-caja.png" alt="Caja" class="feature-img" onerror="this.style.opacity=0.2"></div>
+        <div class="feature-img-wrap"><img src="screenshots/ss-caja.png" alt="Caja" class="feature-img" loading="lazy" decoding="async" onerror="this.style.opacity=0.2"></div>
         <div class="feature-info">
           <h4 data-es="Caja diaria" data-en="Daily cash" data-pt="Caixa diário">Caja diaria</h4>
           <p data-es="Ingresos, egresos, balance. Filtrá por hoy, semana, mes, año." data-en="Income, expenses, balance. Filter by today, week, month, year." data-pt="Entradas, saídas, saldo. Filtre por hoje, semana, mês, ano.">Ingresos, egresos, balance. Filtrá por hoy, semana, mes, año.</p>
         </div>
       </div>
       <div class="feature-card">
-        <div class="feature-img-wrap"><img src="screenshots/ss-inicio.png" alt="Inicio" class="feature-img" onerror="this.style.opacity=0.2"></div>
+        <div class="feature-img-wrap"><img src="screenshots/ss-inicio.png" alt="Inicio" class="feature-img" loading="lazy" decoding="async" onerror="this.style.opacity=0.2"></div>
         <div class="feature-info">
           <h4 data-es="Resumen del mes" data-en="Month summary" data-pt="Resumo do mês">Resumen del mes</h4>
           <p data-es="Stock, vendidos, ganancia y clientes buscando. Todo de un vistazo." data-en="Stock, sold, profit and clients searching. All at a glance." data-pt="Estoque, vendidos, lucro e clientes procurando. Tudo em um relance.">Stock, vendidos, ganancia y clientes buscando. Todo de un vistazo.</p>
         </div>
       </div>
       <div class="feature-card">
-        <div class="feature-img-wrap"><img src="screenshots/ss-estadisticas-1.png" alt="Estadísticas" class="feature-img" onerror="this.style.opacity=0.2"></div>
+        <div class="feature-img-wrap"><img src="screenshots/ss-estadisticas-1.png" alt="Estadísticas" class="feature-img" loading="lazy" decoding="async" onerror="this.style.opacity=0.2"></div>
         <div class="feature-info">
           <h4 data-es="Estadísticas por marca" data-en="Statistics by brand" data-pt="Estatísticas por marca">Estadísticas por marca</h4>
           <p data-es="Cuántos autos tenés por marca, valor del stock, promedio de precios." data-en="How many cars per brand, stock value, average prices." data-pt="Quantos carros você tem por marca, valor do estoque, preço médio.">Cuántos autos tenés por marca, valor del stock, promedio de precios.</p>
         </div>
       </div>
       <div class="feature-card">
-        <div class="feature-img-wrap"><img src="screenshots/ss-estadisticas-2.png" alt="Datos extra" class="feature-img" onerror="this.style.opacity=0.2"></div>
+        <div class="feature-img-wrap"><img src="screenshots/ss-estadisticas-2.png" alt="Datos extra" class="feature-img" loading="lazy" decoding="async" onerror="this.style.opacity=0.2"></div>
         <div class="feature-info">
           <h4 data-es="Datos extra y rankings" data-en="Extra data and rankings" data-pt="Dados extras e rankings">Datos extra y rankings</h4>
           <p data-es="Marca más buscada, cliente con más envíos, autos con más días en stock." data-en="Most searched brand, client with most sends, cars with most days in stock." data-pt="Marca mais buscada, cliente com mais envios, carros com mais dias em estoque.">Marca más buscada, cliente con más envíos, autos con más días en stock.</p>
@@ -554,31 +573,31 @@
     </div>
     <div class="feature-grid">
       <div class="feature-card">
-        <div class="feature-img-wrap"><img src="screenshots/ss-documentacion-1.png" alt="Docs" class="feature-img" onerror="this.style.opacity=0.2"></div>
+        <div class="feature-img-wrap"><img src="screenshots/ss-documentacion-1.png" alt="Docs" class="feature-img" loading="lazy" decoding="async" onerror="this.style.opacity=0.2"></div>
         <div class="feature-info">
           <h4 data-es="11 documentos por vehículo" data-en="11 documents per vehicle" data-pt="11 documentos por veículo">11 documentos por vehículo</h4>
           <p data-es="Título, cédulas, verificaciones. Alertas de documentos críticos." data-en="Title, registration, verifications. Critical document alerts." data-pt="Título, documentos, verificações. Alertas de documentos críticos.">Título, cédulas, verificaciones. Alertas de documentos críticos.</p>
         </div>
       </div>
       <div class="feature-card">
-        <div class="feature-img-wrap"><img src="screenshots/ss-documentacion-2.png" alt="Docs" class="feature-img" onerror="this.style.opacity=0.2"></div>
+        <div class="feature-img-wrap"><img src="screenshots/ss-documentacion-2.png" alt="Docs" class="feature-img" loading="lazy" decoding="async" onerror="this.style.opacity=0.2"></div>
         <div class="feature-info">
           <h4 data-es="Subida de archivos" data-en="File uploads" data-pt="Upload de arquivos">Subida de archivos</h4>
           <p data-es="Subí fotos o PDF de cada documento. Se guardan en la nube." data-en="Upload photos or PDF of each document. Saved to the cloud." data-pt="Envie fotos ou PDF de cada documento. Salvos na nuvem.">Subí fotos o PDF de cada documento. Se guardan en la nube.</p>
         </div>
       </div>
       <div class="feature-card">
-        <div class="feature-img-wrap"><img src="screenshots/ss-reparaciones.png" alt="Reparaciones" class="feature-img" onerror="this.style.opacity=0.2"></div>
+        <div class="feature-img-wrap"><img src="screenshots/ss-reparaciones.png" alt="Reparaciones" class="feature-img" loading="lazy" decoding="async" onerror="this.style.opacity=0.2"></div>
         <div class="feature-info">
           <h4 data-es="Reparaciones con total" data-en="Repairs with total" data-pt="Reparos com total">Reparaciones con total</h4>
           <p data-es="Cargá cada reparación, su costo, proveedor y total acumulado." data-en="Log each repair, its cost, supplier and accumulated total." data-pt="Registre cada reparo, seu custo, fornecedor e total acumulado.">Cargá cada reparación, su costo, proveedor y total acumulado.</p>
         </div>
       </div>
       <div class="feature-card">
-        <div class="feature-img-wrap"><img src="screenshots/ss-consignacion.png" alt="Consignación" class="feature-img" onerror="this.style.opacity=0.2"></div>
+        <div class="feature-img-wrap"><img src="screenshots/ss-consignacion.png" alt="Consignación" class="feature-img" loading="lazy" decoding="async" onerror="this.style.opacity=0.2"></div>
         <div class="feature-info">
-          <h4 data-es="Consignación con ganancia" data-en="Consignment with profit" data-pt="Consignação com lucro">Consignación con ganancia</h4>
-          <p data-es="Pactá con el dueño, definí precio de venta y mirá tu ganancia estimada." data-en="Agree with the owner, set sale price and see your estimated profit." data-pt="Combine com o dono, defina preço de venda e veja seu lucro estimado.">Pactá con el dueño, definí precio de venta y mirá tu ganancia estimada.</p>
+          <h4 data-es="Contratos de venta y consignación" data-en="Sale and consignment contracts" data-pt="Contratos de venda e consignação">Contratos de venta y consignación</h4>
+          <p data-es="Al vender o poner en consignación, el sistema te ofrece generar el contrato en PDF con todos los datos ya cargados." data-en="When you sell or consign, the system offers to generate the PDF contract with all the data already loaded." data-pt="Ao vender ou consignar, o sistema oferece gerar o contrato em PDF com todos os dados já carregados.">Al vender o poner en consignación, el sistema te ofrece generar el contrato en PDF con todos los datos ya cargados.</p>
         </div>
       </div>
     </div>
@@ -591,28 +610,28 @@
     </div>
     <div class="feature-grid">
       <div class="feature-card">
-        <div class="feature-img-wrap"><img src="screenshots/ss-compartir.png" alt="Compartir" class="feature-img" onerror="this.style.opacity=0.2"></div>
+        <div class="feature-img-wrap"><img src="screenshots/ss-compartir.png" alt="Compartir" class="feature-img" loading="lazy" decoding="async" onerror="this.style.opacity=0.2"></div>
         <div class="feature-info">
           <h4 data-es="Compartir en WhatsApp / Instagram" data-en="Share on WhatsApp / Instagram" data-pt="Compartilhar no WhatsApp / Instagram">Compartir en WhatsApp / Instagram</h4>
           <p data-es="Elegí hasta 10 autos y compartilos con un toque." data-en="Pick up to 10 cars and share them in one tap." data-pt="Escolha até 10 carros e compartilhe com um toque.">Elegí hasta 10 autos y compartilos con un toque.</p>
         </div>
       </div>
       <div class="feature-card">
-        <div class="feature-img-wrap"><img src="screenshots/ss-inicio-2.png" alt="Accesos" class="feature-img" onerror="this.style.opacity=0.2"></div>
+        <div class="feature-img-wrap"><img src="screenshots/ss-inicio-2.png" alt="Accesos" class="feature-img" loading="lazy" decoding="async" onerror="this.style.opacity=0.2"></div>
         <div class="feature-info">
           <h4 data-es="Recordatorio diario" data-en="Daily reminder" data-pt="Lembrete diário">Recordatorio diario</h4>
           <p data-es="La app te recuerda compartir 5 autos por día para mantener el stock activo." data-en="The app reminds you to share 5 cars daily to keep your stock active." data-pt="O app lembra você de compartilhar 5 carros por dia para manter o estoque ativo.">La app te recuerda compartir 5 autos por día para mantener el stock activo.</p>
         </div>
       </div>
       <div class="feature-card">
-        <div class="feature-img-wrap"><img src="screenshots/ss-pdf-catalogo.png" alt="PDF" class="feature-img" onerror="this.style.opacity=0.2"></div>
+        <div class="feature-img-wrap"><img src="screenshots/ss-pdf-catalogo.png" alt="PDF" class="feature-img" loading="lazy" decoding="async" onerror="this.style.opacity=0.2"></div>
         <div class="feature-info">
           <h4 data-es="PDF catálogo completo" data-en="Full PDF catalog" data-pt="PDF catálogo completo">PDF catálogo completo</h4>
           <p data-es="Generá un catálogo PDF con todos los autos disponibles, listo para imprimir." data-en="Generate a PDF catalog with all available cars, ready to print." data-pt="Gere um catálogo PDF com todos os carros disponíveis, pronto para imprimir.">Generá un catálogo PDF con todos los autos disponibles, listo para imprimir.</p>
         </div>
       </div>
       <div class="feature-card">
-        <div class="feature-img-wrap"><img src="screenshots/ss-pdf-marca.png" alt="PDF Marca" class="feature-img" onerror="this.style.opacity=0.2"></div>
+        <div class="feature-img-wrap"><img src="screenshots/ss-pdf-marca.png" alt="PDF Marca" class="feature-img" loading="lazy" decoding="async" onerror="this.style.opacity=0.2"></div>
         <div class="feature-info">
           <h4 data-es="PDF por marca" data-en="PDF by brand" data-pt="PDF por marca">PDF por marca</h4>
           <p data-es="Generá un PDF solo con los autos de una marca específica." data-en="Generate a PDF only with cars from a specific brand." data-pt="Gere um PDF apenas com os carros de uma marca específica.">Generá un PDF solo con los autos de una marca específica.</p>
@@ -628,28 +647,28 @@
     </div>
     <div class="feature-grid">
       <div class="feature-card">
-        <div class="feature-img-wrap"><img src="screenshots/ss-config-1.png" alt="Temas" class="feature-img" onerror="this.style.opacity=0.2"></div>
+        <div class="feature-img-wrap"><img src="screenshots/ss-config-1.png" alt="Temas" class="feature-img" loading="lazy" decoding="async" onerror="this.style.opacity=0.2"></div>
         <div class="feature-info">
           <h4 data-es="3 temas visuales" data-en="3 visual themes" data-pt="3 temas visuais">3 temas visuales</h4>
           <p data-es="Claro, Oscuro y Corporativo R21. Elegí el que más te guste." data-en="Light, Dark and Corporate R21. Choose your favorite." data-pt="Claro, Escuro e Corporativo R21. Escolha o seu favorito.">Claro, Oscuro y Corporativo R21. Elegí el que más te guste.</p>
         </div>
       </div>
       <div class="feature-card">
-        <div class="feature-img-wrap"><img src="screenshots/ss-config-2.png" alt="Config" class="feature-img" onerror="this.style.opacity=0.2"></div>
+        <div class="feature-img-wrap"><img src="screenshots/ss-config-2.png" alt="Config" class="feature-img" loading="lazy" decoding="async" onerror="this.style.opacity=0.2"></div>
         <div class="feature-info">
-          <h4 data-es="Backup y notificaciones" data-en="Backup and notifications" data-pt="Backup e notificações">Backup y notificaciones</h4>
-          <p data-es="Descargá backup completo, restaurá datos y configurá recordatorios." data-en="Download full backup, restore data and configure reminders." data-pt="Baixe backup completo, restaure dados e configure lembretes.">Descargá backup completo, restaurá datos y configurá recordatorios.</p>
+          <h4 data-es="Backup y notificaciones push" data-en="Backup and push notifications" data-pt="Backup e notificações push">Backup y notificaciones push</h4>
+          <p data-es="Backup completo, restauración segura y notificaciones push al celular cuando llega un cliente o una tasación." data-en="Full backup, secure restore and push notifications to your phone when a client or appraisal comes in." data-pt="Backup completo, restauração segura e notificações push no celular quando chega um cliente ou avaliação.">Backup completo, restauración segura y notificaciones push al celular cuando llega un cliente o una tasación.</p>
         </div>
       </div>
       <div class="feature-card">
-        <div class="feature-img-wrap"><img src="screenshots/ss-login.png" alt="Login" class="feature-img" onerror="this.style.opacity=0.2"></div>
+        <div class="feature-img-wrap"><img src="screenshots/ss-login.png" alt="Login" class="feature-img" loading="lazy" decoding="async" onerror="this.style.opacity=0.2"></div>
         <div class="feature-info">
-          <h4 data-es="Login con PIN" data-en="PIN login" data-pt="Login com PIN">Login con PIN</h4>
-          <p data-es="Acceso seguro por usuario y PIN. Recordá tu sesión si querés." data-en="Secure access by user and PIN. Remember your session if you want." data-pt="Acesso seguro por usuário e PIN. Lembre sua sessão se quiser.">Acceso seguro por usuario y PIN. Recordá tu sesión si querés.</p>
+          <h4 data-es="Login con PIN o huella" data-en="PIN or fingerprint login" data-pt="Login com PIN ou digital">Login con PIN o huella</h4>
+          <p data-es="Acceso seguro por usuario y PIN, o con huella digital. Recordá tu sesión si querés." data-en="Secure access by user and PIN, or fingerprint. Remember your session if you want." data-pt="Acesso seguro por usuário e PIN, ou digital. Lembre sua sessão se quiser.">Acceso seguro por usuario y PIN, o con huella digital. Recordá tu sesión si querés.</p>
         </div>
       </div>
       <div class="feature-card">
-        <div class="feature-img-wrap"><img src="screenshots/ss-inicio.png" alt="Admin" class="feature-img" onerror="this.style.opacity=0.2"></div>
+        <div class="feature-img-wrap"><img src="screenshots/ss-inicio.png" alt="Admin" class="feature-img" loading="lazy" decoding="async" onerror="this.style.opacity=0.2"></div>
         <div class="feature-info">
           <h4 data-es="Gestión de usuarios" data-en="User management" data-pt="Gestão de usuários">Gestión de usuarios</h4>
           <p data-es="Creá usuarios, asignales roles y controlá quién accede al sistema." data-en="Create users, assign roles and control who accesses the system." data-pt="Crie usuários, atribua papéis e controle quem acessa o sistema.">Creá usuarios, asignales roles y controlá quién accede al sistema.</p>
