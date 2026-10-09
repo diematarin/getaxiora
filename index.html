@@ -164,6 +164,15 @@
   .module-icon { font-size: 36px; margin-bottom: 14px; }
   .module-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
   .module-card p { color: var(--text-muted); font-size: 15px; flex-grow: 1; }
+  .module-link {
+    display: inline-flex; align-items: center; gap: 4px;
+    margin-top: 14px; font-size: 14px; font-weight: 800;
+    color: var(--white); text-decoration: underline;
+    text-decoration-color: var(--gold);
+  }
+  .module-card:not(.featured) .module-link {
+    color: var(--green); text-decoration-color: var(--green);
+  }
   @media (max-width: 900px) {
     .modules { grid-template-columns: repeat(2, 1fr); }
     .module-card.featured { grid-column: span 2; }
@@ -600,6 +609,12 @@
       <h3 data-es="Panel de Escritorio (PC)" data-en="Desktop Panel (PC)" data-pt="Painel de Computador (PC)">Panel de Escritorio (PC)</h3>
       <p data-es="El plan Full suma la app para Windows: pantalla grande para cargar caja, cerrar el mes y revisar reportes cómodo desde la oficina." data-en="The Full plan adds the Windows app: a big screen to log cash, close the month and review reports comfortably from the office." data-pt="O plano Full soma o app para Windows: tela grande para lançar o caixa, fechar o mês e revisar relatórios no escritório.">El plan Full suma la app para Windows: pantalla grande para cargar caja, cerrar el mes y revisar reportes cómodo desde la oficina.</p>
     </div>
+    <div class="module-card featured">
+      <div class="module-icon">🛒</div>
+      <h3 data-es="Tienda Online" data-en="Online Store" data-pt="Loja Online">Tienda Online</h3>
+      <p data-es="Incluida gratis en el plan Full: una página pública con tu stock, fotos y precios, actualizada en vivo y lista para compartir por WhatsApp." data-en="Included free on the Full plan: a public page with your stock, photos and prices, updated live and ready to share on WhatsApp." data-pt="Incluída de graça no plano Full: uma página pública com seu estoque, fotos e preços, atualizada em tempo real e pronta para compartilhar no WhatsApp.">Incluida gratis en el plan Full: una página pública con tu stock, fotos y precios, actualizada en vivo y lista para compartir por WhatsApp.</p>
+      <a class="module-link" href="https://getaxiora.com/tienda/ruta21/" target="_blank" data-es="Ver ejemplo en vivo →" data-en="See live example →" data-pt="Ver exemplo ao vivo →">Ver ejemplo en vivo →</a>
+    </div>
     <div class="module-card">
       <div class="module-icon">🚘</div>
       <h3 data-es="Tasaciones" data-en="Trade-in appraisals" data-pt="Avaliações">Tasaciones</h3>
@@ -981,6 +996,7 @@
         <li data-es="App Android + Windows" data-en="Android + Windows app" data-pt="App Android + Windows">App Android + Windows</li>
         <li data-es="Todos los módulos" data-en="All modules" data-pt="Todos os módulos">Todos los módulos</li>
         <li data-es="Bot de WhatsApp incluido" data-en="WhatsApp Bot included" data-pt="Bot de WhatsApp incluído">Bot de WhatsApp incluido</li>
+        <li data-es="Tienda online incluida" data-en="Online store included" data-pt="Loja online incluída">Tienda online incluida</li>
         <li data-es="Soporte prioritario" data-en="Priority support" data-pt="Suporte prioritário">Soporte prioritario</li>
       </ul>
       <a href="https://wa.me/5493415040667?text=Hola%2C%20quiero%20el%20Plan%20Full%203%20usuarios" target="_blank" class="btn btn-primary" data-es="Empezar" data-en="Start" data-pt="Começar">Empezar</a>
@@ -1009,6 +1025,7 @@
         <li data-es="App Android + Windows" data-en="Android + Windows app" data-pt="App Android + Windows">App Android + Windows</li>
         <li data-es="Todos los módulos" data-en="All modules" data-pt="Todos os módulos">Todos los módulos</li>
         <li data-es="Bot de WhatsApp incluido" data-en="WhatsApp Bot included" data-pt="Bot de WhatsApp incluído">Bot de WhatsApp incluido</li>
+        <li data-es="Tienda online incluida" data-en="Online store included" data-pt="Loja online incluída">Tienda online incluida</li>
         <li data-es="Soporte prioritario" data-en="Priority support" data-pt="Suporte prioritário">Soporte prioritario</li>
       </ul>
       <a href="https://wa.me/5493415040667?text=Hola%2C%20quiero%20el%20Plan%20Full%207%20usuarios" target="_blank" class="btn btn-secondary" data-es="Empezar" data-en="Start" data-pt="Começar">Empezar</a>
@@ -1037,6 +1054,7 @@
         <li data-es="App Android + Windows" data-en="Android + Windows app" data-pt="App Android + Windows">App Android + Windows</li>
         <li data-es="Todos los módulos" data-en="All modules" data-pt="Todos os módulos">Todos los módulos</li>
         <li data-es="Bot de WhatsApp incluido" data-en="WhatsApp Bot included" data-pt="Bot de WhatsApp incluído">Bot de WhatsApp incluido</li>
+        <li data-es="Tienda online incluida" data-en="Online store included" data-pt="Loja online incluída">Tienda online incluida</li>
         <li data-es="Soporte prioritario" data-en="Priority support" data-pt="Suporte prioritário">Soporte prioritario</li>
       </ul>
       <a href="https://wa.me/5493415040667?text=Hola%2C%20quiero%20el%20Plan%20Full%2015%20usuarios" target="_blank" class="btn btn-secondary" data-es="Empezar" data-en="Start" data-pt="Começar">Empezar</a>
