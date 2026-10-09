@@ -250,7 +250,7 @@
   .wa-chat {
     flex-grow: 1; background: #E5DDD5;
     border-radius: 0 0 26px 26px;
-    padding: 14px 12px; overflow: hidden;
+    padding: 14px 12px; overflow-y: auto;
     display: flex; flex-direction: column; gap: 8px;
   }
   .wa-bubble {
@@ -1331,30 +1331,35 @@
   }
 
   // ─── DEMO DEL BOT (chat simulado, multiidioma) ───
+  // Frases textuales del bot real (bot_r21/index.js, objeto TEXTOS).
+  // Solo se inventan los datos del auto/cliente de ejemplo, no las respuestas.
   const chatGuiones = {
     es: [
-      { de: 'in', texto: 'Hola! ¿Tienen un Toyota Corolla 2020?', hora: '14:02' },
-      { de: 'out', texto: 'Hola 👋 Sí, tenemos 2 Corolla 2020 en stock. Uno a $18.500.000 y otro a $19.200.000. ¿Te paso fotos?', hora: '14:02' },
-      { de: 'in', texto: 'Sí dale. Y de paso... ¿toman un auto usado como parte de pago?', hora: '14:03' },
-      { de: 'out', texto: 'Sí! Contame marca, modelo, año y km, y mandame 3 o 4 fotos para tasarlo.', hora: '14:03' },
-      { de: 'in', texto: 'Un Fiat Cronos 2019, 45.000km 📷📷📷', hora: '14:05' },
-      { de: 'out', texto: 'Perfecto, ya guardé todo ✅ En breve el dueño de la agencia lo revisa y te escribe con una propuesta.', hora: '14:05' },
+      { de: 'in', texto: 'Hola! ¿Tienen un Toyota Corolla?', hora: '14:02' },
+      { de: 'out', texto: 'Dame un toque, reviso el stock 🔍', hora: '14:02' },
+      { de: 'out', texto: '¡Mirá lo que encontré! 2 opciones que te pueden interesar 👇\n\n*Toyota Corolla XLI 2020*\n💲 $18.500.000', hora: '14:02' },
+      { de: 'in', texto: 'Buenísimo! Y aparte, ¿les interesaría tomar mi auto como parte de pago?', hora: '14:03' },
+      { de: 'out', texto: '¡Genial! Querés vender tu auto 💰\n\n¿Cuál es tu *nombre*?', hora: '14:03' },
+      { de: 'in', texto: 'Soy Martín. Fiat Cronos 2019, 45.000km 📷📷📷', hora: '14:05' },
+      { de: 'out', texto: 'Recibí los datos y las fotos ✅\n\nEn breve te contacto para coordinar la tasación.', hora: '14:05' },
     ],
     en: [
-      { de: 'in', texto: 'Hi! Do you have a 2020 Toyota Corolla?', hora: '14:02' },
-      { de: 'out', texto: 'Hi 👋 Yes, we have 2 Corolla 2020 in stock. One at $18.500.000 and another at $19.200.000. Want me to send photos?', hora: '14:02' },
-      { de: 'in', texto: 'Yes please. Also... do you take a used car as part of the payment?', hora: '14:03' },
-      { de: 'out', texto: 'Sure! Tell me the brand, model, year and mileage, and send me 3 or 4 photos so I can appraise it.', hora: '14:03' },
-      { de: 'in', texto: 'A Fiat Cronos 2019, 45,000 km 📷📷📷', hora: '14:05' },
-      { de: 'out', texto: 'Perfect, saved it all ✅ The dealership owner will review it shortly and get back to you with an offer.', hora: '14:05' },
+      { de: 'in', texto: 'Hi! Do you have a Toyota Corolla?', hora: '14:02' },
+      { de: 'out', texto: 'Give me a sec, checking stock 🔍', hora: '14:02' },
+      { de: 'out', texto: 'Look what I found! 2 options that might interest you 👇\n\n*Toyota Corolla XLI 2020*\n💲 $18,500,000', hora: '14:02' },
+      { de: 'in', texto: 'Awesome! Also, would you take my car as part of the payment?', hora: '14:03' },
+      { de: 'out', texto: 'Great! You want to sell your car 💰\n\nWhat is your *name*?', hora: '14:03' },
+      { de: 'in', texto: "I'm Martin. Fiat Cronos 2019, 45,000 km 📷📷📷", hora: '14:05' },
+      { de: 'out', texto: "I received the data and photos ✅\n\nI'll contact you shortly to coordinate the appraisal.", hora: '14:05' },
     ],
     pt: [
-      { de: 'in', texto: 'Oi! Vocês têm um Toyota Corolla 2020?', hora: '14:02' },
-      { de: 'out', texto: 'Oi 👋 Sim, temos 2 Corolla 2020 em estoque. Um por $18.500.000 e outro por $19.200.000. Quer que eu mande fotos?', hora: '14:02' },
-      { de: 'in', texto: 'Sim, por favor. E já que estamos falando... vocês aceitam um carro usado como parte do pagamento?', hora: '14:03' },
-      { de: 'out', texto: 'Sim! Me conta marca, modelo, ano e km, e manda 3 ou 4 fotos para eu avaliar.', hora: '14:03' },
-      { de: 'in', texto: 'Um Fiat Cronos 2019, 45.000km 📷📷📷', hora: '14:05' },
-      { de: 'out', texto: 'Perfeito, já salvei tudo ✅ Em breve o dono da loja vai revisar e te manda uma proposta.', hora: '14:05' },
+      { de: 'in', texto: 'Oi! Vocês têm um Toyota Corolla?', hora: '14:02' },
+      { de: 'out', texto: 'Me dá um segundo, vendo o estoque 🔍', hora: '14:02' },
+      { de: 'out', texto: 'Olha o que encontrei! 2 opções que podem te interessar 👇\n\n*Toyota Corolla XLI 2020*\n💲 $18.500.000', hora: '14:02' },
+      { de: 'in', texto: 'Ótimo! Além disso, vocês aceitariam meu carro como parte do pagamento?', hora: '14:03' },
+      { de: 'out', texto: 'Ótimo! Você quer vender seu carro 💰\n\nQual é o seu *nome*?', hora: '14:03' },
+      { de: 'in', texto: 'Sou o Martín. Fiat Cronos 2019, 45.000km 📷📷📷', hora: '14:05' },
+      { de: 'out', texto: 'Recebi os dados e as fotos ✅\n\nEm breve te contato para coordenar a avaliação.', hora: '14:05' },
     ],
   };
 
@@ -1401,10 +1406,16 @@
       }
     }
 
+    function formatoWa(texto) {
+      return texto
+        .replace(/\*(.+?)\*/g, '<strong>$1</strong>')
+        .replace(/\n/g, '<br>');
+    }
+
     function agregarBurbuja(msg) {
       const b = document.createElement('div');
       b.className = `wa-bubble ${msg.de}`;
-      b.innerHTML = `${msg.texto}<span class="wa-time">${msg.hora}</span>`;
+      b.innerHTML = `${formatoWa(msg.texto)}<span class="wa-time">${msg.hora}</span>`;
       chat.appendChild(b);
       chat.scrollTop = chat.scrollHeight;
     }
