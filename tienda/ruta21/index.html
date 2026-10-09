@@ -111,6 +111,14 @@
     text-transform: uppercase; padding: 4px 10px; border-radius: 20px;
     box-shadow: 0 2px 6px rgba(0,0,0,.2);
   }
+  .auto-marca-logo {
+    position: absolute; top: 8px; right: 8px;
+    width: 32px; height: 32px; border-radius: 50%;
+    background: var(--white); box-shadow: 0 2px 6px rgba(0,0,0,.25);
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .auto-marca-logo img { width: 20px; height: 20px; object-fit: contain; }
   .auto-foto-nav {
     position: absolute; top: 50%; transform: translateY(-50%);
     width: 30px; height: 30px; border-radius: 50%; border: none;
@@ -211,6 +219,16 @@
     return `https://wa.me/${WHATSAPP_AGENCIA}?text=${encodeURIComponent(texto)}`;
   }
 
+  // Mismo origen de logos que usa la app (simpleicons.org por slug de marca)
+  function slugMarca(marca) {
+    const especiales = { 'mercedes-benz': 'mercedes', 'citroen': 'citroen', 'citroën': 'citroen' };
+    const limpio = (marca || '').toLowerCase().trim();
+    if (especiales[limpio]) return especiales[limpio];
+    return limpio
+      .normalize('NFD').replace(/[̀-ͯ]/g, '')
+      .replace(/[^a-z0-9]/g, '');
+  }
+
   function renderAutos(lista) {
     const cont = document.getElementById('contenido');
     const contador = document.getElementById('contador');
@@ -224,10 +242,15 @@
     contador.textContent = `${lista.length} vehículo${lista.length === 1 ? '' : 's'} disponible${lista.length === 1 ? '' : 's'}`;
     contador.style.display = 'inline-flex';
 
+    const ordenada = [...lista].sort((a, b) =>
+      (a.marca || '').localeCompare(b.marca || '') ||
+      (a.modelo || '').localeCompare(b.modelo || '')
+    );
+
     const grid = document.createElement('div');
     grid.className = 'grid';
 
-    lista.forEach(auto => {
+    ordenada.forEach(auto => {
       const card = document.createElement('div');
       card.className = 'auto-card';
 
@@ -248,6 +271,7 @@
       card.innerHTML = `
         <div class="auto-foto-wrap" data-idx="0">
           <span class="auto-badge">Disponible</span>
+          <span class="auto-marca-logo"><img src="https://cdn.simpleicons.org/${slugMarca(auto.marca)}" alt="" onerror="this.parentElement.style.display='none'"></span>
           <div class="auto-foto-track">${imgs}</div>
           ${nav}
         </div>
