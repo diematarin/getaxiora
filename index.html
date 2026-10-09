@@ -1259,6 +1259,7 @@
     document.getElementById('btn-pt').classList.toggle('active', lang === 'pt');
     document.documentElement.lang = lang;
     localStorage.setItem('r21-lang', lang);
+    if (typeof cambiarIdiomaDemoBot === 'function') cambiarIdiomaDemoBot(lang);
   }
 
   let cotizacionUSD = 0;
@@ -1329,29 +1330,57 @@
     localStorage.setItem('r21-period', period);
   }
 
-  // ─── DEMO DEL BOT (chat simulado) ───
-  const chatGuion = [
-    { de: 'in', texto: 'Hola! ¿Tienen un Toyota Corolla 2020?', hora: '14:02' },
-    { de: 'out', texto: 'Hola 👋 Sí, tenemos 2 Corolla 2020 en stock. Uno a $18.500.000 y otro a $19.200.000. ¿Te paso fotos?', hora: '14:02' },
-    { de: 'in', texto: 'Sí dale. Y de paso... ¿toman un auto usado como parte de pago?', hora: '14:03' },
-    { de: 'out', texto: 'Sí! Contame marca, modelo, año y km, y mandame 3 o 4 fotos para tasarlo.', hora: '14:03' },
-    { de: 'in', texto: 'Un Fiat Cronos 2019, 45.000km 📷📷📷', hora: '14:05' },
-    { de: 'out', texto: 'Perfecto, ya guardé todo ✅ En breve el dueño de la agencia lo revisa y te escribe con una propuesta.', hora: '14:05' },
-  ];
+  // ─── DEMO DEL BOT (chat simulado, multiidioma) ───
+  const chatGuiones = {
+    es: [
+      { de: 'in', texto: 'Hola! ¿Tienen un Toyota Corolla 2020?', hora: '14:02' },
+      { de: 'out', texto: 'Hola 👋 Sí, tenemos 2 Corolla 2020 en stock. Uno a $18.500.000 y otro a $19.200.000. ¿Te paso fotos?', hora: '14:02' },
+      { de: 'in', texto: 'Sí dale. Y de paso... ¿toman un auto usado como parte de pago?', hora: '14:03' },
+      { de: 'out', texto: 'Sí! Contame marca, modelo, año y km, y mandame 3 o 4 fotos para tasarlo.', hora: '14:03' },
+      { de: 'in', texto: 'Un Fiat Cronos 2019, 45.000km 📷📷📷', hora: '14:05' },
+      { de: 'out', texto: 'Perfecto, ya guardé todo ✅ En breve el dueño de la agencia lo revisa y te escribe con una propuesta.', hora: '14:05' },
+    ],
+    en: [
+      { de: 'in', texto: 'Hi! Do you have a 2020 Toyota Corolla?', hora: '14:02' },
+      { de: 'out', texto: 'Hi 👋 Yes, we have 2 Corolla 2020 in stock. One at $18.500.000 and another at $19.200.000. Want me to send photos?', hora: '14:02' },
+      { de: 'in', texto: 'Yes please. Also... do you take a used car as part of the payment?', hora: '14:03' },
+      { de: 'out', texto: 'Sure! Tell me the brand, model, year and mileage, and send me 3 or 4 photos so I can appraise it.', hora: '14:03' },
+      { de: 'in', texto: 'A Fiat Cronos 2019, 45,000 km 📷📷📷', hora: '14:05' },
+      { de: 'out', texto: 'Perfect, saved it all ✅ The dealership owner will review it shortly and get back to you with an offer.', hora: '14:05' },
+    ],
+    pt: [
+      { de: 'in', texto: 'Oi! Vocês têm um Toyota Corolla 2020?', hora: '14:02' },
+      { de: 'out', texto: 'Oi 👋 Sim, temos 2 Corolla 2020 em estoque. Um por $18.500.000 e outro por $19.200.000. Quer que eu mande fotos?', hora: '14:02' },
+      { de: 'in', texto: 'Sim, por favor. E já que estamos falando... vocês aceitam um carro usado como parte do pagamento?', hora: '14:03' },
+      { de: 'out', texto: 'Sim! Me conta marca, modelo, ano e km, e manda 3 ou 4 fotos para eu avaliar.', hora: '14:03' },
+      { de: 'in', texto: 'Um Fiat Cronos 2019, 45.000km 📷📷📷', hora: '14:05' },
+      { de: 'out', texto: 'Perfeito, já salvei tudo ✅ Em breve o dono da loja vai revisar e te manda uma proposta.', hora: '14:05' },
+    ],
+  };
+
+  let demoIdioma = 'es';
+  let demoGen = 0;
+  let demoIniciado = false;
 
   function iniciarDemoBot() {
     const chat = document.getElementById('waChat');
     if (!chat) return;
+    demoGen++;
+    const miGen = demoGen;
+    chat.innerHTML = '';
     let i = 0;
-    let cancelado = false;
 
     function paso() {
-      if (cancelado) return;
-      if (i >= chatGuion.length) {
-        setTimeout(() => { chat.innerHTML = ''; i = 0; paso(); }, 3800);
+      if (miGen !== demoGen) return;
+      const guion = chatGuiones[demoIdioma] || chatGuiones.es;
+      if (i >= guion.length) {
+        setTimeout(() => {
+          if (miGen !== demoGen) return;
+          chat.innerHTML = ''; i = 0; paso();
+        }, 3800);
         return;
       }
-      const msg = chatGuion[i];
+      const msg = guion[i];
       if (msg.de === 'out') {
         const typing = document.createElement('div');
         typing.className = 'wa-bubble wa-typing';
@@ -1359,7 +1388,7 @@
         chat.appendChild(typing);
         chat.scrollTop = chat.scrollHeight;
         setTimeout(() => {
-          if (cancelado) return;
+          if (miGen !== demoGen) return;
           typing.remove();
           agregarBurbuja(msg);
           i++;
@@ -1383,9 +1412,15 @@
     paso();
   }
 
+  function cambiarIdiomaDemoBot(lang) {
+    demoIdioma = chatGuiones[lang] ? lang : 'es';
+    if (demoIniciado) iniciarDemoBot();
+  }
+
   const demoObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
+      if (entry.isIntersecting && !demoIniciado) {
+        demoIniciado = true;
         iniciarDemoBot();
         demoObserver.disconnect();
       }
