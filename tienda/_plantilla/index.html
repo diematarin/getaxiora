@@ -6,7 +6,7 @@
 <title>__AGENCIA_NOMBRE__ — Catálogo de vehículos</title>
 <meta name="description" content="Vehículos disponibles en __AGENCIA_NOMBRE__. Mirá el stock actualizado y consultá por WhatsApp.">
 <link rel="icon" type="image/png" href="../../logo.png">
-<meta name="theme-color" content="#1B5E3F">
+<meta name="theme-color" content="#0D0D0D">
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="__AGENCIA_NOMBRE__ — Catálogo de vehículos">
@@ -18,14 +18,16 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   :root {
     --gold: #C9A227;
+    --gold-light: #E5C158;
     --green: #1B5E3F;
     --green-light: #2E7D32;
     --black: #0D0D0D;
-    --gray-light: #F5F5F5;
+    --gray: #1A1A1A;
+    --gray-light: #F3F4F3;
     --white: #FFFFFF;
     --text-muted: #6B7280;
   }
@@ -35,37 +37,63 @@
     background: var(--gray-light);
     color: var(--black);
     line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
   }
   a { text-decoration: none; color: inherit; }
 
   header {
-    background: var(--black); color: var(--white);
-    padding: 24px 20px; text-align: center;
+    background: linear-gradient(135deg, var(--black) 0%, #142019 100%);
+    color: var(--white);
+    padding: 36px 20px 30px;
+    text-align: center;
+    border-bottom: 3px solid var(--gold);
   }
-  header h1 { font-size: 24px; font-weight: 900; margin-bottom: 4px; }
-  header p { font-size: 13px; color: #BBB; }
+  .header-logo {
+    width: 64px; height: 64px; border-radius: 16px;
+    object-fit: contain; margin: 0 auto 14px; display: block;
+    background: var(--white); padding: 6px;
+  }
+  header h1 {
+    font-size: 26px; font-weight: 900; letter-spacing: -0.3px;
+    margin-bottom: 6px;
+  }
+  header p {
+    font-size: 13px; color: #B9C4BE; font-weight: 600;
+    letter-spacing: .3px; margin-bottom: 14px;
+  }
+  .header-count {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(201,162,39,.15); border: 1px solid rgba(201,162,39,.4);
+    color: var(--gold-light); font-size: 12px; font-weight: 700;
+    padding: 6px 16px; border-radius: 20px; letter-spacing: .3px;
+  }
 
-  main { max-width: 1100px; margin: 0 auto; padding: 28px 16px 60px; }
+  main { max-width: 1140px; margin: 0 auto; padding: 32px 16px 64px; }
 
   .estado-carga, .estado-vacio {
-    text-align: center; padding: 60px 20px; color: var(--text-muted);
+    text-align: center; padding: 70px 20px; color: var(--text-muted);
     font-size: 15px;
+  }
+  .estado-vacio .icono, .estado-carga .icono {
+    font-size: 40px; display: block; margin-bottom: 14px;
   }
 
   .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 18px;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap: 22px;
   }
 
   .auto-card {
-    background: var(--white); border-radius: 16px; overflow: hidden;
-    border: 1px solid #EEE; display: flex; flex-direction: column;
-    transition: transform .15s, box-shadow .15s;
+    background: var(--white); border-radius: 18px; overflow: hidden;
+    border: 1px solid #ECECEC; box-shadow: 0 2px 10px rgba(0,0,0,.04);
+    display: flex; flex-direction: column;
+    transition: transform .2s ease, box-shadow .2s ease;
   }
-  .auto-card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,.08); }
+  .auto-card:hover { transform: translateY(-6px); box-shadow: 0 18px 34px rgba(0,0,0,.12); }
+
   .auto-foto-wrap {
-    position: relative; width: 100%; height: 190px;
+    position: relative; width: 100%; height: 195px;
     background: #E5E5E5; overflow: hidden;
   }
   .auto-foto-track {
@@ -76,65 +104,93 @@
     width: 100%; height: 100%; flex-shrink: 0;
     object-fit: cover; display: block;
   }
+  .auto-badge {
+    position: absolute; top: 10px; left: 10px;
+    background: var(--green); color: var(--white);
+    font-size: 10.5px; font-weight: 800; letter-spacing: .6px;
+    text-transform: uppercase; padding: 4px 10px; border-radius: 20px;
+    box-shadow: 0 2px 6px rgba(0,0,0,.2);
+  }
   .auto-foto-nav {
     position: absolute; top: 50%; transform: translateY(-50%);
-    width: 28px; height: 28px; border-radius: 50%; border: none;
-    background: rgba(0,0,0,.45); color: var(--white);
-    font-size: 16px; line-height: 1; cursor: pointer;
+    width: 30px; height: 30px; border-radius: 50%; border: none;
+    background: rgba(13,13,13,.5); color: var(--white);
+    font-size: 17px; line-height: 1; cursor: pointer;
     display: flex; align-items: center; justify-content: center;
+    backdrop-filter: blur(2px);
+    transition: background .15s;
   }
-  .auto-foto-nav:hover { background: rgba(0,0,0,.65); }
+  .auto-foto-nav:hover { background: rgba(13,13,13,.75); }
   .auto-foto-nav.prev { left: 8px; }
   .auto-foto-nav.next { right: 8px; }
   .auto-foto-dots {
-    position: absolute; bottom: 8px; left: 0; right: 0;
+    position: absolute; bottom: 9px; left: 0; right: 0;
     display: flex; justify-content: center; gap: 5px;
   }
   .auto-foto-dots .dot {
     width: 6px; height: 6px; border-radius: 50%;
-    background: rgba(255,255,255,.6);
+    background: rgba(255,255,255,.55);
+    box-shadow: 0 0 0 1px rgba(0,0,0,.15);
   }
   .auto-foto-dots .dot.activo { background: var(--white); }
-  .auto-info { padding: 16px; flex-grow: 1; display: flex; flex-direction: column; }
-  .auto-titulo { font-size: 17px; font-weight: 800; margin-bottom: 4px; }
-  .auto-detalle {
-    font-size: 13px; color: var(--text-muted); margin-bottom: 12px;
+
+  .auto-info { padding: 18px; flex-grow: 1; display: flex; flex-direction: column; }
+  .auto-titulo {
+    font-size: 17px; font-weight: 800; margin-bottom: 10px;
+    letter-spacing: -0.2px;
+  }
+  .auto-chips { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+  .auto-chip {
+    background: var(--gray-light); color: var(--text-muted);
+    font-size: 11.5px; font-weight: 700; padding: 4px 9px;
+    border-radius: 7px;
+  }
+  .auto-precio-label {
+    font-size: 10.5px; color: var(--text-muted); font-weight: 700;
+    text-transform: uppercase; letter-spacing: .5px; margin-bottom: 2px;
   }
   .auto-precio {
-    font-size: 20px; font-weight: 900; color: var(--green);
-    margin-bottom: 14px;
+    font-size: 22px; font-weight: 900; color: var(--green);
+    margin-bottom: 16px; letter-spacing: -0.3px;
   }
   .auto-btn {
     margin-top: auto; display: flex; align-items: center; justify-content: center;
     gap: 8px; background: #25D366; color: var(--white);
-    font-weight: 700; font-size: 14px; padding: 11px; border-radius: 10px;
+    font-weight: 700; font-size: 14px; padding: 12px; border-radius: 11px;
+    transition: transform .15s, box-shadow .15s;
   }
+  .auto-btn:hover { transform: translateY(-1px); box-shadow: 0 8px 18px rgba(37,211,102,.35); }
 
   footer {
-    text-align: center; padding: 28px 20px; font-size: 12px;
-    color: var(--text-muted);
+    background: var(--black); color: #888;
+    text-align: center; padding: 26px 20px; font-size: 12.5px;
   }
-  footer a { color: var(--green); font-weight: 700; }
+  footer a { color: var(--gold); font-weight: 700; }
 
   @media (max-width: 480px) {
-    header h1 { font-size: 20px; }
+    header { padding: 28px 16px 22px; }
+    header h1 { font-size: 21px; }
     .grid { grid-template-columns: 1fr 1fr; gap: 12px; }
-    .auto-foto { height: 140px; }
-    .auto-info { padding: 12px; }
-    .auto-titulo { font-size: 14px; }
-    .auto-precio { font-size: 16px; }
+    .auto-foto-wrap { height: 150px; }
+    .auto-info { padding: 13px; }
+    .auto-titulo { font-size: 14px; margin-bottom: 8px; }
+    .auto-chip { font-size: 10px; padding: 3px 7px; }
+    .auto-precio { font-size: 17px; margin-bottom: 12px; }
+    .auto-btn { font-size: 12.5px; padding: 10px; }
   }
 </style>
 </head>
 <body>
 
 <header>
+  <img src="../../logo.png" class="header-logo" alt="" onerror="this.style.display='none'">
   <h1>__AGENCIA_NOMBRE__</h1>
   <p>Catálogo online · actualizado en vivo</p>
+  <div class="header-count" id="contador" style="display:none;"></div>
 </header>
 
 <main>
-  <div id="contenido" class="estado-carga">Cargando vehículos…</div>
+  <div id="contenido" class="estado-carga"><span class="icono">🚗</span>Cargando vehículos…</div>
 </main>
 
 <footer>
@@ -157,11 +213,16 @@
 
   function renderAutos(lista) {
     const cont = document.getElementById('contenido');
+    const contador = document.getElementById('contador');
+
     if (!lista || lista.length === 0) {
       cont.className = 'estado-vacio';
-      cont.textContent = 'No hay vehículos disponibles en este momento. Volvé a mirar pronto.';
+      cont.innerHTML = '<span class="icono">🔍</span>No hay vehículos disponibles en este momento. Volvé a mirar pronto.';
       return;
     }
+
+    contador.textContent = `${lista.length} vehículo${lista.length === 1 ? '' : 's'} disponible${lista.length === 1 ? '' : 's'}`;
+    contador.style.display = 'inline-flex';
 
     const grid = document.createElement('div');
     grid.className = 'grid';
@@ -171,7 +232,7 @@
       card.className = 'auto-card';
 
       const km = auto.km ? `${Number(auto.km).toLocaleString('es-AR')} km` : '';
-      const detalle = [km, auto.combustible, auto.transmision].filter(Boolean).join(' · ');
+      const chips = [km, auto.combustible, auto.transmision].filter(Boolean);
       const fotos = (auto.fotos && auto.fotos.length) ? auto.fotos : [''];
 
       const imgs = fotos.map(f =>
@@ -186,12 +247,14 @@
 
       card.innerHTML = `
         <div class="auto-foto-wrap" data-idx="0">
+          <span class="auto-badge">Disponible</span>
           <div class="auto-foto-track">${imgs}</div>
           ${nav}
         </div>
         <div class="auto-info">
           <div class="auto-titulo">${auto.marca} ${auto.modelo} (${auto.anio})</div>
-          <div class="auto-detalle">${detalle}</div>
+          <div class="auto-chips">${chips.map(c => `<span class="auto-chip">${c}</span>`).join('')}</div>
+          <div class="auto-precio-label">Precio contado</div>
           <div class="auto-precio">${formatoPrecio(auto.precio)}</div>
           <a class="auto-btn" href="${linkWhatsapp(auto)}" target="_blank">💬 Consultar por WhatsApp</a>
         </div>
@@ -224,7 +287,7 @@
       console.error('No se pudo cargar el catálogo:', err);
       const cont = document.getElementById('contenido');
       cont.className = 'estado-vacio';
-      cont.textContent = 'No se pudo cargar el catálogo en este momento. Probá de nuevo en unos minutos.';
+      cont.innerHTML = '<span class="icono">⚠️</span>No se pudo cargar el catálogo en este momento. Probá de nuevo en unos minutos.';
     });
 </script>
 
