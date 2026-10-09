@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Automotores Ruta 21 — Catálogo de vehículos</title>
+<meta name="description" content="Vehículos disponibles en Automotores Ruta 21. Mirá el stock actualizado y consultá por WhatsApp.">
+<link rel="icon" type="image/png" href="../../logo.png">
+<meta name="theme-color" content="#1B5E3F">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Automotores Ruta 21 — Catálogo de vehículos">
+<meta property="og:description" content="Vehículos disponibles en Automotores Ruta 21. Mirá el stock actualizado y consultá por WhatsApp.">
+<meta property="og:image" content="https://getaxiora.com/logo.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Automotores Ruta 21 — Catálogo de vehículos">
+<meta name="twitter:image" content="https://getaxiora.com/logo.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A227;
+    --green: #1B5E3F;
+    --green-light: #2E7D32;
+    --black: #0D0D0D;
+    --gray-light: #F5F5F5;
+    --white: #FFFFFF;
+    --text-muted: #6B7280;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--gray-light);
+    color: var(--black);
+    line-height: 1.5;
+  }
+  a { text-decoration: none; color: inherit; }
+
+  header {
+    background: var(--black); color: var(--white);
+    padding: 24px 20px; text-align: center;
+  }
+  header h1 { font-size: 24px; font-weight: 900; margin-bottom: 4px; }
+  header p { font-size: 13px; color: #BBB; }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 28px 16px 60px; }
+
+  .estado-carga, .estado-vacio {
+    text-align: center; padding: 60px 20px; color: var(--text-muted);
+    font-size: 15px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 18px;
+  }
+
+  .auto-card {
+    background: var(--white); border-radius: 16px; overflow: hidden;
+    border: 1px solid #EEE; display: flex; flex-direction: column;
+    transition: transform .15s, box-shadow .15s;
+  }
+  .auto-card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,.08); }
+  .auto-foto {
+    width: 100%; height: 190px; background: #E5E5E5;
+    object-fit: cover; display: block;
+  }
+  .auto-info { padding: 16px; flex-grow: 1; display: flex; flex-direction: column; }
+  .auto-titulo { font-size: 17px; font-weight: 800; margin-bottom: 4px; }
+  .auto-detalle {
+    font-size: 13px; color: var(--text-muted); margin-bottom: 12px;
+  }
+  .auto-precio {
+    font-size: 20px; font-weight: 900; color: var(--green);
+    margin-bottom: 14px;
+  }
+  .auto-btn {
+    margin-top: auto; display: flex; align-items: center; justify-content: center;
+    gap: 8px; background: #25D366; color: var(--white);
+    font-weight: 700; font-size: 14px; padding: 11px; border-radius: 10px;
+  }
+
+  footer {
+    text-align: center; padding: 28px 20px; font-size: 12px;
+    color: var(--text-muted);
+  }
+  footer a { color: var(--green); font-weight: 700; }
+
+  @media (max-width: 480px) {
+    header h1 { font-size: 20px; }
+    .grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+    .auto-foto { height: 140px; }
+    .auto-info { padding: 12px; }
+    .auto-titulo { font-size: 14px; }
+    .auto-precio { font-size: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Automotores Ruta 21</h1>
+  <p>Catálogo online · actualizado en vivo</p>
+</header>
+
+<main>
+  <div id="contenido" class="estado-carga">Cargando vehículos…</div>
+</main>
+
+<footer>
+  Tienda online hecha con <a href="https://getaxiora.com" target="_blank">R21</a>
+</footer>
+
+<script>
+  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzu_4WFQZ9H0a2VUkuNy1yDs7gvnne-2Lcn0DkEAL1Qckj5h9wb2TBCYVuHVC0DF7Eq/exec';
+  const WHATSAPP_AGENCIA = '5493415040667';
+
+  function formatoPrecio(n) {
+    const num = Number(n) || 0;
+    return '$ ' + num.toLocaleString('es-AR');
+  }
+
+  function linkWhatsapp(auto) {
+    const texto = `Hola! Te consulto por el ${auto.marca} ${auto.modelo} (${auto.anio}) que vi en la tienda online.`;
+    return `https://wa.me/${WHATSAPP_AGENCIA}?text=${encodeURIComponent(texto)}`;
+  }
+
+  function renderAutos(lista) {
+    const cont = document.getElementById('contenido');
+    if (!lista || lista.length === 0) {
+      cont.className = 'estado-vacio';
+      cont.textContent = 'No hay vehículos disponibles en este momento. Volvé a mirar pronto.';
+      return;
+    }
+
+    const grid = document.createElement('div');
+    grid.className = 'grid';
+
+    lista.forEach(auto => {
+      const card = document.createElement('div');
+      card.className = 'auto-card';
+
+      const km = auto.km ? `${Number(auto.km).toLocaleString('es-AR')} km` : '';
+      const detalle = [km, auto.combustible, auto.transmision].filter(Boolean).join(' · ');
+
+      card.innerHTML = `
+        <img class="auto-foto" src="${auto.foto || ''}" alt="${auto.marca} ${auto.modelo}" loading="lazy" onerror="this.style.opacity=0.2">
+        <div class="auto-info">
+          <div class="auto-titulo">${auto.marca} ${auto.modelo} (${auto.anio})</div>
+          <div class="auto-detalle">${detalle}</div>
+          <div class="auto-precio">${formatoPrecio(auto.precio)}</div>
+          <a class="auto-btn" href="${linkWhatsapp(auto)}" target="_blank">💬 Consultar por WhatsApp</a>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+
+    cont.replaceWith(grid);
+  }
+
+  fetch(`${APPS_SCRIPT_URL}?action=catalogoPublico`)
+    .then(res => res.json())
+    .then(data => {
+      if (!data || data.ok !== true) throw new Error('Respuesta inválida');
+      renderAutos(data.data);
+    })
+    .catch(err => {
+      console.error('No se pudo cargar el catálogo:', err);
+      const cont = document.getElementById('contenido');
+      cont.className = 'estado-vacio';
+      cont.textContent = 'No se pudo cargar el catálogo en este momento. Probá de nuevo en unos minutos.';
+    });
+</script>
+
+</body>
+</html>

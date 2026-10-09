@@ -72,6 +72,22 @@
     object-fit: cover; border-radius: 3px;
     box-shadow: 0 1px 3px rgba(0,0,0,.15);
   }
+  .nav-links { display: flex; gap: 28px; }
+  .nav-links a {
+    font-size: 14px; font-weight: 700; color: var(--gray);
+    position: relative; padding: 4px 0; transition: color .15s;
+  }
+  .nav-links a:hover { color: var(--green); }
+  .nav-links a::after {
+    content: ''; position: absolute; left: 0; bottom: -2px;
+    width: 0; height: 2px; background: var(--gold);
+    transition: width .2s;
+  }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-right { display: flex; align-items: center; gap: 16px; }
+  .nav-cta { padding: 9px 18px !important; font-size: 13px !important; border-radius: 9px !important; }
+  @media (max-width: 760px) { .nav-links { display: none; } }
+  @media (max-width: 480px) { .nav-cta { display: none; } }
 
   .hero {
     padding: 70px 24px 60px;
@@ -97,7 +113,13 @@
     color: var(--gray); max-width: 620px; margin: 0 auto 36px;
     font-weight: 500;
   }
-  .cta-group { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .cta-group { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 22px; }
+  .trust-row {
+    display: flex; gap: 22px; justify-content: center; flex-wrap: wrap;
+    font-size: 13px; font-weight: 600; color: var(--text-muted);
+  }
+  .trust-row span { display: inline-flex; align-items: center; gap: 6px; }
+  .trust-row span::before { content: '✓'; color: var(--green); font-weight: 900; }
   .btn {
     display: inline-flex; align-items: center; gap: 8px;
     padding: 14px 28px; border-radius: 12px;
@@ -120,16 +142,36 @@
     max-width: 600px; margin: 0 auto 48px; font-size: 17px;
   }
 
-  .modules { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+  .modules {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 1fr; gap: 20px;
+  }
   .module-card {
     background: var(--gray-light); border-radius: 16px;
     padding: 28px; transition: transform .15s, box-shadow .15s;
     border: 1px solid #EEE;
+    display: flex; flex-direction: column;
   }
   .module-card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,.08); }
+  .module-card.featured {
+    grid-column: span 2;
+    background: linear-gradient(135deg, var(--green) 0%, var(--green-light) 100%);
+    color: var(--white); border: none;
+  }
+  .module-card.featured h3 { color: var(--white); }
+  .module-card.featured p { color: rgba(255,255,255,0.85); }
+  .module-card.featured:hover { box-shadow: 0 16px 32px rgba(27,94,63,.3); }
   .module-icon { font-size: 36px; margin-bottom: 14px; }
   .module-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
-  .module-card p { color: var(--text-muted); font-size: 15px; }
+  .module-card p { color: var(--text-muted); font-size: 15px; flex-grow: 1; }
+  @media (max-width: 900px) {
+    .modules { grid-template-columns: repeat(2, 1fr); }
+    .module-card.featured { grid-column: span 2; }
+  }
+  @media (max-width: 560px) {
+    .modules { grid-template-columns: 1fr; }
+    .module-card.featured { grid-column: span 1; }
+  }
 
   .feature-category { margin-bottom: 72px; }
   .feature-category:last-child { margin-bottom: 0; }
@@ -179,6 +221,83 @@
   }
   .feature-info h4 { font-size: 17px; font-weight: 800; margin-bottom: 8px; }
   .feature-info p { font-size: 14px; color: var(--text-muted); line-height: 1.55; }
+
+  .demo-wrap {
+    display: flex; justify-content: center; align-items: center;
+    gap: 48px; flex-wrap: wrap;
+  }
+  .phone-mockup {
+    width: 320px; height: 580px; background: #0B141A;
+    border-radius: 36px; padding: 10px;
+    box-shadow: 0 30px 60px rgba(0,0,0,.25);
+    display: flex; flex-direction: column; overflow: hidden;
+    flex-shrink: 0;
+  }
+  .wa-header {
+    background: #075E54; border-radius: 22px 22px 0 0;
+    padding: 16px 16px 14px; display: flex; align-items: center; gap: 12px;
+    flex-shrink: 0;
+  }
+  .wa-avatar {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: var(--gold); color: var(--black);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900; font-size: 12px; flex-shrink: 0;
+  }
+  .wa-header-info { display: flex; flex-direction: column; }
+  .wa-name { color: var(--white); font-weight: 700; font-size: 15px; }
+  .wa-status { color: #D4EAE6; font-size: 12px; }
+  .wa-chat {
+    flex-grow: 1; background: #E5DDD5;
+    border-radius: 0 0 26px 26px;
+    padding: 14px 12px; overflow: hidden;
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .wa-bubble {
+    max-width: 82%; padding: 8px 10px 6px; border-radius: 8px;
+    font-size: 13.5px; line-height: 1.4; position: relative;
+    box-shadow: 0 1px 1px rgba(0,0,0,.08);
+    animation: bubbleIn .25s ease;
+  }
+  @keyframes bubbleIn {
+    from { opacity: 0; transform: translateY(6px) scale(.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  .wa-bubble.in { background: #FFFFFF; align-self: flex-start; border-top-left-radius: 2px; }
+  .wa-bubble.out { background: #DCF8C6; align-self: flex-end; border-top-right-radius: 2px; }
+  .wa-time {
+    display: block; text-align: right; font-size: 10.5px;
+    color: #8696a0; margin-top: 2px;
+  }
+  .wa-bubble.out .wa-time::after { content: ' ✓✓'; color: #53bdeb; }
+  .wa-typing { align-self: flex-start; background: #FFFFFF; }
+  .wa-typing .dots { display: flex; gap: 4px; padding: 4px 2px; }
+  .wa-typing .dots span {
+    width: 6px; height: 6px; border-radius: 50%; background: #9AA5A0;
+    animation: typingBounce 1.1s infinite ease-in-out;
+  }
+  .wa-typing .dots span:nth-child(2) { animation-delay: .15s; }
+  .wa-typing .dots span:nth-child(3) { animation-delay: .3s; }
+  @keyframes typingBounce {
+    0%, 60%, 100% { transform: translateY(0); opacity: .5; }
+    30% { transform: translateY(-4px); opacity: 1; }
+  }
+  .demo-caption { max-width: 280px; }
+  .demo-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: #E8F5E9; color: var(--green); font-weight: 800;
+    font-size: 12px; letter-spacing: 1px; text-transform: uppercase;
+    padding: 5px 12px; border-radius: 20px; margin-bottom: 14px;
+  }
+  .demo-dot {
+    width: 7px; height: 7px; border-radius: 50%; background: var(--green);
+    animation: typingBounce 1.4s infinite;
+  }
+  .demo-caption p { color: var(--text-muted); font-size: 15px; line-height: 1.6; }
+  @media (max-width: 760px) {
+    .demo-wrap { flex-direction: column; }
+    .phone-mockup { width: 280px; height: 520px; }
+  }
 
   .payments-section { background: var(--gray-light); max-width: 100%; padding: 80px 24px; }
   .payments-inner { max-width: 1100px; margin: 0 auto; }
@@ -260,28 +379,35 @@
   .price-card h3 { font-size: 17px; font-weight: 800; margin-bottom: 6px; }
   .price-users { font-size: 13px; color: var(--text-muted); font-weight: 600; margin-bottom: 16px; }
 
-  .price-per-user { margin-bottom: 6px; }
-  .per-user-label {
+  .price-total-main { margin-bottom: 4px; }
+  .upfront-note {
+    display: none; margin-top: 8px; padding-top: 8px;
+    border-top: 1px dashed #DDD; font-size: 12px; color: var(--text-muted);
+    font-weight: 600;
+  }
+  .upfront-amount { color: var(--black); font-weight: 800; }
+  .upfront-ars { font-size: 11px; }
+  .total-label {
     display: block; font-size: 11px; color: var(--text-muted);
     text-transform: uppercase; letter-spacing: 1px;
     font-weight: 700; margin-bottom: 4px;
   }
-  .per-user-amount {
-    display: block; font-size: 34px; font-weight: 900;
+  .total-amount {
+    display: block; font-size: 36px; font-weight: 900;
     color: var(--green); line-height: 1;
   }
-  .per-user-ars {
+  .total-ars {
     display: block; font-size: 13px; color: var(--text-muted);
     font-weight: 500; margin-top: 4px; min-height: 16px;
   }
-  .price-total {
+  .price-per-user {
     background: var(--gray-light); border-radius: 10px;
     padding: 8px 12px; font-size: 13px; font-weight: 600;
     color: var(--text-muted); margin: 14px 0 20px;
     display: flex; justify-content: center; gap: 6px; flex-wrap: wrap;
   }
-  .total-amount { color: var(--black); font-weight: 800; }
-  .total-ars {
+  .per-user-amount { color: var(--black); font-weight: 800; }
+  .per-user-ars {
     display: block; width: 100%; text-align: center;
     font-size: 11px; color: var(--text-muted); font-weight: 500;
     margin-top: 2px;
@@ -353,11 +479,37 @@
   .btn-whatsapp { background: #25D366; color: var(--white); }
   .btn-email { background: var(--white); color: var(--black); }
 
+  .faq-list { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+  .faq-item {
+    background: var(--gray-light); border-radius: 14px;
+    border: 1px solid #EEE; padding: 4px 22px;
+  }
+  .faq-item summary {
+    cursor: pointer; font-weight: 700; font-size: 16px;
+    padding: 18px 0; list-style: none;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .faq-item summary::after {
+    content: '+'; font-size: 22px; font-weight: 400; color: var(--green);
+    margin-left: 12px; transition: transform .2s; flex-shrink: 0;
+  }
+  .faq-item[open] summary::after { transform: rotate(45deg); }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item p { color: var(--text-muted); font-size: 15px; padding-bottom: 18px; }
+
   footer {
     background: #050505; color: #888;
-    text-align: center; padding: 32px 24px; font-size: 14px;
+    text-align: center; padding: 48px 24px 32px; font-size: 14px;
   }
   footer a { color: var(--gold); }
+  .footer-inner { max-width: 600px; margin: 0 auto; }
+  .footer-brand { font-weight: 900; font-size: 24px; letter-spacing: 2px; color: var(--gold); margin-bottom: 10px; }
+  .footer-brand span { color: var(--green-light); }
+  .footer-tagline { font-size: 14px; margin-bottom: 20px; }
+  .footer-links { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-bottom: 24px; }
+  .footer-links a { color: #CCC; font-weight: 600; font-size: 13px; }
+  .footer-links a:hover { color: var(--gold); }
+  .footer-copy { font-size: 13px; color: #666; border-top: 1px solid #222; padding-top: 20px; }
 
   @media (max-width: 640px) {
     nav { padding: 12px 16px; }
@@ -384,16 +536,25 @@
 
 <nav>
   <div class="nav-logo">R<span>21</span></div>
-  <div class="lang-switch">
-    <button id="btn-es" class="active" onclick="setLang('es')" title="Español">
-      <img src="https://flagcdn.com/w40/ar.png" alt="AR">
-    </button>
-    <button id="btn-en" onclick="setLang('en')" title="English">
-      <img src="https://flagcdn.com/w40/us.png" alt="US">
-    </button>
-    <button id="btn-pt" onclick="setLang('pt')" title="Português">
-      <img src="https://flagcdn.com/w40/br.png" alt="BR">
-    </button>
+  <div class="nav-links">
+    <a href="#demo" data-es="Demo" data-en="Demo" data-pt="Demo">Demo</a>
+    <a href="#funciones" data-es="Funciones" data-en="Features" data-pt="Recursos">Funciones</a>
+    <a href="#planes" data-es="Planes" data-en="Pricing" data-pt="Planos">Planes</a>
+    <a href="#faq" data-es="Preguntas" data-en="FAQ" data-pt="Perguntas">Preguntas</a>
+  </div>
+  <div class="nav-right">
+    <div class="lang-switch">
+      <button id="btn-es" class="active" onclick="setLang('es')" title="Español">
+        <img src="https://flagcdn.com/w40/ar.png" alt="AR">
+      </button>
+      <button id="btn-en" onclick="setLang('en')" title="English">
+        <img src="https://flagcdn.com/w40/us.png" alt="US">
+      </button>
+      <button id="btn-pt" onclick="setLang('pt')" title="Português">
+        <img src="https://flagcdn.com/w40/br.png" alt="BR">
+      </button>
+    </div>
+    <a href="https://wa.me/5493415040667?text=Hola%2C%20quiero%20probar%20R21%2014%20d%C3%ADas%20gratis" target="_blank" class="nav-cta btn btn-primary" data-es="Probar gratis" data-en="Try free" data-pt="Testar grátis">Probar gratis</a>
   </div>
 </nav>
 
@@ -405,6 +566,12 @@
   <div class="cta-group">
     <a href="https://wa.me/5493415040667?text=Hola%2C%20quiero%20probar%20R21%2014%20d%C3%ADas%20gratis" target="_blank" class="btn btn-primary" data-es="🚀 Probar 14 días gratis" data-en="🚀 Try 14 days free" data-pt="🚀 Teste 14 dias grátis">🚀 Probar 14 días gratis</a>
     <a href="#funciones" class="btn btn-secondary" data-es="Ver funciones" data-en="See features" data-pt="Ver recursos">Ver funciones</a>
+  </div>
+  <div class="trust-row">
+    <span data-es="14 días gratis" data-en="14 days free" data-pt="14 dias grátis">14 días gratis</span>
+    <span data-es="Sin tarjeta" data-en="No credit card" data-pt="Sem cartão">Sin tarjeta</span>
+    <span data-es="Cancelás cuando quieras" data-en="Cancel anytime" data-pt="Cancele quando quiser">Cancelás cuando quieras</span>
+    <span data-es="Celular + PC" data-en="Mobile + PC" data-pt="Celular + PC">Celular + PC</span>
   </div>
 </div>
 
@@ -423,10 +590,15 @@
       <h3 data-es="Membresías" data-en="Memberships" data-pt="Assinaturas">Membresías</h3>
       <p data-es="Gestión de usuarios, vencimientos, renovaciones y planes." data-en="User management, expirations, renewals and plans." data-pt="Gestão de usuários, vencimentos, renovações e planos.">Gestión de usuarios, vencimientos, renovaciones y planes.</p>
     </div>
-    <div class="module-card">
+    <div class="module-card featured">
       <div class="module-icon">🤖</div>
       <h3 data-es="Bot de WhatsApp con IA" data-en="AI WhatsApp Bot" data-pt="Bot de WhatsApp com IA">Bot de WhatsApp con IA</h3>
-      <p data-es="Atiende solo: busca stock, toma tasaciones con fotos y responde consultas. Todo se guarda solo y te llega la notificación." data-en="Answers alone: searches stock, takes trade-in appraisals with photos and answers questions. Everything saves itself and you get notified." data-pt="Atende sozinho: busca estoque, recebe avaliações com fotos e responde dúvidas. Tudo se salva só e você recebe a notificação.">Atiende solo: busca stock, toma tasaciones con fotos y responde consultas. Todo se guarda solo y te llega la notificación.</p>
+      <p data-es="Atiende solo, las 24 horas: busca stock, toma tasaciones con fotos y responde consultas. Todo se guarda solo y te llega la notificación al toque." data-en="Answers alone, 24/7: searches stock, takes trade-in appraisals with photos and answers questions. Everything saves itself and you get notified instantly." data-pt="Atende sozinho, 24h: busca estoque, recebe avaliações com fotos e responde dúvidas. Tudo se salva só e você recebe a notificação na hora.">Atiende solo, las 24 horas: busca stock, toma tasaciones con fotos y responde consultas. Todo se guarda solo y te llega la notificación al toque.</p>
+    </div>
+    <div class="module-card featured">
+      <div class="module-icon">🖥️</div>
+      <h3 data-es="Panel de Escritorio (PC)" data-en="Desktop Panel (PC)" data-pt="Painel de Computador (PC)">Panel de Escritorio (PC)</h3>
+      <p data-es="El plan Full suma la app para Windows: pantalla grande para cargar caja, cerrar el mes y revisar reportes cómodo desde la oficina." data-en="The Full plan adds the Windows app: a big screen to log cash, close the month and review reports comfortably from the office." data-pt="O plano Full soma o app para Windows: tela grande para lançar o caixa, fechar o mês e revisar relatórios no escritório.">El plan Full suma la app para Windows: pantalla grande para cargar caja, cerrar el mes y revisar reportes cómodo desde la oficina.</p>
     </div>
     <div class="module-card">
       <div class="module-icon">🚘</div>
@@ -447,6 +619,36 @@
       <div class="module-icon">⚙️</div>
       <h3 data-es="Panel Admin" data-en="Admin Panel" data-pt="Painel Admin">Panel Admin</h3>
       <p data-es="Listar cuentas, registrar pagos, editar y ver en Maps." data-en="List accounts, register payments, edit and view on Maps." data-pt="Listar contas, registrar pagamentos, editar e ver no Maps.">Listar cuentas, registrar pagos, editar y ver en Maps.</p>
+    </div>
+    <div class="module-card">
+      <div class="module-icon">🌎</div>
+      <h3 data-es="Multiidioma" data-en="Multi-language" data-pt="Multilíngue">Multiidioma</h3>
+      <p data-es="Español, inglés y portugués, listo para clientes de toda la región." data-en="Spanish, English and Portuguese, ready for clients across the region." data-pt="Espanhol, inglês e português, pronto para clientes de toda a região.">Español, inglés y portugués, listo para clientes de toda la región.</p>
+    </div>
+  </div>
+</section>
+
+<section id="demo">
+  <h2 data-es="Mirá al bot en acción" data-en="See the bot in action" data-pt="Veja o bot em ação">Mirá al bot en acción</h2>
+  <p class="section-sub" data-es="Así contesta por WhatsApp, las 24 horas, sin que vos hagas nada." data-en="This is how it answers on WhatsApp, 24/7, without you doing anything." data-pt="É assim que ele responde pelo WhatsApp, 24h, sem você fazer nada.">Así contesta por WhatsApp, las 24 horas, sin que vos hagas nada.</p>
+
+  <div class="demo-wrap">
+    <div class="phone-mockup">
+      <div class="wa-header">
+        <div class="wa-avatar">R21</div>
+        <div class="wa-header-info">
+          <span class="wa-name">R21 Bot</span>
+          <span class="wa-status" data-es="en línea" data-en="online" data-pt="online">en línea</span>
+        </div>
+      </div>
+      <div class="wa-chat" id="waChat"></div>
+    </div>
+    <div class="demo-caption">
+      <span class="demo-badge">
+        <span class="demo-dot"></span>
+        <span data-es="Simulación" data-en="Simulation" data-pt="Simulação">Simulación</span>
+      </span>
+      <p data-es="Conversación de ejemplo para mostrar cómo responde el bot. No es un chat real, pero así se ve en tu WhatsApp todos los días." data-en="Example conversation showing how the bot replies. Not a real chat, but this is what it looks like in your WhatsApp every day." data-pt="Conversa de exemplo mostrando como o bot responde. Não é um chat real, mas é assim que aparece no seu WhatsApp todos os dias.">Conversación de ejemplo para mostrar cómo responde el bot. No es un chat real, pero así se ve en tu WhatsApp todos los días.</p>
     </div>
   </div>
 </section>
@@ -706,15 +908,20 @@
       <span class="price-badge badge-basic" data-es="Básico" data-en="Basic" data-pt="Básico">Básico</span>
       <h3 data-es="Solo Celular" data-en="Mobile Only" data-pt="Só Celular">Solo Celular</h3>
       <div class="price-users" data-es="1 usuario" data-en="1 user" data-pt="1 usuário">1 usuario</div>
-      <div class="price-per-user">
-        <span class="per-user-label" data-es="por usuario/mes" data-en="per user/month" data-pt="por usuário/mês">por usuario/mes</span>
-        <span class="per-user-amount" data-usd-base="29" data-users="1">USD 29</span>
-        <span class="per-user-ars"></span>
-      </div>
-      <div class="price-total">
-        <span data-es="Total:" data-en="Total:" data-pt="Total:">Total:</span>
-        <span class="total-amount" data-usd-base="29">USD 29/mes</span>
+      <div class="price-total-main">
+        <span class="total-label" data-es="Total por mes" data-en="Total per month" data-pt="Total por mês">Total por mes</span>
+        <span class="total-amount" data-usd-base="29">USD 29</span>
         <span class="total-ars"></span>
+        <div class="upfront-note">
+          <span data-es="Pago único:" data-en="One-time payment:" data-pt="Pagamento único:">Pago único:</span>
+          <span class="upfront-amount"></span>
+          <span class="upfront-ars"></span>
+        </div>
+      </div>
+      <div class="price-per-user">
+        <span class="per-user-amount" data-usd-base="29" data-users="1">USD 29</span>
+        <span data-es="por usuario/mes" data-en="per user/month" data-pt="por usuário/mês">por usuario/mes</span>
+        <span class="per-user-ars"></span>
       </div>
       <ul class="price-features">
         <li data-es="App Android" data-en="Android app" data-pt="App Android">App Android</li>
@@ -728,15 +935,20 @@
       <span class="price-badge badge-basic" data-es="Básico" data-en="Basic" data-pt="Básico">Básico</span>
       <h3 data-es="Solo Celular" data-en="Mobile Only" data-pt="Só Celular">Solo Celular</h3>
       <div class="price-users" data-es="3 usuarios" data-en="3 users" data-pt="3 usuários">3 usuarios</div>
-      <div class="price-per-user">
-        <span class="per-user-label" data-es="por usuario/mes" data-en="per user/month" data-pt="por usuário/mês">por usuario/mes</span>
-        <span class="per-user-amount" data-usd-base="69" data-users="3">USD 23</span>
-        <span class="per-user-ars"></span>
-      </div>
-      <div class="price-total">
-        <span data-es="Total:" data-en="Total:" data-pt="Total:">Total:</span>
-        <span class="total-amount" data-usd-base="69">USD 69/mes</span>
+      <div class="price-total-main">
+        <span class="total-label" data-es="Total por mes" data-en="Total per month" data-pt="Total por mês">Total por mes</span>
+        <span class="total-amount" data-usd-base="69">USD 69</span>
         <span class="total-ars"></span>
+        <div class="upfront-note">
+          <span data-es="Pago único:" data-en="One-time payment:" data-pt="Pagamento único:">Pago único:</span>
+          <span class="upfront-amount"></span>
+          <span class="upfront-ars"></span>
+        </div>
+      </div>
+      <div class="price-per-user">
+        <span class="per-user-amount" data-usd-base="69" data-users="3">USD 23</span>
+        <span data-es="por usuario/mes" data-en="per user/month" data-pt="por usuário/mês">por usuario/mes</span>
+        <span class="per-user-ars"></span>
       </div>
       <ul class="price-features">
         <li data-es="App Android" data-en="Android app" data-pt="App Android">App Android</li>
@@ -750,15 +962,20 @@
       <span class="price-badge badge-full" data-es="Full" data-en="Full" data-pt="Full">Full</span>
       <h3 data-es="Celu + PC" data-en="Mobile + PC" data-pt="Celular + PC">Celu + PC</h3>
       <div class="price-users" data-es="3 usuarios" data-en="3 users" data-pt="3 usuários">3 usuarios</div>
-      <div class="price-per-user">
-        <span class="per-user-label" data-es="por usuario/mes" data-en="per user/month" data-pt="por usuário/mês">por usuario/mes</span>
-        <span class="per-user-amount" data-usd-base="89" data-users="3">USD 30</span>
-        <span class="per-user-ars"></span>
-      </div>
-      <div class="price-total">
-        <span data-es="Total:" data-en="Total:" data-pt="Total:">Total:</span>
-        <span class="total-amount" data-usd-base="89">USD 89/mes</span>
+      <div class="price-total-main">
+        <span class="total-label" data-es="Total por mes" data-en="Total per month" data-pt="Total por mês">Total por mes</span>
+        <span class="total-amount" data-usd-base="89">USD 89</span>
         <span class="total-ars"></span>
+        <div class="upfront-note">
+          <span data-es="Pago único:" data-en="One-time payment:" data-pt="Pagamento único:">Pago único:</span>
+          <span class="upfront-amount"></span>
+          <span class="upfront-ars"></span>
+        </div>
+      </div>
+      <div class="price-per-user">
+        <span class="per-user-amount" data-usd-base="89" data-users="3">USD 30</span>
+        <span data-es="por usuario/mes" data-en="per user/month" data-pt="por usuário/mês">por usuario/mes</span>
+        <span class="per-user-ars"></span>
       </div>
       <ul class="price-features">
         <li data-es="App Android + Windows" data-en="Android + Windows app" data-pt="App Android + Windows">App Android + Windows</li>
@@ -773,15 +990,20 @@
       <span class="price-badge badge-full" data-es="Full" data-en="Full" data-pt="Full">Full</span>
       <h3 data-es="Celu + PC" data-en="Mobile + PC" data-pt="Celular + PC">Celu + PC</h3>
       <div class="price-users" data-es="7 usuarios" data-en="7 users" data-pt="7 usuários">7 usuarios</div>
-      <div class="price-per-user">
-        <span class="per-user-label" data-es="por usuario/mes" data-en="per user/month" data-pt="por usuário/mês">por usuario/mes</span>
-        <span class="per-user-amount" data-usd-base="149" data-users="7">USD 21</span>
-        <span class="per-user-ars"></span>
-      </div>
-      <div class="price-total">
-        <span data-es="Total:" data-en="Total:" data-pt="Total:">Total:</span>
-        <span class="total-amount" data-usd-base="149">USD 149/mes</span>
+      <div class="price-total-main">
+        <span class="total-label" data-es="Total por mes" data-en="Total per month" data-pt="Total por mês">Total por mes</span>
+        <span class="total-amount" data-usd-base="149">USD 149</span>
         <span class="total-ars"></span>
+        <div class="upfront-note">
+          <span data-es="Pago único:" data-en="One-time payment:" data-pt="Pagamento único:">Pago único:</span>
+          <span class="upfront-amount"></span>
+          <span class="upfront-ars"></span>
+        </div>
+      </div>
+      <div class="price-per-user">
+        <span class="per-user-amount" data-usd-base="149" data-users="7">USD 21</span>
+        <span data-es="por usuario/mes" data-en="per user/month" data-pt="por usuário/mês">por usuario/mes</span>
+        <span class="per-user-ars"></span>
       </div>
       <ul class="price-features">
         <li data-es="App Android + Windows" data-en="Android + Windows app" data-pt="App Android + Windows">App Android + Windows</li>
@@ -796,15 +1018,20 @@
       <span class="price-badge badge-full" data-es="Full" data-en="Full" data-pt="Full">Full</span>
       <h3 data-es="Celu + PC" data-en="Mobile + PC" data-pt="Celular + PC">Celu + PC</h3>
       <div class="price-users" data-es="15 usuarios" data-en="15 users" data-pt="15 usuários">15 usuarios</div>
-      <div class="price-per-user">
-        <span class="per-user-label" data-es="por usuario/mes" data-en="per user/month" data-pt="por usuário/mês">por usuario/mes</span>
-        <span class="per-user-amount" data-usd-base="249" data-users="15">USD 17</span>
-        <span class="per-user-ars"></span>
-      </div>
-      <div class="price-total">
-        <span data-es="Total:" data-en="Total:" data-pt="Total:">Total:</span>
-        <span class="total-amount" data-usd-base="249">USD 249/mes</span>
+      <div class="price-total-main">
+        <span class="total-label" data-es="Total por mes" data-en="Total per month" data-pt="Total por mês">Total por mes</span>
+        <span class="total-amount" data-usd-base="249">USD 249</span>
         <span class="total-ars"></span>
+        <div class="upfront-note">
+          <span data-es="Pago único:" data-en="One-time payment:" data-pt="Pagamento único:">Pago único:</span>
+          <span class="upfront-amount"></span>
+          <span class="upfront-ars"></span>
+        </div>
+      </div>
+      <div class="price-per-user">
+        <span class="per-user-amount" data-usd-base="249" data-users="15">USD 17</span>
+        <span data-es="por usuario/mes" data-en="per user/month" data-pt="por usuário/mês">por usuario/mes</span>
+        <span class="per-user-ars"></span>
       </div>
       <ul class="price-features">
         <li data-es="App Android + Windows" data-en="Android + Windows app" data-pt="App Android + Windows">App Android + Windows</li>
@@ -968,19 +1195,57 @@
   </div>
 </section>
 
+<section id="faq">
+  <h2 data-es="Preguntas frecuentes" data-en="Frequently asked questions" data-pt="Perguntas frequentes">Preguntas frecuentes</h2>
+  <p class="section-sub" data-es="Lo que más nos preguntan antes de empezar." data-en="What dealers ask us most before getting started." data-pt="O que mais perguntam antes de começar.">Lo que más nos preguntan antes de empezar.</p>
+  <div class="faq-list">
+    <details class="faq-item" open>
+      <summary data-es="¿Necesito tarjeta de crédito para probar?" data-en="Do I need a credit card to try it?" data-pt="Preciso de cartão de crédito para testar?">¿Necesito tarjeta de crédito para probar?</summary>
+      <p data-es="No. Activás los 14 días gratis sin cargar ningún medio de pago. Elegís cómo pagar recién cuando decidís seguir." data-en="No. You activate the 14-day trial without loading any payment method. You choose how to pay only once you decide to continue." data-pt="Não. Você ativa os 14 dias grátis sem cadastrar nenhum meio de pagamento. Escolhe como pagar só quando decidir continuar.">No. Activás los 14 días gratis sin cargar ningún medio de pago. Elegís cómo pagar recién cuando decidís seguir.</p>
+    </details>
+    <details class="faq-item">
+      <summary data-es="¿Qué pasa con mis datos si cancelo?" data-en="What happens to my data if I cancel?" data-pt="O que acontece com meus dados se eu cancelar?">¿Qué pasa con mis datos si cancelo?</summary>
+      <p data-es="Son tuyos. Podés descargar un backup completo (vehículos, clientes, movimientos) desde Configuración en cualquier momento, estés activo o no." data-en="They're yours. You can download a full backup (vehicles, clients, movements) from Settings at any time, active or not." data-pt="São seus. Você pode baixar um backup completo (veículos, clientes, movimentações) em Configurações a qualquer momento.">Son tuyos. Podés descargar un backup completo (vehículos, clientes, movimientos) desde Configuración en cualquier momento, estés activo o no.</p>
+    </details>
+    <details class="faq-item">
+      <summary data-es="¿El bot de WhatsApp usa mi número personal?" data-en="Does the WhatsApp bot use my personal number?" data-pt="O bot de WhatsApp usa meu número pessoal?">¿El bot de WhatsApp usa mi número personal?</summary>
+      <p data-es="Vos elegís qué número conectar. El bot contesta desde ese WhatsApp las 24 horas y vos seguís viendo toda la conversación." data-en="You choose which number to connect. The bot answers from that WhatsApp 24/7 and you keep full visibility of the conversation." data-pt="Você escolhe qual número conectar. O bot responde por esse WhatsApp 24h e você continua vendo toda a conversa.">Vos elegís qué número conectar. El bot contesta desde ese WhatsApp las 24 horas y vos seguís viendo toda la conversación.</p>
+    </details>
+    <details class="faq-item">
+      <summary data-es="¿Puedo usarlo solo desde el celular, sin PC?" data-en="Can I use it only from my phone, without a PC?" data-pt="Posso usar só pelo celular, sem PC?">¿Puedo usarlo solo desde el celular, sin PC?</summary>
+      <p data-es="Sí, el plan Básico es justamente eso: todos los módulos desde el celular. El plan Full suma la app de escritorio para Windows." data-en="Yes, the Basic plan is exactly that: all modules from your phone. The Full plan adds the Windows desktop app." data-pt="Sim, o plano Básico é exatamente isso: todos os módulos pelo celular. O plano Full soma o app de computador para Windows.">Sí, el plan Básico es justamente eso: todos los módulos desde el celular. El plan Full suma la app de escritorio para Windows.</p>
+    </details>
+    <details class="faq-item">
+      <summary data-es="¿Cuántos usuarios puede tener mi agencia?" data-en="How many users can my dealership have?" data-pt="Quantos usuários minha loja pode ter?">¿Cuántos usuarios puede tener mi agencia?</summary>
+      <p data-es="Desde 1 hasta 15 usuarios con roles distintos (admin, gerente, vendedor, operario), según el plan que elijas." data-en="From 1 to 15 users with different roles (admin, manager, salesperson, staff), depending on your plan." data-pt="De 1 a 15 usuários com papéis diferentes (admin, gerente, vendedor, operador), de acordo com o plano.">Desde 1 hasta 15 usuarios con roles distintos (admin, gerente, vendedor, operario), según el plan que elijas.</p>
+    </details>
+  </div>
+</section>
+
 <section class="contact">
   <div style="max-width: 700px; margin: 0 auto;">
-    <h2 data-es="¿Hablamos?" data-en="Let's talk?" data-pt="Vamos conversar?">¿Hablamos?</h2>
-    <p class="section-sub" data-es="Te respondo yo personalmente. Sin bots, sin vueltas." data-en="I answer personally. No bots, no nonsense." data-pt="Eu respondo pessoalmente. Sem bots, sem enrolação.">Te respondo yo personalmente. Sin bots, sin vueltas.</p>
+    <h2 data-es="Empezá hoy mismo" data-en="Get started today" data-pt="Comece hoje mesmo">Empezá hoy mismo</h2>
+    <p class="section-sub" data-es="14 días gratis, sin tarjeta. Si tenés dudas antes de arrancar, escribinos." data-en="14 days free, no card. If you have questions before starting, write to us." data-pt="14 dias grátis, sem cartão. Se tiver dúvidas antes de começar, escreva para nós.">14 días gratis, sin tarjeta. Si tenés dudas antes de arrancar, escribinos.</p>
     <div class="contact-buttons">
-      <a href="https://wa.me/5493415040667?text=Hola%2C%20quiero%20info%20sobre%20R21" target="_blank" class="btn btn-whatsapp" data-es="💬 WhatsApp" data-en="💬 WhatsApp" data-pt="💬 WhatsApp">💬 WhatsApp</a>
+      <a href="https://wa.me/5493415040667?text=Hola%2C%20quiero%20probar%20R21%2014%20d%C3%ADas%20gratis" target="_blank" class="btn btn-whatsapp" data-es="💬 Empezar por WhatsApp" data-en="💬 Start on WhatsApp" data-pt="💬 Começar pelo WhatsApp">💬 Empezar por WhatsApp</a>
       <a href="mailto:sistema.ruta21@gmail.com" class="btn btn-email" data-es="✉️ Email" data-en="✉️ Email" data-pt="✉️ Email">✉️ Email</a>
     </div>
   </div>
 </section>
 
 <footer>
-  <p>© 2026 R21 — <a href="https://getaxiora.com">getaxiora.com</a></p>
+  <div class="footer-inner">
+    <div class="footer-brand">R<span>21</span></div>
+    <p class="footer-tagline" data-es="Sistema de gestión para concesionarias. Hecho en Argentina." data-en="Dealership management system. Made in Argentina." data-pt="Sistema de gestão para lojas de veículos. Feito na Argentina.">Sistema de gestión para concesionarias. Hecho en Argentina.</p>
+    <div class="footer-links">
+      <a href="#demo" data-es="Demo" data-en="Demo" data-pt="Demo">Demo</a>
+      <a href="#funciones" data-es="Funciones" data-en="Features" data-pt="Recursos">Funciones</a>
+      <a href="#planes" data-es="Planes" data-en="Pricing" data-pt="Planos">Planes</a>
+      <a href="#faq" data-es="Preguntas" data-en="FAQ" data-pt="Perguntas">Preguntas</a>
+      <a href="https://wa.me/5493415040667" target="_blank">WhatsApp</a>
+    </div>
+    <p class="footer-copy">© 2026 R21 — <a href="https://getaxiora.com">getaxiora.com</a></p>
+  </div>
 </footer>
 
 <script>
@@ -1000,7 +1265,7 @@
 
   async function cargarCotizacion() {
     try {
-      const res = await fetch('https://dolarapi.com/v1/dolares/tarjeta');
+      const res = await fetch('https://dolarapi.com/v1/dolares/blue');
       const data = await res.json();
       cotizacionUSD = data.venta || data.compra || 0;
     } catch (e) {
@@ -1010,6 +1275,7 @@
   }
 
   const descuentos = { monthly: 0, q: 0.10, s: 0.15, y: 0.20 };
+  const mesesPeriodo = { monthly: 1, q: 3, s: 6, y: 12 };
 
   function setPeriod(period) {
     document.querySelectorAll('.period-btn').forEach(btn => {
@@ -1017,6 +1283,7 @@
     });
 
     const desc = descuentos[period] || 0;
+    const meses = mesesPeriodo[period] || 1;
 
     document.querySelectorAll('.per-user-amount').forEach(el => {
       const base = parseFloat(el.dataset.usdBase);
@@ -1034,18 +1301,98 @@
     document.querySelectorAll('.total-amount').forEach(el => {
       const base = parseFloat(el.dataset.usdBase);
       const total = Math.ceil(base * (1 - desc));
-      const sufijo = period === 'monthly' ? '/mes' : '';
-      el.textContent = `USD ${total}${sufijo}`;
+      el.textContent = `USD ${total}`;
 
       const arsEl = el.parentElement.querySelector('.total-ars');
       if (arsEl && cotizacionUSD > 0) {
         const ars = Math.round(total * cotizacionUSD);
         arsEl.textContent = `≈ $${ars.toLocaleString('es-AR')} ARS`;
       }
+
+      const upfrontEl = el.closest('.price-total-main').querySelector('.upfront-note');
+      if (upfrontEl) {
+        if (meses > 1) {
+          const upfront = total * meses;
+          const amountEl = upfrontEl.querySelector('.upfront-amount');
+          const arsUpfrontEl = upfrontEl.querySelector('.upfront-ars');
+          amountEl.textContent = `USD ${upfront}`;
+          arsUpfrontEl.textContent = cotizacionUSD > 0
+            ? `(≈ $${Math.round(upfront * cotizacionUSD).toLocaleString('es-AR')} ARS)`
+            : '';
+          upfrontEl.style.display = 'block';
+        } else {
+          upfrontEl.style.display = 'none';
+        }
+      }
     });
 
     localStorage.setItem('r21-period', period);
   }
+
+  // ─── DEMO DEL BOT (chat simulado) ───
+  const chatGuion = [
+    { de: 'in', texto: 'Hola! ¿Tienen un Toyota Corolla 2020?', hora: '14:02' },
+    { de: 'out', texto: 'Hola 👋 Sí, tenemos 2 Corolla 2020 en stock. Uno a $18.500.000 y otro a $19.200.000. ¿Te paso fotos?', hora: '14:02' },
+    { de: 'in', texto: 'Sí dale. Y de paso... ¿toman un auto usado como parte de pago?', hora: '14:03' },
+    { de: 'out', texto: 'Sí! Contame marca, modelo, año y km, y mandame 3 o 4 fotos para tasarlo.', hora: '14:03' },
+    { de: 'in', texto: 'Un Fiat Cronos 2019, 45.000km 📷📷📷', hora: '14:05' },
+    { de: 'out', texto: 'Perfecto, ya guardé todo ✅ En breve el dueño de la agencia lo revisa y te escribe con una propuesta.', hora: '14:05' },
+  ];
+
+  function iniciarDemoBot() {
+    const chat = document.getElementById('waChat');
+    if (!chat) return;
+    let i = 0;
+    let cancelado = false;
+
+    function paso() {
+      if (cancelado) return;
+      if (i >= chatGuion.length) {
+        setTimeout(() => { chat.innerHTML = ''; i = 0; paso(); }, 3800);
+        return;
+      }
+      const msg = chatGuion[i];
+      if (msg.de === 'out') {
+        const typing = document.createElement('div');
+        typing.className = 'wa-bubble wa-typing';
+        typing.innerHTML = '<div class="dots"><span></span><span></span><span></span></div>';
+        chat.appendChild(typing);
+        chat.scrollTop = chat.scrollHeight;
+        setTimeout(() => {
+          if (cancelado) return;
+          typing.remove();
+          agregarBurbuja(msg);
+          i++;
+          setTimeout(paso, 900);
+        }, 1100);
+      } else {
+        agregarBurbuja(msg);
+        i++;
+        setTimeout(paso, 1000);
+      }
+    }
+
+    function agregarBurbuja(msg) {
+      const b = document.createElement('div');
+      b.className = `wa-bubble ${msg.de}`;
+      b.innerHTML = `${msg.texto}<span class="wa-time">${msg.hora}</span>`;
+      chat.appendChild(b);
+      chat.scrollTop = chat.scrollHeight;
+    }
+
+    paso();
+  }
+
+  const demoObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        iniciarDemoBot();
+        demoObserver.disconnect();
+      }
+    });
+  }, { threshold: 0.3 });
+  const demoSection = document.getElementById('demo');
+  if (demoSection) demoObserver.observe(demoSection);
 
   // ─── INIT ───
   const navLang = (navigator.language || 'es').toLowerCase();
