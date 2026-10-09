@@ -134,6 +134,10 @@
     overflow: hidden;
   }
   .auto-marca-logo img { width: 20px; height: 20px; object-fit: contain; }
+  .auto-marca-inicial {
+    font-family: 'Inter', sans-serif; font-weight: 900; font-size: 15px;
+    color: var(--green);
+  }
   .auto-foto-nav {
     position: absolute; top: 50%; transform: translateY(-50%);
     width: 30px; height: 30px; border-radius: 50%; border: none;
@@ -249,14 +253,19 @@
     return `https://wa.me/${WHATSAPP_AGENCIA}?text=${encodeURIComponent(texto)}`;
   }
 
-  // Mismo origen de logos que usa la app (simpleicons.org por slug de marca)
-  function slugMarca(marca) {
-    const especiales = { 'mercedes-benz': 'mercedes', 'citroen': 'citroen', 'citroën': 'citroen' };
+  // Mismo origen de logos que usa la app (simpleicons.org por slug de marca,
+  // con las mismas excepciones puntuales que usa el modelo Marca del Flutter)
+  const LOGOS_EXCEPCION = {
+    'mercedes-benz': 'https://res.cloudinary.com/mc0gj8vp/image/upload/mercedes.svg',
+  };
+
+  function logoUrlMarca(marca) {
     const limpio = (marca || '').toLowerCase().trim();
-    if (especiales[limpio]) return especiales[limpio];
-    return limpio
+    if (LOGOS_EXCEPCION[limpio]) return LOGOS_EXCEPCION[limpio];
+    const slug = limpio
       .normalize('NFD').replace(/[̀-ͯ]/g, '')
       .replace(/[^a-z0-9]/g, '');
+    return `https://cdn.simpleicons.org/${slug}`;
   }
 
   let catalogoCompleto = [];
@@ -305,7 +314,7 @@
       card.innerHTML = `
         <div class="auto-foto-wrap" data-idx="0">
           <span class="auto-badge">Disponible</span>
-          <span class="auto-marca-logo"><img src="https://cdn.simpleicons.org/${slugMarca(auto.marca)}" alt="" onerror="this.parentElement.style.display='none'"></span>
+          <span class="auto-marca-logo"><img src="${logoUrlMarca(auto.marca)}" alt="" onerror="this.outerHTML='<span class=\'auto-marca-inicial\'>${(auto.marca || '?').trim().charAt(0).toUpperCase()}</span>'"></span>
           <div class="auto-foto-track">${imgs}</div>
           ${nav}
         </div>
