@@ -78,6 +78,21 @@
     font-size: 40px; display: block; margin-bottom: 14px;
   }
 
+  .filtro-tipo {
+    display: none; justify-content: center; gap: 10px;
+    margin-bottom: 26px;
+  }
+  .filtro-tipo-btn {
+    background: #FFFFFF; border: 2px solid #E5E5E5; color: var(--text-muted);
+    font-family: 'Inter', sans-serif; font-weight: 700; font-size: 14px;
+    padding: 9px 20px; border-radius: 30px; cursor: pointer;
+    transition: all .15s;
+  }
+  .filtro-tipo-btn:hover { border-color: var(--green); }
+  .filtro-tipo-btn.activo {
+    background: var(--green); border-color: var(--green); color: var(--white);
+  }
+
   .grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
@@ -208,6 +223,7 @@
 </header>
 
 <main>
+  <div id="filtroTipo" class="filtro-tipo" style="display:none;"></div>
   <div id="contenido" class="estado-carga"><span class="icono">🚗</span>Cargando vehículos…</div>
 </main>
 
@@ -243,6 +259,9 @@
       .replace(/[^a-z0-9]/g, '');
   }
 
+  let catalogoCompleto = [];
+  let filtroTipoActivo = 'todos';
+
   function renderAutos(lista) {
     const cont = document.getElementById('contenido');
     const contador = document.getElementById('contador');
@@ -263,6 +282,7 @@
 
     const grid = document.createElement('div');
     grid.className = 'grid';
+    grid.id = 'contenido';
 
     ordenada.forEach(auto => {
       const card = document.createElement('div');
@@ -315,11 +335,37 @@
     dots.forEach((d, i) => d.classList.toggle('activo', i === idx));
   }
 
+  function aplicarFiltroTipo(tipo) {
+    filtroTipoActivo = tipo;
+    document.querySelectorAll('.filtro-tipo-btn').forEach(btn => {
+      btn.classList.toggle('activo', btn.dataset.tipo === tipo);
+    });
+    const filtrada = tipo === 'todos'
+      ? catalogoCompleto
+      : catalogoCompleto.filter(a => (a.tipo || 'auto') === tipo);
+    renderAutos(filtrada);
+  }
+
   fetch(`${APPS_SCRIPT_URL}?action=catalogoPublico`)
     .then(res => res.json())
     .then(data => {
       if (!data || data.ok !== true) throw new Error('Respuesta inválida');
-      renderAutos(data.data);
+      catalogoCompleto = data.data;
+
+      const hayAutos = catalogoCompleto.some(a => (a.tipo || 'auto') !== 'moto');
+      const hayMotos = catalogoCompleto.some(a => (a.tipo || 'auto') === 'moto');
+
+      if (hayAutos && hayMotos) {
+        const filtroEl = document.getElementById('filtroTipo');
+        filtroEl.style.display = 'flex';
+        filtroEl.innerHTML = `
+          <button class="filtro-tipo-btn activo" data-tipo="todos" onclick="aplicarFiltroTipo('todos')">Todos</button>
+          <button class="filtro-tipo-btn" data-tipo="auto" onclick="aplicarFiltroTipo('auto')">🚗 Autos</button>
+          <button class="filtro-tipo-btn" data-tipo="moto" onclick="aplicarFiltroTipo('moto')">🏍️ Motos</button>
+        `;
+      }
+
+      aplicarFiltroTipo('todos');
     })
     .catch(err => {
       console.error('No se pudo cargar el catálogo:', err);
