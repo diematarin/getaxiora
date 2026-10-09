@@ -64,10 +64,37 @@
     transition: transform .15s, box-shadow .15s;
   }
   .auto-card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,.08); }
+  .auto-foto-wrap {
+    position: relative; width: 100%; height: 190px;
+    background: #E5E5E5; overflow: hidden;
+  }
+  .auto-foto-track {
+    display: flex; height: 100%;
+    transition: transform .25s ease;
+  }
   .auto-foto {
-    width: 100%; height: 190px; background: #E5E5E5;
+    width: 100%; height: 100%; flex-shrink: 0;
     object-fit: cover; display: block;
   }
+  .auto-foto-nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 28px; height: 28px; border-radius: 50%; border: none;
+    background: rgba(0,0,0,.45); color: var(--white);
+    font-size: 16px; line-height: 1; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .auto-foto-nav:hover { background: rgba(0,0,0,.65); }
+  .auto-foto-nav.prev { left: 8px; }
+  .auto-foto-nav.next { right: 8px; }
+  .auto-foto-dots {
+    position: absolute; bottom: 8px; left: 0; right: 0;
+    display: flex; justify-content: center; gap: 5px;
+  }
+  .auto-foto-dots .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: rgba(255,255,255,.6);
+  }
+  .auto-foto-dots .dot.activo { background: var(--white); }
   .auto-info { padding: 16px; flex-grow: 1; display: flex; flex-direction: column; }
   .auto-titulo { font-size: 17px; font-weight: 800; margin-bottom: 4px; }
   .auto-detalle {
@@ -145,9 +172,23 @@
 
       const km = auto.km ? `${Number(auto.km).toLocaleString('es-AR')} km` : '';
       const detalle = [km, auto.combustible, auto.transmision].filter(Boolean).join(' · ');
+      const fotos = (auto.fotos && auto.fotos.length) ? auto.fotos : [''];
+
+      const imgs = fotos.map(f =>
+        `<img class="auto-foto" src="${f}" alt="${auto.marca} ${auto.modelo}" loading="lazy" onerror="this.style.opacity=0.2">`
+      ).join('');
+
+      const nav = fotos.length > 1 ? `
+        <button class="auto-foto-nav prev" onclick="moverFoto(this, -1)" aria-label="Foto anterior">‹</button>
+        <button class="auto-foto-nav next" onclick="moverFoto(this, 1)" aria-label="Foto siguiente">›</button>
+        <div class="auto-foto-dots">${fotos.map((_, i) => `<span class="dot ${i === 0 ? 'activo' : ''}"></span>`).join('')}</div>
+      ` : '';
 
       card.innerHTML = `
-        <img class="auto-foto" src="${auto.foto || ''}" alt="${auto.marca} ${auto.modelo}" loading="lazy" onerror="this.style.opacity=0.2">
+        <div class="auto-foto-wrap" data-idx="0">
+          <div class="auto-foto-track">${imgs}</div>
+          ${nav}
+        </div>
         <div class="auto-info">
           <div class="auto-titulo">${auto.marca} ${auto.modelo} (${auto.anio})</div>
           <div class="auto-detalle">${detalle}</div>
@@ -159,6 +200,18 @@
     });
 
     cont.replaceWith(grid);
+  }
+
+  function moverFoto(btn, delta) {
+    const wrap = btn.closest('.auto-foto-wrap');
+    const track = wrap.querySelector('.auto-foto-track');
+    const dots = wrap.querySelectorAll('.dot');
+    const total = dots.length;
+    let idx = parseInt(wrap.dataset.idx || '0', 10);
+    idx = (idx + delta + total) % total;
+    wrap.dataset.idx = idx;
+    track.style.transform = `translateX(-${idx * 100}%)`;
+    dots.forEach((d, i) => d.classList.toggle('activo', i === idx));
   }
 
   fetch(`${APPS_SCRIPT_URL}?action=catalogoPublico`)
