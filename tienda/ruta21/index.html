@@ -314,7 +314,7 @@
       card.innerHTML = `
         <div class="auto-foto-wrap" data-idx="0">
           <span class="auto-badge">Disponible</span>
-          <span class="auto-marca-logo"><img src="${logoUrlMarca(auto.marca)}" alt="" onerror="this.outerHTML='<span class=\'auto-marca-inicial\'>${(auto.marca || '?').trim().charAt(0).toUpperCase()}</span>'"></span>
+          <span class="auto-marca-logo"><img class="js-logo-marca" src="${logoUrlMarca(auto.marca)}" alt=""></span>
           <div class="auto-foto-track">${imgs}</div>
           ${nav}
         </div>
@@ -326,6 +326,16 @@
           <a class="auto-btn" href="${linkWhatsapp(auto)}" target="_blank">💬 Consultar por WhatsApp</a>
         </div>
       `;
+
+      const logoImg = card.querySelector('.js-logo-marca');
+      if (logoImg) {
+        logoImg.addEventListener('error', () => {
+          const span = document.createElement('span');
+          span.className = 'auto-marca-inicial';
+          span.textContent = (auto.marca || '?').trim().charAt(0).toUpperCase();
+          logoImg.replaceWith(span);
+        }, { once: true });
+      }
       grid.appendChild(card);
     });
 
