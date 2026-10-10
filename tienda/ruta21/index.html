@@ -79,18 +79,27 @@
   }
 
   .pestanas-tipo {
-    display: flex; justify-content: center; gap: 10px;
-    margin-bottom: 26px; flex-wrap: wrap;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
+    margin-bottom: 30px;
   }
   .pestana-btn {
     background: #FFFFFF; border: 2px solid #E5E5E5; color: var(--text-muted);
-    font-family: 'Inter', sans-serif; font-weight: 700; font-size: 14px;
-    padding: 9px 20px; border-radius: 30px; cursor: pointer;
+    font-family: 'Inter', sans-serif; font-weight: 800; font-size: 16px;
+    padding: 18px 10px; border-radius: 16px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center; gap: 9px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.03);
     transition: all .15s;
   }
-  .pestana-btn:hover { border-color: var(--green); }
+  .pestana-btn .pestana-emoji { font-size: 20px; }
+  .pestana-btn:hover { border-color: var(--green); transform: translateY(-2px); }
   .pestana-btn.activo {
     background: var(--green); border-color: var(--green); color: var(--white);
+    box-shadow: 0 8px 18px rgba(27,94,63,.25);
+  }
+  @media (max-width: 480px) {
+    .pestanas-tipo { gap: 8px; margin-bottom: 20px; }
+    .pestana-btn { font-size: 12px; padding: 13px 4px; border-radius: 12px; gap: 5px; }
+    .pestana-btn .pestana-emoji { font-size: 16px; }
   }
 
   .destacado {
@@ -473,13 +482,13 @@
       // Vehículos de Sistema R21.
       const pestanasEl = document.getElementById('pestanasTipo');
       const botones = [
-        ['auto', '🚗 Autos'],
-        ['moto', '🏍️ Motos'],
-        ['otros', 'Otros'],
+        ['auto', '🚗', 'Autos'],
+        ['moto', '🏍️', 'Motos'],
+        ['otros', '🚤', 'Otros'],
       ];
-      pestanasEl.style.display = 'flex';
-      pestanasEl.innerHTML = botones.map(([tipo, label], i) =>
-        `<button class="pestana-btn ${i === 0 ? 'activo' : ''}" data-tipo="${tipo}" onclick="aplicarFiltroTipo('${tipo}')">${label}</button>`
+      pestanasEl.style.display = 'grid';
+      pestanasEl.innerHTML = botones.map(([tipo, emoji, label], i) =>
+        `<button class="pestana-btn ${i === 0 ? 'activo' : ''}" data-tipo="${tipo}" onclick="aplicarFiltroTipo('${tipo}')"><span class="pestana-emoji">${emoji}</span>${label}</button>`
       ).join('');
 
       aplicarFiltroTipo('auto');
