@@ -468,28 +468,21 @@
 
       renderDestacado(catalogoCompleto);
 
-      const hayAutos = catalogoCompleto.some(a => bucketTipo(a.tipo) === 'auto');
-      const hayMotos = catalogoCompleto.some(a => bucketTipo(a.tipo) === 'moto');
-      const hayOtros = catalogoCompleto.some(a => bucketTipo(a.tipo) === 'otros');
-
+      // Mismas 3 pestañas que la app, siempre visibles (aunque alguna
+      // esté vacía), para que sea consistente con la pantalla de
+      // Vehículos de Sistema R21.
       const pestanasEl = document.getElementById('pestanasTipo');
-      const botones = [];
-      if (hayAutos) botones.push(['auto', '🚗 Autos']);
-      if (hayMotos) botones.push(['moto', '🏍️ Motos']);
-      if (hayOtros) botones.push(['otros', 'Otros']);
+      const botones = [
+        ['auto', '🚗 Autos'],
+        ['moto', '🏍️ Motos'],
+        ['otros', 'Otros'],
+      ];
+      pestanasEl.style.display = 'flex';
+      pestanasEl.innerHTML = botones.map(([tipo, label], i) =>
+        `<button class="pestana-btn ${i === 0 ? 'activo' : ''}" data-tipo="${tipo}" onclick="aplicarFiltroTipo('${tipo}')">${label}</button>`
+      ).join('');
 
-      let primeraTipo = 'auto';
-      if (botones.length > 1) {
-        pestanasEl.style.display = 'flex';
-        pestanasEl.innerHTML = botones.map(([tipo, label], i) =>
-          `<button class="pestana-btn ${i === 0 ? 'activo' : ''}" data-tipo="${tipo}" onclick="aplicarFiltroTipo('${tipo}')">${label}</button>`
-        ).join('');
-        primeraTipo = botones[0][0];
-      } else if (botones.length === 1) {
-        primeraTipo = botones[0][0];
-      }
-
-      aplicarFiltroTipo(primeraTipo);
+      aplicarFiltroTipo('auto');
     })
     .catch(err => {
       console.error('No se pudo cargar el catálogo:', err);
