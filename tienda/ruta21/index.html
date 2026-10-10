@@ -78,19 +78,72 @@
     font-size: 40px; display: block; margin-bottom: 14px;
   }
 
-  .filtro-tipo {
-    display: none; justify-content: center; gap: 10px;
-    margin-bottom: 26px;
+  .pestanas-tipo {
+    display: flex; justify-content: center; gap: 10px;
+    margin-bottom: 26px; flex-wrap: wrap;
   }
-  .filtro-tipo-btn {
+  .pestana-btn {
     background: #FFFFFF; border: 2px solid #E5E5E5; color: var(--text-muted);
     font-family: 'Inter', sans-serif; font-weight: 700; font-size: 14px;
     padding: 9px 20px; border-radius: 30px; cursor: pointer;
     transition: all .15s;
   }
-  .filtro-tipo-btn:hover { border-color: var(--green); }
-  .filtro-tipo-btn.activo {
+  .pestana-btn:hover { border-color: var(--green); }
+  .pestana-btn.activo {
     background: var(--green); border-color: var(--green); color: var(--white);
+  }
+
+  .destacado {
+    display: none;
+    background: linear-gradient(135deg, var(--black) 0%, #142019 100%);
+    border: 1px solid rgba(201,162,39,.4);
+    border-radius: 20px; overflow: hidden; margin-bottom: 30px;
+    box-shadow: 0 12px 30px rgba(0,0,0,.18);
+  }
+  .destacado-tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(201,162,39,.18); color: var(--gold-light);
+    font-size: 11.5px; font-weight: 800; letter-spacing: .5px;
+    text-transform: uppercase; padding: 7px 16px; margin: 16px 0 0 16px;
+    border-radius: 20px; border: 1px solid rgba(201,162,39,.4);
+  }
+  .destacado-body {
+    display: flex; align-items: stretch; gap: 0;
+  }
+  .destacado-foto {
+    flex: 1 1 42%; min-height: 230px; position: relative;
+    background: #1A1A1A; overflow: hidden;
+  }
+  .destacado-foto img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+  }
+  .destacado-info {
+    flex: 1 1 58%; padding: 20px 26px 26px; color: var(--white);
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .destacado-titulo {
+    font-size: 24px; font-weight: 900; letter-spacing: -0.4px;
+    margin-bottom: 10px;
+  }
+  .destacado-chips { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+  .destacado-chips .auto-chip {
+    background: rgba(255,255,255,.1); color: #D8DED9;
+  }
+  .destacado-precio-label {
+    font-size: 10.5px; color: #9AA59E; font-weight: 700;
+    text-transform: uppercase; letter-spacing: .5px; margin-bottom: 2px;
+  }
+  .destacado-precio {
+    font-size: 28px; font-weight: 900; color: var(--gold-light);
+    margin-bottom: 18px; letter-spacing: -0.3px;
+  }
+  .destacado-btn { max-width: 280px; }
+  @media (max-width: 680px) {
+    .destacado-body { flex-direction: column; }
+    .destacado-foto { min-height: 190px; }
+    .destacado-titulo { font-size: 19px; }
+    .destacado-precio { font-size: 22px; }
+    .destacado-btn { max-width: none; }
   }
 
   .grid {
@@ -227,7 +280,20 @@
 </header>
 
 <main>
-  <div id="filtroTipo" class="filtro-tipo" style="display:none;"></div>
+  <section class="destacado" id="destacado">
+    <div class="destacado-tag">⭐ Destacado de hoy</div>
+    <div class="destacado-body">
+      <div class="destacado-foto"><img id="destacadoFoto" src="" alt=""></div>
+      <div class="destacado-info">
+        <div class="destacado-titulo" id="destacadoTitulo"></div>
+        <div class="destacado-chips" id="destacadoChips"></div>
+        <div class="destacado-precio-label">Precio contado</div>
+        <div class="destacado-precio" id="destacadoPrecio"></div>
+        <a class="auto-btn destacado-btn" id="destacadoBtn" target="_blank">💬 Consultar por WhatsApp</a>
+      </div>
+    </div>
+  </section>
+  <div id="pestanasTipo" class="pestanas-tipo" style="display:none;"></div>
   <div id="contenido" class="estado-carga"><span class="icono">🚗</span>Cargando vehículos…</div>
 </main>
 
@@ -269,7 +335,38 @@
   }
 
   let catalogoCompleto = [];
-  let filtroTipoActivo = 'todos';
+  let filtroTipoActivo = 'auto';
+
+  // Mismas 3 pestañas que la pantalla de Vehículos de la app:
+  // Autos / Motos / Otros (lancha, moto de agua, camión y demás).
+  function bucketTipo(tipo) {
+    const t = (tipo || 'auto').toLowerCase();
+    if (t === 'moto') return 'moto';
+    if (t === 'auto' || t === '') return 'auto';
+    return 'otros';
+  }
+
+  function renderDestacado(lista) {
+    const sec = document.getElementById('destacado');
+    if (!lista || lista.length === 0) {
+      sec.style.display = 'none';
+      return;
+    }
+    const auto = lista[Math.floor(Math.random() * lista.length)];
+    const km = auto.km ? `${Number(auto.km).toLocaleString('es-AR')} km` : '';
+    const chips = [km, auto.combustible, auto.transmision].filter(Boolean);
+    const foto = (auto.fotos && auto.fotos.length) ? auto.fotos[0] : '';
+
+    document.getElementById('destacadoFoto').src = foto;
+    document.getElementById('destacadoFoto').alt = `${auto.marca} ${auto.modelo}`;
+    document.getElementById('destacadoTitulo').textContent =
+      `${auto.marca} ${auto.modelo} (${auto.anio})`;
+    document.getElementById('destacadoChips').innerHTML =
+      chips.map(c => `<span class="auto-chip">${c}</span>`).join('');
+    document.getElementById('destacadoPrecio').textContent = formatoPrecio(auto.precio);
+    document.getElementById('destacadoBtn').href = linkWhatsapp(auto);
+    sec.style.display = 'block';
+  }
 
   function renderAutos(lista) {
     const cont = document.getElementById('contenido');
@@ -356,12 +453,10 @@
 
   function aplicarFiltroTipo(tipo) {
     filtroTipoActivo = tipo;
-    document.querySelectorAll('.filtro-tipo-btn').forEach(btn => {
+    document.querySelectorAll('.pestana-btn').forEach(btn => {
       btn.classList.toggle('activo', btn.dataset.tipo === tipo);
     });
-    const filtrada = tipo === 'todos'
-      ? catalogoCompleto
-      : catalogoCompleto.filter(a => (a.tipo || 'auto') === tipo);
+    const filtrada = catalogoCompleto.filter(a => bucketTipo(a.tipo) === tipo);
     renderAutos(filtrada);
   }
 
@@ -371,20 +466,30 @@
       if (!data || data.ok !== true) throw new Error('Respuesta inválida');
       catalogoCompleto = data.data;
 
-      const hayAutos = catalogoCompleto.some(a => (a.tipo || 'auto') !== 'moto');
-      const hayMotos = catalogoCompleto.some(a => (a.tipo || 'auto') === 'moto');
+      renderDestacado(catalogoCompleto);
 
-      if (hayAutos && hayMotos) {
-        const filtroEl = document.getElementById('filtroTipo');
-        filtroEl.style.display = 'flex';
-        filtroEl.innerHTML = `
-          <button class="filtro-tipo-btn activo" data-tipo="todos" onclick="aplicarFiltroTipo('todos')">Todos</button>
-          <button class="filtro-tipo-btn" data-tipo="auto" onclick="aplicarFiltroTipo('auto')">🚗 Autos</button>
-          <button class="filtro-tipo-btn" data-tipo="moto" onclick="aplicarFiltroTipo('moto')">🏍️ Motos</button>
-        `;
+      const hayAutos = catalogoCompleto.some(a => bucketTipo(a.tipo) === 'auto');
+      const hayMotos = catalogoCompleto.some(a => bucketTipo(a.tipo) === 'moto');
+      const hayOtros = catalogoCompleto.some(a => bucketTipo(a.tipo) === 'otros');
+
+      const pestanasEl = document.getElementById('pestanasTipo');
+      const botones = [];
+      if (hayAutos) botones.push(['auto', '🚗 Autos']);
+      if (hayMotos) botones.push(['moto', '🏍️ Motos']);
+      if (hayOtros) botones.push(['otros', 'Otros']);
+
+      let primeraTipo = 'auto';
+      if (botones.length > 1) {
+        pestanasEl.style.display = 'flex';
+        pestanasEl.innerHTML = botones.map(([tipo, label], i) =>
+          `<button class="pestana-btn ${i === 0 ? 'activo' : ''}" data-tipo="${tipo}" onclick="aplicarFiltroTipo('${tipo}')">${label}</button>`
+        ).join('');
+        primeraTipo = botones[0][0];
+      } else if (botones.length === 1) {
+        primeraTipo = botones[0][0];
       }
 
-      aplicarFiltroTipo('todos');
+      aplicarFiltroTipo(primeraTipo);
     })
     .catch(err => {
       console.error('No se pudo cargar el catálogo:', err);
