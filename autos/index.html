@@ -1,0 +1,2189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>R21 Cars — Sistema de gestión para concesionarias de autos</title>
+<meta name="description" content="El sistema para concesionarias de autos. Vendé más, ordená tu agencia, automatizá tu WhatsApp. Autos, SUVs, pickups y utilitarios.">
+<link rel="canonical" href="https://getaxiora.com/autos/">
+<link rel="icon" type="image/png" href="logo.png">
+<meta name="theme-color" content="#1B5E3F">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://getaxiora.com/autos/">
+<meta property="og:site_name" content="R21 Cars">
+<meta property="og:title" content="R21 Cars — Sistema de gestión para concesionarias de autos">
+<meta property="og:description" content="Vendé más, ordená tu agencia, automatizá tu WhatsApp. Autos, SUVs, pickups y utilitarios en un solo sistema.">
+<meta property="og:image" content="https://getaxiora.com/autos/screenshots/ss-inicio.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="R21 Cars — Sistema de gestión para concesionarias de autos">
+<meta name="twitter:description" content="Vendé más, ordená tu agencia, automatizá tu WhatsApp.">
+<meta name="twitter:image" content="https://getaxiora.com/autos/screenshots/ss-inicio.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="logo.png" fetchpriority="high">
+
+<!-- ═══════════════════════════════════════════════════════════════
+     CONFIG — todo lo editable del rubro está acá arriba.
+     Para crear otra landing, copiás este archivo entero y cambiás
+     SOLO este bloque CONFIG.
+     ═══════════════════════════════════════════════════════════════ -->
+<script>
+const CONFIG = {
+  // ─── Identidad ───
+  rubro: 'autos',
+  marca: 'R21 Cars',
+  marcaCorta: 'R21',
+  sufijoMarca: 'Cars',
+  tagline: 'Vehicle Dealership Management System',
+
+  // ─── Paleta ───
+  colorPrimario: '#1B5E3F',   // verde original
+  colorAcento:   '#2E7D32',   // verde claro
+  colorOro:      '#D4AF37',   // dorado R21 (marca)
+  colorVerde:    '#25D366',   // whatsapp
+
+  // ─── Sustantivos del rubro ───
+  sustantivos: {
+    singular: 'auto',
+    plural: 'autos',
+    singularCap: 'Auto',
+    pluralCap: 'Autos',
+    icono: '🚗',
+    unidad: 'kilómetros',
+    unidadCorta: 'Km',
+  },
+
+  // ─── Hero ───
+  hero: {
+    titulo: 'R21 Cars',
+    tagline: 'Vehicle Dealership Management System',
+    parrafo: 'El sistema para concesionarias de autos. Vendé más, ordená tu agencia, automatizá tu WhatsApp.',
+    subtitulo: 'Autos, SUVs, pickups y utilitarios — todo en un solo sistema.',
+    ctaPrincipal: '🚀 Probar 14 días gratis',
+    ctaSecundario: 'Ver funciones',
+    trust: ['14 días gratis', 'Sin tarjeta', 'Cancelás cuando quieras', 'Celular + PC'],
+  },
+
+  // ─── Módulo add-on visible en esta landing ───
+  moduloAddOn: {
+    activo: true,
+    icono: '🚛',
+    nombre: 'Módulo Camiones',
+    descripcion: '¿También vendés camiones o utilitarios pesados? Sumá el módulo Camiones y todo funciona en el mismo sistema: mismas pantallas, mismo bot, misma caja.',
+    precioUsdBase: 9,
+    ctaTexto: 'Sumar módulo Camiones',
+  },
+
+  // ─── Demo bot (guión del chat animado) ───
+  demoBot: {
+    es: [
+      { de: 'in',  texto: 'Hola! ¿Tienen un Toyota Corolla?', hora: '14:02' },
+      { de: 'out', texto: 'Dame un toque, reviso el stock 🔍', hora: '14:02' },
+      { de: 'out', texto: '¡Mirá lo que encontré! 2 opciones que te pueden interesar 👇\n\n*Toyota Corolla XLI 2020*\n💲 $18.500.000', hora: '14:02' },
+      { de: 'in',  texto: 'Buenísimo! Y aparte, ¿les interesaría tomar mi auto como parte de pago?', hora: '14:03' },
+      { de: 'out', texto: '¡Genial! Querés vender tu auto 💰\n\n¿Cuál es tu *nombre*?', hora: '14:03' },
+      { de: 'in',  texto: 'Soy Martín. Fiat Cronos 2019, 45.000km 📷📷📷', hora: '14:05' },
+      { de: 'out', texto: 'Recibí los datos y las fotos ✅\n\nEn breve te contacto para coordinar la tasación.', hora: '14:05' },
+    ],
+    en: [
+      { de: 'in',  texto: 'Hi! Do you have a Toyota Corolla?', hora: '14:02' },
+      { de: 'out', texto: 'Give me a sec, checking stock 🔍', hora: '14:02' },
+      { de: 'out', texto: 'Look what I found! 2 options that might interest you 👇\n\n*Toyota Corolla XLI 2020*\n💲 $18,500,000', hora: '14:02' },
+      { de: 'in',  texto: 'Awesome! Also, would you take my car as part of the payment?', hora: '14:03' },
+      { de: 'out', texto: 'Great! You want to sell your car 💰\n\nWhat is your *name*?', hora: '14:03' },
+      { de: 'in',  texto: "I'm Martin. Fiat Cronos 2019, 45,000 km 📷📷📷", hora: '14:05' },
+      { de: 'out', texto: "I received the data and photos ✅\n\nI'll contact you shortly to coordinate the appraisal.", hora: '14:05' },
+    ],
+    pt: [
+      { de: 'in',  texto: 'Oi! Vocês têm um Toyota Corolla?', hora: '14:02' },
+      { de: 'out', texto: 'Me dá um segundo, vendo o estoque 🔍', hora: '14:02' },
+      { de: 'out', texto: 'Olha o que encontrei! 2 opções que podem te interessar 👇\n\n*Toyota Corolla XLI 2020*\n💲 $18.500.000', hora: '14:02' },
+      { de: 'in',  texto: 'Ótimo! Além disso, vocês aceitariam meu carro como parte do pagamento?', hora: '14:03' },
+      { de: 'out', texto: 'Ótimo! Você quer vender seu carro 💰\n\nQual é o seu *nome*?', hora: '14:03' },
+      { de: 'in',  texto: 'Sou o Martín. Fiat Cronos 2019, 45.000km 📷📷📷', hora: '14:05' },
+      { de: 'out', texto: 'Recebi os dados e as fotos ✅\n\nEm breve te contato para coordenar a avaliação.', hora: '14:05' },
+    ],
+  },
+
+  // ─── Precios (base, sin cambios) ───
+  precios: {
+    basico1u: 29,
+    basico3u: 69,
+    full3u:   89,
+    full7u:   149,
+    full15u:  249,
+    descuentos: { monthly: 0, q: 0.10, s: 0.15, y: 0.20 },
+  },
+};
+</script>
+
+<style>
+  :root {
+    --gold: #D4AF37;
+    --gold-soft: #E5C158;
+    --gold-deep: #B8941F;
+    --green: #1B5E3F;          /* primario — verde original */
+    --green-light: #2E7D32;
+    --green-bright: #25D366;   /* whatsapp */
+    --blue: #2E7D32;           /* acento — verde claro */
+    --blue-soft: #4CAF50;
+    --black: #0A0A0A;
+    --black-soft: #141414;
+    --gray-900: #111111;
+    --gray-700: #4B5563;
+    --gray-500: #6B7280;
+    --gray-300: #D1D5DB;
+    --gray-200: #E5E7EB;
+    --gray-100: #F5F5F5;
+    --gray-50: #FAFAFA;
+    --white: #FFFFFF;
+    --text-muted: #6B7280;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,.04);
+    --shadow-md: 0 4px 14px rgba(0,0,0,.06);
+    --shadow-lg: 0 12px 30px rgba(0,0,0,.10);
+    --shadow-xl: 0 24px 50px rgba(0,0,0,.14);
+    --radius-sm: 10px;
+    --radius-md: 14px;
+    --radius-lg: 20px;
+    --radius-xl: 28px;
+    --ease: cubic-bezier(.4,0,.2,1);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--white);
+    color: var(--gray-900);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  a { text-decoration: none; color: inherit; }
+  img { display: block; max-width: 100%; }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(255,255,255,.82);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid rgba(0,0,0,.06);
+    padding: 14px 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    transition: padding .3s var(--ease), background .3s var(--ease), box-shadow .3s var(--ease);
+  }
+  nav.compacto {
+    padding: 8px 24px;
+    background: rgba(255,255,255,.95);
+    box-shadow: 0 4px 20px rgba(0,0,0,.06);
+  }
+  .nav-logo {
+    font-weight: 900; font-size: 22px;
+    letter-spacing: 2px;
+    color: var(--gold);
+    transition: transform .3s var(--ease);
+  }
+  nav.compacto .nav-logo { transform: scale(.94); }
+  .nav-logo span { color: var(--green); }
+  .nav-logo .sufijo { color: var(--blue); font-size: 0.7em; margin-left: 6px; letter-spacing: 3px; }
+  .nav-links { display: flex; gap: 28px; }
+  .nav-links a {
+    font-size: 14px; font-weight: 700; color: var(--gray-900);
+    position: relative; padding: 6px 0;
+    transition: color .15s var(--ease);
+  }
+  .nav-links a:hover, .nav-links a.activo { color: var(--green); }
+  .nav-links a::after {
+    content: ''; position: absolute; left: 0; bottom: 0;
+    width: 0; height: 2px;
+    background: var(--gold);
+    border-radius: 2px;
+    transition: width .25s var(--ease);
+  }
+  .nav-links a:hover::after, .nav-links a.activo::after { width: 100%; }
+  .nav-right { display: flex; align-items: center; gap: 16px; }
+  .nav-cta {
+    padding: 10px 20px !important;
+    font-size: 13px !important;
+    border-radius: 11px !important;
+  }
+  .lang-switch { display: flex; gap: 6px; }
+  .lang-switch button {
+    background: transparent;
+    border: 1.5px solid transparent;
+    border-radius: 9px;
+    padding: 4px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all .2s var(--ease);
+    opacity: 0.45;
+    display: flex; align-items: center; justify-content: center;
+    width: 44px; height: 36px;
+  }
+  .lang-switch button:hover { opacity: 1; transform: translateY(-1px); }
+  .lang-switch button.active {
+    opacity: 1;
+    border-color: var(--green);
+    background: #E8F5E9;
+    box-shadow: 0 2px 8px rgba(27,94,63,.15);
+  }
+  .lang-switch img { width: 28px; height: 20px; object-fit: cover; border-radius: 3px; box-shadow: 0 1px 3px rgba(0,0,0,.15); }
+  .nav-burger {
+    display: none;
+    background: transparent; border: none;
+    width: 40px; height: 40px;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 9px;
+    transition: background .15s var(--ease);
+  }
+  .nav-burger:hover { background: rgba(0,0,0,.05); }
+  .nav-burger span {
+    display: block; width: 22px; height: 2px;
+    background: var(--gray-900); border-radius: 2px;
+    margin: 5px auto;
+    transition: transform .3s var(--ease), opacity .2s var(--ease);
+  }
+  .nav-burger.abierto span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-burger.abierto span:nth-child(2) { opacity: 0; }
+  .nav-burger.abierto span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .nav-burger { display: block; }
+    .nav-cta { display: none; }
+  }
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(10,10,10,.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 99;
+    opacity: 0;
+    transition: opacity .25s var(--ease);
+  }
+  .mobile-menu.abierto { display: block; opacity: 1; }
+  .mobile-menu-panel {
+    position: absolute;
+    top: 0; right: 0; bottom: 0;
+    width: 300px; max-width: 85vw;
+    background: var(--white);
+    padding: 80px 24px 32px;
+    transform: translateX(100%);
+    transition: transform .3s var(--ease);
+    overflow-y: auto;
+    box-shadow: -20px 0 50px rgba(0,0,0,.2);
+  }
+  .mobile-menu.abierto .mobile-menu-panel { transform: translateX(0); }
+  .mobile-menu-panel a {
+    display: block; padding: 14px 0;
+    font-size: 17px; font-weight: 700; color: var(--gray-900);
+    border-bottom: 1px solid var(--gray-200);
+    transition: color .15s var(--ease), padding-left .2s var(--ease);
+  }
+  .mobile-menu-panel a:hover { color: var(--green); padding-left: 6px; }
+  .mobile-menu-panel .btn { margin-top: 24px; width: 100%; justify-content: center; }
+  .mobile-lang { display: flex; gap: 10px; margin-top: 24px; justify-content: center; }
+
+  /* BOTONES */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    gap: 8px;
+    padding: 14px 28px;
+    border-radius: 13px;
+    font-weight: 800;
+    font-size: 15.5px;
+    cursor: pointer;
+    border: none;
+    font-family: inherit;
+    letter-spacing: .1px;
+    transition: transform .2s var(--ease), box-shadow .2s var(--ease);
+    position: relative; overflow: hidden;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--green) 0%, var(--green-light) 100%);
+    color: var(--white);
+    box-shadow: 0 6px 18px rgba(27,94,63,.28);
+  }
+  .btn-primary:hover { box-shadow: 0 12px 28px rgba(27,94,63,.35); }
+  .btn-secondary {
+    background: var(--white);
+    color: var(--gray-900);
+    border: 2px solid var(--gray-900);
+  }
+  .btn-secondary:hover { box-shadow: 0 10px 24px rgba(0,0,0,.12); }
+  .btn-whatsapp {
+    background: linear-gradient(135deg, var(--green-bright) 0%, #128C7E 100%);
+    color: var(--white);
+    box-shadow: 0 6px 18px rgba(37,211,102,.3);
+  }
+  .btn-whatsapp:hover { box-shadow: 0 12px 28px rgba(37,211,102,.4); }
+  .btn-email {
+    background: var(--white);
+    color: var(--gray-900);
+    border: 2px solid rgba(255,255,255,.3);
+  }
+  .btn-email:hover { box-shadow: 0 12px 28px rgba(0,0,0,.15); }
+  .btn-accent {
+    background: linear-gradient(135deg, var(--blue) 0%, #1B5E3F 100%);
+    color: var(--white);
+    box-shadow: 0 6px 18px rgba(46,125,50,.3);
+  }
+  .btn-accent:hover { box-shadow: 0 12px 28px rgba(46,125,50,.4); }
+
+  /* HERO */
+  .hero {
+    padding: 140px 24px 90px;
+    text-align: center;
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(212,175,55,.08), transparent 60%),
+      radial-gradient(ellipse at 50% 100%, rgba(27,94,63,.05), transparent 60%),
+      linear-gradient(180deg, #FAFAF8 0%, #FFFFFF 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute;
+    top: 0; left: 50%; transform: translateX(-50%);
+    width: 800px; height: 800px;
+    background: radial-gradient(circle, rgba(212,175,55,.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-logo {
+    width: 180px; height: 180px;
+    margin: 0 auto 24px;
+    display: block; object-fit: contain;
+    filter: drop-shadow(0 20px 40px rgba(0,0,0,.08));
+    animation: heroLogoIn .8s var(--ease);
+  }
+  @keyframes heroLogoIn {
+    from { opacity: 0; transform: translateY(10px) scale(.96); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  .hero h1 {
+    font-size: clamp(44px, 8vw, 76px);
+    font-weight: 900; letter-spacing: 6px;
+    color: var(--gold);
+    margin-bottom: 6px; line-height: 1;
+    position: relative;
+  }
+  .hero h1 span { color: var(--green); }
+  .hero h1 .sufijo { color: var(--blue); font-size: 0.62em; letter-spacing: 8px; display: block; margin-top: 8px; }
+  .hero .tagline {
+    font-size: 12px; letter-spacing: 5px;
+    font-weight: 700; color: var(--green);
+    text-transform: uppercase; margin-bottom: 32px;
+  }
+  .hero p.sub {
+    font-size: clamp(18px, 2.4vw, 22px);
+    color: var(--gray-900);
+    max-width: 640px; margin: 0 auto 12px;
+    font-weight: 500; line-height: 1.5;
+  }
+  .hero p.sub-2 {
+    font-size: clamp(15px, 1.8vw, 17px);
+    color: var(--text-muted);
+    max-width: 640px; margin: 0 auto 40px;
+    font-weight: 500; line-height: 1.55;
+  }
+  .cta-group {
+    display: flex; gap: 12px;
+    justify-content: center; flex-wrap: wrap;
+    margin-bottom: 26px;
+  }
+  .trust-row {
+    display: flex; gap: 22px;
+    justify-content: center; flex-wrap: wrap;
+    font-size: 13px; font-weight: 700; color: var(--text-muted);
+  }
+  .trust-row span { display: inline-flex; align-items: center; gap: 6px; }
+  .trust-row span::before {
+    content: ''; width: 16px; height: 16px;
+    background: var(--green); border-radius: 50%;
+    display: inline-block; flex-shrink: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+    background-size: 10px; background-position: center; background-repeat: no-repeat;
+  }
+
+  /* ANIMACIONES */
+  .fade-in {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity .7s var(--ease), transform .7s var(--ease);
+  }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  /* SECCIONES */
+  section { padding: 90px 24px; max-width: 1120px; margin: 0 auto; }
+  section.wide { max-width: 1320px; }
+  h2 {
+    font-size: clamp(30px, 4.2vw, 42px);
+    font-weight: 900; text-align: center;
+    margin-bottom: 14px; letter-spacing: -0.6px;
+    line-height: 1.15; color: var(--gray-900);
+  }
+  .section-sub {
+    text-align: center; color: var(--text-muted);
+    max-width: 620px; margin: 0 auto 56px;
+    font-size: 17px; line-height: 1.55;
+  }
+
+  /* MODULES */
+  .modules {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 1fr;
+    gap: 20px;
+  }
+  .module-card {
+    background: var(--gray-50);
+    border-radius: var(--radius-lg);
+    padding: 28px;
+    transition: transform .25s var(--ease), box-shadow .25s var(--ease), border-color .25s var(--ease);
+    border: 1px solid var(--gray-200);
+    display: flex; flex-direction: column;
+  }
+  .module-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+    border-color: rgba(27,94,63,.2);
+  }
+  .module-card.featured {
+    grid-column: span 2;
+    background: linear-gradient(135deg, var(--green) 0%, var(--green-light) 100%);
+    color: var(--white);
+    border: none;
+    box-shadow: 0 8px 24px rgba(27,94,63,.2);
+  }
+  .module-card.featured:hover { box-shadow: 0 20px 40px rgba(27,94,63,.32); }
+  .module-card.featured h3 { color: var(--white); }
+  .module-card.featured p { color: rgba(255,255,255,.9); }
+  .module-icon { font-size: 36px; margin-bottom: 16px; line-height: 1; }
+  .module-card h3 { font-size: 18px; font-weight: 800; margin-bottom: 10px; letter-spacing: -0.2px; }
+  .module-card p { color: var(--text-muted); font-size: 15px; flex-grow: 1; line-height: 1.55; }
+  .module-link {
+    display: inline-flex; align-items: center; gap: 4px;
+    margin-top: 14px; font-size: 14px; font-weight: 800;
+    color: var(--white);
+    text-decoration: underline;
+    text-decoration-color: var(--gold);
+    text-underline-offset: 3px;
+    transition: gap .2s var(--ease);
+  }
+  .module-link:hover { gap: 8px; }
+  .module-card:not(.featured) .module-link {
+    color: var(--green); text-decoration-color: var(--green);
+  }
+  @media (max-width: 900px) {
+    .modules { grid-template-columns: repeat(2, 1fr); }
+    .module-card.featured { grid-column: span 2; }
+  }
+  @media (max-width: 560px) {
+    .modules { grid-template-columns: 1fr; }
+    .module-card.featured { grid-column: span 1; }
+  }
+
+  /* FEATURES */
+  .feature-category { margin-bottom: 84px; }
+  .feature-category:last-child { margin-bottom: 0; }
+  .category-header {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 32px; padding-bottom: 16px;
+    border-bottom: 2px solid var(--gray-100);
+  }
+  .category-icon { font-size: 32px; line-height: 1; }
+  .category-header h3 { font-size: 24px; font-weight: 900; margin: 0; letter-spacing: -0.3px; }
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+  }
+  .feature-card {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: transform .3s var(--ease), box-shadow .3s var(--ease), border-color .3s var(--ease);
+    display: flex; flex-direction: column;
+  }
+  .feature-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+    border-color: rgba(27,94,63,.15);
+  }
+  .feature-img-wrap {
+    background: linear-gradient(180deg, var(--gray-100) 0%, var(--gray-50) 100%);
+    padding: 20px 20px 0;
+    display: flex; justify-content: center;
+    min-height: 300px;
+    overflow: hidden;
+  }
+  .mockup {
+    width: 200px; height: 280px;
+    background: var(--white);
+    border-radius: 24px 24px 0 0;
+    box-shadow: 0 12px 32px rgba(27,94,63,.18);
+    border: 6px solid var(--green);
+    border-bottom: none;
+    display: flex; flex-direction: column;
+    overflow: hidden;
+    transition: transform .4s var(--ease);
+  }
+  .feature-card:hover .mockup { transform: translateY(-10px); }
+  .mockup-bar {
+    height: 24px;
+    background: linear-gradient(135deg, var(--green) 0%, var(--green-light) 100%);
+    display: flex; align-items: center; padding: 0 10px;
+    gap: 3px;
+  }
+  .mockup-bar::before {
+    content: ''; width: 4px; height: 4px; border-radius: 50%;
+    background: rgba(255,255,255,.5); box-shadow: 8px 0 0 rgba(255,255,255,.5), 16px 0 0 rgba(255,255,255,.5);
+  }
+  .mockup-body {
+    flex-grow: 1;
+    padding: 14px 12px;
+    display: flex; flex-direction: column; gap: 8px;
+    background: linear-gradient(180deg, #FAFCFA 0%, #EDF5EE 100%);
+  }
+  .mockup-icono {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: rgba(46,125,50,.15);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    margin-bottom: 4px;
+  }
+  .mockup-line {
+    height: 6px; border-radius: 3px;
+    background: rgba(27,94,63,.10);
+  }
+  .mockup-line.corto { width: 40%; }
+  .mockup-line.medio { width: 70%; }
+  .mockup-line.largo { width: 90%; }
+  .mockup-line.acento { background: rgba(46,125,50,.35); }
+  .mockup-cards {
+    margin-top: auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 6px;
+  }
+  .mockup-card {
+    height: 40px; border-radius: 6px;
+    background: rgba(27,94,63,.08);
+  }
+  .feature-info {
+    padding: 22px 24px 26px;
+    flex-grow: 1;
+    display: flex; flex-direction: column;
+  }
+  .feature-info h4 { font-size: 17px; font-weight: 800; margin-bottom: 10px; letter-spacing: -0.2px; }
+  .feature-info p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+
+  /* DEMO BOT */
+  .demo-wrap {
+    display: flex; justify-content: center; align-items: center;
+    gap: 56px; flex-wrap: wrap;
+  }
+  .phone-mockup {
+    width: 320px; height: 600px;
+    background: #0B141A;
+    border-radius: 40px;
+    padding: 10px;
+    box-shadow: 0 30px 60px rgba(0,0,0,.25), 0 0 0 8px #1A1A1A, 0 0 0 9px #2A2A2A;
+    display: flex; flex-direction: column;
+    overflow: hidden; flex-shrink: 0;
+    position: relative;
+  }
+  .wa-header {
+    background: linear-gradient(135deg, #075E54 0%, #128C7E 100%);
+    border-radius: 30px 30px 0 0;
+    padding: 18px 16px 14px;
+    display: flex; align-items: center; gap: 12px;
+    flex-shrink: 0;
+  }
+  .wa-avatar {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: var(--gold); color: var(--black);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900; font-size: 11px; flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,.2);
+  }
+  .wa-header-info { display: flex; flex-direction: column; }
+  .wa-name { color: var(--white); font-weight: 700; font-size: 15px; }
+  .wa-status {
+    color: #D4EAE6; font-size: 12px;
+    display: flex; align-items: center; gap: 4px;
+  }
+  .wa-status::before {
+    content: ''; width: 6px; height: 6px; border-radius: 50%;
+    background: #25D366; box-shadow: 0 0 8px #25D366;
+    animation: pulseOnline 2s infinite;
+  }
+  @keyframes pulseOnline { 0%,100%{opacity:1;} 50%{opacity:.5;} }
+  .wa-chat {
+    flex-grow: 1;
+    background:
+      linear-gradient(180deg, rgba(229,221,213,.97) 0%, rgba(229,221,213,.97) 100%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cg fill='%23d5cbc2' fill-opacity='0.35'%3E%3Ccircle cx='4' cy='4' r='1'/%3E%3Ccircle cx='20' cy='12' r='1'/%3E%3Ccircle cx='36' cy='4' r='1'/%3E%3Ccircle cx='12' cy='24' r='1'/%3E%3Ccircle cx='28' cy='32' r='1'/%3E%3Ccircle cx='8' cy='36' r='1'/%3E%3C/g%3E%3C/svg%3E");
+    border-radius: 0 0 30px 30px;
+    padding: 16px 12px;
+    overflow-y: auto;
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .wa-chat::-webkit-scrollbar { width: 3px; }
+  .wa-chat::-webkit-scrollbar-thumb { background: rgba(0,0,0,.15); border-radius: 3px; }
+  .wa-bubble {
+    max-width: 82%; padding: 9px 12px 7px;
+    border-radius: 10px; font-size: 13.5px; line-height: 1.4;
+    position: relative; box-shadow: 0 1px 2px rgba(0,0,0,.1);
+    animation: bubbleIn .3s var(--ease);
+  }
+  @keyframes bubbleIn {
+    from { opacity: 0; transform: translateY(8px) scale(.97); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  .wa-bubble.in {
+    background: #FFFFFF; align-self: flex-start;
+    border-top-left-radius: 3px;
+  }
+  .wa-bubble.out {
+    background: #DCF8C6; align-self: flex-end;
+    border-top-right-radius: 3px;
+  }
+  .wa-time {
+    display: block; text-align: right;
+    font-size: 10.5px; color: #8696a0; margin-top: 3px;
+  }
+  .wa-bubble.out .wa-time::after { content: ' ✓✓'; color: #53bdeb; font-weight: 900; }
+  .wa-typing { align-self: flex-start; background: #FFFFFF; }
+  .wa-typing .dots { display: flex; gap: 4px; padding: 4px 2px; }
+  .wa-typing .dots span {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: #9AA5A0;
+    animation: typingBounce 1.1s infinite ease-in-out;
+  }
+  .wa-typing .dots span:nth-child(2) { animation-delay: .15s; }
+  .wa-typing .dots span:nth-child(3) { animation-delay: .3s; }
+  @keyframes typingBounce {
+    0%,60%,100% { transform: translateY(0); opacity: .5; }
+    30% { transform: translateY(-4px); opacity: 1; }
+  }
+  .demo-caption { max-width: 300px; }
+  .demo-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: #E8F5E9; color: var(--green);
+    font-weight: 800; font-size: 12px;
+    letter-spacing: 1.2px; text-transform: uppercase;
+    padding: 6px 14px; border-radius: 100px; margin-bottom: 18px;
+  }
+  .demo-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--green);
+    animation: typingBounce 1.4s infinite;
+  }
+  .demo-caption p { color: var(--text-muted); font-size: 15.5px; line-height: 1.65; }
+  @media (max-width: 760px) {
+    .demo-wrap { flex-direction: column; gap: 32px; }
+    .phone-mockup { width: 290px; height: 540px; }
+  }
+
+  /* ADD-ON (módulo sumable) */
+  .addon-section { padding: 90px 24px; max-width: 1120px; margin: 0 auto; }
+  .addon-card {
+    background: linear-gradient(135deg, #F1F8F3 0%, #E8F5E9 100%);
+    border-radius: var(--radius-xl);
+    padding: 48px 40px;
+    border: 1px solid rgba(27,94,63,.10);
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 32px;
+  }
+  .addon-icon {
+    font-size: 64px; line-height: 1;
+    width: 96px; height: 96px;
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 8px 24px rgba(27,94,63,.10);
+    flex-shrink: 0;
+  }
+  .addon-content h3 {
+    font-size: 26px; font-weight: 900;
+    color: var(--green); margin-bottom: 8px;
+    letter-spacing: -0.4px;
+  }
+  .addon-content p {
+    font-size: 16px; color: var(--gray-700);
+    line-height: 1.55; margin-bottom: 6px;
+  }
+  .addon-precio {
+    font-size: 14px; font-weight: 800;
+    color: var(--blue);
+    letter-spacing: -0.2px;
+  }
+  .addon-precio strong { font-size: 20px; }
+  .addon-cta { flex-shrink: 0; }
+  @media (max-width: 760px) {
+    .addon-card {
+      grid-template-columns: 1fr;
+      padding: 32px 22px;
+      text-align: center;
+      gap: 20px;
+    }
+    .addon-icon { margin: 0 auto; }
+    .addon-content h3 { font-size: 22px; }
+    .addon-content p { font-size: 15px; }
+  }
+
+  /* COMPARATIVA */
+  .compare-section {
+    background: var(--gray-50);
+    max-width: 100%;
+    padding: 90px 24px;
+  }
+  .compare-inner { max-width: 1000px; margin: 0 auto; }
+  .compare-table {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--gray-200);
+  }
+  .compare-row {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr 1fr;
+    align-items: center;
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--gray-200);
+    transition: background .2s var(--ease);
+  }
+  .compare-row:last-child { border-bottom: none; }
+  .compare-row:not(.compare-head):hover { background: var(--gray-50); }
+  .compare-row.compare-head {
+    background: linear-gradient(135deg, var(--black) 0%, var(--black-soft) 100%);
+    color: var(--white); padding: 22px 24px;
+    font-weight: 900; font-size: 15px; letter-spacing: .5px;
+    border-bottom: none;
+  }
+  .compare-row.compare-head .col-r21 { color: var(--gold); }
+  .compare-row .col { text-align: center; font-size: 15px; font-weight: 600; }
+  .compare-row .col:first-child {
+    text-align: left; color: var(--gray-700);
+    font-weight: 700; font-size: 14.5px;
+  }
+  .compare-row .col-r21 {
+    color: var(--green); font-weight: 800;
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+  }
+  .compare-row .col-otros {
+    color: var(--gray-500);
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+  }
+  .check-icon {
+    display: inline-block; width: 20px; height: 20px;
+    border-radius: 50%; background: var(--green); flex-shrink: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+    background-size: 12px; background-position: center; background-repeat: no-repeat;
+  }
+  .cross-icon {
+    display: inline-block; width: 20px; height: 20px;
+    border-radius: 50%; background: #E5E7EB; flex-shrink: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236B7280' stroke-width='3' stroke-linecap='round'%3E%3Cline x1='18' y1='6' x2='6' y2='18'/%3E%3Cline x1='6' y1='6' x2='18' y2='18'/%3E%3C/svg%3E");
+    background-size: 12px; background-position: center; background-repeat: no-repeat;
+  }
+  @media (max-width: 640px) {
+    .compare-row { grid-template-columns: 1.2fr 1fr 1fr; padding: 14px 16px; font-size: 13px; }
+    .compare-row .col:first-child { font-size: 13px; }
+    .compare-row .col { font-size: 13px; }
+    .check-icon, .cross-icon { width: 16px; height: 16px; }
+  }
+
+  /* PRICING */
+  .pricing-section { padding: 90px 24px; max-width: 1120px; margin: 0 auto; }
+  .period-switch {
+    display: flex; justify-content: center; gap: 8px;
+    margin-bottom: 44px; flex-wrap: wrap;
+    padding: 6px; background: var(--gray-50);
+    border-radius: 16px; border: 1px solid var(--gray-200);
+    max-width: 720px; margin-left: auto; margin-right: auto;
+  }
+  .period-btn {
+    background: transparent; border: none;
+    border-radius: 11px; padding: 11px 22px;
+    cursor: pointer; font-family: inherit;
+    font-weight: 700; font-size: 15px;
+    color: var(--gray-700);
+    display: inline-flex; align-items: center; gap: 8px;
+    transition: all .2s var(--ease);
+  }
+  .period-btn:hover { color: var(--green); }
+  .period-btn.active {
+    background: var(--white); color: var(--green);
+    box-shadow: 0 2px 10px rgba(0,0,0,.08);
+  }
+  .period-badge {
+    background: var(--gold); color: var(--black);
+    font-size: 11px; font-weight: 900;
+    letter-spacing: 0.5px; padding: 3px 9px;
+    border-radius: 100px;
+  }
+  .pricing {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px; align-items: stretch;
+  }
+  .price-card {
+    background: var(--white);
+    border: 1.5px solid var(--gray-200);
+    border-radius: var(--radius-lg);
+    padding: 30px 24px; text-align: center;
+    position: relative;
+    transition: transform .25s var(--ease), box-shadow .25s var(--ease), border-color .25s var(--ease);
+    display: flex; flex-direction: column;
+  }
+  .price-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+    border-color: rgba(27,94,63,.2);
+  }
+  .price-card.featured {
+    border: 2px solid var(--gold);
+    background: linear-gradient(180deg, #FFFEF8 0%, #FFFFFF 100%);
+    box-shadow: 0 12px 32px rgba(212,175,55,.15);
+    transform: scale(1.02);
+  }
+  .price-card.featured:hover { transform: scale(1.02) translateY(-6px); }
+  .price-card.featured::before {
+    content: 'POPULAR';
+    position: absolute; top: -14px; left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-deep) 100%);
+    color: var(--black);
+    font-size: 11px; font-weight: 900; letter-spacing: 2.5px;
+    padding: 6px 18px; border-radius: 100px;
+    box-shadow: 0 4px 12px rgba(212,175,55,.4);
+  }
+  .price-badge {
+    display: inline-block; font-size: 11px; font-weight: 800;
+    letter-spacing: 1.5px; padding: 4px 12px;
+    border-radius: 100px; margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+  .badge-basic { background: #E8F5E9; color: var(--green); }
+  .badge-full {
+    background: linear-gradient(135deg, #FFF8E1 0%, #FFEFB8 100%);
+    color: #8B6F00;
+  }
+  .price-card h3 { font-size: 18px; font-weight: 800; margin-bottom: 6px; letter-spacing: -0.2px; }
+  .price-users { font-size: 13px; color: var(--text-muted); font-weight: 600; margin-bottom: 18px; }
+  .price-total-main { margin-bottom: 4px; }
+  .upfront-note {
+    display: none; margin-top: 10px; padding-top: 10px;
+    border-top: 1px dashed var(--gray-200);
+    font-size: 12px; color: var(--text-muted); font-weight: 600;
+  }
+  .upfront-amount { color: var(--gray-900); font-weight: 800; }
+  .upfront-ars { font-size: 11px; }
+  .total-label {
+    display: block; font-size: 11px; color: var(--text-muted);
+    text-transform: uppercase; letter-spacing: 1.4px;
+    font-weight: 800; margin-bottom: 6px;
+  }
+  .total-amount {
+    display: block; font-size: 38px; font-weight: 900;
+    color: var(--green); line-height: 1;
+    letter-spacing: -1px; font-variant-numeric: tabular-nums;
+  }
+  .total-ars {
+    display: block; font-size: 13px; color: var(--text-muted);
+    font-weight: 500; margin-top: 6px; min-height: 16px;
+  }
+  .price-per-user {
+    background: var(--gray-50); border-radius: 11px;
+    padding: 10px 14px; font-size: 13px; font-weight: 600;
+    color: var(--text-muted); margin: 16px 0 22px;
+    display: flex; justify-content: center; gap: 6px; flex-wrap: wrap;
+  }
+  .per-user-amount { color: var(--gray-900); font-weight: 800; }
+  .per-user-ars {
+    display: block; width: 100%; text-align: center;
+    font-size: 11px; color: var(--text-muted);
+    font-weight: 500; margin-top: 2px;
+  }
+  .price-features {
+    list-style: none; text-align: left;
+    margin-bottom: 24px; flex-grow: 1;
+  }
+  .price-features li {
+    padding: 6px 0; font-size: 14px; color: var(--gray-900);
+    display: flex; align-items: flex-start; gap: 8px;
+  }
+  .price-features li::before {
+    content: ''; width: 16px; height: 16px;
+    border-radius: 50%; background: var(--green); flex-shrink: 0;
+    margin-top: 3px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+    background-size: 10px; background-position: center; background-repeat: no-repeat;
+  }
+  .price-card .btn {
+    width: 100%; justify-content: center;
+    padding: 13px 18px; font-size: 15px;
+  }
+  .founder-box {
+    background: linear-gradient(135deg, var(--black) 0%, var(--black-soft) 100%);
+    color: var(--white); border-radius: var(--radius-lg);
+    padding: 36px 32px; text-align: center;
+    margin-top: 40px; border: 1px solid rgba(212,175,55,.2);
+    position: relative; overflow: hidden;
+  }
+  .founder-box::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(212,175,55,.1), transparent 60%);
+    pointer-events: none;
+  }
+  .founder-box strong {
+    color: var(--gold); font-size: 24px;
+    display: block; margin-bottom: 10px;
+    font-weight: 900; letter-spacing: -0.3px;
+    position: relative;
+  }
+  .founder-box p {
+    font-size: 16px; color: rgba(255,255,255,.85);
+    position: relative; line-height: 1.6;
+  }
+
+  /* DISCOUNTS */
+  .discounts-section {
+    background: var(--gray-50);
+    max-width: 100%;
+    padding: 90px 24px;
+  }
+  .discounts-inner { max-width: 1120px; margin: 0 auto; }
+  .discount-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 18px; margin-bottom: 56px;
+  }
+  .discount-card {
+    background: var(--white);
+    border-radius: var(--radius-md);
+    padding: 28px 22px; text-align: center;
+    border: 1.5px solid var(--gray-200);
+    transition: transform .2s var(--ease), box-shadow .2s var(--ease), border-color .2s var(--ease);
+  }
+  .discount-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+  .discount-card.highlight {
+    border-color: var(--gold);
+    background: linear-gradient(180deg, #FFFEF8 0%, #FFFFFF 100%);
+    box-shadow: 0 8px 24px rgba(212,175,55,.12);
+  }
+  .discount-pct {
+    font-size: 44px; font-weight: 900;
+    color: var(--green); line-height: 1;
+    margin-bottom: 8px; letter-spacing: -2px;
+  }
+  .discount-months { font-size: 16px; font-weight: 800; margin-bottom: 4px; letter-spacing: -0.2px; }
+  .discount-desc { font-size: 13px; color: var(--text-muted); font-weight: 500; }
+  .table-wrapper {
+    overflow-x: auto;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--gray-200);
+    background: var(--white);
+    box-shadow: var(--shadow-sm);
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 720px; }
+  thead {
+    background: linear-gradient(135deg, var(--black) 0%, var(--black-soft) 100%);
+    color: var(--white);
+  }
+  th {
+    padding: 16px 12px; text-align: center;
+    font-weight: 800; font-size: 13px; letter-spacing: 0.6px;
+  }
+  th:first-child, td:first-child { text-align: left; padding-left: 24px; }
+  td {
+    padding: 16px 12px; text-align: center;
+    border-bottom: 1px solid var(--gray-100);
+    font-weight: 600;
+  }
+  tbody tr { transition: background .15s var(--ease); }
+  tbody tr:hover { background: var(--gray-50); }
+  tbody tr:last-child td { border-bottom: none; }
+  .table-plan-name { font-weight: 800; color: var(--gray-900); }
+  .table-plan-badge {
+    display: inline-block; font-size: 10px;
+    font-weight: 900; padding: 3px 9px;
+    border-radius: 100px; margin-left: 8px;
+    text-transform: uppercase; vertical-align: middle;
+    letter-spacing: .5px;
+  }
+  .table-price { font-weight: 800; color: var(--green); font-variant-numeric: tabular-nums; }
+  .table-note {
+    font-size: 12.5px; color: var(--text-muted);
+    text-align: center; margin-top: 20px; font-weight: 500;
+  }
+
+  /* PAYMENTS */
+  .payments-section {
+    background: var(--gray-50);
+    max-width: 100%;
+    padding: 90px 24px;
+  }
+  .payments-inner { max-width: 1120px; margin: 0 auto; }
+  .payment-highlight {
+    background: linear-gradient(135deg, var(--black) 0%, var(--black-soft) 100%);
+    color: var(--white); border-radius: var(--radius-lg);
+    padding: 40px 32px; text-align: center;
+    margin-bottom: 32px; border: 1px solid rgba(212,175,55,.2);
+    position: relative; overflow: hidden;
+  }
+  .payment-highlight::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(212,175,55,.08), transparent 60%);
+    pointer-events: none;
+  }
+  .payment-highlight h3 {
+    color: var(--gold); font-size: 26px;
+    font-weight: 900; margin-bottom: 12px;
+    position: relative; letter-spacing: -0.3px;
+  }
+  .payment-highlight p {
+    font-size: 16px; color: rgba(255,255,255,.85);
+    max-width: 620px; margin: 0 auto;
+    line-height: 1.6; position: relative;
+  }
+  .payment-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px; margin-bottom: 32px;
+  }
+  .payment-card {
+    background: var(--white);
+    border-radius: var(--radius-md);
+    padding: 28px 22px; text-align: center;
+    border: 1.5px solid var(--gray-200);
+    transition: transform .2s var(--ease), border-color .2s var(--ease), box-shadow .2s var(--ease);
+  }
+  .payment-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--gold);
+    box-shadow: 0 12px 28px rgba(212,175,55,.15);
+  }
+  .payment-icon {
+    font-size: 44px; margin-bottom: 14px;
+    line-height: 1; display: inline-block;
+  }
+  .payment-card h4 { font-size: 17px; font-weight: 800; margin-bottom: 10px; letter-spacing: -0.2px; }
+  .payment-card p { font-size: 14px; color: var(--text-muted); line-height: 1.5; }
+  .payment-note {
+    text-align: center; font-size: 14px;
+    color: var(--text-muted); max-width: 720px;
+    margin: 0 auto; line-height: 1.6;
+  }
+
+  /* STEPS */
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 28px;
+  }
+  .step { text-align: center; position: relative; }
+  .step-num {
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--green) 0%, var(--green-light) 100%);
+    color: var(--white);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px; font-weight: 900;
+    margin: 0 auto 18px;
+    box-shadow: 0 8px 20px rgba(27,94,63,.28);
+    position: relative;
+  }
+  .step-num::after {
+    content: ''; position: absolute; inset: -6px;
+    border-radius: 50%; border: 2px solid rgba(27,94,63,.15);
+  }
+  .step h3 { font-size: 18px; font-weight: 800; margin-bottom: 10px; letter-spacing: -0.2px; }
+  .step p { color: var(--text-muted); font-size: 15px; line-height: 1.55; }
+
+  /* CONTACT */
+  .contact {
+    background: linear-gradient(135deg, var(--black) 0%, var(--black-soft) 100%);
+    color: var(--white); text-align: center;
+    max-width: 100%; position: relative; overflow: hidden;
+  }
+  .contact::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(212,175,55,.1), transparent 60%);
+    pointer-events: none;
+  }
+  .contact-inner { max-width: 720px; margin: 0 auto; position: relative; }
+  .contact h2 { color: var(--white); }
+  .contact .section-sub { color: rgba(255,255,255,.7); }
+  .contact-buttons {
+    display: flex; gap: 12px;
+    justify-content: center; flex-wrap: wrap;
+  }
+
+  /* FAQ */
+  .faq-list {
+    max-width: 760px; margin: 0 auto;
+    display: flex; flex-direction: column; gap: 14px;
+  }
+  .faq-item {
+    background: var(--white);
+    border-radius: var(--radius-md);
+    border: 1.5px solid var(--gray-200);
+    padding: 4px 24px;
+    transition: border-color .2s var(--ease), box-shadow .2s var(--ease);
+  }
+  .faq-item[open] {
+    border-color: rgba(27,94,63,.3);
+    box-shadow: 0 8px 20px rgba(27,94,63,.08);
+  }
+  .faq-item summary {
+    cursor: pointer; font-weight: 800;
+    font-size: 16px; padding: 20px 0;
+    list-style: none;
+    display: flex; align-items: center; justify-content: space-between;
+    letter-spacing: -0.2px;
+    transition: color .15s var(--ease);
+  }
+  .faq-item summary:hover { color: var(--green); }
+  .faq-item summary::after {
+    content: ''; width: 28px; height: 28px;
+    border-radius: 50%; background: var(--gray-100);
+    flex-shrink: 0; margin-left: 12px;
+    transition: transform .25s var(--ease), background .25s var(--ease);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231B5E3F' stroke-width='3' stroke-linecap='round'%3E%3Cline x1='12' y1='5' x2='12' y2='19'/%3E%3Cline x1='5' y1='12' x2='19' y2='12'/%3E%3C/svg%3E");
+    background-size: 14px; background-position: center; background-repeat: no-repeat;
+  }
+  .faq-item[open] summary::after {
+    transform: rotate(45deg);
+    background: var(--green);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round'%3E%3Cline x1='12' y1='5' x2='12' y2='19'/%3E%3Cline x1='5' y1='12' x2='19' y2='12'/%3E%3C/svg%3E");
+    background-size: 14px; background-position: center; background-repeat: no-repeat;
+  }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item p {
+    color: var(--text-muted); font-size: 15px;
+    padding-bottom: 20px; line-height: 1.65;
+  }
+
+  /* FOOTER */
+  footer {
+    background: #050505; color: #888;
+    text-align: center;
+    padding: 56px 24px 32px;
+    font-size: 14px;
+    border-top: 1px solid rgba(212,175,55,.1);
+  }
+  footer a { color: var(--gold); transition: color .2s var(--ease); }
+  footer a:hover { color: var(--gold-soft); }
+  .footer-inner { max-width: 700px; margin: 0 auto; }
+  .footer-brand {
+    font-weight: 900; font-size: 26px;
+    letter-spacing: 3px; color: var(--gold);
+    margin-bottom: 14px;
+  }
+  .footer-brand span { color: var(--green); }
+  .footer-brand .sufijo { color: var(--blue-soft); font-size: 0.6em; margin-left: 6px; letter-spacing: 4px; }
+  .footer-tagline {
+    font-size: 14px; margin-bottom: 24px;
+    color: rgba(255,255,255,.5);
+  }
+  .footer-links {
+    display: flex; gap: 24px;
+    justify-content: center; flex-wrap: wrap;
+    margin-bottom: 28px;
+  }
+  .footer-links a {
+    color: #CCC; font-weight: 600; font-size: 13px;
+    transition: color .2s var(--ease);
+  }
+  .footer-links a:hover { color: var(--gold); }
+  .footer-copy {
+    font-size: 13px; color: #666;
+    border-top: 1px solid #1A1A1A;
+    padding-top: 24px;
+  }
+
+  /* WHATSAPP FLOAT */
+  .wa-float {
+    position: fixed;
+    bottom: 24px; right: 24px;
+    z-index: 90;
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+    color: var(--white);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 10px 30px rgba(37,211,102,.4), 0 4px 12px rgba(0,0,0,.15);
+    transition: transform .25s var(--ease), box-shadow .25s var(--ease);
+    cursor: pointer; border: none;
+  }
+  .wa-float:hover {
+    transform: scale(1.08) translateY(-2px);
+    box-shadow: 0 16px 40px rgba(37,211,102,.5), 0 6px 16px rgba(0,0,0,.2);
+  }
+  .wa-float svg { width: 30px; height: 30px; }
+  .wa-float::before {
+    content: ''; position: absolute; inset: -4px;
+    border-radius: 50%; background: rgba(37,211,102,.3);
+    animation: waPulse 2s infinite; z-index: -1;
+  }
+  @keyframes waPulse {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(1.4); opacity: 0; }
+  }
+  @media (max-width: 480px) {
+    .wa-float { bottom: 16px; right: 16px; width: 54px; height: 54px; }
+    .wa-float svg { width: 26px; height: 26px; }
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 640px) {
+    .hero { padding: 100px 20px 60px; }
+    .hero-logo { width: 140px; height: 140px; }
+    section { padding: 64px 20px; }
+    .btn { padding: 12px 24px; font-size: 15px; }
+    .cta-group { flex-direction: column; align-items: center; }
+    .cta-group .btn { width: 100%; max-width: 340px; }
+    .pricing { grid-template-columns: 1fr; }
+    .price-card.featured { transform: none; }
+    .price-card.featured:hover { transform: translateY(-6px); }
+    .discount-pct { font-size: 36px; }
+    .feature-grid { grid-template-columns: 1fr; }
+    .feature-img-wrap { min-height: 260px; }
+    .period-btn { padding: 9px 14px; font-size: 13.5px; }
+    .period-switch { gap: 4px; padding: 4px; }
+    .category-header h3 { font-size: 20px; }
+    .category-icon { font-size: 26px; }
+    .compare-row { font-size: 12px; }
+    .compare-row.compare-head { font-size: 13px; padding: 16px; }
+    .founder-box { padding: 28px 22px; }
+    .founder-box strong { font-size: 20px; }
+    .payment-highlight { padding: 28px 22px; }
+    .payment-highlight h3 { font-size: 22px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="siteNav">
+  <a href="#" class="nav-logo">R<span>21</span><span class="sufijo">CARS</span></a>
+  <div class="nav-links">
+    <a href="#demo" data-es="Demo" data-en="Demo" data-pt="Demo">Demo</a>
+    <a href="#funciones" data-es="Funciones" data-en="Features" data-pt="Recursos">Funciones</a>
+    <a href="#planes" data-es="Planes" data-en="Pricing" data-pt="Planos">Planes</a>
+    <a href="#faq" data-es="Preguntas" data-en="FAQ" data-pt="Perguntas">Preguntas</a>
+  </div>
+  <div class="nav-right">
+    <div class="lang-switch">
+      <button id="btn-es" class="active" onclick="setLang('es')" title="Español"><img src="https://flagcdn.com/w40/ar.png" alt="AR"></button>
+      <button id="btn-en" onclick="setLang('en')" title="English"><img src="https://flagcdn.com/w40/us.png" alt="US"></button>
+      <button id="btn-pt" onclick="setLang('pt')" title="Português"><img src="https://flagcdn.com/w40/br.png" alt="BR"></button>
+    </div>
+    <a href="https://wa.me/5493415040667?text=Hola%2C%20quiero%20probar%20R21%20Cars%2014%20d%C3%ADas%20gratis" target="_blank" class="nav-cta btn btn-primary" data-es="Probar gratis" data-en="Try free" data-pt="Testar grátis">Probar gratis</a>
+    <button class="nav-burger" id="navBurger" aria-label="Menú"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu" onclick="cerrarMenuSiFondo(event)">
+  <div class="mobile-menu-panel" onclick="event.stopPropagation()">
+    <a href="#demo" onclick="cerrarMenu()" data-es="Demo" data-en="Demo" data-pt="Demo">Demo</a>
+    <a href="#funciones" onclick="cerrarMenu()" data-es="Funciones" data-en="Features" data-pt="Recursos">Funciones</a>
+    <a href="#planes" onclick="cerrarMenu()" data-es="Planes" data-en="Pricing" data-pt="Planos">Planes</a>
+    <a href="#faq" onclick="cerrarMenu()" data-es="Preguntas" data-en="FAQ" data-pt="Perguntas">Preguntas</a>
+    <a href="https://wa.me/5493415040667?text=Hola%2C%20quiero%20probar%20R21%20Cars%2014%20d%C3%ADas%20gratis" target="_blank" class="btn btn-primary" data-es="🚀 Probar 14 días gratis" data-en="🚀 Try 14 days free" data-pt="🚀 Teste 14 dias grátis">🚀 Probar 14 días gratis</a>
+    <div class="mobile-lang">
+      <div class="lang-switch">
+        <button id="btn-es-mob" class="active" onclick="setLang('es')" title="Español"><img src="https://flagcdn.com/w40/ar.png" alt="AR"></button>
+        <button id="btn-en-mob" onclick="setLang('en')" title="English"><img src="https://flagcdn.com/w40/us.png" alt="US"></button>
+        <button id="btn-pt-mob" onclick="setLang('pt')" title="Português"><img src="https://flagcdn.com/w40/br.png" alt="BR"></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <img src="logo.png" alt="R21 Cars" class="hero-logo" onerror="this.style.display='none'">
+  <h1>R<span>21</span><span class="sufijo">CARS</span></h1>
+  <div class="tagline" data-es="Vehicle Dealership Management System" data-en="Vehicle Dealership Management System" data-pt="Sistema de gestão para lojas de veículos">Vehicle Dealership Management System</div>
+  <p class="sub" data-es="El sistema para concesionarias de autos. Vendé más, ordená tu agencia, automatizá tu WhatsApp." data-en="The system for car dealerships. Sell more, organize your dealership, automate your WhatsApp." data-pt="O sistema para lojas de carros. Venda mais, organize sua loja, automatize seu WhatsApp.">El sistema para concesionarias de autos. Vendé más, ordená tu agencia, automatizá tu WhatsApp.</p>
+  <p class="sub-2" data-es="Autos, SUVs, pickups y utilitarios — todo en un solo sistema." data-en="Cars, SUVs, pickups and utility vehicles — all in one system." data-pt="Carros, SUVs, picapes e utilitários — tudo em um só sistema.">Autos, SUVs, pickups y utilitarios — todo en un solo sistema.</p>
+  <div class="cta-group">
+    <a href="https://wa.me/5493415040667?text=Hola%2C%20quiero%20probar%20R21%20Cars%2014%20d%C3%ADas%20gratis" target="_blank" class="btn btn-primary" data-es="🚀 Probar 14 días gratis" data-en="🚀 Try 14 days free" data-pt="🚀 Teste 14 dias grátis">🚀 Probar 14 días gratis</a>
+    <a href="#funciones" class="btn btn-secondary" data-es="Ver funciones" data-en="See features" data-pt="Ver recursos">Ver funciones</a>
+  </div>
+  <div class="trust-row">
+    <span data-es="14 días gratis" data-en="14 days free" data-pt="14 dias grátis">14 días gratis</span>
+    <span data-es="Sin tarjeta" data-en="No credit card" data-pt="Sem cartão">Sin tarjeta</span>
+    <span data-es="Cancelás cuando quieras" data-en="Cancel anytime" data-pt="Cancele quando quiser">Cancelás cuando quieras</span>
+    <span data-es="Celular + PC" data-en="Mobile + PC" data-pt="Celular + PC">Celular + PC</span>
+  </div>
+</div>
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/5493415040667?text=Hola%2C%20quiero%20probar%20R21%20Cars%2014%20d%C3%ADas%20gratis" target="_blank" class="wa-float" aria-label="Contactar por WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+  </svg>
+</a>
+
+<!-- MÓDULOS CORE -->
+<section id="modules">
+  <h2 class="fade-in" data-es="Todo lo que tu concesionaria necesita" data-en="Everything your dealership needs" data-pt="Tudo o que sua loja precisa">Todo lo que tu concesionaria necesita</h2>
+  <p class="section-sub fade-in" data-es="Un sistema completo, pensado para concesionarias reales." data-en="A complete system, built for real dealerships." data-pt="Um sistema completo, feito para lojas reais.">Un sistema completo, pensado para concesionarias reales.</p>
+  <div class="modules">
+    <div class="module-card fade-in">
+      <div class="module-icon">📊</div>
+      <h3 data-es="Contable" data-en="Accounting" data-pt="Contábil">Contable</h3>
+      <p data-es="P&amp;L, cuentas corrientes, flujo de caja, cierre de mes." data-en="P&amp;L, current accounts, cash flow, month close." data-pt="DRE, contas correntes, fluxo de caixa, fechamento mensal.">P&amp;L, cuentas corrientes, flujo de caja, cierre de mes.</p>
+    </div>
+    <div class="module-card fade-in">
+      <div class="module-icon">💳</div>
+      <h3 data-es="Membresías" data-en="Memberships" data-pt="Assinaturas">Membresías</h3>
+      <p data-es="Gestión de usuarios, vencimientos, renovaciones y planes." data-en="User management, expirations, renewals and plans." data-pt="Gestão de usuários, vencimentos, renovações e planos.">Gestión de usuarios, vencimientos, renovaciones y planes.</p>
+    </div>
+    <div class="module-card featured fade-in">
+      <div class="module-icon">🤖</div>
+      <h3 data-es="Bot de WhatsApp con IA" data-en="AI WhatsApp Bot" data-pt="Bot de WhatsApp com IA">Bot de WhatsApp con IA</h3>
+      <p data-es="Atiende solo, las 24 horas: busca stock, toma tasaciones con fotos y responde consultas. Todo se guarda solo y te llega la notificación al toque." data-en="Answers alone, 24/7: searches stock, takes trade-in appraisals with photos and answers questions. Everything saves itself and you get notified instantly." data-pt="Atende sozinho, 24h: busca estoque, recebe avaliações com fotos e responde dúvidas. Tudo se salva só e você recebe a notificação na hora.">Atiende solo, las 24 horas: busca stock, toma tasaciones con fotos y responde consultas. Todo se guarda solo y te llega la notificación al toque.</p>
+    </div>
+    <div class="module-card featured fade-in">
+      <div class="module-icon">🖥️</div>
+      <h3 data-es="Panel de Escritorio (PC)" data-en="Desktop Panel (PC)" data-pt="Painel de Computador (PC)">Panel de Escritorio (PC)</h3>
+      <p data-es="El plan Full suma la app para Windows: pantalla grande para cargar caja, cerrar el mes y revisar reportes cómodo desde la oficina." data-en="The Full plan adds the Windows app: a big screen to log cash, close the month and review reports comfortably from the office." data-pt="O plano Full soma o app para Windows: tela grande para lançar o caixa, fechar o mês e revisar relatórios no escritório.">El plan Full suma la app para Windows: pantalla grande para cargar caja, cerrar el mes y revisar reportes cómodo desde la oficina.</p>
+    </div>
+    <div class="module-card featured fade-in">
+      <div class="module-icon">🛒</div>
+      <h3 data-es="Tienda Online" data-en="Online Store" data-pt="Loja Online">Tienda Online</h3>
+      <p data-es="Incluida gratis en el plan Full: una página pública con tu stock, fotos y precios, actualizada en vivo y lista para compartir por WhatsApp." data-en="Included free on the Full plan: a public page with your stock, photos and prices, updated live and ready to share on WhatsApp." data-pt="Incluída de graça no plano Full: uma página pública com seu estoque, fotos e preços, atualizada em tempo real e pronta para compartilhar no WhatsApp.">Incluida gratis en el plan Full: una página pública con tu stock, fotos y precios, actualizada en vivo y lista para compartir por WhatsApp.</p>
+      <a class="module-link" href="https://getaxiora.com/tienda/ruta21/" target="_blank" data-es="Ver ejemplo en vivo →" data-en="See live example →" data-pt="Ver exemplo ao vivo →">Ver ejemplo en vivo →</a>
+    </div>
+    <div class="module-card fade-in">
+      <div class="module-icon">🚗</div>
+      <h3 data-es="Tasaciones" data-en="Trade-in appraisals" data-pt="Avaliações">Tasaciones</h3>
+      <p data-es="El cliente te ofrece su auto por WhatsApp, el bot junta los datos y las fotos, y vos lo revisás desde la app." data-en="The client offers their car via WhatsApp, the bot collects the info and photos, and you review it from the app." data-pt="O cliente oferece o carro pelo WhatsApp, o bot coleta os dados e fotos, e você revisa pelo app.">El cliente te ofrece su auto por WhatsApp, el bot junta los datos y las fotos, y vos lo revisás desde la app.</p>
+    </div>
+    <div class="module-card fade-in">
+      <div class="module-icon">📄</div>
+      <h3 data-es="Documentación" data-en="Documentation" data-pt="Documentação">Documentación</h3>
+      <p data-es="11 documentos por vehículo, con archivos y fotos en la nube." data-en="11 documents per vehicle, with files and photos in the cloud." data-pt="11 documentos por veículo, com arquivos e fotos na nuvem.">11 documentos por vehículo, con archivos y fotos en la nube.</p>
+    </div>
+    <div class="module-card fade-in">
+      <div class="module-icon">💾</div>
+      <h3 data-es="Backup / Restore" data-en="Backup / Restore" data-pt="Backup / Restauração">Backup / Restore</h3>
+      <p data-es="Respaldo completo y restauración segura con confirmaciones." data-en="Full backup and secure restore with confirmations." data-pt="Backup completo e restauração segura com confirmações.">Respaldo completo y restauración segura con confirmaciones.</p>
+    </div>
+    <div class="module-card fade-in">
+      <div class="module-icon">⚙️</div>
+      <h3 data-es="Panel Admin" data-en="Admin Panel" data-pt="Painel Admin">Panel Admin</h3>
+      <p data-es="Listar cuentas, registrar pagos, editar y ver en Maps." data-en="List accounts, register payments, edit and view on Maps." data-pt="Listar contas, registrar pagamentos, editar e ver no Maps.">Listar cuentas, registrar pagos, editar y ver en Maps.</p>
+    </div>
+    <div class="module-card fade-in">
+      <div class="module-icon">🌎</div>
+      <h3 data-es="Multiidioma" data-en="Multi-language" data-pt="Multilíngue">Multiidioma</h3>
+      <p data-es="Español, inglés y portugués, listo para clientes de toda la región." data-en="Spanish, English and Portuguese, ready for clients across the region." data-pt="Espanhol, inglês e português, pronto para clientes de toda a região.">Español, inglés y portugués, listo para clientes de toda la región.</p>
+    </div>
+  </div>
+</section>
+
+<!-- DEMO BOT -->
+<section id="demo">
+  <h2 class="fade-in" data-es="Mirá al bot en acción" data-en="See the bot in action" data-pt="Veja o bot em ação">Mirá al bot en acción</h2>
+  <p class="section-sub fade-in" data-es="Así contesta por WhatsApp, las 24 horas, sin que vos hagas nada." data-en="This is how it answers on WhatsApp, 24/7, without you doing anything." data-pt="É assim que ele responde pelo WhatsApp, 24h, sem você fazer nada.">Así contesta por WhatsApp, las 24 horas, sin que vos hagas nada.</p>
+  <div class="demo-wrap">
+    <div class="phone-mockup">
+      <div class="wa-header">
+        <div class="wa-avatar">R21</div>
+        <div class="wa-header-info">
+          <span class="wa-name">R21 Cars Bot</span>
+          <span class="wa-status" data-es="en línea" data-en="online" data-pt="online">en línea</span>
+        </div>
+      </div>
+      <div class="wa-chat" id="waChat"></div>
+    </div>
+    <div class="demo-caption fade-in">
+      <span class="demo-badge">
+        <span class="demo-dot"></span>
+        <span data-es="Simulación" data-en="Simulation" data-pt="Simulação">Simulación</span>
+      </span>
+      <p data-es="Conversación de ejemplo para mostrar cómo responde el bot. No es un chat real, pero así se ve en tu WhatsApp todos los días." data-en="Example conversation showing how the bot replies. Not a real chat, but this is what it looks like in your WhatsApp every day." data-pt="Conversa de exemplo mostrando como o bot responde. Não é um chat real, mas é assim que aparece no seu WhatsApp todos os dias.">Conversación de ejemplo para mostrar cómo responde el bot. No es un chat real, pero así se ve en tu WhatsApp todos los días.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="funciones" class="wide">
+  <h2 class="fade-in" data-es="Mirá el sistema por dentro" data-en="See the system inside" data-pt="Veja o sistema por dentro">Mirá el sistema por dentro</h2>
+  <p class="section-sub fade-in" data-es="Capturas reales de la app. Sin renders, sin maquetas." data-en="Real app screenshots. No renders, no mockups." data-pt="Capturas reais do app. Sem renders, sem maquetes.">Capturas reales de la app. Sin renders, sin maquetas.</p>
+
+  <div class="feature-category">
+    <div class="category-header">
+      <span class="category-icon">🚗</span>
+      <h3 data-es="Gestión de Stock" data-en="Stock Management" data-pt="Gestão de Estoque">Gestión de Stock</h3>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card fade-in">
+        <div class="feature-img-wrap">
+          <div class="mockup"><div class="mockup-bar"></div><div class="mockup-body"><div class="mockup-icono">🚗</div><div class="mockup-line largo"></div><div class="mockup-line medio"></div><div class="mockup-line corto"></div><div class="mockup-cards"><div class="mockup-card"></div><div class="mockup-card"></div><div class="mockup-card"></div><div class="mockup-card"></div></div></div></div>
+        </div>
+        <div class="feature-info">
+          <h4 data-es="Lista de vehículos con filtros" data-en="Vehicle list with filters" data-pt="Lista de veículos com filtros">Lista de vehículos con filtros</h4>
+          <p data-es="Buscá por marca, modelo, año, combustible y transmisión. Todo en tiempo real." data-en="Search by brand, model, year, fuel and transmission. All in real time." data-pt="Busque por marca, modelo, ano, combustível e transmissão. Tudo em tempo real.">Buscá por marca, modelo, año, combustible y transmisión. Todo en tiempo real.</p>
+        </div>
+      </div>
+      <div class="feature-card fade-in">
+        <div class="feature-img-wrap">
+          <div class="mockup"><div class="mockup-bar"></div><div class="mockup-body"><div class="mockup-icono">🏷️</div><div class="mockup-line largo"></div><div class="mockup-line corto"></div><div class="mockup-line medio"></div><div class="mockup-cards"><div class="mockup-card"></div><div class="mockup-card"></div><div class="mockup-card"></div><div class="mockup-card"></div></div></div></div>
+        </div>
+        <div class="feature-info">
+          <h4 data-es="Marcas cargadas" data-en="Brands loaded" data-pt="Marcas carregadas">Marcas cargadas</h4>
+          <p data-es="Accedé a cada marca con sus logos oficiales y contador de vehículos." data-en="Access each brand with official logos and vehicle counter." data-pt="Acesse cada marca com seus logos oficiais e contador de veículos.">Accedé a cada marca con sus logos oficiales y contador de vehículos.</p>
+        </div>
+      </div>
+      <div class="feature-card fade-in">
+        <div class="feature-img-wrap">
+          <div class="mockup"><div class="mockup-bar"></div><div class="mockup-body"><div class="mockup-icono">📋</div><div class="mockup-line largo"></div><div class="mockup-line medio"></div><div class="mockup-line corto"></div><div class="mockup-line medio"></div><div class="mockup-line corto"></div></div></div>
+        </div>
+        <div class="feature-info">
+          <h4 data-es="Ficha completa del vehículo" data-en="Complete vehicle file" data-pt="Ficha completa do veículo">Ficha completa del vehículo</h4>
+          <p data-es="Precio contado, permuta, kilómetros, combustible, transmisión y más." data-en="Cash price, trade-in, mileage, fuel, transmission and more." data-pt="Preço à vista, troca, quilometragem, combustível, transmissão e mais.">Precio contado, permuta, kilómetros, combustible, transmisión y más.</p>
+        </div>
+      </div>
+      <div class="feature-card fade-in">
+        <div class="feature-img-wrap">
+          <div class="mockup"><div class="mockup-bar"></div><div class="mockup-body"><div class="mockup-icono">🚙</div><div class="mockup-line largo"></div><div class="mockup-line medio"></div><div class="mockup-line corto"></div><div class="mockup-cards"><div class="mockup-card"></div><div class="mockup-card"></div></div></div></div>
+        </div>
+        <div class="feature-info">
+          <h4 data-es="4 subtipos de vehículo" data-en="4 vehicle subtypes" data-pt="4 subtipos de veículo">4 subtipos de vehículo</h4>
+          <p data-es="Auto, SUV, pickup y utilitario — cada uno con su propia ficha dentro de la pestaña Vehículos." data-en="Car, SUV, pickup and utility — each with its own file inside the Vehicles tab." data-pt="Carro, SUV, picape e utilitário — cada um com sua própria ficha dentro da aba Veículos.">Auto, SUV, pickup y utilitario — cada uno con su propia ficha dentro de la pestaña Vehículos.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="feature-category">
+    <div class="category-header">
+      <span class="category-icon">👥</span>
+      <h3 data-es="Clientes y Proveedores" data-en="Clients and Suppliers" data-pt="Clientes e Fornecedores">Clientes y Proveedores</h3>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card fade-in">
+        <div class="feature-img-wrap">
+          <div class="mockup"><div class="mockup-bar"></div><div class="mockup-body"><div class="mockup-icono">👤</div><div class="mockup-line medio"></div><div class="mockup-line largo"></div><div class="mockup-line corto"></div><div class="mockup-line medio"></div></div></div>
+        </div>
+        <div class="feature-info">
+          <h4 data-es="Prospectos, clientes y tasaciones" data-en="Prospects, clients and appraisals" data-pt="Prospectos, clientes e avaliações">Prospectos, clientes y tasaciones</h4>
+          <p data-es="3 pestañas: quién busca auto, quiénes ya te compraron (con historial) y quién te ofreció el suyo." data-en="3 tabs: who's searching for a car, who already bought from you (with history) and who offered you theirs." data-pt="3 abas: quem procura carro, quem já comprou de você (com histórico) e quem ofereceu o carro dele.">3 pestañas: quién busca auto, quiénes ya te compraron (con historial) y quién te ofreció el suyo.</p>
+        </div>
+      </div>
+      <div class="feature-card fade-in">
+        <div class="feature-img-wrap">
+          <div class="mockup"><div class="mockup-bar"></div><div class="mockup-body"><div class="mockup-icono">🎯</div><div class="mockup-line largo"></div><div class="mockup-line corto"></div><div class="mockup-line medio"></div><div class="mockup-cards"><div class="mockup-card"></div><div class="mockup-card"></div></div></div></div>
+        </div>
+        <div class="feature-info">
+          <h4 data-es="Match automático por %" data-en="Automatic match by %" data-pt="Match automático por %">Match automático por %</h4>
+          <p data-es="El sistema te sugiere qué autos coinciden con lo que busca el cliente." data-en="The system suggests which cars match what the client is looking for." data-pt="O sistema sugere quais carros combinam com o que o cliente procura.">El sistema te sugiere qué autos coinciden con lo que busca el cliente.</p>
+        </div>
+      </div>
+      <div class="feature-card fade-in">
+        <div class="feature-img-wrap">
+          <div class="mockup"><div class="mockup-bar"></div><div class="mockup-body"><div class="mockup-icono">🔧</div><div class="mockup-line medio"></div><div class="mockup-line largo"></div><div class="mockup-line corto"></div><div class="mockup-line medio"></div></div></div>
+        </div>
+        <div class="feature-info">
+          <h4 data-es="Proveedores con rating" data-en="Suppliers with rating" data-pt="Fornecedores com avaliação">Proveedores con rating</h4>
+          <p data-es="Chaperos, pintores, tapiceros. Guardá contacto, dirección y puntuación." data-en="Bodyworkers, painters, upholsterers. Save contact, address and rating." data-pt="Funileiros, pintores, tapeceiros. Guarde contato, endereço e avaliação.">Chaperos, pintores, tapiceros. Guardá contacto, dirección y puntuación.</p>
+        </div>
+      </div>
+      <div class="feature-card fade-in">
+        <div class="feature-img-wrap">
+          <div class="mockup"><div class="mockup-bar"></div><div class="mockup-body"><div class="mockup-icono">📈</div><div class="mockup-line largo"></div><div class="mockup-line medio"></div><div class="mockup-line corto"></div><div class="mockup-cards"><div class="mockup-card"></div><div class="mockup-card"></div><div class="mockup-card"></div><div class="mockup-card"></div></div></div></div>
+        </div>
+        <div class="feature-info">
+          <h4 data-es="Reportes con gráficos" data-en="Reports with charts" data-pt="Relatórios com gráficos">Reportes con gráficos</h4>
+          <p data-es="Ganancia por vehículo, gasto por proveedor e ingresos/egresos por categoría, con gráficos de barras y torta." data-en="Profit per vehicle, spend per supplier and income/expenses by category, with bar and pie charts." data-pt="Lucro por veículo, gasto por fornecedor e receitas/despesas por categoria, com gráficos de barras e pizza.">Ganancia por vehículo, gasto por proveedor e ingresos/egresos por categoría, con gráficos de barras y torta.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="feature-category">
+    <div class="category-header">
+      <span class="category-icon">💰</span>
+      <h3 data-es="Contable y Estadísticas" data-en="Accounting and Statistics" data-pt="Contábil e Estatísticas">Contable y Estadísticas</h3>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card fade-in">
+        <div class="feature-img-wrap">
+          <div class="mockup"><div class="mockup-bar"></div><div class="mockup-body"><div class="mockup-icono">💵</div><div class="mockup-line largo"></div><div class="mockup-line corto"></div><div class="mockup-line medio"></div><div class="mockup-line corto"></div></div></div>
+        </div>
+        <div class="feature-info">
+          <h4 data-es="Caja diaria" data-en="Daily cash" data-pt="Caixa diário">Caja diaria</h4>
+          <p data-es="Ingresos, egresos, balance. Filtrá por hoy, semana, mes, año." data-en="Income, expenses, balance. Filter by today, week, month, year." data-pt="Entradas, saídas, saldo. Filtre por hoje, semana, mês, ano.">Ingresos, egresos, balance. Filtrá por hoy, semana, mes, año.</p>
+        </div>
+      </div>
+      <div class="feature-card fade-in">
+        <div class="feature-img-wrap">
+          <div class="mockup"><div class="mockup-bar"></div><div class="mockup-body"><div class="mockup-icono">🏠</div><div class="mockup-line largo"></div><div class="mockup-line corto"></div><div class="mockup-cards"><div class="mockup-card"></div><div class="mockup-card"></div><div class="mockup-card"></div><div class="mockup-card"></div></div></div></div>
+        </div>
+        <div class="feature-info">
+          <h4 data-es="Resumen del mes" data-en="Month summary" data-pt="Resumo do mês">Resumen del mes</h4>
+          <p data-es="Stock, vendidos, ganancia y clientes buscando. Todo de un vistazo." data-en="Stock, sold, profit and clients searching. All at a glance." data-pt="Estoque, vendidos, lucro e clientes procurando. Tudo em um relance.">Stock, vendidos, ganancia y clientes buscando. Todo de un vistazo.</p>
+        </div>
+      </div>
+      <div class="feature-card fade-in">
+        <div class="feature-img-wrap">
+          <div class="mockup"><div class="mockup-bar"></div><div class="mockup-body"><div class="mockup-icono">📊</div><div class="mockup-line largo"></div><div class="mockup-line medio"></div><div class="mockup-line corto"></div><div class="mockup-cards"><div class="mockup-card"></div><div class="mockup-card"></div><div class="mockup-card"></div><div class="mockup-card"></div></div></div></div>
+        </div>
+        <div class="feature-info">
+          <h4 data-es="Estadísticas por marca" data-en="Statistics by brand" data-pt="Estatísticas por marca">Estadísticas por marca</h4>
+          <p data-es="Cuántos autos tenés por marca, valor del stock, promedio de precios." data-en="How many cars per brand, stock value, average prices." data-pt="Quantos carros você tem por marca, valor do estoque, preço médio.">Cuántos autos tenés por marca, valor del stock, promedio de precios.</p>
+        </div>
+      </div>
+      <div class="feature-card fade-in">
+        <div class="feature-img-wrap">
+          <div class="mockup"><div class="mockup-bar"></div><div class="mockup-body"><div class="mockup-icono">🏆</div><div class="mockup-line medio"></div><div class="mockup-line largo"></div><div class="mockup-line corto"></div><div class="mockup-line medio"></div></div></div>
+        </div>
+        <div class="feature-info">
+          <h4 data-es="Datos extra y rankings" data-en="Extra data and rankings" data-pt="Dados extras e rankings">Datos extra y rankings</h4>
+          <p data-es="Marca más buscada, cliente con más envíos, autos con más días en stock." data-en="Most searched brand, client with most sends, cars with most days in stock." data-pt="Marca mais buscada, cliente com mais envios, carros com mais dias em estoque.">Marca más buscada, cliente con más envíos, autos con más días en stock.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="feature-category">
+    <div class="category-header">
+      <span class="category-icon">📄</span>
+      <h3 data-es="Documentación y Reparaciones" data-en="Documentation and Repairs" data-pt="Documentação e Reparos">Documentación y Reparaciones</h3>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card fade-in">
+        <div class="feature-img-wrap">
+          <div class="mockup"><div class="mockup-bar"></div><div class="mockup-body"><div class="mockup-icono">📄</div><div class="mockup-line largo"></div><div class="mockup-line medio"></div><div class="mockup-line corto"></div><div class="mockup-line medio"></div></div></div>
+        </div>
+        <div class="feature-info">
+          <h4 data-es="11 documentos por vehículo" data-en="11 documents per vehicle" data-pt="11 documentos por veículo">11 documentos por vehículo</h4>
+          <p data-es="Título, cédulas, verificaciones. Alertas de documentos críticos." data-en="Title, registration, verifications. Critical document alerts." data-pt="Título, documentos, verificações. Alertas de documentos críticos.">Título, cédulas, verificaciones. Alertas de documentos críticos.</p>
+        </div>
+      </div>
+      <div class="feature-card fade-in">
+        <div class="feature-img-wrap">
+          <div class="mockup"><div class="mockup-bar"></div><div class="mockup-body"><div class="mockup-icono">📎</div><div class="mockup-line corto"></div><div class="mockup-line largo"></div><div class="mockup-line medio"></div><div class="mockup-line corto"></div></div></div>
+        </div>
+        <div class="feature-info">
+          <h4 data-es="Subida de archivos" data-en="File uploads" data-pt="Upload de arquivos">Subida de archivos</h4>
+          <p data-es="Subí fotos o PDF de cada documento. Se guardan en la nube." data-en="Upload photos or PDF of each document. Saved to the cloud." data-pt="Envie fotos ou PDF de cada documento. Salvos na nuvem.">Subí fotos o PDF de cada documento. Se guardan en la nube.</p>
+        </div>
+      </div>
+      <div class="feature-card fade-in">
+        <div class="feature-img-wrap">
+          <div class="mockup"><div class="mockup-bar"></div><div class="mockup-body"><div class="mockup-icono">🔧</div><div class="mockup-line largo"></div><div class="mockup-line corto"></div><div class="mockup-line medio"></div><div class="mockup-line corto"></div></div></div>
+        </div>
+        <div class="feature-info">
+          <h4 data-es="Reparaciones con total" data-en="Repairs with total" data-pt="Reparos com total">Reparaciones con total</h4>
+          <p data-es="Cargá cada reparación, su costo, proveedor y total acumulado." data-en="Log each repair, its cost, supplier and accumulated total." data-pt="Registre cada reparo, seu custo, fornecedor e total acumulado.">Cargá cada reparación, su costo, proveedor y total acumulado.</p>
+        </div>
+      </div>
+      <div class="feature-card fade-in">
+        <div class="feature-img-wrap">
+          <div class="mockup"><div class="mockup-bar"></div><div class="mockup-body"><div class="mockup-icono">📝</div><div class="mockup-line largo"></div><div class="mockup-line medio"></div><div class="mockup-line corto"></div><div class="mockup-line medio"></div></div></div>
+        </div>
+        <div class="feature-info">
+          <h4 data-es="Contratos de venta y consignación" data-en="Sale and consignment contracts" data-pt="Contratos de venda e consignação">Contratos de venta y consignación</h4>
+          <p data-es="Al vender o poner en consignación, el sistema te ofrece generar el contrato en PDF con todos los datos ya cargados." data-en="When you sell or consign, the system offers to generate the PDF contract with all the data already loaded." data-pt="Ao vender ou consignar, o sistema oferece gerar o contrato em PDF com todos os dados já carregados.">Al vender o poner en consignación, el sistema te ofrece generar el contrato en PDF con todos los datos ya cargados.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SECCIÓN ADD-ON — Sumá el Módulo Camiones
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="addon-section">
+  <h2 class="fade-in" data-es="¿También vendés camiones?" data-en="Do you also sell trucks?" data-pt="Você também vende caminhões?">¿También vendés camiones?</h2>
+  <p class="section-sub fade-in" data-es="R21 es un sistema modular. Si además de autos vendés camiones o utilitarios pesados, podés sumar el módulo Camiones y todo funciona en el mismo sistema, con las mismas pantallas y el mismo bot." data-en="R21 is a modular system. If besides cars you sell trucks or heavy utility vehicles, you can add the Trucks module and everything works in the same system, with the same screens and the same bot." data-pt="R21 é um sistema modular. Se além de carros você vende caminhões ou utilitários pesados, pode somar o módulo Caminhões e tudo funciona no mesmo sistema, com as mesmas telas e o mesmo bot.">R21 es un sistema modular. Si además de autos vendés camiones o utilitarios pesados, podés sumar el módulo Camiones y todo funciona en el mismo sistema, con las mismas pantallas y el mismo bot.</p>
+  <div class="addon-card fade-in">
+    <div class="addon-icon">🚛</div>
+    <div class="addon-content">
+      <h3 data-es="Módulo Camiones" data-en="Trucks Module" data-pt="Módulo Caminhões">Módulo Camiones</h3>
+      <p data-es="Camiones, acoplados, semirremolques y utilitarios pesados con ficha técnica propia: capacidad de carga, cantidad de ejes, kilometraje y documentos RNPA." data-en="Trucks, trailers, semi-trailers and heavy utility vehicles with their own technical file: load capacity, number of axles, mileage and RNPA documents." data-pt="Caminhões, reboques, semirreboques e utilitários pesados com ficha técnica própria: capacidade de carga, quantidade de eixos, quilometragem e documentos RNPA.">Camiones, acoplados, semirremolques y utilitarios pesados con ficha técnica propia: capacidad de carga, cantidad de ejes, kilometraje y documentos RNPA.</p>
+      <span class="addon-precio" data-es="Precio: +USD 9/mes" data-en="Price: +USD 9/month" data-pt="Preço: +USD 9/mês">Precio: <strong>+USD 9/mes</strong></span>
+    </div>
+    <div class="addon-cta">
+      <a href="https://wa.me/5493415040667?text=Hola%2C%20quiero%20sumar%20el%20M%C3%B3dulo%20Camiones%20al%20plan%20R21%20Cars" target="_blank" class="btn btn-accent" data-es="Sumar módulo Camiones" data-en="Add Trucks module" data-pt="Somar módulo Caminhões">Sumar módulo Camiones</a>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARATIVA -->
+<section class="compare-section">
+  <div class="compare-inner">
+    <h2 class="fade-in" data-es="¿Por qué elegir R21 Cars?" data-en="Why choose R21 Cars?" data-pt="Por que escolher o R21 Cars?">¿Por qué elegir R21 Cars?</h2>
+    <p class="section-sub fade-in" data-es="Comparalo con lo que hay en el mercado." data-en="Compare it with what's on the market." data-pt="Compare com o que há no mercado.">Comparalo con lo que hay en el mercado.</p>
+    <div class="compare-table fade-in">
+      <div class="compare-row compare-head">
+        <div class="col"></div>
+        <div class="col col-r21">R21 Cars</div>
+        <div class="col" data-es="Otros sistemas" data-en="Other systems" data-pt="Outros sistemas">Otros sistemas</div>
+      </div>
+      <div class="compare-row">
+        <div class="col" data-es="Precio mensual" data-en="Monthly price" data-pt="Preço mensal">Precio mensual</div>
+        <div class="col col-r21" data-es="Desde USD 29" data-en="From USD 29" data-pt="A partir de USD 29">Desde USD 29</div>
+        <div class="col col-otros" data-es="USD 200+" data-en="USD 200+" data-pt="USD 200+">USD 200+</div>
+      </div>
+      <div class="compare-row">
+        <div class="col" data-es="Bot de WhatsApp con IA" data-en="AI WhatsApp Bot" data-pt="Bot de WhatsApp com IA">Bot de WhatsApp con IA</div>
+        <div class="col col-r21"><span class="check-icon"></span></div>
+        <div class="col col-otros"><span class="cross-icon"></span></div>
+      </div>
+      <div class="compare-row">
+        <div class="col" data-es="Celular + PC" data-en="Mobile + PC" data-pt="Celular + PC">Celular + PC</div>
+        <div class="col col-r21"><span class="check-icon"></span></div>
+        <div class="col col-otros" data-es="Solo uno" data-en="Only one" data-pt="Só um">Solo uno</div>
+      </div>
+      <div class="compare-row">
+        <div class="col" data-es="Sin tarjeta para probar" data-en="No card to try" data-pt="Sem cartão para testar">Sin tarjeta para probar</div>
+        <div class="col col-r21"><span class="check-icon"></span></div>
+        <div class="col col-otros"><span class="cross-icon"></span></div>
+      </div>
+      <div class="compare-row">
+        <div class="col" data-es="Soporte directo con el creador" data-en="Direct support with the creator" data-pt="Suporte direto com o criador">Soporte directo con el creador</div>
+        <div class="col col-r21"><span class="check-icon"></span></div>
+        <div class="col col-otros" data-es="Call center" data-en="Call center" data-pt="Call center">Call center</div>
+      </div>
+      <div class="compare-row">
+        <div class="col" data-es="Tienda online incluida" data-en="Online store included" data-pt="Loja online incluída">Tienda online incluida</div>
+        <div class="col col-r21"><span class="check-icon"></span></div>
+        <div class="col col-otros" data-es="Se paga aparte" data-en="Paid separately" data-pt="Pago à parte">Se paga aparte</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLANES -->
+<section id="planes" class="pricing-section">
+  <h2 class="fade-in" data-es="Planes simples" data-en="Simple plans" data-pt="Planos simples">Planes simples</h2>
+  <p class="section-sub fade-in" data-es="Sin sorpresas. Cancelás cuando quieras. Prueba 14 días gratis." data-en="No surprises. Cancel anytime. 14-day free trial." data-pt="Sem surpresas. Cancele quando quiser. Teste 14 dias grátis.">Sin sorpresas. Cancelás cuando quieras. Prueba 14 días gratis.</p>
+
+  <div class="period-switch fade-in">
+    <button class="period-btn" data-period="monthly" onclick="setPeriod('monthly')"><span data-es="Mensual" data-en="Monthly" data-pt="Mensal">Mensual</span></button>
+    <button class="period-btn" data-period="q" onclick="setPeriod('q')"><span data-es="3 meses" data-en="3 months" data-pt="3 meses">3 meses</span><span class="period-badge">-10%</span></button>
+    <button class="period-btn" data-period="s" onclick="setPeriod('s')"><span data-es="6 meses" data-en="6 months" data-pt="6 meses">6 meses</span><span class="period-badge">-15%</span></button>
+    <button class="period-btn active" data-period="y" onclick="setPeriod('y')"><span data-es="Anual" data-en="Annual" data-pt="Anual">Anual</span><span class="period-badge">-20%</span></button>
+  </div>
+
+  <div class="pricing">
+    <div class="price-card fade-in">
+      <span class="price-badge badge-basic" data-es="Básico" data-en="Basic" data-pt="Básico">Básico</span>
+      <h3 data-es="Solo Celular" data-en="Mobile Only" data-pt="Só Celular">Solo Celular</h3>
+      <div class="price-users" data-es="1 usuario" data-en="1 user" data-pt="1 usuário">1 usuario</div>
+      <div class="price-total-main">
+        <span class="total-label" data-es="Total por mes" data-en="Total per month" data-pt="Total por mês">Total por mes</span>
+        <span class="total-amount" data-usd-base="29">USD 29</span>
+        <span class="total-ars"></span>
+        <div class="upfront-note"><span data-es="Pago único:" data-en="One-time payment:" data-pt="Pagamento único:">Pago único:</span> <span class="upfront-amount"></span> <span class="upfront-ars"></span></div>
+      </div>
+      <div class="price-per-user">
+        <span class="per-user-amount" data-usd-base="29" data-users="1">USD 29</span>
+        <span data-es="por usuario/mes" data-en="per user/month" data-pt="por usuário/mês">por usuario/mes</span>
+        <span class="per-user-ars"></span>
+      </div>
+      <ul class="price-features">
+        <li data-es="App Android" data-en="Android app" data-pt="App Android">App Android</li>
+        <li data-es="Todos los módulos" data-en="All modules" data-pt="Todos os módulos">Todos los módulos</li>
+        <li data-es="Soporte por WhatsApp" data-en="WhatsApp support" data-pt="Suporte por WhatsApp">Soporte por WhatsApp</li>
+      </ul>
+      <a href="https://wa.me/5493415040667?text=Hola%2C%20quiero%20el%20Plan%20B%C3%A1sico%201%20usuario%20de%20R21%20Cars" target="_blank" class="btn btn-secondary" data-es="Empezar" data-en="Start" data-pt="Começar">Empezar</a>
+    </div>
+
+    <div class="price-card fade-in">
+      <span class="price-badge badge-basic" data-es="Básico" data-en="Basic" data-pt="Básico">Básico</span>
+      <h3 data-es="Solo Celular" data-en="Mobile Only" data-pt="Só Celular">Solo Celular</h3>
+      <div class="price-users" data-es="3 usuarios" data-en="3 users" data-pt="3 usuários">3 usuarios</div>
+      <div class="price-total-main">
+        <span class="total-label" data-es="Total por mes" data-en="Total per month" data-pt="Total por mês">Total por mes</span>
+        <span class="total-amount" data-usd-base="69">USD 69</span>
+        <span class="total-ars"></span>
+        <div class="upfront-note"><span data-es="Pago único:" data-en="One-time payment:" data-pt="Pagamento único:">Pago único:</span> <span class="upfront-amount"></span> <span class="upfront-ars"></span></div>
+      </div>
+      <div class="price-per-user">
+        <span class="per-user-amount" data-usd-base="69" data-users="3">USD 23</span>
+        <span data-es="por usuario/mes" data-en="per user/month" data-pt="por usuário/mês">por usuario/mes</span>
+        <span class="per-user-ars"></span>
+      </div>
+      <ul class="price-features">
+        <li data-es="App Android" data-en="Android app" data-pt="App Android">App Android</li>
+        <li data-es="Todos los módulos" data-en="All modules" data-pt="Todos os módulos">Todos los módulos</li>
+        <li data-es="Soporte por WhatsApp" data-en="WhatsApp support" data-pt="Suporte por WhatsApp">Soporte por WhatsApp</li>
+      </ul>
+      <a href="https://wa.me/5493415040667?text=Hola%2C%20quiero%20el%20Plan%20B%C3%A1sico%203%20usuarios%20de%20R21%20Cars" target="_blank" class="btn btn-secondary" data-es="Empezar" data-en="Start" data-pt="Começar">Empezar</a>
+    </div>
+
+    <div class="price-card featured fade-in">
+      <span class="price-badge badge-full" data-es="Full" data-en="Full" data-pt="Full">Full</span>
+      <h3 data-es="Celu + PC" data-en="Mobile + PC" data-pt="Celular + PC">Celu + PC</h3>
+      <div class="price-users" data-es="3 usuarios" data-en="3 users" data-pt="3 usuários">3 usuarios</div>
+      <div class="price-total-main">
+        <span class="total-label" data-es="Total por mes" data-en="Total per month" data-pt="Total por mês">Total por mes</span>
+        <span class="total-amount" data-usd-base="89">USD 89</span>
+        <span class="total-ars"></span>
+        <div class="upfront-note"><span data-es="Pago único:" data-en="One-time payment:" data-pt="Pagamento único:">Pago único:</span> <span class="upfront-amount"></span> <span class="upfront-ars"></span></div>
+      </div>
+      <div class="price-per-user">
+        <span class="per-user-amount" data-usd-base="89" data-users="3">USD 30</span>
+        <span data-es="por usuario/mes" data-en="per user/month" data-pt="por usuário/mês">por usuario/mes</span>
+        <span class="per-user-ars"></span>
+      </div>
+      <ul class="price-features">
+        <li data-es="App Android + Windows" data-en="Android + Windows app" data-pt="App Android + Windows">App Android + Windows</li>
+        <li data-es="Todos los módulos" data-en="All modules" data-pt="Todos os módulos">Todos los módulos</li>
+        <li data-es="Bot de WhatsApp incluido" data-en="WhatsApp Bot included" data-pt="Bot de WhatsApp incluído">Bot de WhatsApp incluido</li>
+        <li data-es="Tienda online incluida" data-en="Online store included" data-pt="Loja online incluída">Tienda online incluida</li>
+        <li data-es="Soporte prioritario" data-en="Priority support" data-pt="Suporte prioritário">Soporte prioritario</li>
+      </ul>
+      <a href="https://wa.me/5493415040667?text=Hola%2C%20quiero%20el%20Plan%20Full%203%20usuarios%20de%20R21%20Cars" target="_blank" class="btn btn-primary" data-es="Empezar" data-en="Start" data-pt="Começar">Empezar</a>
+    </div>
+
+    <div class="price-card fade-in">
+      <span class="price-badge badge-full" data-es="Full" data-en="Full" data-pt="Full">Full</span>
+      <h3 data-es="Celu + PC" data-en="Mobile + PC" data-pt="Celular + PC">Celu + PC</h3>
+      <div class="price-users" data-es="7 usuarios" data-en="7 users" data-pt="7 usuários">7 usuarios</div>
+      <div class="price-total-main">
+        <span class="total-label" data-es="Total por mes" data-en="Total per month" data-pt="Total por mês">Total por mes</span>
+        <span class="total-amount" data-usd-base="149">USD 149</span>
+        <span class="total-ars"></span>
+        <div class="upfront-note"><span data-es="Pago único:" data-en="One-time payment:" data-pt="Pagamento único:">Pago único:</span> <span class="upfront-amount"></span> <span class="upfront-ars"></span></div>
+      </div>
+      <div class="price-per-user">
+        <span class="per-user-amount" data-usd-base="149" data-users="7">USD 21</span>
+        <span data-es="por usuario/mes" data-en="per user/month" data-pt="por usuário/mês">por usuario/mes</span>
+        <span class="per-user-ars"></span>
+      </div>
+      <ul class="price-features">
+        <li data-es="App Android + Windows" data-en="Android + Windows app" data-pt="App Android + Windows">App Android + Windows</li>
+        <li data-es="Todos los módulos" data-en="All modules" data-pt="Todos os módulos">Todos los módulos</li>
+        <li data-es="Bot de WhatsApp incluido" data-en="WhatsApp Bot included" data-pt="Bot de WhatsApp incluído">Bot de WhatsApp incluido</li>
+        <li data-es="Tienda online incluida" data-en="Online store included" data-pt="Loja online incluída">Tienda online incluida</li>
+        <li data-es="Soporte prioritario" data-en="Priority support" data-pt="Suporte prioritário">Soporte prioritario</li>
+      </ul>
+      <a href="https://wa.me/5493415040667?text=Hola%2C%20quiero%20el%20Plan%20Full%207%20usuarios%20de%20R21%20Cars" target="_blank" class="btn btn-secondary" data-es="Empezar" data-en="Start" data-pt="Começar">Empezar</a>
+    </div>
+
+    <div class="price-card fade-in">
+      <span class="price-badge badge-full" data-es="Full" data-en="Full" data-pt="Full">Full</span>
+      <h3 data-es="Celu + PC" data-en="Mobile + PC" data-pt="Celular + PC">Celu + PC</h3>
+      <div class="price-users" data-es="15 usuarios" data-en="15 users" data-pt="15 usuários">15 usuarios</div>
+      <div class="price-total-main">
+        <span class="total-label" data-es="Total por mes" data-en="Total per month" data-pt="Total por mês">Total por mes</span>
+        <span class="total-amount" data-usd-base="249">USD 249</span>
+        <span class="total-ars"></span>
+        <div class="upfront-note"><span data-es="Pago único:" data-en="One-time payment:" data-pt="Pagamento único:">Pago único:</span> <span class="upfront-amount"></span> <span class="upfront-ars"></span></div>
+      </div>
+      <div class="price-per-user">
+        <span class="per-user-amount" data-usd-base="249" data-users="15">USD 17</span>
+        <span data-es="por usuario/mes" data-en="per user/month" data-pt="por usuário/mês">por usuario/mes</span>
+        <span class="per-user-ars"></span>
+      </div>
+      <ul class="price-features">
+        <li data-es="App Android + Windows" data-en="Android + Windows app" data-pt="App Android + Windows">App Android + Windows</li>
+        <li data-es="Todos los módulos" data-en="All modules" data-pt="Todos os módulos">Todos los módulos</li>
+        <li data-es="Bot de WhatsApp incluido" data-en="WhatsApp Bot included" data-pt="Bot de WhatsApp incluído">Bot de WhatsApp incluido</li>
+        <li data-es="Tienda online incluida" data-en="Online store included" data-pt="Loja online incluída">Tienda online incluida</li>
+        <li data-es="Soporte prioritario" data-en="Priority support" data-pt="Suporte prioritário">Soporte prioritario</li>
+      </ul>
+      <a href="https://wa.me/5493415040667?text=Hola%2C%20quiero%20el%20Plan%20Full%2015%20usuarios%20de%20R21%20Cars" target="_blank" class="btn btn-secondary" data-es="Empezar" data-en="Start" data-pt="Começar">Empezar</a>
+    </div>
+  </div>
+
+  <div class="founder-box fade-in">
+    <strong data-es="🎁 Probá gratis 14 días" data-en="🎁 Try 14 days free" data-pt="🎁 Teste grátis 14 dias">🎁 Probá gratis 14 días</strong>
+    <p data-es="Sin tarjeta. Sin contrato. Cancelás cuando quieras. Soporte directo por WhatsApp con el creador." data-en="No card. No contract. Cancel anytime. Direct WhatsApp support with the creator." data-pt="Sem cartão. Sem contrato. Cancele quando quiser. Suporte direto por WhatsApp com o criador.">Sin tarjeta. Sin contrato. Cancelás cuando quieras. Soporte directo por WhatsApp con el creador.</p>
+  </div>
+</section>
+
+<!-- DESCUENTOS -->
+<section class="discounts-section">
+  <div class="discounts-inner">
+    <h2 class="fade-in" data-es="Ahorrá pagando adelantado" data-en="Save by paying upfront" data-pt="Economize pagando adiantado">Ahorrá pagando adelantado</h2>
+    <p class="section-sub fade-in" data-es="Cuanto más pagás por adelantado, más ahorrás." data-en="The more you pay upfront, the more you save." data-pt="Quanto mais você paga adiantado, mais economiza.">Cuanto más pagás por adelantado, más ahorrás.</p>
+
+    <div class="discount-cards fade-in">
+      <div class="discount-card"><div class="discount-pct">-10%</div><div class="discount-months" data-es="3 meses" data-en="3 months" data-pt="3 meses">3 meses</div><div class="discount-desc" data-es="Pago trimestral" data-en="Quarterly payment" data-pt="Pagamento trimestral">Pago trimestral</div></div>
+      <div class="discount-card highlight"><div class="discount-pct">-15%</div><div class="discount-months" data-es="6 meses" data-en="6 months" data-pt="6 meses">6 meses</div><div class="discount-desc" data-es="Pago semestral" data-en="Half-yearly payment" data-pt="Pagamento semestral">Pago semestral</div></div>
+      <div class="discount-card"><div class="discount-pct">-20%</div><div class="discount-months" data-es="1 año" data-en="1 year" data-pt="1 ano">1 año</div><div class="discount-desc" data-es="Pago anual" data-en="Annual payment" data-pt="Pagamento anual">Pago anual</div></div>
+    </div>
+
+    <h3 class="fade-in" style="font-size: 22px; font-weight: 800; text-align: center; margin-bottom: 24px;" data-es="Precio por usuario / mes" data-en="Price per user / month" data-pt="Preço por usuário / mês">Precio por usuario / mes</h3>
+
+    <div class="table-wrapper fade-in">
+      <table>
+        <thead>
+          <tr>
+            <th data-es="Plan" data-en="Plan" data-pt="Plano">Plan</th>
+            <th data-es="Usuarios" data-en="Users" data-pt="Usuários">Usuarios</th>
+            <th data-es="Mensual" data-en="Monthly" data-pt="Mensal">Mensual</th>
+            <th data-es="3 meses (-10%)" data-en="3 months (-10%)" data-pt="3 meses (-10%)">3 meses (-10%)</th>
+            <th data-es="6 meses (-15%)" data-en="6 months (-15%)" data-pt="6 meses (-15%)">6 meses (-15%)</th>
+            <th data-es="Anual (-20%)" data-en="Annual (-20%)" data-pt="Anual (-20%)">Anual (-20%)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="table-plan-name">Básico</span><span class="table-plan-badge badge-basic">1u</span></td><td>1</td><td class="table-price">USD 29</td><td class="table-price">USD 26</td><td class="table-price">USD 25</td><td class="table-price">USD 24</td></tr>
+          <tr><td><span class="table-plan-name">Básico</span><span class="table-plan-badge badge-basic">3u</span></td><td>3</td><td class="table-price">USD 23</td><td class="table-price">USD 21</td><td class="table-price">USD 20</td><td class="table-price">USD 19</td></tr>
+          <tr><td><span class="table-plan-name">Full</span><span class="table-plan-badge badge-full">3u</span></td><td>3</td><td class="table-price">USD 30</td><td class="table-price">USD 27</td><td class="table-price">USD 25</td><td class="table-price">USD 24</td></tr>
+          <tr><td><span class="table-plan-name">Full</span><span class="table-plan-badge badge-full">7u</span></td><td>7</td><td class="table-price">USD 21</td><td class="table-price">USD 19</td><td class="table-price">USD 18</td><td class="table-price">USD 17</td></tr>
+          <tr><td><span class="table-plan-name">Full</span><span class="table-plan-badge badge-full">15u</span></td><td>15</td><td class="table-price">USD 17</td><td class="table-price">USD 15</td><td class="table-price">USD 14</td><td class="table-price">USD 13</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="table-note" data-es="Precios por usuario, por mes, ya con el descuento aplicado." data-en="Prices per user, per month, discount already applied." data-pt="Preços por usuário, por mês, já com o desconto aplicado.">Precios por usuario, por mes, ya con el descuento aplicado.</p>
+  </div>
+</section>
+
+<!-- PAGOS -->
+<section class="payments-section">
+  <div class="payments-inner">
+    <h2 class="fade-in" data-es="Métodos de pago" data-en="Payment methods" data-pt="Métodos de pagamento">Métodos de pago</h2>
+    <p class="section-sub fade-in" data-es="Elegí el que más te convenga. Todos son seguros." data-en="Choose the one that suits you best. All are secure." data-pt="Escolha o que mais lhe convier. Todos são seguros.">Elegí el que más te convenga. Todos son seguros.</p>
+
+    <div class="payment-highlight fade-in">
+      <h3 data-es="💳 No pedimos tarjeta" data-en="💳 We don't ask for a card" data-pt="💳 Não pedimos cartão">💳 No pedimos tarjeta</h3>
+      <p data-es="No necesitás cargar tarjeta de crédito para probar ni para pagar. Elegís cómo pagar cuando quieras y listo." data-en="You don't need to load a credit card to try or pay. You choose how to pay whenever you want." data-pt="Você não precisa cadastrar cartão de crédito para testar nem para pagar. Escolhe como pagar quando quiser.">No necesitás cargar tarjeta de crédito para probar ni para pagar. Elegís cómo pagar cuando quieras y listo.</p>
+    </div>
+
+    <div class="payment-cards">
+      <div class="payment-card fade-in"><div class="payment-icon">💙</div><h4>MercadoPago</h4><p data-es="Transferí desde cualquier billetera o app bancaria al alias." data-en="Transfer from any wallet or bank app to the alias." data-pt="Transfira de qualquer carteira ou app bancário para o alias.">Transferí desde cualquier billetera o app bancaria al alias.</p></div>
+      <div class="payment-card fade-in"><div class="payment-icon">🏦</div><h4 data-es="Transferencia bancaria" data-en="Bank transfer" data-pt="Transferência bancária">Transferencia bancaria</h4><p data-es="CBU y alias. Desde cualquier home banking." data-en="CBU and alias. From any home banking." data-pt="CBU e alias. De qualquer internet banking.">CBU y alias. Desde cualquier home banking.</p></div>
+      <div class="payment-card fade-in"><div class="payment-icon">🌎</div><h4>PayPal</h4><p data-es="Para clientes del exterior. Pagá con tu cuenta PayPal." data-en="For international clients. Pay with your PayPal account." data-pt="Para clientes do exterior. Pague com sua conta PayPal.">Para clientes del exterior. Pagá con tu cuenta PayPal.</p></div>
+      <div class="payment-card fade-in"><div class="payment-icon">₿</div><h4>USDT (TRC20)</h4><p data-es="Cripto en red TRC20. Rápido y con comisiones bajas." data-en="Crypto on TRC20 network. Fast and low fees." data-pt="Cripto na rede TRC20. Rápido e com taxas baixas.">Cripto en red TRC20. Rápido y con comisiones bajas.</p></div>
+    </div>
+
+    <p class="payment-note" data-es="🔒 Tus datos bancarios nunca pasan por nosotros. Cada pago se hace directamente a la cuenta del proveedor del servicio." data-en="🔒 Your bank details never pass through us. Each payment goes directly to the service provider's account." data-pt="🔒 Seus dados bancários nunca passam por nós. Cada pagamento vai direto para a conta do provedor do serviço.">🔒 Tus datos bancarios nunca pasan por nosotros. Cada pago se hace directamente a la cuenta del proveedor del servicio.</p>
+  </div>
+</section>
+
+<!-- PASOS -->
+<section>
+  <h2 class="fade-in" data-es="Empezar es fácil" data-en="Getting started is easy" data-pt="Começar é fácil">Empezar es fácil</h2>
+  <p class="section-sub fade-in" data-es="En 3 pasos tenés tu agencia funcionando." data-en="In 3 steps your dealership is running." data-pt="Em 3 passos sua loja está funcionando.">En 3 pasos tenés tu agencia funcionando.</p>
+  <div class="steps">
+    <div class="step fade-in"><div class="step-num">1</div><h3 data-es="Probás gratis" data-en="Try for free" data-pt="Teste grátis">Probás gratis</h3><p data-es="14 días sin pagar nada. Sin tarjeta." data-en="14 days free. No card." data-pt="14 dias sem pagar nada. Sem cartão.">14 días sin pagar nada. Sin tarjeta.</p></div>
+    <div class="step fade-in"><div class="step-num">2</div><h3 data-es="Cargás tus datos" data-en="Load your data" data-pt="Carregue seus dados">Cargás tus datos</h3><p data-es="Autos, clientes, movimientos. O restauramos tu backup." data-en="Cars, clients, movements. Or we restore your backup." data-pt="Carros, clientes, movimentações. Ou restauramos seu backup.">Autos, clientes, movimientos. O restauramos tu backup.</p></div>
+    <div class="step fade-in"><div class="step-num">3</div><h3 data-es="El bot atiende solo" data-en="The bot answers alone" data-pt="O bot atende sozinho">El bot atiende solo</h3><p data-es="Vos dedicás a vender. El bot contesta 24/7." data-en="You focus on selling. The bot answers 24/7." data-pt="Você foca em vender. O bot responde 24/7.">Vos dedicás a vender. El bot contesta 24/7.</p></div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <h2 class="fade-in" data-es="Preguntas frecuentes" data-en="Frequently asked questions" data-pt="Perguntas frequentes">Preguntas frecuentes</h2>
+  <p class="section-sub fade-in" data-es="Lo que más nos preguntan antes de empezar." data-en="What dealers ask us most before getting started." data-pt="O que mais perguntam antes de começar.">Lo que más nos preguntan antes de empezar.</p>
+  <div class="faq-list">
+    <details class="faq-item fade-in" open>
+      <summary data-es="¿Necesito tarjeta de crédito para probar?" data-en="Do I need a credit card to try it?" data-pt="Preciso de cartão de crédito para testar?">¿Necesito tarjeta de crédito para probar?</summary>
+      <p data-es="No. Activás los 14 días gratis sin cargar ningún medio de pago. Elegís cómo pagar recién cuando decidís seguir." data-en="No. You activate the 14-day trial without loading any payment method. You choose how to pay only once you decide to continue." data-pt="Não. Você ativa os 14 dias grátis sem cadastrar nenhum meio de pagamento. Escolhe como pagar só quando decidir continuar.">No. Activás los 14 días gratis sin cargar ningún medio de pago. Elegís cómo pagar recién cuando decidís seguir.</p>
+    </details>
+    <details class="faq-item fade-in">
+      <summary data-es="¿Qué pasa con mis datos si cancelo?" data-en="What happens to my data if I cancel?" data-pt="O que acontece com meus dados se eu cancelar?">¿Qué pasa con mis datos si cancelo?</summary>
+      <p data-es="Son tuyos. Podés descargar un backup completo (vehículos, clientes, movimientos) desde Configuración en cualquier momento, estés activo o no." data-en="They're yours. You can download a full backup (vehicles, clients, movements) from Settings at any time, active or not." data-pt="São seus. Você pode baixar um backup completo (veículos, clientes, movimentações) em Configurações a qualquer momento.">Son tuyos. Podés descargar un backup completo (vehículos, clientes, movimientos) desde Configuración en cualquier momento, estés activo o no.</p>
+    </details>
+    <details class="faq-item fade-in">
+      <summary data-es="¿El bot de WhatsApp usa mi número personal?" data-en="Does the WhatsApp bot use my personal number?" data-pt="O bot de WhatsApp usa meu número pessoal?">¿El bot de WhatsApp usa mi número personal?</summary>
+      <p data-es="Vos elegís qué número conectar. El bot contesta desde ese WhatsApp las 24 horas y vos seguís viendo toda la conversación." data-en="You choose which number to connect. The bot answers from that WhatsApp 24/7 and you keep full visibility of the conversation." data-pt="Você escolhe qual número conectar. O bot responde por esse WhatsApp 24h e você continua vendo toda a conversa.">Vos elegís qué número conectar. El bot contesta desde ese WhatsApp las 24 horas y vos seguís viendo toda la conversación.</p>
+    </details>
+    <details class="faq-item fade-in">
+      <summary data-es="¿Puedo usarlo solo desde el celular, sin PC?" data-en="Can I use it only from my phone, without a PC?" data-pt="Posso usar só pelo celular, sem PC?">¿Puedo usarlo solo desde el celular, sin PC?</summary>
+      <p data-es="Sí, el plan Básico es justamente eso: todos los módulos desde el celular. El plan Full suma la app de escritorio para Windows." data-en="Yes, the Basic plan is exactly that: all modules from your phone. The Full plan adds the Windows desktop app." data-pt="Sim, o plano Básico é exatamente isso: todos os módulos pelo celular. O plano Full soma o app de computador para Windows.">Sí, el plan Básico es justamente eso: todos los módulos desde el celular. El plan Full suma la app de escritorio para Windows.</p>
+    </details>
+    <details class="faq-item fade-in">
+      <summary data-es="¿Cuántos usuarios puede tener mi agencia?" data-en="How many users can my dealership have?" data-pt="Quantos usuários minha loja pode ter?">¿Cuántos usuarios puede tener mi agencia?</summary>
+      <p data-es="Desde 1 hasta 15 usuarios con roles distintos (admin, gerente, vendedor, operario), según el plan que elijas." data-en="From 1 to 15 users with different roles (admin, manager, salesperson, staff), depending on your plan." data-pt="De 1 a 15 usuários com papéis diferentes (admin, gerente, vendedor, operador), de acordo com o plano.">Desde 1 hasta 15 usuarios con roles distintos (admin, gerente, vendedor, operario), según el plan que elijas.</p>
+    </details>
+    <details class="faq-item fade-in">
+      <summary data-es="¿Y si además vendo camiones?" data-en="What if I also sell trucks?" data-pt="E se eu também vender caminhões?">¿Y si además vendo camiones?</summary>
+      <p data-es="Podés sumar el módulo Camiones por un adicional de USD 9/mes. Todo funciona en el mismo sistema, con las mismas pantallas y el mismo bot. Escribinos y te armamos el plan combinado." data-en="You can add the Trucks module for an extra USD 9/month. Everything works in the same system, with the same screens and the same bot. Write to us and we'll put together the combined plan." data-pt="Você pode somar o módulo Caminhões por um adicional de USD 9/mês. Tudo funciona no mesmo sistema, com as mesmas telas e o mesmo bot. Escreva para nós e montamos o plano combinado.">Podés sumar el módulo Camiones por un adicional de USD 9/mes. Todo funciona en el mismo sistema, con las mismas pantallas y el mismo bot. Escribinos y te armamos el plan combinado.</p>
+    </details>
+    <details class="faq-item fade-in">
+      <summary data-es="¿Y si además vendo motos o lanchas?" data-en="What if I also sell motorcycles or boats?" data-pt="E se eu também vender motos ou lanchas?">¿Y si además vendo motos o lanchas?</summary>
+      <p data-es="R21 también tiene módulos para Motos y Náutica. Si tu agencia vende varios rubros a la vez, escribinos y te armamos un plan combinado a medida. Todo funciona en el mismo sistema." data-en="R21 also has modules for Motorcycles and Boats. If your dealership sells multiple categories at once, write to us and we'll build a custom combined plan. Everything works in the same system." data-pt="R21 também tem módulos para Motos e Náutica. Se sua loja vende várias categorias ao mesmo tempo, escreva para nós e montamos um plano combinado sob medida. Tudo funciona no mesmo sistema.">R21 también tiene módulos para Motos y Náutica. Si tu agencia vende varios rubros a la vez, escribinos y te armamos un plan combinado a medida. Todo funciona en el mismo sistema.</p>
+    </details>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section class="contact">
+  <div class="contact-inner">
+    <h2 class="fade-in" data-es="Empezá hoy mismo" data-en="Get started today" data-pt="Comece hoje mesmo">Empezá hoy mismo</h2>
+    <p class="section-sub fade-in" data-es="14 días gratis, sin tarjeta. Si tenés dudas antes de arrancar, escribinos." data-en="14 days free, no card. If you have questions before starting, write to us." data-pt="14 dias grátis, sem cartão. Se tiver dúvidas antes de começar, escreva para nós.">14 días gratis, sin tarjeta. Si tenés dudas antes de arrancar, escribinos.</p>
+    <div class="contact-buttons">
+      <a href="https://wa.me/5493415040667?text=Hola%2C%20quiero%20probar%20R21%20Cars%2014%20d%C3%ADas%20gratis" target="_blank" class="btn btn-whatsapp" data-es="💬 Empezar por WhatsApp" data-en="💬 Start on WhatsApp" data-pt="💬 Começar pelo WhatsApp">💬 Empezar por WhatsApp</a>
+      <a href="mailto:sistema.ruta21@gmail.com" class="btn btn-email" data-es="✉️ Email" data-en="✉️ Email" data-pt="✉️ Email">✉️ Email</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">R<span>21</span><span class="sufijo">CARS</span></div>
+    <p class="footer-tagline" data-es="Sistema de gestión para concesionarias de autos. Hecho en Argentina." data-en="Car dealership management system. Made in Argentina." data-pt="Sistema de gestão para lojas de carros. Feito na Argentina.">Sistema de gestión para concesionarias de autos. Hecho en Argentina.</p>
+    <div class="footer-links">
+      <a href="#demo" data-es="Demo" data-en="Demo" data-pt="Demo">Demo</a>
+      <a href="#funciones" data-es="Funciones" data-en="Features" data-pt="Recursos">Funciones</a>
+      <a href="#planes" data-es="Planes" data-en="Pricing" data-pt="Planos">Planes</a>
+      <a href="#faq" data-es="Preguntas" data-en="FAQ" data-pt="Perguntas">Preguntas</a>
+      <a href="https://wa.me/5493415040667" target="_blank">WhatsApp</a>
+    </div>
+    <p class="footer-copy">© 2026 R21 Cars — <a href="https://getaxiora.com">getaxiora.com</a></p>
+  </div>
+</footer>
+
+<script>
+  // ═════════════════════════════════════════════
+  //  IDIOMAS
+  // ═════════════════════════════════════════════
+  function setLang(lang) {
+    document.querySelectorAll('[data-es]').forEach(el => {
+      const val = el.getAttribute('data-' + lang);
+      if (val) el.textContent = val;
+    });
+    document.getElementById('btn-es').classList.toggle('active', lang === 'es');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    document.getElementById('btn-pt').classList.toggle('active', lang === 'pt');
+    const mobEs = document.getElementById('btn-es-mob');
+    const mobEn = document.getElementById('btn-en-mob');
+    const mobPt = document.getElementById('btn-pt-mob');
+    if (mobEs) mobEs.classList.toggle('active', lang === 'es');
+    if (mobEn) mobEn.classList.toggle('active', lang === 'en');
+    if (mobPt) mobPt.classList.toggle('active', lang === 'pt');
+    document.documentElement.lang = lang;
+    localStorage.setItem('r21-lang', lang);
+    if (typeof cambiarIdiomaDemoBot === 'function') cambiarIdiomaDemoBot(lang);
+  }
+
+  // ═════════════════════════════════════════════
+  //  COTIZACIÓN USD
+  // ═════════════════════════════════════════════
+  let cotizacionUSD = 0;
+  async function cargarCotizacion() {
+    try {
+      const res = await fetch('https://dolarapi.com/v1/dolares/blue');
+      const data = await res.json();
+      cotizacionUSD = data.venta || data.compra || 0;
+    } catch (e) {
+      console.log('No se pudo cargar la cotización:', e);
+      cotizacionUSD = 0;
+    }
+  }
+
+  const descuentos = { monthly: 0, q: 0.10, s: 0.15, y: 0.20 };
+  const mesesPeriodo = { monthly: 1, q: 3, s: 6, y: 12 };
+
+  function setPeriod(period) {
+    document.querySelectorAll('.period-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.period === period);
+    });
+    const desc = descuentos[period] || 0;
+    const meses = mesesPeriodo[period] || 1;
+    document.querySelectorAll('.per-user-amount').forEach(el => {
+      const base = parseFloat(el.dataset.usdBase);
+      const users = parseFloat(el.dataset.users || 1);
+      const perUser = Math.ceil((base * (1 - desc)) / users);
+      el.textContent = `USD ${perUser}`;
+      const arsEl = el.parentElement.querySelector('.per-user-ars');
+      if (arsEl && cotizacionUSD > 0) {
+        const ars = Math.round(perUser * cotizacionUSD);
+        arsEl.textContent = `≈ $${ars.toLocaleString('es-AR')} ARS`;
+      }
+    });
+    document.querySelectorAll('.total-amount').forEach(el => {
+      const base = parseFloat(el.dataset.usdBase);
+      const total = Math.ceil(base * (1 - desc));
+      el.textContent = `USD ${total}`;
+      const arsEl = el.parentElement.querySelector('.total-ars');
+      if (arsEl && cotizacionUSD > 0) {
+        const ars = Math.round(total * cotizacionUSD);
+        arsEl.textContent = `≈ $${ars.toLocaleString('es-AR')} ARS`;
+      }
+      const upfrontEl = el.closest('.price-total-main').querySelector('.upfront-note');
+      if (upfrontEl) {
+        if (meses > 1) {
+          const upfront = total * meses;
+          const amountEl = upfrontEl.querySelector('.upfront-amount');
+          const arsUpfrontEl = upfrontEl.querySelector('.upfront-ars');
+          amountEl.textContent = `USD ${upfront}`;
+          arsUpfrontEl.textContent = cotizacionUSD > 0
+            ? `(≈ $${Math.round(upfront * cotizacionUSD).toLocaleString('es-AR')} ARS)`
+            : '';
+          upfrontEl.style.display = 'block';
+        } else {
+          upfrontEl.style.display = 'none';
+        }
+      }
+    });
+    localStorage.setItem('r21-period', period);
+  }
+
+  // ═════════════════════════════════════════════
+  //  DEMO BOT
+  // ═════════════════════════════════════════════
+  const chatGuiones = CONFIG.demoBot;
+  let demoIdioma = 'es';
+  let demoGen = 0;
+  let demoIniciado = false;
+
+  function iniciarDemoBot() {
+    const chat = document.getElementById('waChat');
+    if (!chat) return;
+    demoGen++;
+    const miGen = demoGen;
+    chat.innerHTML = '';
+    let i = 0;
+    function paso() {
+      if (miGen !== demoGen) return;
+      const guion = chatGuiones[demoIdioma] || chatGuiones.es;
+      if (i >= guion.length) {
+        setTimeout(() => {
+          if (miGen !== demoGen) return;
+          chat.innerHTML = ''; i = 0; paso();
+        }, 3800);
+        return;
+      }
+      const msg = guion[i];
+      if (msg.de === 'out') {
+        const typing = document.createElement('div');
+        typing.className = 'wa-bubble wa-typing';
+        typing.innerHTML = '<div class="dots"><span></span><span></span><span></span></div>';
+        chat.appendChild(typing);
+        chat.scrollTop = chat.scrollHeight;
+        setTimeout(() => {
+          if (miGen !== demoGen) return;
+          typing.remove();
+          agregarBurbuja(msg);
+          i++;
+          setTimeout(paso, 900);
+        }, 1100);
+      } else {
+        agregarBurbuja(msg);
+        i++;
+        setTimeout(paso, 1000);
+      }
+    }
+    function formatoWa(texto) {
+      return texto.replace(/\*(.+?)\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
+    }
+    function agregarBurbuja(msg) {
+      const b = document.createElement('div');
+      b.className = `wa-bubble ${msg.de}`;
+      b.innerHTML = `${formatoWa(msg.texto)}<span class="wa-time">${msg.hora}</span>`;
+      chat.appendChild(b);
+      chat.scrollTop = chat.scrollHeight;
+    }
+    paso();
+  }
+
+  function cambiarIdiomaDemoBot(lang) {
+    demoIdioma = chatGuiones[lang] ? lang : 'es';
+    if (demoIniciado) iniciarDemoBot();
+  }
+
+  const demoObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !demoIniciado) {
+        demoIniciado = true;
+        iniciarDemoBot();
+        demoObserver.disconnect();
+      }
+    });
+  }, { threshold: 0.3 });
+  const demoSection = document.getElementById('demo');
+  if (demoSection) demoObserver.observe(demoSection);
+
+  // ═════════════════════════════════════════════
+  //  NAV
+  // ═════════════════════════════════════════════
+  const navEl = document.getElementById('siteNav');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const sectionsConSpy = ['demo', 'funciones', 'planes', 'faq'];
+
+  function actualizarNav() {
+    if (window.scrollY > 20) navEl.classList.add('compacto');
+    else navEl.classList.remove('compacto');
+    let activo = null;
+    for (const id of sectionsConSpy) {
+      const sec = document.getElementById(id);
+      if (!sec) continue;
+      const rect = sec.getBoundingClientRect();
+      if (rect.top <= 150 && rect.bottom >= 150) { activo = id; break; }
+    }
+    navLinks.forEach(a => {
+      const href = a.getAttribute('href');
+      a.classList.toggle('activo', href === '#' + activo);
+    });
+  }
+  window.addEventListener('scroll', actualizarNav, { passive: true });
+
+  // ═════════════════════════════════════════════
+  //  MENÚ MOBILE
+  // ═════════════════════════════════════════════
+  const burger = document.getElementById('navBurger');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  function abrirMenu() {
+    mobileMenu.classList.add('abierto');
+    burger.classList.add('abierto');
+    document.body.style.overflow = 'hidden';
+  }
+  function cerrarMenu() {
+    mobileMenu.classList.remove('abierto');
+    burger.classList.remove('abierto');
+    document.body.style.overflow = '';
+  }
+  function cerrarMenuSiFondo(e) {
+    if (e.target === mobileMenu) cerrarMenu();
+  }
+  burger.addEventListener('click', () => {
+    if (mobileMenu.classList.contains('abierto')) cerrarMenu();
+    else abrirMenu();
+  });
+
+  // ═════════════════════════════════════════════
+  //  FADE-IN
+  // ═════════════════════════════════════════════
+  const fadeObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        fadeObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+  document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
+
+  // ═════════════════════════════════════════════
+  //  INIT
+  // ═════════════════════════════════════════════
+  const navLang = (navigator.language || 'es').toLowerCase();
+  const autoLang = navLang.startsWith('pt') ? 'pt' : (navLang.startsWith('en') ? 'en' : 'es');
+  const savedLang = localStorage.getItem('r21-lang') || autoLang;
+  setLang(savedLang);
+
+  cargarCotizacion().then(() => {
+    const savedPeriod = localStorage.getItem('r21-period') || 'y';
+    setPeriod(savedPeriod);
+  });
+</script>
+
+</body>
+</html>

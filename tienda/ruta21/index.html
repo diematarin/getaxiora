@@ -741,7 +741,7 @@
 
 <!-- CTA VENDER -->
 <section class="cta-vender">
-  <p>¿Querés vender tu auto o entregarlo en consignación? <a href="https://wa.me/5493415040667?text=Hola%2C%20quiero%20vender%20o%20consignar%20mi%20auto" target="_blank">Escribinos</a></p>
+  <p id="ctaVenderTexto">¿Querés vender tu vehículo o entregarlo en consignación? <a href="https://wa.me/5493415040667?text=Hola%2C%20quiero%20vender%20o%20consignar%20mi%20vehiculo" target="_blank">Escribinos</a></p>
 </section>
 
 <!-- FOOTER -->
@@ -800,9 +800,22 @@
   let filtroTipoActivo = 'auto';
   let textoBusqueda = '';
 
+  // Mismo agrupamiento que usa la app: lancha/semirrígido/bote/moto de
+  // agua comparten pestaña "Botes", velero (único sin pestaña propia)
+  // cae en "Otros" junto a lo que no tenga grupo reconocido.
+  const GRUPOS_TIPO = {
+    auto: { emoji: '🚗', label: 'Autos' },
+    moto: { emoji: '🏍️', label: 'Motos' },
+    camion: { emoji: '🚛', label: 'Camiones' },
+    lancha: { emoji: '🚤', label: 'Botes' },
+    otros: { emoji: '⛵', label: 'Otros' },
+  };
+
   function bucketTipo(tipo) {
     const t = (tipo || 'auto').toLowerCase();
     if (t === 'moto') return 'moto';
+    if (t === 'camion') return 'camion';
+    if (['lancha', 'moto_agua', 'semirrigido', 'bote'].includes(t)) return 'lancha';
     if (t === 'auto' || t === '') return 'auto';
     return 'otros';
   }
@@ -982,19 +995,33 @@
 
       renderDestacado(catalogoCompleto);
 
+      // Pestañas dinámicas: solo se muestran los grupos que tienen al
+      // menos un vehículo cargado — así un cliente que solo vende
+      // botes ve directo "Botes" en vez de arrancar en "Autos" vacío.
+      const gruposConStock = Object.keys(GRUPOS_TIPO).filter(g =>
+        catalogoCompleto.some(a => bucketTipo(a.tipo) === g)
+      );
       const pestanasEl = document.getElementById('pestanasTipo');
-      const botones = [
-        ['auto', '🚗', 'Autos'],
-        ['moto', '🏍️', 'Motos'],
-        ['otros', '🚤', 'Otros'],
-      ];
-      pestanasEl.style.display = 'flex';
-      pestanasEl.innerHTML = botones.map(([tipo, emoji, label], i) =>
-        `<button class="pestana-btn ${i === 0 ? 'activo' : ''}" data-tipo="${tipo}" onclick="aplicarFiltroTipo('${tipo}')"><span class="pestana-emoji">${emoji}</span>${label}</button>`
-      ).join('');
+      if (gruposConStock.length > 1) {
+        pestanasEl.style.display = 'flex';
+        pestanasEl.innerHTML = gruposConStock.map((tipo, i) => {
+          const g = GRUPOS_TIPO[tipo];
+          return `<button class="pestana-btn ${i === 0 ? 'activo' : ''}" data-tipo="${tipo}" onclick="aplicarFiltroTipo('${tipo}')"><span class="pestana-emoji">${g.emoji}</span>${g.label}</button>`;
+        }).join('');
+      } else {
+        pestanasEl.style.display = 'none';
+      }
+
+      const tipoInicial = gruposConStock[0] || 'auto';
+      const ctaTexto = document.getElementById('ctaVenderTexto');
+      if (ctaTexto && tipoInicial === 'lancha' && gruposConStock.length === 1) {
+        ctaTexto.innerHTML =
+          '¿Querés vender tu embarcación o entregarla en consignación? ' +
+          '<a href="https://wa.me/5493415040667?text=Hola%2C%20quiero%20vender%20o%20consignar%20mi%20embarcacion" target="_blank">Escribinos</a>';
+      }
 
       inicializarBuscador();
-      aplicarFiltroTipo('auto');
+      aplicarFiltroTipo(tipoInicial);
     })
     .catch(err => {
       console.error('No se pudo cargar el catálogo:', err);
