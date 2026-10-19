@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Política de privacidad — R21</title>
+<meta name="description" content="Qué datos usa la aplicación Sistema R21, para qué, dónde se guardan y cómo pedir su eliminación.">
+<link rel="canonical" href="https://getaxiora.com/privacidad.html">
+<style>
+  :root { --fondo:#ffffff; --texto:#1b1f23; --suave:#5b6670; --acento:#1b7a3d; --linea:#e3e7eb; }
+  @media (prefers-color-scheme: dark) {
+    :root { --fondo:#14171a; --texto:#e8ecef; --suave:#9aa5ae; --acento:#5fd38a; --linea:#2a3036; }
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--fondo); color:var(--texto); font:16px/1.65 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; }
+  main { max-width: 760px; margin: 0 auto; padding: 32px 20px 64px; }
+  a { color: var(--acento); }
+  h1 { font-size: 1.9rem; margin: 0 0 4px; }
+  h2 { font-size: 1.2rem; margin: 32px 0 8px; padding-top: 8px; border-top: 1px solid var(--linea); }
+  .fecha { color: var(--suave); margin: 0 0 24px; }
+  table { width:100%; border-collapse: collapse; margin: 12px 0; font-size: .95rem; }
+  th, td { text-align:left; padding: 8px 10px; border-bottom: 1px solid var(--linea); vertical-align: top; }
+  th { color: var(--suave); font-weight: 600; }
+  .volver { display:inline-block; margin-bottom: 20px; text-decoration:none; }
+</style>
+</head>
+<body>
+<main>
+  <a class="volver" href="/">← Volver a R21</a>
+  <h1>Política de privacidad</h1>
+  <p class="fecha">Aplicación <strong>Sistema R21</strong> · Última actualización: octubre de 2026</p>
+
+  <p>Sistema R21 es una aplicación de gestión para agencias y comercios que venden autos, motos, camiones y embarcaciones. Esta política explica qué datos usa la aplicación, para qué, dónde se guardan y cómo podés pedir que se eliminen. Responsable del servicio: equipo de R21 (<a href="https://getaxiora.com">getaxiora.com</a>) — contacto: <a href="mailto:sistema.ruta21@gmail.com">sistema.ruta21@gmail.com</a>.</p>
+
+  <h2>1. Quién es dueño de los datos</h2>
+  <p>La aplicación la usa cada agencia con su propia cuenta. Los datos que la agencia carga (vehículos, clientes, movimientos de caja, documentos, fotos) son <strong>de la agencia</strong>, que es responsable de tener el consentimiento de las personas cuyos datos carga (por ejemplo, sus clientes). R21 trata esos datos solamente para prestar el servicio.</p>
+
+  <h2>2. Qué datos se usan</h2>
+  <table>
+    <tr><th>Dato</th><th>Para qué</th></tr>
+    <tr><td>Usuario, PIN y código de agencia</td><td>Iniciar sesión y separar los datos de cada agencia.</td></tr>
+    <tr><td>Datos de vehículos, fotos y documentos</td><td>Mostrar el stock, armar catálogos, fichas y contratos.</td></tr>
+    <tr><td>Datos de clientes y proveedores (nombre, teléfono, interés)</td><td>Agenda comercial, seguimiento y mensajes que la agencia decide enviar.</td></tr>
+    <tr><td>Movimientos de caja y contabilidad</td><td>Reportes de ganancias, caja y cuentas corrientes.</td></tr>
+    <tr><td>Datos de la agencia (nombre, domicilio, Instagram, logo)</td><td>Que aparezcan en catálogos, mensajes y contratos.</td></tr>
+    <tr><td>Identificador del dispositivo para notificaciones</td><td>Enviar avisos (nuevo cliente, recordatorios).</td></tr>
+  </table>
+
+  <h2>3. Permisos del teléfono</h2>
+  <p>La aplicación pide permisos solo cuando necesita la función correspondiente, y no funciona peor si los rechazás (solo se desactiva esa función):</p>
+  <table>
+    <tr><th>Permiso</th><th>Uso</th></tr>
+    <tr><td>Cámara y fotos</td><td>Sacar o elegir fotos de los vehículos, documentos y el logo de la agencia.</td></tr>
+    <tr><td>Micrófono</td><td>Comandos y búsqueda por voz. El audio lo procesa el reconocimiento de voz del propio teléfono.</td></tr>
+    <tr><td>Contactos</td><td>Guardar un cliente en la agenda del teléfono, solo si vos lo pedís.</td></tr>
+    <tr><td>Ubicación</td><td>Marcar dónde se encuentra una unidad o una visita, solo si vos lo pedís.</td></tr>
+    <tr><td>Huella / biometría</td><td>Desbloquear la aplicación. La huella la gestiona Android; R21 nunca la recibe.</td></tr>
+    <tr><td>Notificaciones y alarmas</td><td>Avisos y recordatorios de agenda, vencimientos y clientes.</td></tr>
+  </table>
+
+  <h2>4. Dónde se guardan los datos y con quién se comparten</h2>
+  <p>Los datos de cada agencia se guardan en una planilla de Google (Google Sheets / Drive) creada para esa agencia. Para funcionar, la aplicación usa estos proveedores:</p>
+  <ul>
+    <li><strong>Google</strong> (Sheets, Drive, Apps Script, Firebase Cloud Messaging): almacenamiento, servidor y notificaciones.</li>
+    <li><strong>Cloudinary</strong>: alojamiento de las fotos de los vehículos y del logo.</li>
+    <li><strong>Servicios de inteligencia artificial</strong>: para redactar descripciones de vehículos se envía solo la ficha técnica de la unidad (marca, modelo, año, equipamiento y datos de la agencia). No se envían datos personales de clientes.</li>
+    <li><strong>WhatsApp</strong>: cuando la agencia usa el bot de consultas, los mensajes se procesan para responder y registrar el interés.</li>
+  </ul>
+  <p>No vendemos datos personales ni los usamos para publicidad de terceros.</p>
+
+  <h2>5. Seguridad</h2>
+  <p>La comunicación con los servidores es cifrada (HTTPS). Cada agencia accede únicamente a su propia información mediante un código firmado, y las acciones administrativas están protegidas con clave. Aun así, ningún sistema es infalible: recomendamos usar PINs que no sean obvios y mantener el teléfono bloqueado.</p>
+
+  <h2>6. Cuentas de prueba y vencimiento</h2>
+  <p>Las cuentas de prueba duran 14 días. Al vencer, pasan a modo solo lectura: podés ver y descargar tu información, pero no cargar datos nuevos hasta elegir un plan.</p>
+
+  <h2>7. Tus derechos y eliminación de datos</h2>
+  <p>Podés pedir en cualquier momento acceso, corrección o <strong>eliminación de tu cuenta y de todos los datos asociados</strong> escribiendo a <a href="mailto:sistema.ruta21@gmail.com">sistema.ruta21@gmail.com</a> desde el correo con el que contrataste, indicando el código de tu agencia. Respondemos dentro de los 10 días hábiles y eliminamos la información de la planilla, las fotos y los identificadores de notificaciones. Los titulares de datos personales en Argentina pueden además ejercer sus derechos ante la Agencia de Acceso a la Información Pública (AAIP), autoridad de aplicación de la Ley 25.326.</p>
+
+  <h2>8. Menores</h2>
+  <p>La aplicación está pensada para uso comercial por personas mayores de edad.</p>
+
+  <h2>9. Cambios en esta política</h2>
+  <p>Si cambiamos esta política, publicaremos la nueva versión en esta página con su fecha de actualización.</p>
+
+  <h2>10. Contacto</h2>
+  <p>Consultas: <a href="mailto:sistema.ruta21@gmail.com">sistema.ruta21@gmail.com</a> · WhatsApp <a href="https://wa.me/5493415040667">+54 9 341 504-0667</a>.</p>
+</main>
+</body>
+</html>

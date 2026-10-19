@@ -860,6 +860,39 @@
     .payment-highlight { padding: 28px 22px; }
     .payment-highlight h3 { font-size: 22px; }
   }
+
+  /* R21-COMBOS */
+  #combos { max-width: 1100px; margin: 0 auto; padding: 80px 24px; }
+  #combos h2 { text-align: center; }
+  .combo-box { background: var(--white, #fff); border: 1px solid var(--gray-200, #E5E7EB); border-radius: var(--radius-xl, 28px); padding: 28px; box-shadow: var(--shadow-md, 0 4px 14px rgba(0,0,0,.06)); margin-top: 28px; }
+  .combo-label { font-size: 13px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--gray-500, #6B7280); margin: 18px 0 10px; }
+  .combo-label:first-child { margin-top: 0; }
+  .combo-chips { display: flex; flex-wrap: wrap; gap: 10px; }
+  .combo-chip { border: 2px solid var(--gray-200, #E5E7EB); background: var(--white, #fff); color: var(--gray-900, #111); border-radius: 999px; padding: 10px 18px; font: inherit; font-weight: 700; cursor: pointer; transition: all .2s; }
+  .combo-chip:hover { border-color: var(--gold, #D4AF37); }
+  .combo-chip.on { background: var(--green, #1B5E3F); border-color: var(--green, #1B5E3F); color: #fff; }
+  .combo-result { margin-top: 26px; padding: 22px; border-radius: var(--radius-lg, 20px); background: var(--gray-50, #FAFAFA); border: 1px solid var(--gray-200, #E5E7EB); display: flex; flex-wrap: wrap; gap: 22px; align-items: center; justify-content: space-between; }
+  .combo-total { font-size: 44px; font-weight: 900; letter-spacing: -1px; color: var(--green, #1B5E3F); line-height: 1.05; }
+  .combo-total small { font-size: 16px; font-weight: 700; color: var(--gray-500, #6B7280); }
+  .combo-detail { font-size: 14px; color: var(--gray-700, #4B5563); margin-top: 8px; line-height: 1.6; }
+  .combo-ahorro { display: inline-block; margin-top: 8px; padding: 4px 12px; border-radius: 999px; background: rgba(212,175,55,.18); color: var(--gold-deep, #B8941F); font-weight: 800; font-size: 13px; }
+  .combo-cta { background: var(--green-bright, #25D366); color: #fff; font-weight: 800; padding: 14px 26px; border-radius: 999px; text-decoration: none; white-space: nowrap; }
+  .combo-cta:hover { filter: brightness(.95); }
+  .combo-scroll { overflow-x: auto; margin-top: 18px; border: 1px solid var(--gray-200, #E5E7EB); border-radius: var(--radius-lg, 20px); }
+  .combo-table { width: 100%; border-collapse: collapse; min-width: 640px; font-size: 15px; }
+  .combo-table th, .combo-table td { padding: 12px 14px; text-align: center; border-bottom: 1px solid var(--gray-200, #E5E7EB); }
+  .combo-table th { background: var(--gray-100, #F5F5F5); color: var(--gray-900, #111); font-size: 13px; font-weight: 800; }
+  .combo-table td { color: var(--gray-900, #111); }
+  .combo-table th:first-child, .combo-table td:first-child { text-align: left; font-weight: 700; }
+  .combo-table tr:last-child td { border-bottom: none; }
+  .combo-table td.sel { background: rgba(37,211,102,.12); font-weight: 800; }
+  .combo-nota { margin-top: 14px; font-size: 13px; color: var(--gray-500, #6B7280); line-height: 1.55; }
+  .herr-sub { display: flex; align-items: center; gap: 12px; justify-content: center; margin: 56px 0 4px; }
+  .herr-sub h3 { font-size: 24px; font-weight: 800; }
+  .herr-tag { background: var(--gold, #D4AF37); color: #111; font-weight: 800; font-size: 12px; padding: 4px 12px; border-radius: 999px; }
+  #herramientas { max-width: 1200px; margin: 0 auto; padding: 80px 24px; }
+  #herramientas h2 { text-align: center; }
+  @media (max-width: 700px) { .combo-total { font-size: 36px; } .combo-box { padding: 20px; } .combo-cta { width: 100%; text-align: center; } }
 </style>
 </head>
 <body>
@@ -871,7 +904,9 @@
     <a href="#rubros" data-es="Rubros" data-en="Categories" data-pt="Categorias">Rubros</a>
     <a href="#sistema" data-es="El sistema" data-en="The system" data-pt="O sistema">El sistema</a>
     <a href="#precios" data-es="Precios" data-en="Pricing" data-pt="Preços">Precios</a>
+    <a href="#combos" data-es="Combos" data-en="Combos" data-pt="Combos">Combos</a>
     <a href="#faq" data-es="Preguntas" data-en="FAQ" data-pt="Perguntas">Preguntas</a>
+    <a href="app/" data-es="Ingresar" data-en="Log in" data-pt="Entrar">Ingresar</a>
   </div>
   <div class="nav-right">
     <div class="lang-switch">
@@ -890,7 +925,9 @@
     <a href="#rubros" onclick="cerrarMenu()" data-es="Rubros" data-en="Categories" data-pt="Categorias">Rubros</a>
     <a href="#sistema" onclick="cerrarMenu()" data-es="El sistema" data-en="The system" data-pt="O sistema">El sistema</a>
     <a href="#precios" onclick="cerrarMenu()" data-es="Precios" data-en="Pricing" data-pt="Preços">Precios</a>
+    <a href="#combos" onclick="cerrarMenu()" data-es="Combos" data-en="Combos" data-pt="Combos">Combos</a>
     <a href="#faq" onclick="cerrarMenu()" data-es="Preguntas" data-en="FAQ" data-pt="Perguntas">Preguntas</a>
+    <a href="app/" onclick="cerrarMenu()" data-es="Ingresar al sistema" data-en="Log in" data-pt="Entrar no sistema">Ingresar al sistema</a>
     <a href="https://wa.me/5493415040667?text=Hola%2C%20quiero%20probar%20R21%2014%20d%C3%ADas%20gratis" target="_blank" class="btn btn-primary" data-es="🚀 Probar 14 días gratis" data-en="🚀 Try 14 days free" data-pt="🚀 Teste 14 dias grátis">🚀 Probar 14 días gratis</a>
     <div class="mobile-lang">
       <div class="lang-switch">
@@ -1009,6 +1046,46 @@
       <h3 data-es="Multiidioma" data-en="Multi-language" data-pt="Multilíngue">Multiidioma</h3>
       <p data-es="Español, inglés y portugués, listo para clientes de toda la región." data-en="Spanish, English and Portuguese, ready for clients across the region." data-pt="Espanhol, inglês e português, pronto para clientes de toda a região.">Español, inglés y portugués, listo para clientes de toda la región.</p>
     </div>
+    <div class="feature-common fade-in">
+      <div class="feature-common-icon">🎯</div>
+      <h3 data-es="Compras inteligentes" data-en="Smart buying" data-pt="Compras inteligentes">Compras inteligentes</h3>
+      <p data-es="Con la guía de precios, la app te dice cuánto pagar, analiza subastas con IA y evalúa las listas de tu proveedor. En autos, plan Full." data-en="With the price guide, the app tells you how much to pay, analyses auctions with AI and evaluates your supplier lists. For cars, Full plan." data-pt="Com o guia de preços, o app diz quanto pagar, analisa leilões com IA e avalia as listas do seu fornecedor. Em carros, plano Full.">Con la guía de precios, la app te dice cuánto pagar, analiza subastas con IA y evalúa las listas de tu proveedor. En autos, plan Full.</p>
+    </div>
+    <div class="feature-common fade-in">
+      <div class="feature-common-icon">📅</div>
+      <h3 data-es="Agenda y vencimientos" data-en="Agenda and deadlines" data-pt="Agenda e vencimentos">Agenda y vencimientos</h3>
+      <p data-es="Visitas, seguros, VTV y patentes con alertas para que no se te escape ninguna venta ni ningún trámite." data-en="Visits, insurance, inspections and taxes with alerts so no sale or paperwork slips through." data-pt="Visitas, seguros, vistorias e impostos com alertas para não perder nenhuma venda nem trâmite.">Visitas, seguros, VTV y patentes con alertas para que no se te escape ninguna venta ni ningún trámite.</p>
+    </div>
+    <div class="feature-common fade-in">
+      <div class="feature-common-icon">🧾</div>
+      <h3 data-es="Caja, cheques y recibos" data-en="Cash, cheques and receipts" data-pt="Caixa, cheques e recibos">Caja, cheques y recibos</h3>
+      <p data-es="Cierre de caja diario por medio de pago, transferencias entre efectivo y banco, cheques pendientes y recibos en PDF con el monto en letras." data-en="Daily cash close by payment method, transfers between cash and bank, pending cheques and PDF receipts with the amount in words." data-pt="Fechamento de caixa diário, cheques pendentes e recibos em PDF com o valor por extenso.">Cierre de caja diario, cheques pendientes y recibos en PDF con el monto en letras.</p>
+    </div>
+    <div class="feature-common fade-in">
+      <div class="feature-common-icon">🛡️</div>
+      <h3 data-es="Control y auditoría" data-en="Control and audit" data-pt="Controle e auditoria">Control y auditoría</h3>
+      <p data-es="Roles con permisos, registro de quién hizo qué y ventas por vendedor. Sabés todo lo que pasa en tu agencia." data-en="Roles with permissions, a log of who did what and sales by salesperson. You know everything happening in your dealership." data-pt="Perfis com permissões, registro de quem fez o quê e vendas por vendedor. Você sabe tudo o que acontece na sua loja.">Roles con permisos, registro de quién hizo qué y ventas por vendedor. Sabés todo lo que pasa en tu agencia.</p>
+    </div>
+    <div class="feature-common fade-in">
+      <div class="feature-common-icon">✨</div>
+      <h3 data-es="Ficha de lujo por rubro" data-en="Premium spec sheet per category" data-pt="Ficha premium por categoria">Ficha de lujo por rubro</h3>
+      <p data-es="Embarcaciones, motos y camiones con su ficha técnica propia: motorización, eslora, equipamiento, capacidad. PDF listo para enviar al cliente." data-en="Boats, motorcycles and trucks with their own spec sheet: engine, length, equipment, capacity. PDF ready to send to the customer." data-pt="Embarcações, motos e caminhões com ficha técnica própria: motorização, comprimento, equipamentos, capacidade. PDF pronto para enviar ao cliente.">Embarcaciones, motos y camiones con su ficha técnica propia: motorización, eslora, equipamiento, capacidad. PDF listo para enviar al cliente.</p>
+    </div>
+    <div class="feature-common fade-in">
+      <div class="feature-common-icon">🏷️</div>
+      <h3 data-es="Tu marca en todo" data-en="Your brand everywhere" data-pt="Sua marca em tudo">Tu marca en todo</h3>
+      <p data-es="Cada agencia carga su logo, domicilio e Instagram una vez y salen en catálogos, contratos y mensajes. Se ve como tu sistema, no el de otro." data-en="Each dealership loads its logo, address and Instagram once and they appear on catalogs, contracts and messages. It looks like your system, not someone else’s." data-pt="Cada agência cadastra logo, endereço e Instagram uma vez e eles aparecem em catálogos, contratos e mensagens. Parece o seu sistema, não o de outro.">Cada agencia carga su logo, domicilio e Instagram una vez y salen en catálogos, contratos y mensajes. Se ve como tu sistema, no el de otro.</p>
+    </div>
+    <div class="feature-common fade-in">
+      <div class="feature-common-icon">📣</div>
+      <h3 data-es="Publicá en todos lados" data-en="Post everywhere" data-pt="Publique em todos os lugares">Publicá en todos lados</h3>
+      <p data-es="Textos listos con IA para WhatsApp, Instagram, Marketplace y MercadoLibre, con título, datos y tu contacto. Elegís la red y copiás o compartís." data-en="AI-written posts ready for WhatsApp, Instagram, Marketplace and MercadoLibre, with title, details and your contact. Pick the network, then copy or share." data-pt="Textos prontos com IA para WhatsApp, Instagram, Marketplace e MercadoLibre, com título, dados e seu contato. Escolha a rede e copie ou compartilhe.">Textos listos con IA para WhatsApp, Instagram, Marketplace y MercadoLibre, con título, datos y tu contacto. Elegís la red y copiás o compartís.</p>
+    </div>
+    <div class="feature-common fade-in">
+      <div class="feature-common-icon">📈</div>
+      <h3 data-es="Precio con tu historial" data-en="Price from your history" data-pt="Preço pelo seu histórico">Precio con tu historial</h3>
+      <p data-es="En motos, camiones y embarcaciones el sistema sugiere el precio con lo que tu agencia ya compró y vendió. Mientras más usás, más preciso." data-en="For motorcycles, trucks and boats the system suggests a price based on what your dealership has already bought and sold. The more you use it, the sharper it gets." data-pt="Em motos, caminhões e embarcações o sistema sugere o preço com base no que sua agência já comprou e vendeu. Quanto mais usa, mais preciso.">En motos, camiones y embarcaciones el sistema sugiere el precio con lo que tu agencia ya compró y vendió. Mientras más usás, más preciso.</p>
+    </div>
   </div>
 </section>
 
@@ -1046,7 +1123,7 @@
 <!-- PRECIOS BASE -->
 <section id="precios" class="precios-section">
   <h2 class="fade-in" data-es="Planes simples, desde cada rubro" data-en="Simple plans, from each category" data-pt="Planos simples, de cada categoria">Planes simples, desde cada rubro</h2>
-  <p class="section-sub fade-in" data-es="Cada rubro tiene sus planes. El precio base cambia según el rubro; el resto de la escalera (más usuarios, más prestaciones) es igual para todos." data-en="Each category has its own plans. The base price changes per category; the rest of the ladder (more users, more features) is the same for all." data-pt="Cada categoria tem seus planos. O preço base muda por categoria; o resto da escada (mais usuários, mais recursos) é igual para todos.">Cada rubro tiene sus planes. El precio base cambia según el rubro; el resto de la escalera (más usuarios, más prestaciones) es igual para todos.</p>
+  <p class="section-sub fade-in" data-es="Cada rubro tiene sus planes, desde 1 usuario hasta 15. Autos, Motos y Camiones comparten precios; Náutica tiene los suyos." data-en="Each category has its own plans, from 1 to 15 users. Cars, Bikes and Trucks share prices; Boats has its own." data-pt="Cada categoria tem seus planos, de 1 a 15 usuários. Carros, Motos e Caminhões compartilham preços; Náutica tem os seus.">Cada rubro tiene sus planes, desde 1 usuario hasta 15. Autos, Motos y Camiones comparten precios; Náutica tiene los suyos.</p>
 
   <div class="precios-grid">
     <a href="autos/#planes" class="precio-rubro fade-in">
@@ -1082,7 +1159,14 @@
     </a>
   </div>
 
-  <p class="precios-nota fade-in" data-es="💡 14 días gratis en cualquier rubro, sin tarjeta. Los add-ons (sumar módulos) se cotizan según el caso — escribinos por WhatsApp." data-en="💡 14 days free in any category, no card. Add-ons (adding modules) are quoted per case — write to us on WhatsApp." data-pt="💡 14 dias grátis em qualquer categoria, sem cartão. Os add-ons (somar módulos) são cotizados por caso — escreva para nós no WhatsApp.">💡 14 días gratis en cualquier rubro, sin tarjeta. Los add-ons (sumar módulos) se cotizan según el caso — escribinos por WhatsApp.</p>
+  <p class="precios-nota fade-in" data-es="💡 14 días gratis en cualquier rubro, sin tarjeta. Sumar módulos tiene precio fijo: +USD 9/mes por módulo extra. Armá tu combo abajo." data-en="💡 14 days free in any category, no card. Adding modules has a fixed price: +USD 9/month per extra module. Build your combo below." data-pt="💡 14 dias grátis em qualquer categoria, sem cartão. Somar módulos tem preço fixo: +USD 9/mês por módulo extra. Monte seu combo abaixo.">💡 14 días gratis en cualquier rubro, sin tarjeta. Sumar módulos tiene precio fijo: +USD 9/mes por módulo extra. Armá tu combo abajo.</p>
+</section>
+
+<!-- R21-COMBOS -->
+<section id="combos">
+  <h2 class="fade-in" data-es="Armá tu combo" data-en="Build your combo" data-pt="Monte seu combo">Armá tu combo</h2>
+  <p class="section-sub fade-in" data-es="Elegí tus rubros y tu plan: el total se calcula al instante. Sin letra chica." data-en="Pick your categories and plan: the total is calculated instantly. No fine print." data-pt="Escolha suas categorias e seu plano: o total é calculado na hora. Sem letra miúda." style="text-align:center">Elegí tus rubros y tu plan: el total se calcula al instante. Sin letra chica.</p>
+  <div id="comboApp" class="combo-box" data-default="autos"></div>
 </section>
 
 <!-- PAGOS -->
@@ -1137,8 +1221,20 @@
       <p data-es="Sí, el plan Básico es justamente eso: todo el sistema desde el celular. El plan Full suma la app de escritorio para Windows y la tienda online." data-en="Yes, the Basic plan is exactly that: the whole system from your phone. The Full plan adds the Windows desktop app and the online store." data-pt="Sim, o plano Básico é exatamente isso: todo o sistema pelo celular. O plano Full soma o app de computador para Windows e a loja online.">Sí, el plan Básico es justamente eso: todo el sistema desde el celular. El plan Full suma la app de escritorio para Windows y la tienda online.</p>
     </details>
     <details class="faq-item fade-in">
-      <summary data-es="¿Cuánto cuesta sumar un módulo extra?" data-en="How much does it cost to add an extra module?" data-pt="Quanto custa somar um módulo extra?">¿Cuánto cuesta sumar un módulo extra?</summary>
-      <p data-es="Depende del rubro. Sumar Camiones desde Autos o al revés ronda los USD 9/mes. Sumar Náutica desde Motos ronda los USD 12-15/mes. Escribinos por WhatsApp y te armamos el plan combinado." data-en="It depends on the category. Adding Trucks from Cars or vice versa is around USD 9/month. Adding Boats from Motorcycles is around USD 12-15/month. Write to us on WhatsApp and we'll build the combined plan." data-pt="Depende da categoria. Somar Caminhões de Carros ou vice-versa é em torno de USD 9/mês. Somar Náutica de Motos é em torno de USD 12-15/mês. Escreva para nós no WhatsApp e montamos o plano combinado.">Depende del rubro. Sumar Camiones desde Autos o al revés ronda los USD 9/mes. Sumar Náutica desde Motos ronda los USD 12-15/mes. Escribinos por WhatsApp y te armamos el plan combinado.</p>
+      <summary data-es="¿Qué pasa cuando terminan los 14 días?" data-en="What happens when the 14 days end?" data-pt="O que acontece quando os 14 dias terminam?">¿Qué pasa cuando terminan los 14 días?</summary>
+      <p data-es="Tu cuenta pasa a solo lectura: podés seguir viendo y descargando todos tus datos, pero no cargar movimientos nuevos hasta que elijas un plan. No se borra nada." data-en="Your account becomes read-only: you can keep viewing and downloading all your data, but you cannot add new entries until you choose a plan. Nothing is deleted." data-pt="Sua conta passa a somente leitura: você pode continuar vendo e baixando todos os seus dados, mas não lançar novos registros até escolher um plano. Nada é apagado.">Tu cuenta pasa a solo lectura: podés seguir viendo y descargando todos tus datos, pero no cargar movimientos nuevos hasta que elijas un plan. No se borra nada.</p>
+    </details>
+    <details class="faq-item fade-in">
+      <summary data-es="¿Cuánto cuesta sumar otro rubro?" data-en="How much does it cost to add another category?" data-pt="Quanto custa somar outra categoria?">¿Cuánto cuesta sumar otro rubro?</summary>
+      <p data-es="La regla es simple: se toma el plan del módulo más caro y cada módulo extra suma USD 9/mes. Por ejemplo, en el plan Básico de 1 usuario, Autos + Motos cuesta USD 38 y Motos + Náutica USD 51. Armá tu combo en la sección Combos y mirá el total al instante." data-en="The rule is simple: take the plan of the most expensive module and each extra module adds USD 9/month. For example, on the 1-user Basic plan, Cars + Bikes costs USD 38 and Bikes + Boats USD 51. Build your combo in the Combos section and see the total instantly." data-pt="A regra é simples: considera-se o plano do módulo mais caro e cada módulo extra soma USD 9/mês. Por exemplo, no plano Básico de 1 usuário, Carros + Motos custa USD 38 e Motos + Náutica USD 51. Monte seu combo na seção Combos e veja o total na hora.">La regla es simple: se toma el plan del módulo más caro y cada módulo extra suma USD 9/mes. Por ejemplo, en el plan Básico de 1 usuario, Autos + Motos cuesta USD 38 y Motos + Náutica USD 51. Armá tu combo en la sección Combos y mirá el total al instante.</p>
+    </details>
+    <details class="faq-item fade-in">
+      <summary data-es="¿Mis datos están seguros?" data-en="Is my data safe?" data-pt="Meus dados estão seguros?">¿Mis datos están seguros?</summary>
+      <p data-es="Cada agencia tiene su propio espacio, separado del resto, y los usuarios tienen roles con permisos distintos. Además queda un registro de quién hizo cada cambio y podés descargar un backup completo cuando quieras." data-en="Each dealership has its own space, separate from all others, and users have roles with different permissions. There is also a log of who made each change and you can download a full backup whenever you like." data-pt="Cada loja tem seu próprio espaço, separado das demais, e os usuários têm perfis com permissões diferentes. Também fica um registro de quem fez cada alteração e você pode baixar um backup completo quando quiser.">Cada agencia tiene su propio espacio, separado del resto, y los usuarios tienen roles con permisos distintos. Además queda un registro de quién hizo cada cambio y podés descargar un backup completo cuando quieras.</p>
+    </details>
+    <details class="faq-item fade-in">
+      <summary data-es="¿En qué dispositivos funciona?" data-en="Which devices does it run on?" data-pt="Em quais dispositivos funciona?">¿En qué dispositivos funciona?</summary>
+      <p data-es="La app es para celulares Android. El plan Full suma además la app de escritorio para Windows, con la misma información en tiempo real." data-en="The app is for Android phones. The Full plan also adds the Windows desktop app, with the same information in real time." data-pt="O app é para celulares Android. O plano Full soma também o app de desktop para Windows, com as mesmas informações em tempo real.">La app es para celulares Android. El plan Full suma además la app de escritorio para Windows, con la misma información en tiempo real.</p>
     </details>
   </div>
 </section>
@@ -1166,6 +1262,7 @@
       <a href="camiones/" data-es="Camiones" data-en="Trucks" data-pt="Caminhões">Camiones</a>
       <a href="nautica/" data-es="Náutica" data-en="Boating" data-pt="Náutica">Náutica</a>
       <a href="https://wa.me/5493415040667" target="_blank">WhatsApp</a>
+      <a href="privacidad.html" data-es="Privacidad" data-en="Privacy" data-pt="Privacidade">Privacidad</a>
     </div>
     <p class="footer-copy">© 2026 R21 — <a href="https://getaxiora.com">getaxiora.com</a></p>
   </div>
@@ -1263,5 +1360,125 @@
   setLang(savedLang);
 </script>
 
+
+<script>
+/* R21-COMBOS */
+(function () {
+  var MOD = ['autos', 'motos', 'camiones', 'nautica'];
+  var ICON = { autos: '🚗', motos: '🏍️', camiones: '🚛', nautica: '🚤' };
+  var PLANES = ['b1', 'b3', 'f3', 'f7', 'f15'];
+  var BASE = { std: { b1: 29, b3: 69, f3: 89, f7: 149, f15: 249 }, nautica: { b1: 42, b3: 99, f3: 129, f7: 215, f15: 359 } };
+  var EXTRA = 9;
+  var PER = { m: { n: 1, d: 0 }, q: { n: 3, d: 0.10 }, s: { n: 6, d: 0.15 }, y: { n: 12, d: 0.20 } };
+  var L = {
+    es: { mod: { autos: 'Autos', motos: 'Motos', camiones: 'Camiones', nautica: 'Náutica' },
+      plan: { b1: 'Básico · 1 usuario', b3: 'Básico · 3 usuarios', f3: 'Full · 3 usuarios', f7: 'Full · 7 usuarios', f15: 'Full · 15 usuarios' },
+      per: { m: 'Mensual', q: '3 meses −10%', s: '6 meses −15%', y: 'Anual −20%' },
+      rubros: 'Rubros', plans: 'Plan', periodo: 'Forma de pago', mes: '/mes', elegi: 'Elegí al menos un rubro',
+      base: 'Plan', extra: 'módulo extra', pagas: 'Pagás', por: 'por', meses: 'meses', ahorro: 'Ahorrás', cta: 'Quiero este plan por WhatsApp',
+      tabla: 'Tabla completa de precios por mes', combo: 'Combo', nota: 'Precios en USD por mes, sin impuestos. Regla: se toma el plan del módulo más caro y cada módulo extra suma USD 9/mes. Los descuentos por pago adelantado se aplican sobre el total. 14 días gratis, sin tarjeta.',
+      wa: 'Hola, quiero probar R21 14 días gratis. Me interesa: ' },
+    en: { mod: { autos: 'Cars', motos: 'Bikes', camiones: 'Trucks', nautica: 'Boats' },
+      plan: { b1: 'Basic · 1 user', b3: 'Basic · 3 users', f3: 'Full · 3 users', f7: 'Full · 7 users', f15: 'Full · 15 users' },
+      per: { m: 'Monthly', q: '3 months −10%', s: '6 months −15%', y: 'Yearly −20%' },
+      rubros: 'Categories', plans: 'Plan', periodo: 'Billing', mes: '/month', elegi: 'Pick at least one category',
+      base: 'Plan', extra: 'extra module', pagas: 'You pay', por: 'for', meses: 'months', ahorro: 'You save', cta: 'I want this plan on WhatsApp',
+      tabla: 'Full price table per month', combo: 'Combo', nota: 'Prices in USD per month, excluding taxes. Rule: take the plan of the most expensive module and each extra module adds USD 9/month. Prepayment discounts apply to the total. 14 days free, no card.',
+      wa: 'Hi, I want to try R21 free for 14 days. I am interested in: ' },
+    pt: { mod: { autos: 'Carros', motos: 'Motos', camiones: 'Caminhões', nautica: 'Náutica' },
+      plan: { b1: 'Básico · 1 usuário', b3: 'Básico · 3 usuários', f3: 'Full · 3 usuários', f7: 'Full · 7 usuários', f15: 'Full · 15 usuários' },
+      per: { m: 'Mensal', q: '3 meses −10%', s: '6 meses −15%', y: 'Anual −20%' },
+      rubros: 'Categorias', plans: 'Plano', periodo: 'Forma de pagamento', mes: '/mês', elegi: 'Escolha ao menos uma categoria',
+      base: 'Plano', extra: 'módulo extra', pagas: 'Você paga', por: 'por', meses: 'meses', ahorro: 'Você economiza', cta: 'Quero este plano pelo WhatsApp',
+      tabla: 'Tabela completa de preços por mês', combo: 'Combo', nota: 'Preços em USD por mês, sem impostos. Regra: considera-se o plano do módulo mais caro e cada módulo extra soma USD 9/mês. Os descontos por pagamento antecipado valem sobre o total. 14 dias grátis, sem cartão.',
+      wa: 'Olá, quero testar o R21 14 dias grátis. Tenho interesse em: ' }
+  };
+  var app = document.getElementById('comboApp');
+  if (!app) return;
+  var est = { mods: [app.getAttribute('data-default') || 'autos'], plan: 'f3', per: 'm' };
+
+  function lang() { var l = document.documentElement.lang; return L[l] ? l : 'es'; }
+  function total(mods, plan) {
+    if (!mods.length) return 0;
+    var tabla = mods.indexOf('nautica') >= 0 ? BASE.nautica : BASE.std;
+    return tabla[plan] + EXTRA * (mods.length - 1);
+  }
+  function usd(n) { return 'USD ' + n.toLocaleString('es-AR'); }
+  function combos() {
+    var out = [];
+    for (var m = 1; m < 16; m++) {
+      var c = [];
+      for (var i = 0; i < 4; i++) if (m & (1 << i)) c.push(MOD[i]);
+      out.push(c);
+    }
+    return out.sort(function (a, b) { return a.length - b.length; });
+  }
+  function nombre(c, t) { return c.map(function (m) { return ICON[m] + ' ' + t.mod[m]; }).join(' + '); }
+
+  function render() {
+    var t = L[lang()];
+    var h = '<div class="combo-label">' + t.rubros + '</div><div class="combo-chips">';
+    MOD.forEach(function (m) {
+      h += '<button type="button" class="combo-chip' + (est.mods.indexOf(m) >= 0 ? ' on' : '') + '" data-mod="' + m + '">' + ICON[m] + ' ' + t.mod[m] + '</button>';
+    });
+    h += '</div><div class="combo-label">' + t.plans + '</div><div class="combo-chips">';
+    PLANES.forEach(function (p) {
+      h += '<button type="button" class="combo-chip' + (est.plan === p ? ' on' : '') + '" data-plan="' + p + '">' + t.plan[p] + '</button>';
+    });
+    h += '</div><div class="combo-label">' + t.periodo + '</div><div class="combo-chips">';
+    Object.keys(PER).forEach(function (k) {
+      h += '<button type="button" class="combo-chip' + (est.per === k ? ' on' : '') + '" data-per="' + k + '">' + t.per[k] + '</button>';
+    });
+    h += '</div>';
+
+    if (!est.mods.length) {
+      h += '<div class="combo-result"><div class="combo-detail">' + t.elegi + '</div></div>';
+    } else {
+      var tot = total(est.mods, est.plan);
+      var per = PER[est.per];
+      var mensual = Math.round(tot * (1 - per.d));
+      var pago = Math.round(tot * (1 - per.d) * per.n);
+      var ahorro = tot * per.n - pago;
+      var base = est.mods.indexOf('nautica') >= 0 ? BASE.nautica : BASE.std;
+      var det = t.base + ' ' + t.plan[est.plan] + ': ' + usd(base[est.plan]);
+      if (est.mods.length > 1) det += ' + ' + (est.mods.length - 1) + ' ' + t.extra + (est.mods.length > 2 ? 's' : '') + ' × USD ' + EXTRA;
+      var msg = t.wa + nombre(est.mods, t).replace(/[^\w\s+áéíóúñãõçÁÉÍÓÚÑ]/g, '').replace(/\s+/g, ' ') + ' — ' + t.plan[est.plan] + ' (' + t.per[est.per] + ')';
+      h += '<div class="combo-result"><div><div class="combo-total">' + usd(mensual) + '<small> ' + t.mes + '</small></div>' +
+        '<div class="combo-detail">' + det + '</div>' +
+        (per.n > 1 ? '<div class="combo-detail">' + t.pagas + ' ' + usd(pago) + ' ' + t.por + ' ' + per.n + ' ' + t.meses + '</div><span class="combo-ahorro">' + t.ahorro + ' ' + usd(ahorro) + '</span>' : '') +
+        '</div><a class="combo-cta" target="_blank" rel="noopener" href="https://wa.me/5493415040667?text=' + encodeURIComponent(msg) + '">' + t.cta + '</a></div>';
+    }
+
+    h += '<div class="combo-label" style="margin-top:28px">' + t.tabla + '</div><div class="combo-scroll"><table class="combo-table"><thead><tr><th>' + t.combo + '</th>';
+    PLANES.forEach(function (p) { h += '<th>' + t.plan[p] + '</th>'; });
+    h += '</tr></thead><tbody>';
+    combos().forEach(function (c) {
+      var esSel = c.length === est.mods.length && c.every(function (m) { return est.mods.indexOf(m) >= 0; });
+      h += '<tr><td>' + nombre(c, t) + '</td>';
+      PLANES.forEach(function (p) {
+        h += '<td' + (esSel && est.plan === p ? ' class="sel"' : '') + '>USD ' + total(c, p) + '</td>';
+      });
+      h += '</tr>';
+    });
+    h += '</tbody></table></div><p class="combo-nota">' + t.nota + '</p>';
+    app.innerHTML = h;
+  }
+
+  app.addEventListener('click', function (e) {
+    var b = e.target.closest('button');
+    if (!b) return;
+    if (b.hasAttribute('data-mod')) {
+      var m = b.getAttribute('data-mod'), i = est.mods.indexOf(m);
+      if (i >= 0) est.mods.splice(i, 1); else est.mods.push(m);
+    } else if (b.hasAttribute('data-plan')) est.plan = b.getAttribute('data-plan');
+    else if (b.hasAttribute('data-per')) est.per = b.getAttribute('data-per');
+    render();
+  });
+
+  var previo = window.setLang;
+  if (typeof previo === 'function') window.setLang = function (l) { previo(l); render(); };
+  render();
+})();
+</script>
 </body>
 </html>
