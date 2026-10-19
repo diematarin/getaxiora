@@ -861,6 +861,101 @@
     .payment-highlight h3 { font-size: 22px; }
   }
 
+  /* R21-INCLUYE (tabla Básico vs Full) */
+  .compare-section {
+    background: var(--gray-50);
+    max-width: 100%;
+    padding: 90px 24px;
+  }
+  .compare-inner { max-width: 1000px; margin: 0 auto; }
+  .compare-table {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--gray-200);
+  }
+  .compare-row {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr 1fr;
+    align-items: center;
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--gray-200);
+    transition: background .2s var(--ease);
+  }
+  .compare-row:last-child { border-bottom: none; }
+  .compare-row:not(.compare-head):hover { background: var(--gray-50); }
+  .compare-row.compare-head {
+    background: linear-gradient(135deg, var(--black) 0%, var(--black-soft) 100%);
+    color: var(--white);
+    padding: 22px 24px;
+    font-weight: 900;
+    font-size: 15px;
+    letter-spacing: .5px;
+    border-bottom: none;
+  }
+  .compare-row.compare-head .col-r21 { color: var(--gold); }
+  .compare-row .col {
+    text-align: center;
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .compare-row .col:first-child {
+    text-align: left;
+    color: var(--gray-700);
+    font-weight: 700;
+    font-size: 14.5px;
+  }
+  .compare-row .col-r21 {
+    color: var(--green);
+    font-weight: 800;
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+  }
+  .compare-row .col-otros {
+    color: var(--gray-500);
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+  }
+  .check-icon {
+    display: inline-block;
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: var(--green);
+    flex-shrink: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+    background-size: 12px;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  .cross-icon {
+    display: inline-block;
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: #E5E7EB;
+    flex-shrink: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236B7280' stroke-width='3' stroke-linecap='round'%3E%3Cline x1='18' y1='6' x2='6' y2='18'/%3E%3Cline x1='6' y1='6' x2='18' y2='18'/%3E%3C/svg%3E");
+    background-size: 12px;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  @media (max-width: 640px) {
+    .compare-row {
+      grid-template-columns: 1.2fr 1fr 1fr;
+      padding: 14px 16px;
+      font-size: 13px;
+    }
+    .compare-row .col:first-child { font-size: 13px; }
+    .compare-row .col { font-size: 13px; }
+    .check-icon, .cross-icon { width: 16px; height: 16px; }
+  }
+
+  .compare-row.compare-head .col-gold { color: var(--gold); }
+  .compare-sub { display: block; font-size: 11px; font-weight: 600; letter-spacing: 0; opacity: .75; margin-top: 2px; }
+  .compare-row .col-txt { color: var(--green); font-weight: 800; font-size: 14px; text-align: center; }
+  .compare-sep { background: var(--gray-50); font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--gray-500); padding: 10px 24px; border-bottom: 1px solid var(--gray-200); }
+  #incluye { background: var(--gray-50); max-width: 100%; padding: 90px 24px; }
+  #incluye h2 { text-align: center; }
+  .compare-nota { max-width: 1000px; margin: 14px auto 0; font-size: 13px; color: var(--gray-500); line-height: 1.55; text-align: center; }
+
   /* R21-COMBOS */
   #combos { max-width: 1100px; margin: 0 auto; padding: 80px 24px; }
   #combos h2 { text-align: center; }
@@ -1160,6 +1255,99 @@
   </div>
 
   <p class="precios-nota fade-in" data-es="💡 14 días gratis en cualquier rubro, sin tarjeta. Sumar módulos tiene precio fijo: +USD 9/mes por módulo extra. Armá tu combo abajo." data-en="💡 14 days free in any category, no card. Adding modules has a fixed price: +USD 9/month per extra module. Build your combo below." data-pt="💡 14 dias grátis em qualquer categoria, sem cartão. Somar módulos tem preço fixo: +USD 9/mês por módulo extra. Monte seu combo abaixo.">💡 14 días gratis en cualquier rubro, sin tarjeta. Sumar módulos tiene precio fijo: +USD 9/mes por módulo extra. Armá tu combo abajo.</p>
+</section>
+
+<!-- R21-INCLUYE -->
+<section id="incluye" class="compare-section">
+  <div class="compare-inner">
+    <h2 class="fade-in" data-es="Qué incluye cada plan" data-en="What each plan includes" data-pt="O que cada plano inclui">Qué incluye cada plan</h2>
+    <p class="section-sub fade-in" data-es="Los dos planes traen todo el sistema para tu rubro. El Full suma la PC y las herramientas de gestión avanzadas." data-en="Both plans include the whole system for your category. Full adds the PC app and advanced management tools." data-pt="Os dois planos trazem todo o sistema para a sua categoria. O Full adiciona o PC e as ferramentas de gestão avançadas.">Los dos planes traen todo el sistema para tu rubro. El Full suma la PC y las herramientas de gestión avanzadas.</p>
+    <div class="compare-table fade-in">
+      <div class="compare-row compare-head">
+        <div class="col"></div>
+        <div class="col">Básico<span class="compare-sub" data-es="Solo celular · desde USD 29" data-en="Phone only · from USD 29" data-pt="Só celular · a partir de USD 29">Solo celular · desde USD 29</span></div>
+        <div class="col col-gold">Full<span class="compare-sub" data-es="Celular + PC · desde USD 89" data-en="Phone + PC · from USD 89" data-pt="Celular + PC · a partir de USD 89">Celular + PC · desde USD 89</span></div>
+      </div>
+      <div class="compare-sep" data-es="Lo que tienen los dos planes" data-en="Included in both plans" data-pt="Incluído nos dois planos">Lo que tienen los dos planes</div>
+      <div class="compare-row">
+        <div class="col" data-es="App Android: todo el sistema en tu celular" data-en="Android app: the whole system on your phone" data-pt="App Android: todo o sistema no seu celular">App Android: todo el sistema en tu celular</div>
+        <div class="col col-r21"><span class="check-icon"></span></div>
+        <div class="col col-r21"><span class="check-icon"></span></div>
+      </div>
+      <div class="compare-row">
+        <div class="col" data-es="Todos los módulos de tu rubro" data-en="All the modules of your category" data-pt="Todos os módulos da sua categoria">Todos los módulos de tu rubro</div>
+        <div class="col col-r21"><span class="check-icon"></span></div>
+        <div class="col col-r21"><span class="check-icon"></span></div>
+      </div>
+      <div class="compare-row">
+        <div class="col" data-es="Stock con fotos, fichas técnicas y catálogo en PDF" data-en="Stock with photos, spec sheets and PDF catalog" data-pt="Estoque com fotos, fichas técnicas e catálogo em PDF">Stock con fotos, fichas técnicas y catálogo en PDF</div>
+        <div class="col col-r21"><span class="check-icon"></span></div>
+        <div class="col col-r21"><span class="check-icon"></span></div>
+      </div>
+      <div class="compare-row">
+        <div class="col" data-es="Clientes, oportunidades y agenda de visitas" data-en="Customers, opportunities and visit calendar" data-pt="Clientes, oportunidades e agenda de visitas">Clientes, oportunidades y agenda de visitas</div>
+        <div class="col col-r21"><span class="check-icon"></span></div>
+        <div class="col col-r21"><span class="check-icon"></span></div>
+      </div>
+      <div class="compare-row">
+        <div class="col" data-es="Compartir en WhatsApp, Instagram, Marketplace y MercadoLibre" data-en="Share on WhatsApp, Instagram, Marketplace and MercadoLibre" data-pt="Compartilhar no WhatsApp, Instagram, Marketplace e MercadoLibre">Compartir en WhatsApp, Instagram, Marketplace y MercadoLibre</div>
+        <div class="col col-r21"><span class="check-icon"></span></div>
+        <div class="col col-r21"><span class="check-icon"></span></div>
+      </div>
+      <div class="compare-row">
+        <div class="col" data-es="Caja, cheques y recibos en PDF" data-en="Cash, cheques and PDF receipts" data-pt="Caixa, cheques e recibos em PDF">Caja, cheques y recibos en PDF</div>
+        <div class="col col-r21"><span class="check-icon"></span></div>
+        <div class="col col-r21"><span class="check-icon"></span></div>
+      </div>
+      <div class="compare-row">
+        <div class="col" data-es="Vencimientos: seguro, VTV y patente" data-en="Deadlines: insurance, inspection and taxes" data-pt="Vencimentos: seguro, vistoria e impostos">Vencimientos: seguro, VTV y patente</div>
+        <div class="col col-r21"><span class="check-icon"></span></div>
+        <div class="col col-r21"><span class="check-icon"></span></div>
+      </div>
+      <div class="compare-row">
+        <div class="col" data-es="Soporte por WhatsApp" data-en="WhatsApp support" data-pt="Suporte por WhatsApp">Soporte por WhatsApp</div>
+        <div class="col col-r21"><span class="check-icon"></span></div>
+        <div class="col col-r21"><span class="check-icon"></span></div>
+      </div>
+      <div class="compare-sep" data-es="Lo que suma el plan Full" data-en="What the Full plan adds" data-pt="O que o plano Full adiciona">Lo que suma el plan Full</div>
+      <div class="compare-row">
+        <div class="col" data-es="App de escritorio para Windows (celular + PC)" data-en="Windows desktop app (phone + PC)" data-pt="App de desktop para Windows (celular + PC)">App de escritorio para Windows (celular + PC)</div>
+        <div class="col col-r21"><span class="cross-icon"></span></div>
+        <div class="col col-r21"><span class="check-icon"></span></div>
+      </div>
+      <div class="compare-row">
+        <div class="col" data-es="Contabilidad completa: resultados, cuentas corrientes y flujo de caja" data-en="Full accounting: P&L, current accounts and cash flow" data-pt="Contabilidade completa: resultados, contas correntes e fluxo de caixa">Contabilidad completa: resultados, cuentas corrientes y flujo de caja</div>
+        <div class="col col-r21"><span class="cross-icon"></span></div>
+        <div class="col col-r21"><span class="check-icon"></span></div>
+      </div>
+      <div class="compare-row">
+        <div class="col" data-es="Guía de precios: precio sugerido, cuánto pagar, subastas y listas de proveedor (autos)" data-en="Price guide: suggested price, how much to pay, auctions and supplier lists (cars)" data-pt="Guia de preços: preço sugerido, quanto pagar, leilões e listas de fornecedor (carros)">Guía de precios: precio sugerido, cuánto pagar, subastas y listas de proveedor (autos)</div>
+        <div class="col col-r21"><span class="cross-icon"></span></div>
+        <div class="col col-r21"><span class="check-icon"></span></div>
+      </div>
+      <div class="compare-row">
+        <div class="col" data-es="Bot de WhatsApp con IA" data-en="AI WhatsApp bot" data-pt="Bot de WhatsApp com IA">Bot de WhatsApp con IA</div>
+        <div class="col col-r21"><span class="cross-icon"></span></div>
+        <div class="col col-r21"><span class="check-icon"></span></div>
+      </div>
+      <div class="compare-row">
+        <div class="col" data-es="Tienda online incluida" data-en="Online store included" data-pt="Loja online incluída">Tienda online incluida</div>
+        <div class="col col-r21"><span class="cross-icon"></span></div>
+        <div class="col col-r21"><span class="check-icon"></span></div>
+      </div>
+      <div class="compare-row">
+        <div class="col" data-es="Soporte prioritario" data-en="Priority support" data-pt="Suporte prioritário">Soporte prioritario</div>
+        <div class="col col-r21"><span class="cross-icon"></span></div>
+        <div class="col col-r21"><span class="check-icon"></span></div>
+      </div>
+      <div class="compare-row">
+        <div class="col" data-es="Usuarios" data-en="Users" data-pt="Usuários">Usuarios</div>
+        <div class="col col-txt" data-es="1 o 3" data-en="1 or 3" data-pt="1 ou 3">1 o 3</div>
+        <div class="col col-txt" data-es="3, 7 o 15" data-en="3, 7 or 15" data-pt="3, 7 ou 15">3, 7 o 15</div>
+      </div>
+    </div>
+    <p class="compare-nota" data-es="Precios en dólares por mes, según rubro y cantidad de usuarios. 14 días gratis en cualquier plan, sin tarjeta." data-en="Prices in USD per month, depending on category and number of users. 14 days free on any plan, no card needed." data-pt="Preços em dólares por mês, conforme a categoria e o número de usuários. 14 dias grátis em qualquer plano, sem cartão.">Precios en dólares por mes, según rubro y cantidad de usuarios. 14 días gratis en cualquier plan, sin tarjeta.</p>
+  </div>
 </section>
 
 <!-- R21-COMBOS -->
