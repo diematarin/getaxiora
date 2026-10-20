@@ -780,6 +780,37 @@
     justify-content: center; flex-wrap: wrap;
   }
 
+  /* PROBAR GRATIS (alta automática) */
+  .probar-section { max-width: 100%; background: var(--gray-50); border-top: 1px solid var(--gray-200); border-bottom: 1px solid var(--gray-200); }
+  .probar-inner { max-width: 640px; margin: 0 auto; text-align: center; }
+  .probar-inner h2 { margin-bottom: 8px; }
+  .probar-form { text-align: left; background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius-lg); padding: 28px; box-shadow: var(--shadow-lg); margin-top: 28px; }
+  .probar-form label.campo { display: block; font-size: 13px; font-weight: 600; color: var(--gray-700); margin-bottom: 14px; }
+  .probar-form input[type=text], .probar-form input[type=email], .probar-form input[type=tel] {
+    display: block; width: 100%; margin-top: 6px; padding: 12px 14px; font: inherit; font-size: 15px;
+    border: 1px solid var(--gray-300); border-radius: var(--radius-sm); background: var(--white); color: var(--gray-900);
+  }
+  .probar-form input:focus { outline: 2px solid var(--green-light); outline-offset: 1px; border-color: var(--green-light); }
+  .probar-form .fila2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .probar-form fieldset { border: 0; margin: 4px 0 18px; }
+  .probar-form legend { font-size: 13px; font-weight: 600; color: var(--gray-700); margin-bottom: 8px; }
+  .probar-rubros { display: flex; flex-wrap: wrap; gap: 8px; }
+  .probar-rubros label { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border: 1px solid var(--gray-300); border-radius: 999px; font-size: 14px; cursor: pointer; background: var(--white); }
+  .probar-rubros input:checked + span { font-weight: 700; color: var(--green); }
+  .probar-form .trampa { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  .probar-form button[type=submit] { width: 100%; justify-content: center; border: 0; cursor: pointer; font: inherit; font-weight: 700; }
+  .probar-form button[disabled] { opacity: .7; cursor: wait; }
+  .probar-aviso { margin-top: 14px; font-size: 13px; color: var(--gray-500); text-align: center; }
+  .probar-error { margin-top: 14px; padding: 12px 14px; border-radius: var(--radius-sm); background: #FEF2F2; color: #991B1B; font-size: 14px; display: none; }
+  .probar-listo { display: none; text-align: left; background: var(--white); border: 2px solid var(--green-light); border-radius: var(--radius-lg); padding: 28px; box-shadow: var(--shadow-lg); margin-top: 28px; }
+  .probar-listo h3 { color: var(--green); margin-bottom: 6px; }
+  .probar-datos { display: grid; grid-template-columns: auto 1fr; gap: 8px 16px; margin: 18px 0; padding: 16px; background: var(--gray-100); border-radius: var(--radius-md); font-size: 15px; }
+  .probar-datos dt { color: var(--gray-500); }
+  .probar-datos dd { font-weight: 700; font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 16px; word-break: break-all; }
+  .probar-listo ol { margin: 0 0 18px 20px; font-size: 15px; color: var(--gray-700); }
+  .probar-acciones { display: flex; flex-wrap: wrap; gap: 10px; }
+  @media (max-width: 560px) { .probar-form .fila2 { grid-template-columns: 1fr; } .probar-form, .probar-listo { padding: 20px; } }
+
   /* FOOTER */
   footer {
     background: #050505; color: #888;
@@ -1009,7 +1040,7 @@
       <button id="btn-en" onclick="setLang('en')" title="English"><img src="https://flagcdn.com/w40/us.png" alt="US"></button>
       <button id="btn-pt" onclick="setLang('pt')" title="Português"><img src="https://flagcdn.com/w40/br.png" alt="BR"></button>
     </div>
-    <a href="https://wa.me/5493415040667?text=Hola%2C%20quiero%20probar%20R21%2014%20d%C3%ADas%20gratis" target="_blank" class="nav-cta btn btn-primary" data-es="Probar gratis" data-en="Try free" data-pt="Testar grátis">Probar gratis</a>
+    <a href="#probar" data-ev="click_probar" class="nav-cta btn btn-primary" data-es="Probar gratis" data-en="Try free" data-pt="Testar grátis">Probar gratis</a>
     <button class="nav-burger" id="navBurger" aria-label="Menú"><span></span><span></span><span></span></button>
   </div>
 </nav>
@@ -1023,7 +1054,7 @@
     <a href="#combos" onclick="cerrarMenu()" data-es="Combos" data-en="Combos" data-pt="Combos">Combos</a>
     <a href="#faq" onclick="cerrarMenu()" data-es="Preguntas" data-en="FAQ" data-pt="Perguntas">Preguntas</a>
     <a href="app/" onclick="cerrarMenu()" data-es="Ingresar al sistema" data-en="Log in" data-pt="Entrar no sistema">Ingresar al sistema</a>
-    <a href="https://wa.me/5493415040667?text=Hola%2C%20quiero%20probar%20R21%2014%20d%C3%ADas%20gratis" target="_blank" class="btn btn-primary" data-es="🚀 Probar 14 días gratis" data-en="🚀 Try 14 days free" data-pt="🚀 Teste 14 dias grátis">🚀 Probar 14 días gratis</a>
+    <a href="#probar" onclick="cerrarMenu()" data-ev="click_probar" class="btn btn-primary" data-es="🚀 Probar 14 días gratis" data-en="🚀 Try 14 days free" data-pt="🚀 Teste 14 dias grátis">🚀 Probar 14 días gratis</a>
     <div class="mobile-lang">
       <div class="lang-switch">
         <button id="btn-es-mob" class="active" onclick="setLang('es')" title="Español"><img src="https://flagcdn.com/w40/ar.png" alt="AR"></button>
@@ -1427,6 +1458,60 @@
   </div>
 </section>
 
+<!-- PROBAR GRATIS -->
+<section id="probar" class="probar-section">
+  <div class="probar-inner">
+    <h2 class="fade-in" data-es="Probá R21 gratis por 14 días" data-en="Try R21 free for 14 days" data-pt="Teste o R21 grátis por 14 dias">Probá R21 gratis por 14 días</h2>
+    <p class="section-sub fade-in" data-es="Completá tus datos y en un par de minutos tenés tu agencia lista, con ejemplos cargados. Sin tarjeta ni compromiso." data-en="Fill in your details and in a couple of minutes your agency is ready, with sample data loaded. No card, no commitment." data-pt="Preencha seus dados e em alguns minutos sua agência está pronta, com exemplos carregados. Sem cartão nem compromisso.">Completá tus datos y en un minuto tenés tu agencia lista, con ejemplos cargados. Sin tarjeta ni compromiso.</p>
+
+    <form id="formProbar" class="probar-form" novalidate autocomplete="on">
+      <label class="campo"><span data-es="Nombre de tu agencia" data-en="Your agency name" data-pt="Nome da sua agência">Nombre de tu agencia</span>
+        <input type="text" name="agencia" maxlength="80" required autocomplete="organization"></label>
+      <div class="fila2">
+        <label class="campo"><span data-es="Tu nombre" data-en="Your name" data-pt="Seu nome">Tu nombre</span>
+          <input type="text" name="contacto" maxlength="60" required autocomplete="name"></label>
+        <label class="campo"><span data-es="WhatsApp o teléfono" data-en="WhatsApp or phone" data-pt="WhatsApp ou telefone">WhatsApp o teléfono</span>
+          <input type="tel" name="telefono" maxlength="25" required autocomplete="tel" placeholder="+54 9 341 ..."></label>
+      </div>
+      <label class="campo"><span data-es="Email" data-en="Email" data-pt="Email">Email</span>
+        <input type="email" name="email" maxlength="80" required autocomplete="email"></label>
+      <fieldset>
+        <legend data-es="¿Qué vendés?" data-en="What do you sell?" data-pt="O que você vende?">¿Qué vendés?</legend>
+        <div class="probar-rubros">
+          <label><input type="checkbox" name="rubro" value="C" checked><span data-es="Autos" data-en="Cars" data-pt="Carros">Autos</span></label>
+          <label><input type="checkbox" name="rubro" value="B"><span data-es="Motos" data-en="Motorcycles" data-pt="Motos">Motos</span></label>
+          <label><input type="checkbox" name="rubro" value="T"><span data-es="Camiones" data-en="Trucks" data-pt="Caminhões">Camiones</span></label>
+          <label><input type="checkbox" name="rubro" value="L"><span data-es="Náutica" data-en="Boating" data-pt="Náutica">Náutica</span></label>
+        </div>
+      </fieldset>
+      <div class="trampa" aria-hidden="true"><label>Web <input type="text" name="web" tabindex="-1" autocomplete="off"></label></div>
+      <button type="submit" class="btn btn-primary" id="btnProbar" data-es="🚀 Crear mi prueba gratis" data-en="🚀 Create my free trial" data-pt="🚀 Criar meu teste grátis">🚀 Crear mi prueba gratis</button>
+      <p class="probar-aviso" data-es="Usamos tus datos solo para darte la prueba y contactarte. Mirá la política de privacidad." data-en="We use your details only to give you the trial and contact you. See the privacy policy." data-pt="Usamos seus dados apenas para dar o teste e entrar em contato. Veja a política de privacidade.">Usamos tus datos solo para darte la prueba y contactarte. Mirá la política de privacidad.</p>
+      <div class="probar-error" id="probarError" role="alert"></div>
+    </form>
+
+    <div class="probar-listo" id="probarListo" aria-live="polite">
+      <h3 data-es="¡Tu agencia de prueba está lista!" data-en="Your trial agency is ready!" data-pt="Sua agência de teste está pronta!">¡Tu agencia de prueba está lista!</h3>
+      <p data-es="Guardá estos datos: los necesitás para entrar." data-en="Save these details: you need them to log in." data-pt="Guarde estes dados: você precisa deles para entrar.">Guardá estos datos: los necesitás para entrar.</p>
+      <dl class="probar-datos">
+        <dt data-es="Código de agencia" data-en="Agency code" data-pt="Código da agência">Código de agencia</dt><dd id="pCodigo"></dd>
+        <dt data-es="Usuario" data-en="User" data-pt="Usuário">Usuario</dt><dd id="pUsuario"></dd>
+        <dt>PIN</dt><dd id="pPin"></dd>
+        <dt data-es="Vence" data-en="Expires" data-pt="Vence">Vence</dt><dd id="pVence"></dd>
+      </dl>
+      <ol>
+        <li data-es="Abrí R21 (se usa desde el navegador, también en el celular)." data-en="Open R21 (works in the browser, also on your phone)." data-pt="Abra o R21 (funciona no navegador, também no celular).">Abrí R21 (se usa desde el navegador, también en el celular).</li>
+        <li data-es="Escribí el código de agencia." data-en="Enter the agency code." data-pt="Digite o código da agência.">Escribí el código de agencia.</li>
+        <li data-es="Entrá con el usuario y el PIN de arriba." data-en="Log in with the user and PIN above." data-pt="Entre com o usuário e o PIN acima.">Entrá con el usuario y el PIN de arriba.</li>
+      </ol>
+      <div class="probar-acciones">
+        <a href="app/" class="btn btn-primary" data-ev="ingresar_app" data-es="Abrir R21 ahora" data-en="Open R21 now" data-pt="Abrir o R21 agora">Abrir R21 ahora</a>
+        <a id="pWhatsapp" href="#" target="_blank" rel="noopener" class="btn btn-whatsapp" data-ev="click_whatsapp" data-es="💬 Avisarnos por WhatsApp" data-en="💬 Message us on WhatsApp" data-pt="💬 Avisar pelo WhatsApp">💬 Avisarnos por WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- CONTACTO -->
 <section class="contact">
   <div class="contact-inner">
@@ -1464,6 +1549,10 @@
     document.querySelectorAll('[data-es]').forEach(el => {
       const val = el.getAttribute('data-' + lang);
       if (val) el.textContent = val;
+    });
+    document.querySelectorAll('[data-ph-es]').forEach(el => {
+      const val = el.getAttribute('data-ph-' + lang);
+      if (val) el.setAttribute('placeholder', val);
     });
     document.getElementById('btn-es').classList.toggle('active', lang === 'es');
     document.getElementById('btn-en').classList.toggle('active', lang === 'en');
@@ -1667,6 +1756,95 @@
   if (typeof previo === 'function') window.setLang = function (l) { previo(l); render(); };
   render();
 })();
+</script>
+<script>
+  // ═════════════════════════════════════════════
+  //  PRUEBA GRATIS AUTOMÁTICA + ANALÍTICA (sin cookies ni datos personales en las métricas)
+  // ═════════════════════════════════════════════
+  (function () {
+    const MAESTRA = 'https://script.google.com/macros/s/AKfycbwGPwYX_XhcxnRnnI7ZwQYFmxQpHjJx9WSLCMuyO7hqJ8gFYDtTluHgz4nW_NAZq22P/exec';
+    const lang = () => localStorage.getItem('r21-lang') || 'es';
+    const T = {
+      es: { creando: 'Preparando tu agencia… puede tardar hasta 2 minutos, no cierres esta página', boton: '🚀 Crear mi prueba gratis', red: 'No pudimos conectar. Revisá tu conexión e intentá de nuevo, o escribinos por WhatsApp.', rubro: 'Elegí al menos un rubro.', wa: 'Hola, ya creé mi prueba de R21 (código ' },
+      en: { creando: 'Setting up your agency… it can take up to 2 minutes, do not close this page', boton: '🚀 Create my free trial', red: 'We could not connect. Check your connection and try again, or message us on WhatsApp.', rubro: 'Choose at least one category.', wa: 'Hi, I just created my R21 trial (code ' },
+      pt: { creando: 'Preparando sua agência… pode levar até 2 minutos, não feche esta página', boton: '🚀 Criar meu teste grátis', red: 'Não foi possível conectar. Verifique sua conexão e tente de novo, ou fale pelo WhatsApp.', rubro: 'Escolha pelo menos uma categoria.', wa: 'Olá, acabei de criar meu teste do R21 (código ' },
+    };
+    const tx = (k) => (T[lang()] || T.es)[k];
+
+    // Origen de la visita: utm_source o el sitio desde el que llegó.
+    function origen() {
+      try {
+        const u = new URLSearchParams(location.search).get('utm_source');
+        if (u) return u.toLowerCase().replace(/[^a-z0-9_.-]/g, '').slice(0, 24);
+        if (document.referrer) {
+          const h = new URL(document.referrer).hostname.replace(/^www\./, '');
+          if (h && h !== location.hostname) return ('r_' + h).replace(/[^a-z0-9_.-]/g, '').slice(0, 24);
+        }
+      } catch (e) {}
+      return '';
+    }
+    const ORIGEN = origen();
+    function evento(ev) {
+      try {
+        const u = MAESTRA + '?action=evento&ev=' + encodeURIComponent(ev) + '&o=' + encodeURIComponent(ORIGEN);
+        fetch(u, { mode: 'no-cors', keepalive: true }).catch(() => {});
+      } catch (e) {}
+    }
+    try {
+      if (!sessionStorage.getItem('r21-visita')) { sessionStorage.setItem('r21-visita', '1'); evento('visita'); }
+    } catch (e) { evento('visita'); }
+    document.addEventListener('click', (e) => {
+      const a = e.target.closest('[data-ev]');
+      if (a) { evento(a.getAttribute('data-ev')); return; }
+      if (e.target.closest('a[href*="wa.me"]')) evento('click_whatsapp');
+    });
+
+    const form = document.getElementById('formProbar');
+    if (!form) return;
+    const btn = document.getElementById('btnProbar');
+    const err = document.getElementById('probarError');
+    let inicio = false;
+    form.addEventListener('input', () => { if (!inicio) { inicio = true; evento('form_inicio'); } });
+
+    function mostrarError(m) { err.textContent = m; err.style.display = 'block'; }
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      err.style.display = 'none';
+      const f = new FormData(form);
+      const rubros = f.getAll('rubro').join('');
+      if (!rubros) { mostrarError(tx('rubro')); return; }
+      if (!form.reportValidity()) return;
+      btn.disabled = true;
+      btn.textContent = tx('creando');
+      evento('solicitud_enviada');
+      const q = new URLSearchParams({
+        action: 'solicitarPrueba', agencia: f.get('agencia'), contacto: f.get('contacto'),
+        email: f.get('email'), telefono: f.get('telefono'), modulos: rubros, web: f.get('web') || '', origen: ORIGEN,
+      });
+      const ctl = new AbortController();
+      const corte = setTimeout(() => ctl.abort(), 150000);
+      try {
+        const r = await fetch(MAESTRA + '?' + q.toString(), { signal: ctl.signal });
+        const d = await r.json();
+        if (!d.ok) { mostrarError(d.error || tx('red')); return; }
+        document.getElementById('pCodigo').textContent = d.codigo;
+        document.getElementById('pUsuario').textContent = d.usuario;
+        document.getElementById('pPin').textContent = d.pin;
+        document.getElementById('pVence').textContent = d.vencimiento;
+        document.getElementById('pWhatsapp').href = 'https://wa.me/5493415040667?text=' + encodeURIComponent(tx('wa') + d.codigo + ')');
+        form.style.display = 'none';
+        const listo = document.getElementById('probarListo');
+        listo.style.display = 'block';
+        listo.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } catch (x) {
+        mostrarError(tx('red'));
+      } finally {
+        clearTimeout(corte);
+        btn.disabled = false;
+        btn.textContent = tx('boton');
+      }
+    });
+  })();
 </script>
 </body>
 </html>
