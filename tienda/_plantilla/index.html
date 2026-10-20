@@ -772,9 +772,9 @@
   const APPS_SCRIPT_URL = '__APPS_SCRIPT_URL__';
   const WHATSAPP_AGENCIA = '__WHATSAPP_AGENCIA__';
 
-  function formatoPrecio(n) {
+  function formatoPrecio(n, moneda) {
     const num = Number(n) || 0;
-    return '$ ' + num.toLocaleString('es-AR');
+    return (moneda === 'USD' ? 'US$ ' : '$ ') + num.toLocaleString('es-AR');
   }
 
   function linkWhatsapp(auto) {
@@ -849,7 +849,7 @@
       `${auto.marca} ${auto.modelo} (${auto.anio})`;
     document.getElementById('destacadoChips').innerHTML =
       chips.map(c => `<span class="auto-chip">${c}</span>`).join('');
-    document.getElementById('destacadoPrecio').textContent = formatoPrecio(auto.precio);
+    document.getElementById('destacadoPrecio').textContent = formatoPrecio(auto.precio, auto.moneda);
     document.getElementById('destacadoBtn').href = linkWhatsapp(auto);
     sec.style.display = 'block';
   }
@@ -909,7 +909,7 @@
           <div class="auto-titulo">${auto.marca} ${auto.modelo} (${auto.anio})</div>
           <div class="auto-chips">${chips.map(c => `<span class="auto-chip">${c}</span>`).join('')}</div>
           <div class="auto-precio-label">Precio contado</div>
-          <div class="auto-precio">${formatoPrecio(auto.precio)}</div>
+          <div class="auto-precio">${formatoPrecio(auto.precio, auto.moneda)}</div>
           <a class="auto-btn" href="${linkWhatsapp(auto)}" target="_blank">💬 Consultar por WhatsApp</a>
         </div>
       `;
