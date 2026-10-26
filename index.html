@@ -1235,7 +1235,7 @@
     <div class="feature-common fade-in">
       <div class="feature-common-icon">🏢</div>
       <h3 data-es="Varias sucursales (opcional)" data-en="Multiple branches (optional)" data-pt="Várias filiais (opcional)">Varias sucursales (opcional)</h3>
-      <p data-es="Cada sucursal con sus propios datos y usuarios. El dueño cambia de una a otra, ve el total del grupo y pasa unidades entre sucursales." data-en="Each branch with its own data and users. The owner switches between them, sees the group total and moves units between branches." data-pt="Cada filial com seus próprios dados e usuários. O dono troca de uma para outra, vê o total do grupo e passa unidades entre filiais.">Cada sucursal con sus propios datos y usuarios. El dueño cambia de una a otra, ve el total del grupo y pasa unidades entre sucursales.</p>
+      <p data-es="Cada sucursal con sus propios datos y usuarios. El dueño cambia de una a otra, ve el total del grupo y pasa unidades entre sucursales. Las sucursales adicionales pagan el 80% (de la 2 a la 5) y el 60% (de la 6 a la 10) de tu plan: calculalo en Armá tu combo." data-en="Each branch with its own data and users. The owner switches between them, sees the group total and moves units between branches. Additional branches pay 80% (2nd to 5th) and 60% (6th to 10th) of your plan: work it out in Build your combo." data-pt="Cada filial com seus próprios dados e usuários. O dono troca de uma para outra, vê o total do grupo e passa unidades entre filiais. As filiais adicionais pagam 80% (da 2ª à 5ª) e 60% (da 6ª à 10ª) do seu plano: calcule em Monte seu combo.">Cada sucursal con sus propios datos y usuarios. El dueño cambia de una a otra, ve el total del grupo y pasa unidades entre sucursales. Las sucursales adicionales pagan el 80% (de la 2 a la 5) y el 60% (de la 6 a la 10) de tu plan: calculalo en Armá tu combo.</p>
     </div>
     <div class="feature-common fade-in">
       <div class="feature-common-icon">🔥</div>
@@ -1704,6 +1704,7 @@
       plan: { b1: 'Básico · 1 usuario', b3: 'Básico · 3 usuarios', f3: 'Full · 3 usuarios', f7: 'Full · 7 usuarios', f15: 'Full · 15 usuarios' },
       per: { m: 'Mensual', q: '3 meses −10%', s: '6 meses −15%', y: 'Anual −20%' },
       opcTit: 'Módulos opcionales (+USD 9 cada uno; los cinco juntos USD 36)', opc: { taller: 'Taller', chaperia: 'Chapería', repuestos: 'Repuestos', accesorios: 'Accesorios', peritaje: 'Peritajes' }, opcDet: 'Módulos opcionales', pack: 'pack con los cinco', opcTablet: 'Peritajes: pensados para la tablet de taller o el celular del perito.', opcWa: 'Módulos: ',
+      sucTit: 'Sucursales (mismos módulos que la principal)', sucDet: 'sucursal(es) adicional(es) al 80% (2 a 5) / 60% (6 a 10)', sucWa: 'sucursales', sucNota: 'La sucursal 1 paga el plan completo; las sucursales 2 a 5 pagan el 80% y de la 6 a la 10 el 60%, con los mismos módulos que la principal. Máximo 10.',
       rubros: 'Rubros', plans: 'Plan', periodo: 'Forma de pago', mes: '/mes', elegi: 'Elegí al menos un rubro',
       base: 'Plan', extra: 'módulo extra', pagas: 'Pagás', por: 'por', meses: 'meses', ahorro: 'Ahorrás', cta: 'Quiero este plan por WhatsApp',
       tabla: 'Tabla completa de precios por mes', combo: 'Combo', nota: 'Precios en USD por mes, sin impuestos. Regla: se toma el plan del módulo más caro y cada módulo extra suma USD 9/mes. Los descuentos por pago adelantado se aplican sobre el total. 14 días gratis, sin tarjeta.',
@@ -1712,6 +1713,7 @@
       plan: { b1: 'Basic · 1 user', b3: 'Basic · 3 users', f3: 'Full · 3 users', f7: 'Full · 7 users', f15: 'Full · 15 users' },
       per: { m: 'Monthly', q: '3 months −10%', s: '6 months −15%', y: 'Yearly −20%' },
       opcTit: 'Optional modules (+USD 9 each; all five USD 36)', opc: { taller: 'Workshop', chaperia: 'Body shop', repuestos: 'Parts', accesorios: 'Accessories', peritaje: 'Inspections' }, opcDet: 'Optional modules', pack: 'pack with all five', opcTablet: 'Inspections: designed for the workshop tablet or the appraiser\'s phone.', opcWa: 'Modules: ',
+      sucTit: 'Branches (same modules as the main one)', sucDet: 'additional branch(es) at 80% (2 to 5) / 60% (6 to 10)', sucWa: 'branches', sucNota: 'Branch 1 pays the full plan; branches 2 to 5 pay 80% and 6 to 10 pay 60%, with the same modules as the main one. Maximum 10.',
       rubros: 'Categories', plans: 'Plan', periodo: 'Billing', mes: '/month', elegi: 'Pick at least one category',
       base: 'Plan', extra: 'extra module', pagas: 'You pay', por: 'for', meses: 'months', ahorro: 'You save', cta: 'I want this plan on WhatsApp',
       tabla: 'Full price table per month', combo: 'Combo', nota: 'Prices in USD per month, excluding taxes. Rule: take the plan of the most expensive module and each extra module adds USD 9/month. Prepayment discounts apply to the total. 14 days free, no card.',
@@ -1720,6 +1722,7 @@
       plan: { b1: 'Básico · 1 usuário', b3: 'Básico · 3 usuários', f3: 'Full · 3 usuários', f7: 'Full · 7 usuários', f15: 'Full · 15 usuários' },
       per: { m: 'Mensal', q: '3 meses −10%', s: '6 meses −15%', y: 'Anual −20%' },
       opcTit: 'Módulos opcionais (+USD 9 cada; os cinco juntos USD 36)', opc: { taller: 'Oficina', chaperia: 'Funilaria', repuestos: 'Peças', accesorios: 'Acessórios', peritaje: 'Laudos' }, opcDet: 'Módulos opcionais', pack: 'pacote com os cinco', opcTablet: 'Laudos: pensados para o tablet de oficina ou o celular do perito.', opcWa: 'Módulos: ',
+      sucTit: 'Filiais (mesmos módulos da principal)', sucDet: 'filial(is) adicional(is) a 80% (2 a 5) / 60% (6 a 10)', sucWa: 'filiais', sucNota: 'A filial 1 paga o plano completo; as filiais 2 a 5 pagam 80% e da 6 à 10 pagam 60%, com os mesmos módulos da principal. Máximo 10.',
       rubros: 'Categorias', plans: 'Plano', periodo: 'Forma de pagamento', mes: '/mês', elegi: 'Escolha ao menos uma categoria',
       base: 'Plano', extra: 'módulo extra', pagas: 'Você paga', por: 'por', meses: 'meses', ahorro: 'Você economiza', cta: 'Quero este plano pelo WhatsApp',
       tabla: 'Tabela completa de preços por mês', combo: 'Combo', nota: 'Preços em USD por mês, sem impostos. Regra: considera-se o plano do módulo mais caro e cada módulo extra soma USD 9/mês. Os descontos por pagamento antecipado valem sobre o total. 14 dias grátis, sem cartão.',
@@ -1727,7 +1730,7 @@
   };
   var app = document.getElementById('comboApp');
   if (!app) return;
-  var est = { mods: [app.getAttribute('data-default') || 'autos'], opc: [], plan: 'f3', per: 'm' };
+  var est = { mods: [app.getAttribute('data-default') || 'autos'], opc: [], plan: 'f3', per: 'm', suc: 1 };
 
   function lang() { var l = document.documentElement.lang; return L[l] ? l : 'es'; }
   function total(mods, plan) {
@@ -1736,6 +1739,7 @@
     return tabla[plan] + EXTRA * (mods.length - 1);
   }
   function totalConOpc(mods, plan) { return total(mods, plan) + opcPrecio(est.opc.length); }
+  function sucFactor(n) { var f = 1; for (var i = 2; i <= n; i++) f += i <= 5 ? 0.8 : 0.6; return f; }
   function usd(n) { return 'USD ' + n.toLocaleString('es-AR'); }
   function combos() {
     var out = [];
@@ -1758,7 +1762,9 @@
     OPC.forEach(function (m) {
       h += '<button type="button" class="combo-chip' + (est.opc.indexOf(m) >= 0 ? ' on' : '') + '" data-opc="' + m + '">' + OPC_ICON[m] + ' ' + t.opc[m] + '</button>';
     });
-    h += '</div><div class="combo-detail" style="margin-top:6px">' + t.opcTablet + '</div><div class="combo-label">' + t.plans + '</div><div class="combo-chips">';
+    h += '</div><div class="combo-detail" style="margin-top:6px">' + t.opcTablet + '</div><div class="combo-label">' + t.sucTit + '</div><div class="combo-chips">';
+    for (var s = 1; s <= 10; s++) h += '<button type="button" class="combo-chip' + (est.suc === s ? ' on' : '') + '" data-suc="' + s + '">' + s + '</button>';
+    h += '</div><div class="combo-detail" style="margin-top:6px">' + t.sucNota + '</div><div class="combo-label">' + t.plans + '</div><div class="combo-chips">';
     PLANES.forEach(function (p) {
       h += '<button type="button" class="combo-chip' + (est.plan === p ? ' on' : '') + '" data-plan="' + p + '">' + t.plan[p] + '</button>';
     });
@@ -1771,7 +1777,8 @@
     if (!est.mods.length) {
       h += '<div class="combo-result"><div class="combo-detail">' + t.elegi + '</div></div>';
     } else {
-      var tot = totalConOpc(est.mods, est.plan);
+      var unit = totalConOpc(est.mods, est.plan);
+      var tot = Math.round(unit * sucFactor(est.suc));
       var per = PER[est.per];
       var mensual = Math.round(tot * (1 - per.d));
       var pago = Math.round(tot * (1 - per.d) * per.n);
@@ -1780,7 +1787,9 @@
       var det = t.base + ' ' + t.plan[est.plan] + ': ' + usd(base[est.plan]);
       if (est.mods.length > 1) det += ' + ' + (est.mods.length - 1) + ' ' + t.extra + (est.mods.length > 2 ? 's' : '') + ' × USD ' + EXTRA;
       if (est.opc.length) det += ' + ' + t.opcDet + ': ' + usd(opcPrecio(est.opc.length)) + (est.opc.length >= OPC.length ? ' (' + t.pack + ')' : '');
+      if (est.suc > 1) det += ' + ' + (est.suc - 1) + ' ' + t.sucDet + ': ' + usd(tot - unit);
       var msg = t.wa + nombre(est.mods, t).replace(/[^\w\s+áéíóúñãõçÁÉÍÓÚÑ]/g, '').replace(/\s+/g, ' ') + (est.opc.length ? '. ' + t.opcWa + est.opc.map(function (m) { return t.opc[m]; }).join(', ') : '') + ' — ' + t.plan[est.plan] + ' (' + t.per[est.per] + ')';
+      if (est.suc > 1) msg += ' — ' + est.suc + ' ' + t.sucWa;
       h += '<div class="combo-result"><div><div class="combo-total">' + usd(mensual) + '<small> ' + t.mes + '</small></div>' +
         '<div class="combo-detail">' + det + '</div>' +
         (per.n > 1 ? '<div class="combo-detail">' + t.pagas + ' ' + usd(pago) + ' ' + t.por + ' ' + per.n + ' ' + t.meses + '</div><span class="combo-ahorro">' + t.ahorro + ' ' + usd(ahorro) + '</span>' : '') +
@@ -1811,7 +1820,8 @@
     } else if (b.hasAttribute('data-mod')) {
       var m = b.getAttribute('data-mod'), i = est.mods.indexOf(m);
       if (i >= 0) est.mods.splice(i, 1); else est.mods.push(m);
-    } else if (b.hasAttribute('data-plan')) est.plan = b.getAttribute('data-plan');
+    } else if (b.hasAttribute('data-suc')) est.suc = parseInt(b.getAttribute('data-suc'), 10);
+    else if (b.hasAttribute('data-plan')) est.plan = b.getAttribute('data-plan');
     else if (b.hasAttribute('data-per')) est.per = b.getAttribute('data-per');
     render();
   });
