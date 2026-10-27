@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#0b2545">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="../app/icons/Icon-192.png">
+<link rel="apple-touch-icon" href="../app/icons/Icon-192.png">
+<title>R21 Vendedores</title>
+<style>
+:root{--navy:#0b2545;--blue:#13579b;--green:#1B5E3F;--gold:#B8941F;--red:#b3261e;--line:#d6dee8;--mut:#5d6b7a;--bg:#f4f7fb}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
+body{margin:0;font-family:"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:#1c2733;padding-bottom:78px}
+header{background:linear-gradient(120deg,var(--navy),var(--blue));color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+header h1{margin:0;font-size:18px}header small{opacity:.85;display:block}
+header button{background:rgba(255,255,255,.15);color:#fff;border:0;border-radius:8px;padding:7px 11px;font:inherit;font-size:13px;cursor:pointer}
+main{max-width:980px;margin:0 auto;padding:14px}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:14px}
+h2{margin:0 0 10px;font-size:14px;color:var(--navy);text-transform:uppercase;letter-spacing:.06em}
+label{display:block;font-size:12px;font-weight:700;color:var(--mut);margin:10px 0 4px}
+input,select,textarea{width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;font:inherit;background:#fff}
+textarea{min-height:70px;resize:vertical}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:2px solid var(--line);background:#fff;border-radius:99px;padding:7px 14px;font:inherit;font-weight:700;cursor:pointer;color:#1c2733}
+.chip.on{background:var(--green);border-color:var(--green);color:#fff}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.btn{background:var(--blue);color:#fff;border:0;border-radius:10px;padding:11px 16px;font:inherit;font-weight:800;cursor:pointer;margin-top:10px}
+.btn.sec{background:#fff;color:var(--blue);border:2px solid var(--blue)}
+.btn.red{background:#fff;color:var(--red);border:2px solid var(--red)}
+.btn.sm{padding:7px 12px;margin-top:0;font-size:13px}
+.total{font-size:38px;font-weight:900;color:var(--green);line-height:1}.total small{font-size:15px;color:var(--mut);font-weight:700}
+.mut{color:var(--mut)}.ok{color:var(--green);font-weight:800}.bad{color:var(--red);font-weight:700}
+table{width:100%;border-collapse:collapse;margin-top:10px;font-size:14px}td,th{padding:6px 4px;border-bottom:1px solid var(--line);text-align:left}td:last-child{text-align:right;font-weight:700}
+.int{background:#fff8e6;border:1px dashed var(--gold);border-radius:10px;padding:10px 12px;margin-top:12px;font-size:13px}
+nav{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);display:flex;padding-bottom:env(safe-area-inset-bottom);z-index:5}
+nav button{flex:1;border:0;background:none;padding:9px 2px 8px;font:inherit;font-size:12px;font-weight:700;color:var(--mut);cursor:pointer}
+nav button b{display:block;font-size:20px}nav button.on{color:var(--blue)}
+.pcard{border:1px solid var(--line);border-radius:12px;padding:11px;margin-bottom:10px;background:#fff}
+.pcard h3{margin:0 0 2px;font-size:16px}.pcard .acc{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.tag{display:inline-block;font-size:11px;font-weight:800;border-radius:99px;padding:2px 9px;background:#e8f1fb;color:var(--blue)}
+.tag.hoy{background:#fff3d6;color:#8a6a00}.tag.venc{background:#fdeeee;color:var(--red)}.tag.gan{background:#e6f7f4;color:var(--green)}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.kpi{border:1px solid var(--line);border-radius:12px;padding:10px;background:#fff}.kpi b{display:block;font-size:22px;color:var(--navy)}.kpi small{color:var(--mut);font-size:12px}
+details{border:1px solid var(--line);border-radius:12px;background:#fff;margin-bottom:10px;padding:0 12px}summary{padding:12px 0;font-weight:800;color:var(--navy);cursor:pointer}details>div{padding-bottom:12px;font-size:14px;line-height:1.45}
+details table td:last-child{text-align:left;font-weight:400}
+.msg{background:#dcf8c6;border-radius:10px;padding:9px 11px;margin:6px 0;font-size:14px;white-space:pre-line}
+#login{max-width:380px;margin:60px auto;padding:0 16px}
+dialog{border:0;border-radius:16px;padding:16px;width:min(560px,94vw);max-height:92vh}dialog::backdrop{background:rgba(0,0,0,.45)}
+#toast{position:fixed;left:50%;bottom:92px;transform:translateX(-50%);background:#1c2733;color:#fff;padding:9px 16px;border-radius:99px;font-size:14px;opacity:0;pointer-events:none;transition:.25s;z-index:9}#toast.on{opacity:1}
+.hide{display:none!important}
+#presupuesto .hdr{display:none}
+@media print{
+ body{background:#fff;padding:0}header,nav,.noprint,.int,.vista:not(#v-cot),#cot-form,#toast{display:none!important}
+ main{max-width:none;padding:0}.card{border:0;padding:0}
+ #presupuesto .hdr{display:block;border-bottom:3px solid var(--navy);padding-bottom:10px;margin-bottom:14px}
+ #presupuesto .hdr b{font-size:26px;color:var(--navy)}
+}
+@media(max-width:520px){.kpis{grid-template-columns:1fr}.total{font-size:32px}}
+</style></head><body>
+
+<div id="login" class="hide">
+ <div class="card">
+  <h2 style="font-size:20px;text-transform:none;letter-spacing:0">R21 · Vendedores</h2>
+  <p class="mut" style="margin-top:0">Entrá con el usuario y la clave que te dio el equipo de R21.</p>
+  <label for="l-user">Usuario</label><input id="l-user" autocomplete="username" autocapitalize="none" autocorrect="off">
+  <label for="l-pass">Clave</label><input id="l-pass" type="password" autocomplete="current-password">
+  <div id="l-err" class="bad" style="margin-top:8px"></div>
+  <button class="btn" style="width:100%" id="l-go">Entrar</button>
+ </div>
+</div>
+
+<div id="app" class="hide">
+ <header><div><h1>R21 · Vendedores</h1><small id="quien"></small></div><button id="salir">Salir</button></header>
+ <div id="aviso" class="int hide" style="margin:10px 14px 0"></div>
+ <main>
+  <!-- COTIZADOR -->
+  <section class="vista" id="v-cot">
+   <div class="card" id="cot-form">
+    <h2>1 · Datos</h2>
+    <label for="pro-sel">Prospecto (de tu lista)</label><select id="pro-sel"></select>
+    <label for="pros">Nombre de la agencia</label><input id="pros" placeholder="Nombre de la agencia">
+    <label>Rubros</label><div class="chips" id="rubros"></div>
+    <label for="plan">Plan</label><select id="plan"></select>
+    <label>Módulos opcionales (USD 9 c/u · los 5 juntos USD 36)</label><div class="chips" id="mods"></div>
+    <div class="row2">
+     <div><label for="suc">Sucursales (2 a 5: 80% · 6 a 10: 60%)</label><select id="suc"></select></div>
+     <div><label for="per">Forma de pago</label><select id="per"></select></div>
+    </div>
+    <label for="cup">Cupón</label>
+    <div class="row2"><input id="cup" placeholder="Código de cupón" autocapitalize="characters"><button class="btn sec" style="margin:0" id="cup-ok">Aplicar</button></div>
+    <div id="cupmsg" style="font-size:13px;margin-top:6px"></div>
+   </div>
+   <div class="card" id="presupuesto">
+    <div class="hdr"><b>R21</b> · Presupuesto<br><span id="pr-para"></span> <span id="pr-fecha" style="float:right"></span></div>
+    <h2 class="noprint">2 · Presupuesto</h2>
+    <div class="total"><span id="t-mes"></span><small> /mes</small></div>
+    <div class="mut" id="t-ars" style="font-weight:700;margin-top:4px"></div>
+    <table id="det"></table>
+    <div id="pago" style="margin-top:12px"></div>
+    <p class="mut" style="font-size:12px;margin-bottom:0">Precios en dólares estadounidenses por mes, sin impuestos. El equivalente en pesos es una referencia al dólar blue del día de hoy. Incluye 14 días de prueba gratis. Presupuesto válido por 7 días desde la fecha de emisión.<br>getaxiora.com</p>
+    <div class="int" id="com"></div>
+    <div class="noprint">
+     <button class="btn" id="b-print">Imprimir / guardar como PDF</button>
+     <button class="btn sec" id="b-copy">Copiar para WhatsApp</button>
+     <button class="btn sec" id="b-venta">Registrar venta cerrada</button>
+    </div>
+   </div>
+  </section>
+
+  <!-- PROSPECTOS -->
+  <section class="vista hide" id="v-pro">
+   <div class="kpis" style="margin-bottom:12px" id="pro-kpi"></div>
+   <div class="chips" id="pro-filtro" style="margin-bottom:12px"></div>
+   <button class="btn" style="margin:0 0 12px;width:100%" id="pro-nuevo">+ Nuevo prospecto</button>
+   <div id="pro-lista"></div>
+  </section>
+
+  <!-- GUÍA -->
+  <section class="vista hide" id="v-gui"></section>
+
+  <!-- COMISIONES -->
+  <section class="vista hide" id="v-com">
+   <div class="kpis" style="margin-bottom:12px" id="com-kpi"></div>
+   <div class="card"><h2>Cómo se paga</h2>
+    <p style="margin:0;font-size:14px">Tu comisión es el <b>primer mes de lista</b> de cada venta, una sola vez. Se paga <b>cuando se cobra el sistema</b>, es decir, cuando el cliente paga su primer abono.</p></div>
+   <div id="com-lista"></div>
+  </section>
+ </main>
+ <nav>
+  <button data-v="cot" class="on"><b>🧮</b>Cotizador</button>
+  <button data-v="pro"><b>👥</b>Prospectos</button>
+  <button data-v="gui"><b>📖</b>Guía</button>
+  <button data-v="com"><b>💵</b>Comisiones</button>
+ </nav>
+</div>
+
+<dialog id="dlg"><form method="dialog" id="dlg-form"></form></dialog>
+<div id="toast"></div>
+
+<script>
+/* ═══════════ CONFIGURACIÓN ═══════════ */
+const API='https://script.google.com/macros/s/AKfycbwGPwYX_XhcxnRnnI7ZwQYFmxQpHjJx9WSLCMuyO7hqJ8gFYDtTluHgz4nW_NAZq22P/exec';
+// Precios: tienen que coincidir con la landing (getaxiora.com).
+const BASE={std:{b1:29,b3:69,f3:89,f7:149,f15:249},nautica:{b1:42,b3:99,f3:129,f7:215,f15:359}};
+const EXTRA=9,OPC_PRECIO=9,OPC_PACK=36;
+const PLANES={b1:'Básico · 1 usuario',b3:'Básico · 3 usuarios',f3:'Full · 3 usuarios',f7:'Full · 7 usuarios',f15:'Full · 15 usuarios'};
+const PER={m:{n:1,d:0,t:'Mensual'},q:{n:3,d:.10,t:'3 meses (−10%)'},s:{n:6,d:.15,t:'6 meses (−15%)'},y:{n:12,d:.20,t:'Anual (−20%)'}};
+const RUBROS={autos:'Autos',motos:'Motos',camiones:'Camiones',nautica:'Náutica'};
+const OPC={taller:'Taller',chaperia:'Chapería y pintura',repuestos:'Repuestos',accesorios:'Accesorios',peritaje:'Peritajes'};
+const ESTADOS=['Nuevo','Contactado','Demo hecha','En prueba','Presupuesto enviado','Ganado','Perdido'];
+const ESTADO_VENTA={'Pendiente de cobro':'El cliente todavía no pagó','Cobrada por el cliente':'El cliente pagó: comisión a liquidar','Comisión liquidada':'Comisión liquidada','Anulada':'Anulada'};
+
+/* ═══════════ UTILIDADES ═══════════ */
+const $=id=>document.getElementById(id);
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const usd=n=>'USD '+Number(n).toLocaleString('es-AR');
+const hoyISO=()=>new Date().toLocaleDateString('en-CA');
+function toast(t){const e=$('toast');e.textContent=t;e.classList.add('on');setTimeout(()=>e.classList.remove('on'),2200)}
+function copiarTexto(t){return navigator.clipboard.writeText(t).then(()=>toast('Copiado'),()=>{prompt('Copiá el texto:',t)})}
+const S={token:localStorage.getItem('r21v_token')||'',usuario:localStorage.getItem('r21v_usuario')||'',nombre:localStorage.getItem('r21v_nombre')||'',cupones:[],prospectos:[],ventas:[]};
+
+async function api(action,params){
+  const r=await fetch(API,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(Object.assign({action,token:S.token},params||{}))});
+  const j=await r.json();
+  if(j.sesion===false){cerrarSesion(true);throw new Error('Tu sesión venció. Entrá de nuevo.')}
+  return j;
+}
+
+/* ═══════════ SESIÓN ═══════════ */
+function mostrar(vista){document.querySelectorAll('.vista').forEach(v=>v.classList.toggle('hide',v.id!=='v-'+vista));document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.v===vista));window.scrollTo(0,0)}
+function pantalla(app){$('login').classList.toggle('hide',app);$('app').classList.toggle('hide',!app)}
+function cerrarSesion(vencida){
+  ['token','usuario','nombre','datos'].forEach(k=>localStorage.removeItem('r21v_'+k));
+  S.token='';S.prospectos=[];S.ventas=[];S.cupones=[];pantalla(false);
+  $('l-pass').value='';$('l-err').textContent=vencida===true?'Tu sesión venció. Entrá de nuevo.':'';
+}
+async function entrar(){
+  const u=$('l-user').value.trim(),c=$('l-pass').value;if(!u||!c){$('l-err').textContent='Completá usuario y clave';return}
+  $('l-go').disabled=true;$('l-err').textContent='';
+  try{
+    const r=await fetch(API,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'vendLogin',usuario:u,clave:c})});const j=await r.json();
+    if(!j.ok){$('l-err').textContent=j.error||'No se pudo entrar';return}
+    S.token=j.token;S.usuario=j.usuario;S.nombre=j.nombre;
+    localStorage.setItem('r21v_token',j.token);localStorage.setItem('r21v_usuario',j.usuario);localStorage.setItem('r21v_nombre',j.nombre);
+    $('l-pass').value='';await iniciar();
+  }catch(e){$('l-err').textContent='No hay conexión. Probá de nuevo.'}
+  finally{$('l-go').disabled=false}
+}
+async function cargarDatos(){
+  const j=await api('vendDatos');
+  if(!j.ok)throw new Error(j.error||'Error al cargar');
+  S.cupones=j.cupones;S.prospectos=j.prospectos;S.ventas=j.ventas;
+  localStorage.setItem('r21v_datos',JSON.stringify({cupones:j.cupones,prospectos:j.prospectos,ventas:j.ventas}));
+  $('aviso').classList.add('hide');
+}
+async function iniciar(){
+  pantalla(true);$('quien').textContent=S.nombre||S.usuario;
+  try{await cargarDatos()}
+  catch(e){
+    if(!S.token)return;
+    const c=JSON.parse(localStorage.getItem('r21v_datos')||'null');
+    if(c){Object.assign(S,c);const a=$('aviso');a.textContent='Sin conexión: ves la última información guardada. Los cambios no se pueden guardar hasta que vuelva internet.';a.classList.remove('hide')}
+  }
+  pintarProspectos();pintarComisiones();pintarProspectoSelect();armarGuia();calc();
+}
+
+/* ═══════════ COTIZADOR ═══════════ */
+const est={rubros:['autos'],mods:[]};let COT=0,ult='',Q=null;
+const usdN=n=>'USD '+n.toLocaleString('es-AR');
+const ars=n=>COT>0?'≈ $'+Math.round(n*COT).toLocaleString('es-AR')+' ARS':'';
+function chips(el,obj,lista){el.innerHTML='';for(const k in obj){const b=document.createElement('button');b.type='button';b.className='chip'+(lista.includes(k)?' on':'');b.textContent=obj[k];b.onclick=()=>{const i=lista.indexOf(k);if(i>=0)lista.splice(i,1);else lista.push(k);chips(el,obj,lista);calc()};el.appendChild(b)}}
+function sucFactor(n){let f=1;for(let i=2;i<=n;i++)f+=i<=5?.8:.6;return f}
+function initCot(){
+  chips($('rubros'),RUBROS,est.rubros);chips($('mods'),OPC,est.mods);
+  $('plan').innerHTML=Object.entries(PLANES).map(([k,v])=>`<option value="${k}"${k==='f3'?' selected':''}>${v}</option>`).join('');
+  $('suc').innerHTML=Array.from({length:10},(_,i)=>`<option value="${i+1}">${i?i+1+' sucursales':'1 (solo la principal)'}</option>`).join('');
+  $('per').innerHTML=Object.entries(PER).map(([k,v])=>`<option value="${k}">${v.t}</option>`).join('');
+  ['plan','suc','per','pros'].forEach(i=>$(i).addEventListener('input',calc));
+  $('cup').addEventListener('keydown',e=>{if(e.key==='Enter')calc()});$('cup-ok').onclick=calc;
+  $('pr-fecha').textContent=new Date().toLocaleDateString('es-AR');
+  $('pro-sel').onchange=()=>{const p=S.prospectos.find(x=>x.id===$('pro-sel').value);if(p){$('pros').value=p.agencia;if(p.cupon)$('cup').value=p.cupon}calc()};
+  fetch('https://dolarapi.com/v1/dolares/blue').then(r=>r.json()).then(d=>{COT=d.venta||d.compra||0;calc()}).catch(()=>{});
+  $('b-print').onclick=()=>window.print();$('b-copy').onclick=()=>copiarTexto(ult);$('b-venta').onclick=registrarVenta;
+}
+function pintarProspectoSelect(){
+  const v=$('pro-sel').value;
+  $('pro-sel').innerHTML='<option value="">— Sin elegir —</option>'+S.prospectos.filter(p=>p.estado!=='Ganado'&&p.estado!=='Perdido').map(p=>`<option value="${esc(p.id)}">${esc(p.agencia)}</option>`).join('');
+  $('pro-sel').value=S.prospectos.some(p=>p.id===v)?v:'';
+}
+function cupon(){
+  const c=$('cup').value.trim().toUpperCase();if(!c){$('cupmsg').textContent='';return null}
+  const k=S.cupones.find(x=>x.codigo===c);
+  if(!k){$('cupmsg').innerHTML='<span class="bad">Cupón no válido o vencido</span>';return null}
+  $('cupmsg').innerHTML='<span class="ok">Cupón aplicado: '+esc(k.nota)+'</span>';return k;
+}
+function calc(){
+  if(!est.rubros.length){$('t-mes').textContent='—';$('det').innerHTML='<tr><td>Elegí al menos un rubro</td><td></td></tr>';Q=null;return}
+  const nautica=est.rubros.includes('nautica'),tabla=nautica?BASE.nautica:BASE.std;
+  const plan=$('plan').value,suc=parseInt($('suc').value),per=PER[$('per').value];
+  const base=tabla[plan],extraR=EXTRA*(est.rubros.length-1),opc=est.mods.length>=5?OPC_PACK:OPC_PRECIO*est.mods.length;
+  const unit=base+extraR+opc,tot=Math.round(unit*sucFactor(suc)),mensual=Math.round(tot*(1-per.d));
+  const pago=Math.round(tot*(1-per.d)*per.n);
+  const k=cupon();let dto=0,prueba=14;
+  if(k){if(k.tipo==='pct')dto=Math.round(pago*k.valor/100);else if(k.tipo==='fijo')dto=Math.min(k.valor,pago);else if(k.tipo==='prueba')prueba=14+k.valor}
+  const primer=pago-dto;
+  $('t-mes').textContent=usdN(mensual);$('t-ars').textContent=ars(mensual)?ars(mensual)+' por mes':'';
+  let f=`<tr><td>Plan ${PLANES[plan]}${nautica?' (náutica)':''}</td><td>${usdN(base)}</td></tr>`;
+  if(extraR)f+=`<tr><td>${est.rubros.length-1} rubro(s) adicional(es)</td><td>${usdN(extraR)}</td></tr>`;
+  if(opc)f+=`<tr><td>Módulos: ${est.mods.map(m=>OPC[m]).join(', ')}${est.mods.length>=5?' (pack)':''}</td><td>${usdN(opc)}</td></tr>`;
+  if(suc>1)f+=`<tr><td>${suc-1} sucursal(es) adicional(es) (2 a 5: 80% · 6 a 10: 60%)</td><td>${usdN(tot-unit)}</td></tr>`;
+  f+=`<tr><td><b>Total de lista por mes</b></td><td>${usdN(tot)}</td></tr>`;
+  if(per.d)f+=`<tr><td>Descuento por pago adelantado (${Math.round(per.d*100)}%)</td><td>− ${usdN(tot-mensual)}/mes</td></tr>`;
+  $('det').innerHTML=f;
+  let p='';
+  if(per.n>1)p+=`<div>Pago por ${per.n} meses: <b>${usdN(pago)}</b> ${ars(pago)}</div>`;
+  if(dto)p+=`<div class="ok">Con cupón ${esc(k.codigo)}: primer pago <b>${usdN(primer)}</b> ${ars(primer)} (ahorrás ${usdN(dto)})</div>`;
+  if(k&&k.tipo==='prueba')p+=`<div class="ok">Prueba gratis de ${prueba} días</div>`;
+  if(!p)p='<div>14 días de prueba gratis, sin tarjeta.</div>';
+  $('pago').innerHTML=p;
+  $('pr-para').textContent=$('pros').value?'Para: '+$('pros').value:'';
+  $('com').innerHTML=`<b>Solo para vos (no sale en el PDF):</b> tu comisión por esta venta es el primer mes de lista = <b>${usdN(tot)}</b>, una sola vez, cuando se cobre el sistema (el primer abono del cliente).`;
+  const detalle=`${PLANES[plan]} · ${est.rubros.map(r=>RUBROS[r]).join('+')}${est.mods.length?' · '+est.mods.map(m=>OPC[m]).join('+'):''}${suc>1?' · '+suc+' suc.':''} · ${per.t}${k?' · cupón '+k.codigo:''}`;
+  Q={comision:tot,detalle,cupon:k?k.codigo:''};
+  ult=`Hola${$('pros').value?' '+$('pros').value:''}! Te paso el presupuesto de R21:\n`+
+   `• Rubros: ${est.rubros.map(r=>RUBROS[r]).join(' + ')}\n• Plan: ${PLANES[plan]}\n`+
+   (est.mods.length?`• Módulos: ${est.mods.map(m=>OPC[m]).join(', ')}\n`:'')+(suc>1?`• ${suc} sucursales\n`:'')+
+   `• Total: ${usdN(mensual)} por mes${ars(mensual)?' ('+ars(mensual)+')':''}\n`+
+   (per.n>1?`• Pagando ${per.n} meses: ${usdN(pago)}\n`:'')+(dto?`• Con cupón ${k.codigo}: primer pago ${usdN(primer)}\n`:'')+
+   `• ${prueba} días de prueba gratis, sin tarjeta.\nPrecios en dólares, sin impuestos. Válido 7 días.\nProbalo en ${linkPersonal()}`;
+}
+const linkPersonal=()=>'https://getaxiora.com/?utm_source='+encodeURIComponent(S.usuario);
+async function registrarVenta(){
+  const ag=$('pros').value.trim();
+  if(!ag){toast('Escribí el nombre de la agencia');$('pros').focus();return}
+  if(!Q)return;
+  if(!confirm(`¿Registrar la venta de "${ag}"?\n\nTu comisión: ${usdN(Q.comision)}, cuando el cliente pague su primer abono.\nEl equipo de R21 la revisa antes de confirmarla.`))return;
+  try{
+    const j=await api('vendRegistrarVenta',{agencia:ag,detalle:Q.detalle,comision:Q.comision,prospecto_id:$('pro-sel').value});
+    if(!j.ok){alert(j.error||'No se pudo registrar');return}
+    toast('Venta registrada');await cargarDatos();pintarProspectos();pintarComisiones();pintarProspectoSelect();mostrar('com');
+  }catch(e){alert(e.message||'No hay conexión. Probá de nuevo.')}
+}
+
+/* ═══════════ PROSPECTOS ═══════════ */
+let filtro='activos';
+function tagProx(p){
+  if(!p.proximo_contacto||p.estado==='Ganado'||p.estado==='Perdido')return '';
+  const h=hoyISO(),f=p.proximo_contacto.split('-').reverse().join('/');
+  if(p.proximo_contacto<h)return `<span class="tag venc">Vencido ${f}</span>`;
+  if(p.proximo_contacto===h)return '<span class="tag hoy">Contactar hoy</span>';
+  return `<span class="tag">Próximo: ${f}</span>`;
+}
+function pintarProspectos(){
+  const h=hoyISO(),ps=S.prospectos;
+  const act=ps.filter(p=>p.estado!=='Ganado'&&p.estado!=='Perdido');
+  const hoy=act.filter(p=>p.proximo_contacto&&p.proximo_contacto<=h);
+  $('pro-kpi').innerHTML=`<div class="kpi"><b>${act.length}</b><small>En seguimiento</small></div><div class="kpi"><b>${hoy.length}</b><small>Para contactar hoy o vencidos</small></div><div class="kpi"><b>${ps.filter(p=>p.estado==='Ganado').length}</b><small>Ganados</small></div>`;
+  const fs={activos:'En seguimiento',hoy:'Para hoy',todos:'Todos',Ganado:'Ganados',Perdido:'Perdidos'};
+  $('pro-filtro').innerHTML=Object.entries(fs).map(([k,v])=>`<button class="chip${filtro===k?' on':''}" data-f="${k}">${v}</button>`).join('');
+  $('pro-filtro').querySelectorAll('button').forEach(b=>b.onclick=()=>{filtro=b.dataset.f;pintarProspectos()});
+  let l=filtro==='activos'?act:filtro==='hoy'?hoy:filtro==='todos'?ps:ps.filter(p=>p.estado===filtro);
+  l=l.slice().sort((a,b)=>(a.proximo_contacto||'9999').localeCompare(b.proximo_contacto||'9999'));
+  $('pro-lista').innerHTML=l.length?l.map(p=>`<div class="pcard"><h3>${esc(p.agencia)}</h3>
+   <div class="mut" style="font-size:13px">${esc([p.contacto,p.ciudad,p.rubro].filter(Boolean).join(' · '))}</div>
+   <div style="margin-top:6px"><span class="tag${p.estado==='Ganado'?' gan':''}">${esc(p.estado)}</span> ${tagProx(p)}</div>
+   ${p.notas?`<div style="font-size:13px;margin-top:6px">${esc(p.notas)}</div>`:''}
+   <div class="acc">${p.telefono?`<a class="btn sm" style="text-decoration:none" target="_blank" rel="noopener" href="https://wa.me/${waNum(p.telefono)}">WhatsApp</a>`:''}
+   <button class="btn sec sm" data-cot="${esc(p.id)}">Cotizar</button><button class="btn sec sm" data-edit="${esc(p.id)}">Editar</button></div></div>`).join(''):'<div class="card mut">No hay prospectos en esta vista.</div>';
+  $('pro-lista').querySelectorAll('[data-edit]').forEach(b=>b.onclick=()=>editarProspecto(b.dataset.edit));
+  $('pro-lista').querySelectorAll('[data-cot]').forEach(b=>b.onclick=()=>{mostrar('cot');$('pro-sel').value=b.dataset.cot;$('pro-sel').onchange()});
+}
+function waNum(t){let d=String(t).replace(/\D/g,'');if(d.startsWith('00'))d=d.slice(2);if(d.length===10)d='549'+d;return d}
+function editarProspecto(id){
+  const p=S.prospectos.find(x=>x.id===id)||{estado:'Nuevo'};
+  const dlg=$('dlg'),f=$('dlg-form');
+  f.innerHTML=`<h2>${p.id?'Editar prospecto':'Nuevo prospecto'}</h2>
+   <label>Agencia</label><input id="e-agencia" value="${esc(p.agencia)}" maxlength="80">
+   <div class="row2"><div><label>Contacto</label><input id="e-contacto" value="${esc(p.contacto)}" maxlength="60"></div><div><label>Teléfono</label><input id="e-tel" type="tel" value="${esc(p.telefono)}" maxlength="30"></div></div>
+   <div class="row2"><div><label>Ciudad</label><input id="e-ciudad" value="${esc(p.ciudad)}" maxlength="60"></div><div><label>Rubro</label><input id="e-rubro" value="${esc(p.rubro)}" maxlength="40" placeholder="Autos, motos…"></div></div>
+   <div class="row2"><div><label>Estado</label><select id="e-estado">${ESTADOS.map(e=>`<option${e===p.estado?' selected':''}>${e}</option>`).join('')}</select></div><div><label>Próximo contacto</label><input id="e-prox" type="date" value="${esc(p.proximo_contacto)}"></div></div>
+   <div class="row2"><div><label>Plan estimado</label><input id="e-plan" value="${esc(p.plan)}" maxlength="60"></div><div><label>Cupón</label><input id="e-cupon" value="${esc(p.cupon)}" maxlength="30"></div></div>
+   <label>Notas</label><textarea id="e-notas" maxlength="500">${esc(p.notas)}</textarea>
+   <div id="e-err" class="bad"></div>
+   <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
+    <button type="button" class="btn" id="e-ok" style="margin:0">Guardar</button>
+    <button type="button" class="btn sec" id="e-no" style="margin:0">Cancelar</button>
+    ${p.id?'<button type="button" class="btn red" id="e-del" style="margin:0 0 0 auto">Borrar</button>':''}</div>`;
+  dlg.showModal();
+  $('e-no').onclick=()=>dlg.close();
+  $('e-ok').onclick=async()=>{
+    const ag=$('e-agencia').value.trim();if(!ag){$('e-err').textContent='Falta el nombre de la agencia';return}
+    $('e-ok').disabled=true;
+    try{
+      const j=await api('vendGuardarProspecto',{data:JSON.stringify({id:p.id||'',agencia:ag,contacto:$('e-contacto').value,telefono:$('e-tel').value,ciudad:$('e-ciudad').value,rubro:$('e-rubro').value,estado:$('e-estado').value,proximo_contacto:$('e-prox').value,plan:$('e-plan').value,cupon:$('e-cupon').value,notas:$('e-notas').value})});
+      if(!j.ok){$('e-err').textContent=j.error||'No se pudo guardar';$('e-ok').disabled=false;return}
+      dlg.close();toast('Guardado');await cargarDatos();pintarProspectos();pintarProspectoSelect();
+    }catch(e){$('e-err').textContent=e.message||'No hay conexión';$('e-ok').disabled=false}
+  };
+  if(p.id)$('e-del').onclick=async()=>{
+    if(!confirm('¿Borrar "'+p.agencia+'"? No se puede deshacer.'))return;
+    try{const j=await api('vendEliminarProspecto',{id:p.id});if(!j.ok){$('e-err').textContent=j.error;return}
+      dlg.close();toast('Borrado');await cargarDatos();pintarProspectos();pintarProspectoSelect()}catch(e){$('e-err').textContent=e.message||'No hay conexión'}
+  };
+}
+
+/* ═══════════ COMISIONES ═══════════ */
+function pintarComisiones(){
+  const vs=S.ventas,suma=e=>vs.filter(v=>v.estado===e).reduce((a,v)=>a+v.comision_usd,0);
+  $('com-kpi').innerHTML=`<div class="kpi"><b>${usd(suma('Pendiente de cobro'))}</b><small>Pendiente: el cliente todavía no pagó</small></div><div class="kpi"><b>${usd(suma('Cobrada por el cliente'))}</b><small>A liquidar: el cliente ya pagó</small></div><div class="kpi"><b>${usd(suma('Comisión liquidada'))}</b><small>Liquidada (ya cobrada por vos)</small></div>`;
+  $('com-lista').innerHTML=vs.length?vs.slice().sort((a,b)=>b.fecha.localeCompare(a.fecha)).map(v=>`<div class="pcard"><div style="display:flex;justify-content:space-between;gap:8px"><h3>${esc(v.agencia)}</h3><b>${usd(v.comision_usd)}</b></div>
+   <div class="mut" style="font-size:13px">${esc(v.fecha.split('-').reverse().join('/'))} · ${esc(v.detalle)}</div>
+   <div style="margin-top:6px"><span class="tag${v.estado==='Comisión liquidada'?' gan':''}">${esc(ESTADO_VENTA[v.estado]||v.estado)}</span></div>${v.nota?`<div style="font-size:13px;margin-top:6px">${esc(v.nota)}</div>`:''}</div>`).join(''):'<div class="card mut">Todavía no registraste ventas. Cuando cierres una, tocá "Registrar venta cerrada" en el cotizador.</div>';
+}
+
+/* ═══════════ GUÍA ═══════════ */
+const MENSAJES=[
+['1 · Primer contacto','Hola [Nombre], soy [Vendedor]. Trabajo con R21, un sistema para ordenar agencias de autos: stock con fotos, clientes, caja y alertas de vencimientos, todo desde el celular.\n¿Te puedo mostrar en 10 minutos cómo funciona? Si no te sirve, no pasa nada.'],
+['2 · Después de la demo','[Nombre], gracias por el tiempo. Te dejo el link para probarlo 14 días gratis, sin tarjeta: [link]\nCargá 5 autos y vas a ver la ficha lista para enviar. Cualquier duda, escribime.'],
+['3 · Día 3 de la prueba','Hola [Nombre], ¿pudiste entrar a R21? Si querés, hacemos juntos 10 minutos y te dejo cargados tus primeros autos.'],
+['4 · Día 7: mostrar una función nueva','[Nombre], una cosa que suelen usar mucho: cuando cargás un cliente con lo que busca, R21 te avisa si entra un auto que le sirve. ¿Probaste cargar un cliente?'],
+['5 · Día 12: cierre','[Nombre], tu prueba termina en 2 días. Te armé el presupuesto: [plan y total]. ¿Lo activamos para que no pierdas lo que cargaste?'],
+['6 · "Lo voy a pensar"','Dale, [Nombre]. ¿Qué te gustaría ver o resolver para decidir? Te escribo el [fecha] para saber cómo vas.'],
+['7 · Reactivar a los 15 días','Hola [Nombre], ¿cómo viene el stock? Sumamos cosas nuevas (por ejemplo, la ficha del vehículo lista para el cliente). Si querés, te muestro lo nuevo en 5 minutos.']
+];
+function armarGuia(){
+  const msgs=MENSAJES.map(([t,m],i)=>`<div><b>${t}</b><div class="msg" id="m${i}">${esc(m.replace('[Vendedor]',S.nombre||'[Vendedor]').replace('[link]',linkPersonal()))}</div><button class="btn sec sm" data-m="${i}">Copiar</button></div>`).join('<br>');
+  $('v-gui').innerHTML=`
+  <div class="card"><h2>Tu link personal</h2><p style="margin:0 0 8px;font-size:14px">Mandá siempre este link: así cada prueba gratis queda a tu nombre.</p>
+   <input readonly value="${esc(linkPersonal())}" id="lk"><button class="btn sm" style="margin-top:8px" id="lk-c">Copiar link</button></div>
+  <details><summary>1 · Qué vendés y a quién</summary><div>
+   <p><b>La frase:</b> “R21 ordena tu agencia: stock con fotos, clientes, caja y precios, en el celular y la PC. Todo conectado: cuando vendés un auto, se actualiza la caja, la comisión y la contabilidad solos.”</p>
+   <p><b>Cliente ideal:</b> agencias de autos usados de 1 a 15 usuarios que hoy usan Excel, cuaderno y WhatsApp; también motos, camiones, náutica y concesionarias con taller.</p>
+   <table><tr><td>“No sé cuántos días lleva parado cada auto”</td><td>Días en stock, alertas de stock parado y panel de gerencia.</td></tr>
+   <tr><td>“Se me pasan los vencimientos (VTV, seguro)”</td><td>Alertas con aviso en el celular.</td></tr>
+   <tr><td>“No sé cuánto gané realmente”</td><td>Costo + reparaciones + ganancia por unidad y por mes.</td></tr>
+   <tr><td>“Mis vendedores se llevan los clientes”</td><td>Clientes y oportunidades en el sistema, con seguimiento.</td></tr>
+   <tr><td>“Pierdo tiempo con WhatsApp”</td><td>Fichas listas para enviar, publicaciones armadas y, en Full, bot de WhatsApp.</td></tr></table>
+   <p><b>Regla de oro:</b> no vendas funciones, vendé el problema resuelto. Primero preguntá cómo trabaja hoy.</p></div></details>
+  <details><summary>2 · El proceso de venta</summary><div>
+   <ol><li><b>Contacto:</b> conseguí 10 minutos para una demo, no vendas por mensaje.</li>
+   <li><b>Demo de 10 minutos</b> con la cuenta de demostración, nunca con datos de otra agencia.</li>
+   <li><b>Prueba gratis de 14 días:</b> el prospecto la pide en getaxiora.com con tu link personal y se crea sola (hasta 2 minutos).</li>
+   <li><b>Seguimiento:</b> día 1 ¿pudiste entrar? · día 3 ¿cargaste unidades? · día 7 mostrá una función nueva · día 12 cierre.</li>
+   <li><b>Presupuesto:</b> armalo en el Cotizador y mandalo en PDF o por WhatsApp.</li>
+   <li><b>Alta:</b> pasale a Diego los datos del cliente; él revisa y activa la cuenta (al principio nada se activa sin su revisión).</li>
+   <li><b>Primer pago y comisión:</b> tu comisión se liquida cuando se cobra el sistema.</li></ol>
+   <p><b>Datos para el alta:</b> nombre de la agencia, titular, teléfono y mail, ciudad y provincia, rubros, plan y cantidad de usuarios, módulos, sucursales, forma de pago, cupón y vendedor.</p></div></details>
+  <details><summary>3 · Guion de la demo (10 min)</summary><div>
+   <table><tr><td>0–1</td><td>Abrí la app con la cuenta demo. “No es un Excel: está todo conectado.”</td></tr>
+   <tr><td>1–3</td><td>Lista de vehículos y una ficha; exportá la ficha para el cliente. “Cargás una vez y con un toque tenés la ficha lista para WhatsApp.”</td></tr>
+   <tr><td>3–5</td><td>Clientes y coincidencias. “Cuando entra un auto que le sirve a un cliente, te avisa a quién llamar.”</td></tr>
+   <tr><td>5–6</td><td>Alertas y agenda. “VTV, seguro, visitas: no se te pasa nada.”</td></tr>
+   <tr><td>6–8</td><td>Caja y panel de negocio de una unidad. “Sabés cuánto ganás en cada auto.”</td></tr>
+   <tr><td>8–9</td><td>Solo Full: precio sugerido/subasta o panel de gerencia.</td></tr>
+   <tr><td>9–10</td><td>Cierre: “Probalo 14 días con tus propios autos. ¿Te lo activo ahora?”</td></tr></table>
+   <p><b>Preguntas para descubrir:</b> ¿cuántos autos tenés en stock? ¿dónde llevás stock y caja? ¿cuántas personas lo cargan? ¿cómo sabés cuánto ganaste en cada venta? ¿qué te quita más tiempo en la semana?</p>
+   <p><b>Nunca:</b> muestres datos reales de otra agencia, prometas funciones que no están ni des precios distintos a la lista sin autorización.</p></div></details>
+  <details><summary>4 · Objeciones frecuentes</summary><div>
+   <table><tr><td>“Es caro”</td><td>Pasalo a costo por día: el Básico es menos de USD 1 por día. Preguntá “¿cuánto te cuesta un auto parado un mes?”. Podés ofrecer pago adelantado (−10%, −15%, −20%) o un cupón vigente.</td></tr>
+   <tr><td>“Ya uso Excel”</td><td>Importamos tu Excel el primer día. Y lo que Excel no hace: avisos, fichas en PDF, caja conectada y coincidencias con clientes.</td></tr>
+   <tr><td>“¿Mis datos están seguros?”</td><td>Quedan en un almacenamiento en la nube propio de tu agencia, con usuario y PIN por persona, permisos por rol y registro de quién hizo qué. Hay copia de seguridad diaria que se restaura desde la app.</td></tr>
+   <tr><td>“Mis empleados no lo van a usar”</td><td>Cada uno ve solo lo suyo, la carga es corta y se puede importar desde Excel. La prueba de 14 días sirve para comprobarlo.</td></tr>
+   <tr><td>“¿Y si se corta internet?”</td><td>Ves el stock y las fotos igual. Lo que anotes se envía solo al volver la conexión.</td></tr>
+   <tr><td>“No tengo tiempo para cambiar”</td><td>Empezás con 5 autos. La prueba es gratis y sin tarjeta.</td></tr>
+   <tr><td>“¿Y si dejan de darme soporte?”</td><td>Soporte por WhatsApp en todos los planes y prioritario en Full. Tus datos viven en la nube propia de tu agencia.</td></tr>
+   <tr><td>“Lo voy a pensar”</td><td>“¿Qué tendría que pasar en la prueba para que sea un sí?” Fijá una fecha de seguimiento antes de cortar.</td></tr></table>
+   <p>Si no sabés la respuesta: “lo confirmo y te respondo hoy”, y consultalo con Diego.</p></div></details>
+  <details><summary>5 · Precios, cupones y límites</summary><div>
+   <table><tr><td>Básico 1 / 3 usuarios</td><td>USD 29 / 69</td></tr><tr><td>Full 3 / 7 / 15 usuarios</td><td>USD 89 / 149 / 249</td></tr>
+   <tr><td>Náutica: Básico 1 / 3 · Full 3 / 7 / 15</td><td>USD 42 / 99 · 129 / 215 / 359</td></tr>
+   <tr><td>Rubro adicional</td><td>USD 9</td></tr><tr><td>Módulo opcional (Taller, Chapería, Repuestos, Accesorios, Peritajes)</td><td>USD 9 c/u · pack de 5: USD 36</td></tr>
+   <tr><td>Sucursales 2 a 5 / 6 a 10</td><td>80% / 60% de la principal</td></tr><tr><td>Pago adelantado 3 / 6 / 12 meses</td><td>−10% / −15% / −20%</td></tr></table>
+   <p>Todo en dólares, sin impuestos. Prueba de 14 días sin tarjeta. Usá siempre el Cotizador.</p>
+   <p><b>Cupones:</b> un solo cupón por venta, no se acumula, no se aplica a un cliente que ya existe. Tus cupones vigentes aparecen en el cotizador. Tu comisión se calcula sobre el precio de lista, no baja si usás cupón.</p>
+   <p><b>Lo que R21 todavía NO hace (no lo prometas):</b> facturación electrónica (ARCA/AFIP); publicar solo en MercadoLibre, Facebook o Instagram (genera el texto y se copia y pega); bot oficial de WhatsApp de Meta; cotizar créditos prendarios dentro del sistema; guía de precios de mercado en motos, camiones y náutica; cobro automático de la suscripción (el alta y el cobro se coordinan con Diego).</p></div></details>
+  <details><summary>6 · Mensajes de WhatsApp listos</summary><div>${msgs}</div></details>`;
+  $('lk-c').onclick=()=>copiarTexto(linkPersonal());
+  $('v-gui').querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>copiarTexto($('m'+b.dataset.m).textContent));
+}
+
+/* ═══════════ ARRANQUE ═══════════ */
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>mostrar(b.dataset.v));
+$('l-go').onclick=entrar;$('l-pass').addEventListener('keydown',e=>{if(e.key==='Enter')entrar()});
+$('salir').onclick=()=>{if(confirm('¿Salir?'))cerrarSesion()};
+$('pro-nuevo').onclick=()=>editarProspecto('');
+initCot();
+if(S.token)iniciar();else pantalla(false);
+if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
+</script></body></html>
