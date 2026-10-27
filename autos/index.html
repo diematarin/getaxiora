@@ -2020,8 +2020,8 @@ const CONFIG = {
           </tr>
         </thead>
         <tbody>
-          <tr><td><span class="table-plan-name">Básico</span><span class="table-plan-badge badge-basic">1u</span></td><td>1</td><td class="table-price">USD 29</td><td class="table-price">USD 26</td><td class="table-price">USD 25</td><td class="table-price">USD 24</td></tr>
-          <tr><td><span class="table-plan-name">Básico</span><span class="table-plan-badge badge-basic">3u</span></td><td>3</td><td class="table-price">USD 23</td><td class="table-price">USD 21</td><td class="table-price">USD 20</td><td class="table-price">USD 19</td></tr>
+          <tr><td><span class="table-plan-name">Básico</span><span class="table-plan-badge badge-basic">1u</span></td><td>1</td><td class="table-price">USD 29</td><td class="table-price">USD 26</td><td class="table-price">USD 25</td><td class="table-price">USD 23</td></tr>
+          <tr><td><span class="table-plan-name">Básico</span><span class="table-plan-badge badge-basic">3u</span></td><td>3</td><td class="table-price">USD 23</td><td class="table-price">USD 21</td><td class="table-price">USD 20</td><td class="table-price">USD 18</td></tr>
           <tr><td><span class="table-plan-name">Full</span><span class="table-plan-badge badge-full">3u</span></td><td>3</td><td class="table-price">USD 30</td><td class="table-price">USD 27</td><td class="table-price">USD 25</td><td class="table-price">USD 24</td></tr>
 <tr><td><span class="table-plan-name">Full</span><span class="table-plan-badge badge-full">7u</span></td><td>7</td><td class="table-price">USD 21</td><td class="table-price">USD 19</td><td class="table-price">USD 18</td><td class="table-price">USD 17</td></tr>
 <tr><td><span class="table-plan-name">Full</span><span class="table-plan-badge badge-full">15u</span></td><td>15</td><td class="table-price">USD 17</td><td class="table-price">USD 15</td><td class="table-price">USD 14</td><td class="table-price">USD 13</td></tr>
@@ -2205,7 +2205,7 @@ const CONFIG = {
     document.querySelectorAll('.per-user-amount').forEach(el => {
       const base = parseFloat(el.dataset.usdBase);
       const users = parseFloat(el.dataset.users || 1);
-      const perUser = Math.ceil((base * (1 - desc)) / users);
+      const perUser = Math.round(Math.round(base * (1 - desc)) / users);
       el.textContent = `USD ${perUser}`;
       const arsEl = el.parentElement.querySelector('.per-user-ars');
       if (arsEl && cotizacionUSD > 0) {
@@ -2215,7 +2215,7 @@ const CONFIG = {
     });
     document.querySelectorAll('.total-amount').forEach(el => {
       const base = parseFloat(el.dataset.usdBase);
-      const total = Math.ceil(base * (1 - desc));
+      const total = Math.round(base * (1 - desc));
       el.textContent = `USD ${total}`;
       const arsEl = el.parentElement.querySelector('.total-ars');
       if (arsEl && cotizacionUSD > 0) {
