@@ -1012,6 +1012,8 @@
   .combo-table th:first-child, .combo-table td:first-child { text-align: left; font-weight: 700; }
   .combo-table tr:last-child td { border-bottom: none; }
   .combo-table td.sel { background: rgba(37,211,102,.12); font-weight: 800; }
+  .ars-auto { font-size: 12.5px; font-weight: 700; color: var(--gray-500, #6B7280); margin-top: 4px; }
+  .combo-ars { font-size: 15px; font-weight: 700; color: var(--gray-500, #6B7280); margin-top: 4px; }
   .combo-nota { margin-top: 14px; font-size: 13px; color: var(--gray-500, #6B7280); line-height: 1.55; }
   .herr-sub { display: flex; align-items: center; gap: 12px; justify-content: center; margin: 56px 0 4px; }
   .herr-sub h3 { font-size: 24px; font-weight: 800; }
@@ -1297,6 +1299,7 @@
       <div class="nombre">R21 Cars</div>
       <div class="desde" data-es="Desde" data-en="From" data-pt="A partir de">Desde</div>
       <div class="monto">USD 29<small>/mes</small></div>
+      <div class="ars-auto" data-usd="29"></div>
       <div class="ver" data-es="Ver planes completos →" data-en="See full plans →" data-pt="Ver planos completos →">Ver planes completos →</div>
     </a>
 
@@ -1305,6 +1308,7 @@
       <div class="nombre">R21 Bikes</div>
       <div class="desde" data-es="Desde" data-en="From" data-pt="A partir de">Desde</div>
       <div class="monto">USD 29<small>/mes</small></div>
+      <div class="ars-auto" data-usd="29"></div>
       <div class="ver" data-es="Ver planes completos →" data-en="See full plans →" data-pt="Ver planos completos →">Ver planes completos →</div>
     </a>
 
@@ -1313,6 +1317,7 @@
       <div class="nombre">R21 Trucks</div>
       <div class="desde" data-es="Desde" data-en="From" data-pt="A partir de">Desde</div>
       <div class="monto">USD 29<small>/mes</small></div>
+      <div class="ars-auto" data-usd="29"></div>
       <div class="ver" data-es="Ver planes completos →" data-en="See full plans →" data-pt="Ver planos completos →">Ver planes completos →</div>
     </a>
 
@@ -1321,6 +1326,7 @@
       <div class="nombre">R21 Boats</div>
       <div class="desde" data-es="Desde" data-en="From" data-pt="A partir de">Desde</div>
       <div class="monto">USD 42<small>/mes</small></div>
+      <div class="ars-auto" data-usd="42"></div>
       <div class="ver" data-es="Ver planes completos →" data-en="See full plans →" data-pt="Ver planos completos →">Ver planes completos →</div>
     </a>
   </div>
@@ -1728,6 +1734,8 @@
       tabla: 'Tabela completa de preços por mês', combo: 'Combo', nota: 'Preços em USD por mês, sem impostos. Regra: considera-se o plano do módulo mais caro e cada módulo extra soma USD 9/mês. Os descontos por pagamento antecipado valem sobre o total. 14 dias grátis, sem cartão.',
       wa: 'Olá, quero testar o R21 14 dias grátis. Tenho interesse em: ' }
   };
+  var COT = 0;
+  function ars(n) { return COT > 0 ? '≈ $' + Math.round(n * COT).toLocaleString('es-AR') + ' ARS' : ''; }
   var app = document.getElementById('comboApp');
   if (!app) return;
   var est = { mods: [app.getAttribute('data-default') || 'autos'], opc: [], plan: 'f3', per: 'm', suc: 1 };
@@ -1792,7 +1800,8 @@
       if (est.suc > 1) msg += ' — ' + est.suc + ' ' + t.sucWa;
       h += '<div class="combo-result"><div><div class="combo-total">' + usd(mensual) + '<small> ' + t.mes + '</small></div>' +
         '<div class="combo-detail">' + det + '</div>' +
-        (per.n > 1 ? '<div class="combo-detail">' + t.pagas + ' ' + usd(pago) + ' ' + t.por + ' ' + per.n + ' ' + t.meses + '</div><span class="combo-ahorro">' + t.ahorro + ' ' + usd(ahorro) + '</span>' : '') +
+        (COT > 0 ? '<div class="combo-ars">' + ars(mensual) + ' ' + t.mes + '</div>' : '') +
+        (per.n > 1 ? '<div class="combo-detail">' + t.pagas + ' ' + usd(pago) + (COT > 0 ? ' (' + ars(pago) + ')' : '') + ' ' + t.por + ' ' + per.n + ' ' + t.meses + '</div><span class="combo-ahorro">' + t.ahorro + ' ' + usd(ahorro) + '</span>' : '') +
         '</div><a class="combo-cta" target="_blank" rel="noopener" href="https://wa.me/5493415040667?text=' + encodeURIComponent(msg) + '">' + t.cta + '</a></div>';
     }
 
@@ -1828,6 +1837,17 @@
 
   var previo = window.setLang;
   if (typeof previo === 'function') window.setLang = function (l) { previo(l); render(); };
+  function llenarArs() {
+    document.querySelectorAll('.ars-auto').forEach(function (el) {
+      var u = parseFloat(el.getAttribute('data-usd'));
+      if (u && COT > 0) el.textContent = ars(u);
+    });
+  }
+  fetch('https://dolarapi.com/v1/dolares/blue').then(function (r) { return r.json(); }).then(function (d) {
+    COT = d.venta || d.compra || 0;
+    render();
+    llenarArs();
+  }).catch(function () {});
   render();
 })();
 </script>
